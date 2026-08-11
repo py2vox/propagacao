@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGHIP — Sistema unificado de propagação</title>
+<style>
+:root {
+  --surface-2:#ffffff; --surface-1:#f5f4f0; --surface-0:#faf9f6;
+  --text-primary:#1a1a1a; --text-secondary:#5f5e5a; --text-muted:#898781;
+  --border:#e1e0d9; --border-strong:#c9c7bd; --radius:8px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --good:#16A34A; --boa:#0D9488; --warn:#D97706; --bad:#C81E3A;
+  --status-good-bg:#dcfce7; --status-good-fg:#166534;
+  --status-warn-bg:#fef3c7; --status-warn-fg:#92400e;
+  --status-orange-bg:#ffedd5; --status-orange-fg:#9a3412;
+  --status-bad-bg:#fee2e2; --status-bad-fg:#991b1b;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --surface-2:#262624; --surface-1:#1e1e1c; --surface-0:#191918; --text-primary:#f2f1ed; --text-secondary:#b5b3ac; --text-muted:#8a8880; --border:#3a3a37; --border-strong:#4a4a46;
+    --status-good-bg:#14532d; --status-good-fg:#86efac;
+    --status-warn-bg:#78350f; --status-warn-fg:#fde68a;
+    --status-orange-bg:#7c2d12; --status-orange-fg:#ffedd5;
+    --status-bad-bg:#7f1d1d; --status-bad-fg:#fca5a5;
+  }
+}
+* { box-sizing:border-box; }
+body { background:var(--surface-0); font-family:var(--font-sans); margin:0; padding:20px; color:var(--text-primary); font-size:16px; }
+.wrap { max-width:760px; margin:0 auto; }
+button, select, input { font-family:var(--font-sans); min-height:44px; padding:8px 14px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface-2); color:var(--text-primary); }
+button { cursor:pointer; }
+button:hover { background:var(--surface-1); }
+.tab-bar { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
+.tab-btn { flex:1; min-width:100px; border:1px solid var(--border-strong); background:var(--surface-1); border-radius:8px; padding:10px; font-size:14px; font-weight:500; text-align:center; }
+.tab-btn.active { background:var(--text-primary); color:var(--surface-2); border-color:var(--text-primary); }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+.card { background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:1.25rem; margin-bottom:14px; }
+.metric { background:var(--surface-1); border-radius:var(--radius); padding:12px 14px; }
+table { width:100%; font-size:14px; border-collapse:collapse; }
+th { text-align:left; font-size:12px; color:var(--text-muted); padding:6px; border-bottom:1px solid var(--border-strong); }
+td { padding:6px; border-bottom:1px solid var(--border); }
+.glm-flash-icon { background: radial-gradient(circle, #FDE68A 20%, #F59E0B 80%); border-radius: 50%; box-shadow: 0 0 10px 3px rgba(245, 158, 11, 0.6); animation: pulse-lightning 1.5s infinite; }
+@keyframes pulse-lightning { 0% { transform: scale(0.8); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.5; } 100% { transform: scale(0.8); opacity: 1; } }
+</style>
+</head>
+<body><div class="wrap">
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="mapa" onclick="switchTab('mapa')">Mapa</button>
+  <button class="tab-btn" data-tab="hf" onclick="switchTab('hf')">HF (160m-10m)</button>
+  <button class="tab-btn" data-tab="vhf" onclick="switchTab('vhf')">VHF (6m/2m)</button>
+  <button class="tab-btn" data-tab="eme" onclick="switchTab('eme')">EME</button>
+  <button class="tab-btn" data-tab="meteo" onclick="switchTab('meteo')">Meteorologia</button>
+</div>
+
+<div class="card">
+  <label style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Seu QTH (grid locator)</label>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+    <input id="qth-input" type="text" value="GG67" style="width:160px;text-transform:uppercase;" onchange="onQthChange()">
+    <button onclick="loadAllData()">Atualizar tudo</button>
+    <span id="global-status" style="font-size:13px;color:var(--text-muted);"></span>
+  </div>
+  <div id="qth-region-status" style="font-size:12px;color:var(--text-muted);margin-top:8px;">Detectando cidade a partir do grid…</div>
+  <div id="qth-alert-badge" style="display:none;margin-top:10px;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;"></div>
+</div>
+
+<!-- ABA MAPA -->
+<div class="tab-panel active" id="panel-mapa">
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Melhor banda HF por destino — próximas 3 horas</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Mapa real (Natural Earth via world-atlas), grande círculo por interpolação esférica. Cada ponto mostra a banda ao lado, não só a cor.</div>
+    <div id="map-container" style="width:100%;"></div>
+    <div style="display:flex;gap:14px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;margin-top:10px;">
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:var(--good);display:inline-block;"></span>Excelente/boa</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:var(--warn);display:inline-block;"></span>Marginal</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:var(--bad);display:inline-block;"></span>Fechada</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:rgba(30,30,40,0.6);display:inline-block;"></span>Lado noturno (greyline)</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:#2a78d6;display:inline-block;"></span>Seu QTH</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Lista completa — mesma informação do mapa, em texto</div>
+    <div style="overflow-x:auto;"><table><thead><tr><th>Destino</th><th>Banda</th><th>Quando</th><th>SNR</th></tr></thead><tbody id="map-list-tbody"></tbody></table></div>
+  </div>
+  <div class="card" style="font-size:12px;color:var(--text-muted);line-height:1.6;">
+    <b style="color:var(--text-primary);">O que este sistema entrega hoje (v73):</b><br>
+    <b>Mapa</b> — mundo real (Natural Earth), 24 destinos com grande círculo, greyline (terminador dia/noite por círculo geográfico de 90°, redesenho isolado a cada 60s sem recriar os destinos junto), lista com banda+horário+SNR em texto.<br>
+    <b>HF (160m–11m)</b> — 11 bandas incluindo 11m/CB; SFI, Kp, Dst, Bz e raio-X reais da NOAA; A-index calculado; heatmap de 36h com marcação de virada de dia; MUF recalibrada contra literatura real (SFI=120→10m abre, antes exigia SFI≈250); absorção de camada D por "elo mais fraco" do caminho, não média (fontes: NM7M, ON4UN, N4IS); amostragem adaptativa do grande círculo em caminhos longos/quase-antipodais; alerta de tendência de Bz com suavização e detecção de defasagem do feed; verificação cruzada com spots reais do WSPR (janela 8h, ±9°, com timestamp e contexto dia/noite/transição) — <b>calibrada uma vez contra 159 spots reais</b> (viés de +4,1dB corrigido parcialmente, -3dB no ganho base); gráfico de tendência do Kp (UTC, com marcação de virada de dia).<br>
+    <b>VHF (6m/2m)</b> — Esporádica-E sazonal com pico principal (nov-fev hemisfério sul) e secundário (mai-jun) confirmados na literatura; F2 (SFI-gated) para 6m; TEP diferenciado por banda — 6m com janela mais larga (modo vespertino+noturno), 2m mais estreito (só modo noturno/bolhas de plasma, confirmado em literatura específica), calibrado contra caso real (EA7→PY); duto troposférico com dado atmosférico real (Open-Meteo); calendário de meteoros com datas astronômicas verificadas.<br>
+    <b>EME</b> — seletor de banda (144/432/1296MHz); posição lunar validada contra lua cheia/nova reais, com correção de paralaxe topocêntrica (até ~1°, maior perto do horizonte); ruído galáctico restaurado e ponderado por banda (cai com f⁻²·⁸, negligenciável perto de 1GHz); distância com contexto de perigeu/apogeu; ruído solar por separação angular, com destaque extra em 432/1296MHz; janela comum entre duas estações quaisquer; rotação de Faraday como nota de severidade por banda (não calculada em tempo real).<br>
+    <b>Meteorologia</b> — avisos oficiais do INMET via feed RSS real (domínio público), deduplicados e priorizados por relevância operacional (vento > raios/tempestade > chuva > resto, não só "grau" burocrático), região amarrada ao grid via geocodificação reversa (Nominatim); selo de alerta compartilhado entre abas; condições da estação e índice de segurança de vento por escala Beaufort (Open-Meteo, CC BY 4.0); radar de precipitação real (RainViewer) sobre mapa OpenStreetMap via Leaflet; raios sobre o Brasil via satélite GOES-19/GLM com geocodificação reversa das coordenadas (cidade em vez de lat/lon) — <b>experimental, mas confirmado funcionando</b> em teste real do usuário; mapa de raios EUA/Europa via Blitzortung (sem propaganda, centralizado).<br>
+    <b>Limites que continuam de pé:</b> física aproximada, não é VOACAP nem WSJT-X; sem infraestrutura persistente entre sessões (log de Bz só funciona se publicado como Artifact no Claude.ai, não no arquivo baixado); sem treinamento de IA com dados reais; libração exata e rotação de Faraday em tempo real ficaram fora por exigirem dado que não tenho fonte gratuita e confiável para buscar; calibração do modelo de SNR contra WSPR é de uma sessão só — precisa de mais dados ao longo do tempo pra confirmar.
+
+  </div>
+</div>
+
+<!-- ABA HF -->
+<div class="tab-panel" id="panel-hf">
+  <div class="card">
+    <label style="font-size:14px;color:var(--text-secondary);">Destino</label>
+    <select id="dest-sel" onchange="renderHF()" style="width:100%;margin-top:6px;">
+      <optgroup label="América do Norte"><option value="0">EUA Leste (W3)</option><option value="1">EUA Oeste (W6)</option><option value="2">Canadá (VE3)</option></optgroup>
+      <optgroup label="América do Sul"><option value="3">Argentina (LU)</option><option value="4">Chile (CE)</option><option value="5">Peru (OA)</option></optgroup>
+      <optgroup label="Caribe"><option value="23">Porto Rico (KP4)</option></optgroup>
+      <optgroup label="Europa"><option value="6">Espanha (EA)</option><option value="7">Alemanha (DL)</option><option value="8">Reino Unido (G)</option><option value="10">Rússia (UA)</option></optgroup>
+      <optgroup label="Ásia"><option value="12">Japão (JA)</option><option value="14">Índia (VU)</option></optgroup>
+      <optgroup label="Oceania"><option value="17">Austrália (VK)</option></optgroup>
+      <optgroup label="África"><option value="19">África do Sul (ZS)</option></optgroup>
+      <optgroup label="Ártico"><option value="22">Islândia (TF)</option></optgroup>
+    </select>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px;">
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">SFI</div><div style="font-size:18px;font-weight:600;" id="m-sfi">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Kp</div><div style="font-size:18px;font-weight:600;" id="m-kp">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Dst</div><div style="font-size:18px;font-weight:600;" id="m-dst">—</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px;">
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Bz</div><div style="font-size:18px;font-weight:600;" id="m-bz">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">A-index</div><div style="font-size:18px;font-weight:600;" id="m-aidx">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Raio-X</div><div style="font-size:18px;font-weight:600;" id="m-xray">—</div></div>
+  </div>
+  <div id="bz-trend-alert" style="display:none;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;margin-bottom:14px;"></div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Histórico real de Bz (registrado neste navegador)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Cada vez que a página carrega, a leitura atual é anexada aqui — não é observação minha, é registro do próprio sistema ao longo do tempo. Útil para revisar o comportamento durante uma tempestade real, depois do fato.</div>
+    <div id="bz-log-status" style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">—</div>
+    <div id="bz-log-table" style="font-size:12px;max-height:200px;overflow-y:auto;"></div>
+    <button onclick="clearBzLog()" style="font-size:12px;margin-top:8px;padding:4px 10px;min-height:32px;">Limpar histórico</button>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Previsão por banda — próximas 36h (horários em UTC)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Rótulos marcam virada de dia · <span id="utc-offset-note">Brasília = UTC−3</span></div>
+    <div id="heatmap" style="display:grid;gap:3px;"></div>
+    <div style="display:flex;gap:12px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;margin-top:12px;">
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:18px;height:18px;border-radius:4px;background:var(--good);display:inline-flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700;">E</span>Excelente</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:18px;height:18px;border-radius:4px;background:var(--boa);display:inline-flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700;">B</span>Boa</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:18px;height:18px;border-radius:4px;background:var(--warn);display:inline-flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700;">M</span>Marginal</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:18px;height:18px;border-radius:4px;background:var(--bad);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;">F</span>Fechada</span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Melhor janela por banda (UTC)</div>
+    <table><thead><tr><th>Banda</th><th>Horário UTC</th><th>Confiança</th></tr></thead><tbody id="band-detail"></tbody></table>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Verificação com spots reais (WSPR)</div>
+    <div id="gt-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <table><thead><tr><th>Banda</th><th>Spots</th><th>SNR obs.</th><th>SNR prev.</th></tr></thead><tbody id="gt-tbody"></tbody></table>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Tendência do Kp (horários em UTC)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Kp mede <b>perturbação geomagnética</b>, não propagação diretamente — é uma entre várias variáveis (SFI, foF2, hora local, caminho). Tempestades ionosféricas têm duas fases: <b>negativa</b> (foF2 cai, pior propagação — domina durante o pico) e <b>positiva</b> (foF2 sobe, propagação pode melhorar — mais comum no início da recuperação, após o pico). Por isso "Kp alto" não é sinônimo automático de "banda fechada" — vale olhar a tendência e o horário, não só o número isolado.</div>
+    <div style="position:relative;width:100%;height:140px;"><canvas id="kpChart" role="img" aria-label="Gráfico do índice Kp nas últimas horas">Histórico de Kp.</canvas></div>
+  </div>
+</div>
+
+<!-- ABA VHF -->
+<div class="tab-panel" id="panel-vhf">
+  <div class="card">
+    <label style="font-size:14px;color:var(--text-secondary);">Destino (para TEP)</label>
+    <select id="vhf-dest-sel" onchange="renderVHF()" style="width:100%;margin-top:6px;">
+      <option value="3">Argentina (LU)</option><option value="4">Chile (CE)</option><option value="5">Peru (OA)</option>
+      <option value="23">Porto Rico (KP4)</option><option value="6">Espanha (EA)</option><option value="19">África do Sul (ZS)</option>
+    </select>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:10px;">6 metros</div>
+    <div id="vhf-6m" style="font-size:14px;line-height:1.8;">calculando…</div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:10px;">2 metros</div>
+    <div id="vhf-2m" style="font-size:14px;line-height:1.8;">calculando…</div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Meteor Scatter — próxima chuva</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Datas de pico são fato astronômico, não heurística. Radiante (RA/Dec), ZHR e elevação máxima no seu QTH vêm de fontes específicas citadas em cada card, não um valor genérico único.</div>
+    <div id="meteor-info" style="font-size:14px;line-height:1.8;">calculando…</div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Duto troposférico — dado atmosférico real</div>
+    <div id="tropo-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <div id="tropo-verdict" style="font-size:14px;"></div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Dado: <a href="https://open-meteo.com/" target="_blank" style="color:var(--text-muted);">Open-Meteo.com</a>, licença CC BY 4.0</div>
+  </div>
+</div>
+
+<!-- ABA METEOROLOGIA -->
+<div class="tab-panel" id="panel-meteo">
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Avisos oficiais INMET</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Feed RSS real (apiprevmet3.inmet.gov.br/avisos/rss), licença explícita "public domain". Filtro por nome de região — funciona corretamente para o QTH padrão (Campinas é o nome oficial da micro-região INMET); para outros locais do Brasil, o filtro por nome pode não bater exatamente com a região correspondente sem um mapa lat/lon→região que não tenho.</div>
+    <div id="inmet-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <div id="inmet-avisos" style="font-size:13px;line-height:1.6;"></div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Clima da estação — condições reais</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Condições numéricas via Open-Meteo. O INMET publica avisos oficiais (card acima), mas não oferece uma API aberta de condições numéricas em tempo real. Dados brutos do Blitzortung são reservados a estações contribuintes da rede.</div>
+    <div id="weather-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px;">
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Temperatura</div><div style="font-size:18px;font-weight:600;" id="w-temp">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Umidade</div><div style="font-size:18px;font-weight:600;" id="w-hum">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Vento</div><div style="font-size:18px;font-weight:600;" id="w-wind">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Rajada</div><div style="font-size:18px;font-weight:600;" id="w-gust">—</div></div>
+    </div>
+    <div id="wind-safety" style="font-size:14px;padding:10px;border-radius:8px;"></div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Limiares baseados na escala Beaufort (referência pública padrão), não em cálculo estrutural da sua antena/torre específica — equipamento real tem sua própria classificação do fabricante, sempre priorize ela.</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dado: <a href="https://open-meteo.com/" target="_blank" style="color:var(--text-muted);">Open-Meteo.com</a>, licença CC BY 4.0</div>
+    <div style="margin-top:12px;">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:6px;">Radar de precipitação, centrado no QTH</div>
+      <div id="radar-status" style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">—</div>
+      <div id="radar-map" style="width:100%;height:320px;border-radius:8px;"></div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Weather data by <a href="https://www.rainviewer.com/" target="_blank" style="color:var(--text-muted);">RainViewer</a></div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Raios sobre o Brasil (satélite GOES-19)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;"><b>Experimental</b> — a cobertura do Blitzortung sobre a América do Sul é esparsa (confirmado pela própria rede, "very sparse over S. America"). Como alternativa para o Brasil, este card lê diretamente o sensor GLM do satélite GOES-19 (GOES East desde abr/2025), processando o arquivo científico bruto (NetCDF/HDF5) no navegador via <a href="https://github.com/usnistgov/h5wasm" target="_blank">h5wasm</a> (NIST). Confirmado funcionando em múltiplas sessões reais (parsing do arquivo, acúmulo em buffer, geocodificação) — mas continua sendo a integração tecnicamente mais incomum do sistema (arquivo binário científico processado direto no navegador), por isso mantém o rótulo. Se algo falhar, o motivo aparece abaixo em vez de travar o restante do painel.</div>
+    <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <div id="glm-flashes" style="font-size:13px;line-height:1.6;"></div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Blitzortung.org — EUA e Europa</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Rede comunitária, não oficial — para segurança use os avisos INMET acima.</div>
+    <iframe src="https://www.blitzortung.org/en/live_lightning_maps.php?Advertisment=0#3/45/-25" style="width:100%;height:400px;border:1px solid var(--border);border-radius:8px;" loading="lazy" title="Mapa de raios em tempo real, EUA e Europa, Blitzortung.org"></iframe>
+  </div>
+</div>
+
+<!-- ABA EME -->
+<div class="tab-panel" id="panel-eme">
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Posição da Lua agora</div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;">
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Azimute</div><div style="font-size:18px;font-weight:600;" id="moon-az">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Elevação</div><div style="font-size:18px;font-weight:600;" id="moon-el">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Distância</div><div style="font-size:18px;font-weight:600;" id="moon-dist">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Perigeu/apogeu</div><div style="font-size:18px;font-weight:600;" id="moon-perigee">—</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <label style="font-size:13px;color:var(--text-secondary);">Banda EME</label>
+    <select id="eme-band-sel" onchange="renderEME()" style="width:100%;margin-top:6px;">
+      <option value="144">144 MHz (2m)</option>
+      <option value="432">432 MHz (70cm)</option>
+      <option value="1296">1296 MHz (23cm)</option>
+    </select>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Ruído de céu (galáctico + solar)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Ruído galáctico cai com a frequência (∝f⁻²·⁸, fonte: análise SWORD/arXiv) — domina em 144MHz, fica negligenciável perto de 1GHz (qsl.net/yu1aw). Isso inverte a importância relativa: em 144MHz, latitude galáctica importa mais; em 432/1296MHz, a separação Sol-Lua passa a ser o fator crítico.</div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:8px;">
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Latitude galáctica</div><div style="font-size:16px;font-weight:600;" id="moon-gb">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Dist. Centro Galáctico</div><div style="font-size:16px;font-weight:600;" id="moon-gc-dist">—</div></div>
+    </div>
+    <div id="galactic-verdict" style="font-size:14px;padding:8px;border-radius:6px;margin-bottom:10px;"></div>
+    <div id="solar-noise" style="font-size:14px;padding:8px;border-radius:6px;">—</div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Janela comum da Lua</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Grid locator da outra estação — mostra quantas horas, nas próximas 24h, os dois enxergam a Lua ao mesmo tempo</div>
+    <input id="eme-other-grid" type="text" value="PM95" style="width:140px;text-transform:uppercase;margin-bottom:8px;" onchange="renderEME()">
+    <div id="common-window" style="font-size:14px;padding:8px;border-radius:6px;"></div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Rotação de Faraday — severidade típica por banda</div>
+    <div style="font-size:12px;color:var(--text-muted);">Não calculado em tempo real (exigiria TEC ionosférico ao longo de todo o caminho Terra-Lua-Terra, sem fonte confiável e gratuita disponível) — mas a severidade relativa por frequência é fato documentado, não heurística</div>
+    <table style="margin-top:8px;"><tbody>
+      <tr><td>50/144 MHz</td><td style="color:var(--bad);font-weight:600;">Severa — rotação pode passar de uma volta completa</td></tr>
+      <tr><td>432 MHz</td><td style="color:var(--warn);font-weight:600;">Moderada</td></tr>
+      <tr><td>1296 MHz e acima</td><td style="color:var(--good);font-weight:600;">Desprezível</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module">
+  import h5wasm from "https://cdn.jsdelivr.net/npm/h5wasm@latest/dist/esm/hdf5_hl.js";
+  window.__h5wasmReadyPromise = h5wasm.ready.then(Module => { window.h5wasm = h5wasm; window.__h5FS = Module.FS; return Module; });
+</script>
+<script>
+// ===== ESTADO GLOBAL =====
+let QTH = {lat:-22.8156, lon:-47.0578}; // posição oficial da estação CEPAGRI/UNICAMP, 664m (22°48'56"S, 47°03'28"W) — antes era aproximação própria
+let S = { sfi:150, kp:2, dst:0, bz:0, bzHist:[], xrayFlux:8e-7, kpHist:[], kpFcst:[], groundTruth:{} };
+let kpChartObj = null;
+const WEEKDAYS = ['dom','seg','ter','qua','qui','sex','sáb'];
+const DESTINATIONS = [
+  {name:'EUA Leste (W3)',lat:38.9,lon:-77},{name:'EUA Oeste (W6)',lat:34,lon:-118.2},{name:'Canadá (VE3)',lat:43.7,lon:-79.4},
+  {name:'Argentina (LU)',lat:-34.6,lon:-58.4},{name:'Chile (CE)',lat:-33.4,lon:-70.6},{name:'Peru (OA)',lat:-12.0,lon:-77.0},
+  {name:'Espanha (EA)',lat:40.4,lon:-3.7},{name:'Alemanha (DL)',lat:52.5,lon:13.4},{name:'Reino Unido (G)',lat:51.5,lon:-0.1},{name:'Itália (I)',lat:41.9,lon:12.5},{name:'Rússia (UA)',lat:55.7,lon:37.6},{name:'Suécia (SM)',lat:59.3,lon:18.1},
+  {name:'Japão (JA)',lat:35.7,lon:139.7},{name:'China (BY)',lat:39.9,lon:116.4},{name:'Índia (VU)',lat:28.6,lon:77.2},{name:'Coreia do Sul (HL)',lat:37.6,lon:127.0},{name:'Israel (4X)',lat:31.8,lon:35.2},
+  {name:'Austrália (VK)',lat:-33.9,lon:151.2},{name:'Nova Zelândia (ZL)',lat:-41.3,lon:174.8},
+  {name:'África do Sul (ZS)',lat:-33.9,lon:18.4},{name:'Quênia (5Z)',lat:-1.3,lon:36.8},{name:'Marrocos (CN)',lat:33.6,lon:-7.6},
+  {name:'Islândia (TF)',lat:64.1,lon:-21.9},{name:'Porto Rico (KP4)',lat:18.2,lon:-66.6}
+];
+const BAND_LABEL={1:'160m',3:'80m',5:'60m',7:'40m',10:'30m',14:'20m',18:'17m',21:'15m',24:'12m',27:'11m (CB)',28:'10m'};
+const BAND_FREQ={1:1.836,3:3.570,5:5.288,7:7.040,10:10.140,14:14.097,18:18.106,21:21.096,24:24.926,27:27.205,28:28.126};
+const ABS_MAX={1:50,3:32,5:22,7:16,10:11,14:8,18:6,21:5,24:4,27:3.7,28:3.5};
+const NOISE_PEN={1:7,3:5,5:3.5,7:2.5,10:1.5,14:0.8,18:0.4,21:0.2,24:0.1,27:0.05,28:0};
+const AUR_SENS={1:2.4,3:1.6,5:1.1,7:0.8,10:0.55,14:0.4,18:0.3,21:0.25,24:0.2,27:0.17,28:0.15};
+const GEOMAG_POLE={lat:80.79,lon:-72.76}; // WMM2025 oficial
+const BANDS_ORDER=[1,3,5,7,10,14,18,21,24,27,28]; // 27 = 11m/CB, física idêntica, serviço diferente
+
+// ===== FUNCOES DE ASTRONOMIA/GEOMETRIA =====
+function numFrom(obj){for(let i=1;i<arguments.length;i++){const k=arguments[i];if(obj&&obj[k]!==undefined&&obj[k]!==null){const v=parseFloat(obj[k]);if(isFinite(v))return v;}}return null;}
+function gridToLatLon(locator){locator=(locator||'').trim().toUpperCase();if(!/^[A-R]{2}[0-9]{2}([A-X]{2})?$/.test(locator))return null;const A='A'.charCodeAt(0);const fieldLon=locator.charCodeAt(0)-A,fieldLat=locator.charCodeAt(1)-A;const squareLon=parseInt(locator[2]),squareLat=parseInt(locator[3]);let lon=fieldLon*20-180+squareLon*2,lat=fieldLat*10-90+squareLat*1;let lonSize=2,latSize=1;if(locator.length>=6){const subLon=locator.charCodeAt(4)-A,subLat=locator.charCodeAt(5)-A;lon=lon+subLon*(2/24);lat=lat+subLat*(1/24);lonSize=2/24;latSize=1/24;}return{lat:lat+latSize/2,lon:lon+lonSize/2};}
+function sunPos(d){const n=(d-new Date(Date.UTC(d.getUTCFullYear(),0,0)))/864e5;const decl=-23.44*Math.cos(2*Math.PI/365*(n+10))*Math.PI/180;return{decl,sunLon:(12-(d.getUTCHours()+d.getUTCMinutes()/60))*15};}
+function cosChi(lat,lon,sun){const lr=lat*Math.PI/180,ha=((lon-sun.sunLon+540)%360-180)*Math.PI/180;return Math.sin(lr)*Math.sin(sun.decl)+Math.cos(lr)*Math.cos(sun.decl)*Math.cos(ha);}
+function geomagLat(lat,lon){const phi=lat*Math.PI/180,lam=lon*Math.PI/180,phi0=GEOMAG_POLE.lat*Math.PI/180,lam0=GEOMAG_POLE.lon*Math.PI/180;const s=Math.sin(phi)*Math.sin(phi0)+Math.cos(phi)*Math.cos(phi0)*Math.cos(lam-lam0);return Math.asin(Math.max(-1,Math.min(1,s)))*180/Math.PI;}
+function toXYZ(lat,lon){const la=lat*Math.PI/180,lo=lon*Math.PI/180;return[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)];}
+function toLatLon(v){return[Math.asin(Math.max(-1,Math.min(1,v[2])))*180/Math.PI,Math.atan2(v[1],v[0])*180/Math.PI];}
+function slerpPoint(lat1,lon1,lat2,lon2,f){const v0=toXYZ(lat1,lon1),v1=toXYZ(lat2,lon2);let dot=Math.max(-1,Math.min(1,v0[0]*v1[0]+v0[1]*v1[1]+v0[2]*v1[2]));const d=Math.acos(dot);if(d<1e-6||Math.PI-d<1e-6)return[lat1+(lat2-lat1)*f,lon1+(lon2-lon1)*f];const sd=Math.sin(d),a=Math.sin((1-f)*d)/sd,b=Math.sin(f*d)/sd;const v=[a*v0[0]+b*v1[0],a*v0[1]+b*v1[1],a*v0[2]+b*v1[2]];const norm=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])||1;return toLatLon([v[0]/norm,v[1]/norm,v[2]/norm]);}
+function samplePath(a,b,c,d,n){const p=[];for(let i=0;i<=n;i++)p.push(slerpPoint(a,b,c,d,i/n));return p;}
+function estMUF(lat,lon,sun,sfi){
+  const cz=Math.max(0,cosChi(lat,lon,sun));
+  const latRad=lat*Math.PI/90;
+  const foF2max=4.5+0.0636*Math.max(0,sfi-65); // calibrado: SFI=65->foF2~4.5MHz, SFI=120->foF2~8MHz (faixa 7-9MHz citada na literatura)
+  const secFactor=3.2; // fator geometrico salto unico ~3000km, ITU-R P.1240-2 cita tipicamente 3-4
+  const foF2 = cz>0.02 ? foF2max*Math.pow(cz,0.2)*(1+0.2*Math.cos(latRad)) : foF2max*0.35*(1+0.15*Math.cos(latRad));
+  return foF2*secFactor;
+}
+function greatCircleDist(lat1,lon1,lat2,lon2){const R=6371,tr=Math.PI/180,dLat=(lat2-lat1)*tr,dLon=(lon2-lon1)*tr;const a=Math.sin(dLat/2)**2+Math.cos(lat1*tr)*Math.cos(lat2*tr)*Math.sin(dLon/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+function kpForecastAt(date){const t=date.getTime();const all=[...S.kpHist,...S.kpFcst];if(!all.length)return{kp:S.kp||2,beyond:true};let best=all[0],bestDiff=Infinity;all.forEach(h=>{const diff=Math.abs(new Date(h.t).getTime()-t);if(diff<bestDiff){bestDiff=diff;best=h;}});return{kp:best.kp,beyond:bestDiff>3*3600000*1.5};}
+function mufOwfPenalty(freq,muf){const owf=muf*0.85;if(freq<=owf)return 0;if(freq<=muf)return(freq-owf)/Math.max(0.5,muf-owf)*12;return 12+Math.min(30,(freq-muf)*3);}
+const K_TO_A=[0,3,7,15,27,48,80,132,207,400];
+function kpToA(kp){const kpC=Math.max(0,Math.min(9,kp));const k0=Math.floor(kpC);const k1=Math.min(9,k0+1);const frac=kpC-k0;return K_TO_A[k0]+(K_TO_A[k1]-K_TO_A[k0])*frac;}
+function runningAIndex(){if(!S.kpHist.length)return null;const last8=S.kpHist.slice(-8);const as=last8.map(h=>kpToA(h.kp));return as.reduce((a,b)=>a+b,0)/as.length;}
+function xrayClass(flux){if(!isFinite(flux)||flux<=0)return'—';if(flux<1e-7)return'A'+(flux/1e-8).toFixed(1);if(flux<1e-6)return'B'+(flux/1e-7).toFixed(1);if(flux<1e-5)return'C'+(flux/1e-6).toFixed(1);if(flux<1e-4)return'M'+(flux/1e-5).toFixed(1);return'X'+(flux/1e-4).toFixed(1);}
+function xraySidPenalty(flux,band,sunlitFrac){if(flux<1e-5)return 0;const excess=Math.log10(flux/1e-5);const bandSens=(ABS_MAX[band]??10)/5;return Math.min(30,excess*15*bandSens)*sunlitFrac;}
+function pathQualityAt(dest,band,futureDate){const sun=sunPos(futureDate);const distKm=greatCircleDist(QTH.lat,QTH.lon,dest.lat,dest.lon);const nSamples=distKm>15000?12:distKm>8000?8:4;const pts=samplePath(QTH.lat,QTH.lon,dest.lat,dest.lon,nSamples);let czSum=0,czMax=0,gmMax=0;pts.forEach(([la,lo])=>{const cz=Math.max(0,cosChi(la,lo,sun));czSum+=cz;if(cz>czMax)czMax=cz;const gm=Math.abs(geomagLat(la,lo));if(gm>gmMax)gmMax=gm;});const czAvg=czSum/pts.length,czEff=0.35*czAvg+0.65*czMax,mid=pts[Math.floor(pts.length/2)];const freq=BAND_FREQ[band];const muf=estMUF(mid[0],mid[1],sun,S.sfi);const{kp}=kpForecastAt(futureDate);const absD=(ABS_MAX[band]??10)*czEff;const mufPen=mufOwfPenalty(freq,muf);const ovalBoundary=Math.max(45,67-2*kp);const aurExcess=Math.max(0,gmMax-ovalBoundary);const aurPen=Math.min(45,(AUR_SENS[band]??0.3)*aurExcess);const noisePen=NOISE_PEN[band]??0;const stormPen=S.dst<-30?Math.min(20,Math.abs(S.dst+30)*0.25*((AUR_SENS[band]??0.3)/2.4)):0;const bzPen=S.bz<-5?Math.min(6,Math.abs(S.bz+5)*0.4):0;const xrayPen=xraySidPenalty(S.xrayFlux,band,czAvg>0.05?1:0);const snr=50-21*Math.log10(Math.max(distKm,50))+27-absD-mufPen-aurPen-noisePen-stormPen-bzPen-xrayPen;return{snr};} // "+27" era "+30": corrigido -3dB (conservador, não os 4.1dB completos) após primeira validação real contra WSPR (159 spots, 6/7 bandas otimistas, viés ponderado +4.1dB) -- ajuste parcial de uma sessão só, não recalibração completa por banda
+function bestWindow(hourly,threshold){threshold=threshold??-20;let windows=[],cur=null;hourly.forEach(pt=>{if(pt.snr>=threshold){if(!cur)cur={start:pt.h,end:pt.h,sum:pt.snr,n:1};else{cur.end=pt.h;cur.sum+=pt.snr;cur.n++;}}else if(cur){windows.push(cur);cur=null;}});if(cur)windows.push(cur);if(!windows.length)return null;windows.forEach(w=>w.avgSnr=w.sum/w.n);windows.sort((a,b)=>b.avgSnr-a.avgSnr);return windows[0];}
+function confidenceFor(win){if(!win)return null;let conf=90-win.start*0.8;return Math.round(Math.max(40,Math.min(95,conf)));}
+function heatColor(snr){if(snr>=5)return'var(--good)';if(snr>=-10)return'var(--boa)';if(snr>=-20)return'var(--warn)';return'var(--bad)';}
+function bestBandFor(dest){
+  const now=new Date(); let best={band:null,snr:-999,h:0};
+  for(let h=0;h<3;h++){
+    const t=new Date(now.getTime()+h*3600000);
+    BANDS_ORDER.forEach(b=>{ const q=pathQualityAt(dest,b,t); if(q.snr>best.snr) best={band:b,snr:q.snr,h}; });
+  }
+  return best;
+}
+
+// ===== ABAS =====
+function switchTab(name){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
+  if(name==='meteo' && radarMap){ setTimeout(()=>radarMap.invalidateSize(), 50); }
+}
+
+// ===== MAPA =====
+let mapSvg=null, mapProjection=null, mapPath=null;
+function initMap(){
+  const container=document.getElementById('map-container');
+  try {
+    if (typeof d3 === 'undefined' || typeof topojson === 'undefined') throw new Error('D3/topojson não carregou');
+    const width=720, height=380;
+    mapSvg=d3.select(container).append('svg').attr('viewBox','0 0 '+width+' '+height).attr('width','100%');
+    mapProjection=d3.geoNaturalEarth1().scale(115).translate([width/2,height/2]);
+    mapPath=d3.geoPath(mapProjection);
+    const isDark=matchMedia('(prefers-color-scheme: dark)').matches;
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
+      const countries=topojson.feature(world,world.objects.countries);
+      mapSvg.append('g').selectAll('path').data(countries.features).join('path')
+        .attr('d',mapPath).attr('fill',isDark?'#3a3a37':'#e1e0d9').attr('stroke',isDark?'#191918':'#faf9f6').attr('stroke-width',0.5);
+      drawMapOverlay();
+      drawGreyline();
+    }).catch(()=>{ container.innerHTML='<p style="font-size:13px;color:var(--text-muted);">Mapa indisponível agora (topologia não carregou pela rede).</p>'; });
+  } catch(e) {
+    container.innerHTML='<p style="font-size:13px;color:var(--text-muted);">Mapa indisponível agora (biblioteca D3 não carregou) — o resto do sistema (HF, VHF, EME) continua funcionando normalmente.</p>';
+  }
+}
+function renderMapList(){
+  let listHtml='';
+  DESTINATIONS.forEach(dest=>{
+    const best=bestBandFor(dest);
+    const bandTxt=best.band?BAND_LABEL[best.band]:'—';
+    const cc=heatColor(best.snr);
+    listHtml += '<tr><td>'+dest.name+'</td><td style="font-weight:600;">'+bandTxt+'</td><td>'+(best.h===0?'agora':'em '+best.h+'h')+'</td><td style="color:'+cc+';font-weight:600;">'+best.snr.toFixed(0)+' dB</td></tr>';
+  });
+  const listEl=document.getElementById('map-list-tbody');
+  if (listEl) listEl.innerHTML=listHtml;
+}
+function drawGreyline(){
+  if (!mapSvg || typeof d3.geoCircle !== 'function') return;
+  mapSvg.selectAll('.greyline-overlay').remove();
+  const g=mapSvg.insert('g',':first-child').attr('class','greyline-overlay'); // insere antes dos outros grupos, fica por baixo
+  const now=new Date();
+  const sun=sunPos(now);
+  const declDeg=sun.decl*180/Math.PI;
+  const antisolarLon=((sun.sunLon+180+540)%360)-180; // normaliza para -180..180
+  const antisolarLat=-declDeg;
+  const nightCircle=d3.geoCircle().center([antisolarLon,antisolarLat]).radius(90)();
+  g.append('path').attr('d',mapPath(nightCircle)).attr('fill',isDarkNow()?'rgba(0,0,0,0.35)':'rgba(30,30,40,0.28)').attr('stroke','none').attr('pointer-events','none');
+}
+function drawMapOverlay(){
+  renderMapList();
+  if (!mapSvg) return;
+  mapSvg.selectAll('.dest-overlay').remove();
+  const g=mapSvg.append('g').attr('class','dest-overlay');
+  DESTINATIONS.forEach(dest=>{
+    const pathPts=samplePath(QTH.lat,QTH.lon,dest.lat,dest.lon,24).map(([la,lo])=>[lo,la]);
+    const geo={type:'LineString',coordinates:pathPts};
+    g.append('path').attr('d',mapPath(geo)).attr('fill','none').attr('stroke','#898781').attr('stroke-width',0.6).attr('stroke-opacity',0.5);
+  });
+  DESTINATIONS.forEach(dest=>{
+    const best=bestBandFor(dest);
+    const xy=mapProjection([dest.lon,dest.lat]);
+    const bandTxt=best.band?BAND_LABEL[best.band]:'—';
+    if(xy){
+      g.append('circle').attr('cx',xy[0]).attr('cy',xy[1]).attr('r',5).attr('fill',heatColor(best.snr)).attr('stroke','#fff').attr('stroke-width',1);
+      g.append('text').attr('x',xy[0]+8).attr('y',xy[1]+3).attr('font-size',9).attr('fill',isDarkNow()?'#f2f1ed':'#1a1a1a').text(bandTxt);
+    }
+  });
+  const qxy=mapProjection([QTH.lon,QTH.lat]);
+  if(qxy){ g.append('circle').attr('cx',qxy[0]).attr('cy',qxy[1]).attr('r',7).attr('fill','#2a78d6').attr('stroke','#fff').attr('stroke-width',1.5); }
+}
+function isDarkNow(){ return matchMedia('(prefers-color-scheme: dark)').matches; }
+
+// ===== QTH =====
+function onQthChange(){
+  const p=gridToLatLon(document.getElementById('qth-input').value);
+  if(!p){ document.getElementById('global-status').textContent='Grid inválido.'; return; }
+  QTH=p;
+  loadAllData();
+}
+
+// ===== HF =====
+function drawHeatmap(dest,now){
+  const nB=12; const wrap=document.getElementById('heatmap'); if(!wrap) return;
+  wrap.style.gridTemplateColumns='42px repeat('+nB+',1fr)';
+  let cells='<div></div>'; let lastDate=now.getUTCDate();
+  for(let i=0;i<nB;i++){
+    const t=new Date(now.getTime()+i*3*3600000);
+    const hh=String(t.getUTCHours()).padStart(2,'0');
+    const isNewDay=t.getUTCDate()!==lastDate; lastDate=t.getUTCDate();
+    cells += isNewDay
+      ? '<div style="font-size:10px;color:var(--text-primary);font-weight:600;text-align:center;border-left:2px solid var(--border-strong);">'+WEEKDAYS[t.getUTCDay()]+' '+hh+'h</div>'
+      : '<div style="font-size:10px;color:var(--text-muted);text-align:center;">'+hh+'h</div>';
+  }
+  BANDS_ORDER.forEach(b=>{
+    cells+='<div style="font-size:12px;font-weight:500;color:var(--text-primary);display:flex;align-items:center;">'+BAND_LABEL[b]+'</div>';
+    for(let i=0;i<nB;i++){
+      const slice=[]; for(let h=i*3;h<i*3+3;h++){const t=new Date(now.getTime()+h*3600000);slice.push(pathQualityAt(dest,b,t).snr);}
+      const avg=slice.reduce((a,v)=>a+v,0)/slice.length;
+      const letter=avg>=5?'E':avg>=-10?'B':avg>=-20?'M':'F';
+      cells+='<div style="height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;background:'+heatColor(avg)+';color:#fff;" title="'+BAND_LABEL[b]+': '+avg.toFixed(1)+'dB">'+letter+'</div>';
+    }
+  });
+  wrap.innerHTML=cells;
+}
+function destBox(dest){const pad=9;return{lat1:dest.lat-pad,lat2:dest.lat+pad,lon1:dest.lon-pad,lon2:dest.lon+pad};}
+async function loadGroundTruth(dest){
+  const statusEl=document.getElementById('gt-status'); if(!statusEl) return;
+  statusEl.textContent='Buscando spots reais…'; S.groundTruth={};
+  try{
+    const box=destBox(dest),qp=9; // ampliado de 6 para 9 graus, mais dado sem perder o sentido de "caminho especifico"
+    const q=`SELECT band, snr FROM wspr.rx WHERE time > subtractHours(now(),8) AND band IN (1,3,5,7,10,14,18,21,24,28) AND ((tx_lat BETWEEN ${QTH.lat-qp} AND ${QTH.lat+qp} AND tx_lon BETWEEN ${QTH.lon-qp} AND ${QTH.lon+qp} AND rx_lat BETWEEN ${box.lat1} AND ${box.lat2} AND rx_lon BETWEEN ${box.lon1} AND ${box.lon2}) OR (rx_lat BETWEEN ${QTH.lat-qp} AND ${QTH.lat+qp} AND rx_lon BETWEEN ${QTH.lon-qp} AND ${QTH.lon+qp} AND tx_lat BETWEEN ${box.lat1} AND ${box.lat2} AND tx_lon BETWEEN ${box.lon1} AND ${box.lon2})) ORDER BY time DESC LIMIT 800 FORMAT JSON`;
+    const r=await fetch('https://db1.wspr.live/?query='+encodeURIComponent(q));
+    if(!r.ok) throw 0;
+    const j=await r.json();
+    (j.data||[]).forEach(d=>{const band=+d.band,snr=+d.snr;if(!isFinite(band)||!isFinite(snr))return;if(!S.groundTruth[band])S.groundTruth[band]={count:0,sum:0};S.groundTruth[band].count++;S.groundTruth[band].sum+=snr;});
+    const total=Object.values(S.groundTruth).reduce((a,g)=>a+g.count,0);
+    const agora=new Date();
+    const horaUTC=agora.toISOString().slice(11,16);
+    const sunNow=sunPos(agora);
+    const czQTHraw=cosChi(QTH.lat,QTH.lon,sunNow);
+    const contexto=czQTHraw>0.15?'dia no QTH':czQTHraw>-0.15?'transição/terminador no QTH':'noite no QTH';
+    statusEl.textContent = total>0 ? (total+' spots reais nas últimas 8h, região ±9° de cada ponta — consultado às '+horaUTC+' UTC ('+contexto+')') : 'Nenhum spot real nesta janela ampliada — banda(s) provavelmente sem tráfego WSPR ativo agora neste caminho. Consultado às '+horaUTC+' UTC ('+contexto+').';
+  }catch(e){ statusEl.textContent='wspr.live indisponível agora.'; }
+  renderGroundTruth(dest);
+}
+function renderGroundTruth(dest){
+  const tbody=document.getElementById('gt-tbody'); if(!tbody) return;
+  const now=new Date(); let html='';
+  [1,3,5,7,10,14,18,21,24,28].forEach(b=>{
+    const gt=S.groundTruth[b]; const predicted=pathQualityAt(dest,b,now).snr;
+    if(gt&&gt.count>0){ const avgObs=gt.sum/gt.count; html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+gt.count+'</td><td>'+avgObs.toFixed(1)+'</td><td style="color:var(--text-muted);">'+predicted.toFixed(1)+'</td></tr>'; }
+    else { html+='<tr><td>'+BAND_LABEL[b]+'</td><td colspan="3" style="color:var(--text-muted);">sem spots reais</td></tr>'; }
+  });
+  tbody.innerHTML=html;
+}
+function drawKpChart(){
+  const canvas=document.getElementById('kpChart'); if(!canvas||typeof Chart==='undefined') return;
+  if(kpChartObj) kpChartObj.destroy();
+  const labels=S.kpHist.map(h=>{const t=new Date(h.t);const hh=t.getUTCHours().toString().padStart(2,'0');return hh==='00'?WEEKDAYS[t.getUTCDay()]+' '+hh+'h':hh+'h';});
+  const data=S.kpHist.map(h=>h.kp);
+  const kpColor=k=>k>=7?'#991B1B':k>=5?'#DC2626':k>=4?'#D97706':'#0D9488'; // limiares verificados na pagina oficial NOAA/SWPC: 5=inicio storm(G1), 7=severe(G3)
+  const kpShape=k=>k>=7?'triangle':k>=5?'rectRot':k>=4?'rect':'circle'; // forma geometrica, nao so cor -- acessibilidade daltonismo
+  const kpLabel=k=>k>=9?'G5 Extrema':k>=8?'G4 Severa':k>=7?'G3 Forte':k>=6?'G2 Moderada':k>=5?'G1 Menor':k>=4?'Ativo':'Calmo';
+  const pointColors=data.map(kpColor), pointShapes=data.map(kpShape);
+  kpChartObj=new Chart(canvas,{type:'line',data:{labels,datasets:[
+    {data,borderColor:'#0D9488',backgroundColor:'rgba(13,148,136,0.12)',fill:true,tension:0.3,pointRadius:5,pointBorderWidth:1.5,pointBorderColor:'#fff',pointBackgroundColor:pointColors,pointStyle:pointShapes,borderWidth:2},
+    {data:labels.map(()=>5),borderColor:'#DC2626',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false},
+    {data:labels.map(()=>7),borderColor:'#991B1B',borderWidth:1,borderDash:[4,4],pointRadius:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{filter:(item)=>item.datasetIndex===0,callbacks:{title:(items)=>{const h=S.kpHist[items[0].dataIndex];return h?new Date(h.t).toISOString().slice(0,16).replace('T',' ')+' UTC':'';},label:(item)=>{const k=item.parsed.y;return 'Kp '+k.toFixed(1)+' — '+kpLabel(k);}}}},scales:{x:{ticks:{font:{size:10}},grid:{display:false}},y:{min:0,max:9,ticks:{font:{size:10},stepSize:3}}}}});
+}
+async function appendBzLog(bz, rate, level){
+  try{
+    const key='bz-trend-log';
+    let entries=[];
+    try{ const r=await window.storage.get(key,false); if(r&&r.value) entries=JSON.parse(r.value); }catch(e){ entries=[]; }
+    entries.push({t:new Date().toISOString(), bz:+bz.toFixed(1), rate:+rate.toFixed(1), level});
+    if(entries.length>500) entries=entries.slice(entries.length-500); // cap para nao crescer sem limite
+    await window.storage.set(key, JSON.stringify(entries), false);
+    renderBzLog(entries);
+  }catch(e){ document.getElementById('bz-log-status').textContent='Armazenamento indisponível neste ambiente.'; }
+}
+function renderBzLog(entries){
+  const statusEl=document.getElementById('bz-log-status'), tableEl=document.getElementById('bz-log-table');
+  if(!statusEl||!tableEl) return;
+  statusEl.textContent=entries.length+' leitura'+(entries.length!==1?'s':'')+' registrada'+(entries.length!==1?'s':'')+' desde que este navegador começou a usar o painel.';
+  const recent=entries.slice(-15).reverse();
+  const cores={CRITICO:'#991B1B',ATENCAO:'#92400E',RECUPERACAO:'#166534',NORMAL:'var(--text-muted)'};
+  tableEl.innerHTML=recent.map(e=>'<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);"><span>'+e.t.slice(0,16).replace('T',' ')+'</span><span>'+e.bz+'nT</span><span style="color:'+(cores[e.level]||'var(--text-muted)')+';">'+e.level+'</span></div>').join('');
+}
+async function clearBzLog(){
+  try{ await window.storage.delete('bz-trend-log', false); }catch(e){}
+  renderBzLog([]);
+}
+async function loadBzLog(){
+  try{
+    if(typeof window.storage==='undefined') throw new Error('sem storage');
+    const r=await window.storage.get('bz-trend-log', false); const entries=r&&r.value?JSON.parse(r.value):[]; renderBzLog(entries);
+  }
+  catch(e){ const s=document.getElementById('bz-log-status'); if(s) s.textContent='Armazenamento persistente indisponível neste ambiente (funciona quando publicado como Artifact no Claude.ai).'; }
+}
+function renderBzTrend(){
+  const el=document.getElementById('bz-trend-alert'); if(!el) return;
+  if(!S.bzHist||S.bzHist.length<2){ el.style.display='none'; return; }
+  const hist=S.bzHist;
+  const lastT=new Date(hist[hist.length-1].t).getTime();
+  const staleMin=(Date.now()-lastT)/60000;
+  if(staleMin>25){
+    el.style.display='block'; el.style.background='var(--surface-1)'; el.style.color='var(--text-muted)';
+    el.innerHTML='Feed de Bz da NOAA desatualizado há '+Math.round(staleMin)+'min — tendência não calculada para evitar janela defasada.';
+    return;
+  }
+  // media movel dos ultimos ~5min (absorve turbulencia de ponto unico no extremo "agora")
+  const recentWindow=hist.filter(h=>lastT-new Date(h.t).getTime()<=5*60000);
+  const recentAvg=recentWindow.reduce((s,h)=>s+h.bz,0)/recentWindow.length;
+  const recentMidT=recentWindow.reduce((s,h)=>s+new Date(h.t).getTime(),0)/recentWindow.length;
+  // media movel numa janela de ~5min centrada em ~30min atras (mesmo principio no extremo "passado")
+  const refWindow=hist.filter(h=>{const dt=lastT-new Date(h.t).getTime();return dt>=25*60000&&dt<=35*60000;});
+  if(!refWindow.length){
+    el.style.display='block'; el.style.background='var(--surface-1)'; el.style.color='var(--text-secondary)';
+    el.innerHTML='Bz '+recentAvg.toFixed(1)+' nT · sem dado suficiente em ~30min para calcular tendência (possível lacuna no feed).';
+    return;
+  }
+  const refPts=refWindow;
+  const refAvg=refPts.reduce((s,h)=>s+h.bz,0)/refPts.length;
+  const refMidT=refPts.reduce((s,h)=>s+new Date(h.t).getTime(),0)/refPts.length;
+  const last={bz:recentAvg}, ref={bz:refAvg};
+  const elapsedH=(recentMidT-refMidT)/3600000;
+  if(elapsedH<=0){ el.style.display='none'; return; }
+  const rate=(last.bz-ref.bz)/elapsedH; // nT/h
+  el.style.display='block';
+  let level='NORMAL';
+  if(rate<-10 && last.bz<-5){
+    level='CRITICO';
+    el.style.background='var(--status-bad-bg)'; el.style.color='var(--status-bad-fg)';
+    el.innerHTML='⚠️ Bz caindo forte ('+rate.toFixed(1)+' nT/h, agora '+last.bz.toFixed(1)+' nT) — risco elevado de tempestade geomagnética e degradação em altas latitudes.';
+  } else if(rate<-5 && last.bz<-3){
+    level='ATENCAO';
+    el.style.background='var(--status-warn-bg)'; el.style.color='var(--status-warn-fg)';
+    el.innerHTML='⚡ Bz caindo ('+rate.toFixed(1)+' nT/h, agora '+last.bz.toFixed(1)+' nT) — monitore degradação em HF nas próximas horas.';
+  } else if(rate>5 && last.bz>0){
+    level='RECUPERACAO';
+    el.style.background='var(--status-good-bg)'; el.style.color='var(--status-good-fg)';
+    el.innerHTML='✓ Bz virando para o norte (+'+rate.toFixed(1)+' nT/h, agora '+last.bz.toFixed(1)+' nT) — condições geomagnéticas em recuperação.';
+  } else {
+    el.style.background='var(--surface-1)'; el.style.color='var(--text-secondary)';
+    el.innerHTML='Bz '+last.bz.toFixed(1)+' nT · tendência '+(rate>=0?'+':'')+rate.toFixed(1)+' nT/h ('+elapsedH.toFixed(1)+'h)';
+  }
+  appendBzLog(last.bz, rate, level);
+}
+function renderHF(){
+  const dest=DESTINATIONS[parseInt(document.getElementById('dest-sel').value)];
+  document.getElementById('m-sfi').textContent=Math.round(S.sfi);
+  document.getElementById('m-kp').textContent=S.kp.toFixed(1).replace('.0','');
+  document.getElementById('m-dst').textContent=Math.round(S.dst);
+  document.getElementById('m-bz').textContent=(S.bz>0?'+':'')+S.bz.toFixed(1);
+  const aIdx=runningAIndex();
+  document.getElementById('m-aidx').textContent=aIdx!==null?Math.round(aIdx):'—';
+  document.getElementById('m-xray').textContent=xrayClass(S.xrayFlux);
+  renderBzTrend();
+  const now=new Date();
+  let html='';
+  BANDS_ORDER.forEach(b=>{
+    const hourly=[];
+    for(let h=0;h<36;h++){const t=new Date(now.getTime()+h*3600000);hourly.push({h,t,...pathQualityAt(dest,b,t)});}
+    const win=bestWindow(hourly);
+    if(!win){ html+='<tr><td>'+BAND_LABEL[b]+'</td><td colspan="2" style="color:var(--text-muted);">Sem abertura clara</td></tr>'; return; }
+    const fmt=t=>String(t.getUTCHours()).padStart(2,'0')+':'+String(t.getUTCMinutes()).padStart(2,'0');
+    const conf=confidenceFor(win);
+    html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+fmt(hourly[win.start].t)+'–'+fmt(hourly[win.end].t)+'</td><td style="font-weight:600;">'+conf+'%</td></tr>';
+  });
+  document.getElementById('band-detail').innerHTML=html;
+  drawHeatmap(dest,now);
+  drawKpChart();
+  loadGroundTruth(dest);
+}
+
+// ===== VHF =====
+function seasonBump(doy,centerDOY,halfWidth){let d=Math.abs(doy-centerDOY);if(d>182.5)d=365-d;return Math.max(0,Math.cos(d/halfWidth*(Math.PI/2)));}
+function esLikelihood(lat,lon,date){
+  const isSouthern=lat<0;
+  const primaryDOY=isSouthern?355:172; // solsticio de verao do hemisferio
+  const secondaryDOY=isSouthern?145:325; // pico secundario, ~6 meses do primario (fonte: dxradar Es season, "secondary: May-June" p/ hemisferio sul)
+  const doy=Math.floor((date-new Date(Date.UTC(date.getUTCFullYear(),0,0)))/864e5);
+  const primaryFactor=seasonBump(doy,primaryDOY,90);
+  const secondaryFactor=seasonBump(doy,secondaryDOY,45)*0.4; // mais estreito e mais fraco que o principal, por ser secundario
+  const seasonFactor=Math.max(primaryFactor,secondaryFactor);
+  const utcHour=date.getUTCHours()+date.getUTCMinutes()/60;const localHour=((utcHour+lon/15)%24+24)%24;let diurnalDist=Math.abs(localHour-13);diurnalDist=Math.min(diurnalDist,24-diurnalDist);const diurnalFactor=Math.max(0,Math.cos(diurnalDist/7*(Math.PI/2)));const absLat=Math.abs(lat);const latFactor=Math.max(0,1-Math.abs(absLat-35)/35);return Math.round(seasonFactor*diurnalFactor*latFactor*100);
+}
+// ===== TEP (calibrado contra caso real documentado EA7->PY) =====
+function nsAlignment(brng){const d0=Math.min(brng,360-brng),d180=Math.abs(brng-180);return Math.max(0,1-Math.min(d0,d180)/70);}
+function geomFactorTEP(gmTx,gmRx){const crossesEq=(gmTx*gmRx)<0;const absTx=Math.abs(gmTx),absRx=Math.abs(gmRx);const nearAnomaly=(absTx>=3&&absTx<=35)||(absRx>=3&&absRx<=35);let f=crossesEq?0.6:0.15;if(nearAnomaly)f+=0.4;return Math.min(1,f);}
+function initialBearing(lat1,lon1,lat2,lon2){const tr=Math.PI/180;const y=Math.sin((lon2-lon1)*tr)*Math.cos(lat2*tr);const x=Math.cos(lat1*tr)*Math.sin(lat2*tr)-Math.sin(lat1*tr)*Math.cos(lat2*tr)*Math.cos((lon2-lon1)*tr);return(Math.atan2(y,x)*180/Math.PI+360)%360;}
+function tepScoreAt(tx,rx,date,sfi,is2m){
+  const gmTx=geomagLat(tx.lat,tx.lon),gmRx=geomagLat(rx.lat,rx.lon);
+  const brng=initialBearing(tx.lat,tx.lon,rx.lat,rx.lon);
+  const geomF=geomFactorTEP(gmTx,gmRx), nsF=nsAlignment(brng);
+  const midLon=(tx.lon+rx.lon)/2;
+  const utcH=date.getUTCHours()+date.getUTCMinutes()/60;
+  const localH=((utcH+midLon/15)%24+24)%24;
+  // 6m acessa dois mecanismos (aTEP vespertino + eTEP noturno) -> janela mais larga, centro ~19h
+  // 2m so acessa eTEP (bolhas de plasma) -> janela mais estreita, confirmada 1900-2300 local
+  const center=is2m?21:19, halfWidth=is2m?4:6.5;
+  let hourDist=Math.abs(localH-center); hourDist=Math.min(hourDist,24-hourDist);
+  const hourF=Math.max(0,Math.cos(hourDist/halfWidth*(Math.PI/2)));
+  const doy=Math.floor((date-new Date(Date.UTC(date.getUTCFullYear(),0,0)))/864e5);
+  const dMar=Math.min(Math.abs(doy-80),365-Math.abs(doy-80)), dSep=Math.min(Math.abs(doy-266),365-Math.abs(doy-266));
+  const seasonF=0.5+0.5*Math.max(0,Math.cos(Math.min(dMar,dSep)/60*(Math.PI/2)));
+  const sfiF=Math.max(0,Math.min(1,(sfi-90)/110));
+  let score=geomF*nsF*hourF*seasonF*sfiF;
+  if(is2m)score*=0.35;
+  return Math.round(score*100);
+}
+function peakTepIn24h(dest,is2m){
+  const now=new Date(); let best={score:-1,h:0};
+  for(let h=0;h<24;h++){const t=new Date(now.getTime()+h*3600000);const s=tepScoreAt(QTH,dest,t,S.sfi,is2m);if(s>best.score)best={score:s,h};}
+  return best;
+}
+// ===== DUTO TROPOSFÉRICO (Open-Meteo, dado atmosférico real) =====
+function satVaporPressure(tC){ return 6.1121*Math.exp((17.502*tC)/(240.97+tC)); }
+function refractivityN(pHpa,tC,rh){ const T=tC+273.15; const e=(rh/100)*satVaporPressure(tC); return 77.6*(pHpa/T)+3.73e5*(e/(T*T)); }
+async function loadTropo(){
+  const statusEl=document.getElementById('tropo-status'); if(!statusEl) return;
+  statusEl.textContent='Buscando perfil atmosférico modelado…';
+  const levels=[1000,950,900,850];
+  const vars=levels.map(l=>['temperature_'+l+'hPa','relative_humidity_'+l+'hPa','geopotential_height_'+l+'hPa']).flat().join(',');
+  try{
+    const url='https://api.open-meteo.com/v1/forecast?latitude='+QTH.lat.toFixed(3)+'&longitude='+QTH.lon.toFixed(3)+'&hourly='+vars+'&forecast_days=1';
+    const r=await fetch(url); if(!r.ok) throw 0;
+    const j=await r.json(); const h=j.hourly; const idx=new Date().getUTCHours();
+    const profile=levels.map(l=>({t:h['temperature_'+l+'hPa'][idx],rh:h['relative_humidity_'+l+'hPa'][idx],gh:h['geopotential_height_'+l+'hPa'][idx]}))
+      .map(p=>({...p,N:refractivityN(1000,p.t,p.rh)})).filter(p=>isFinite(p.gh)&&isFinite(p.N)).sort((a,b)=>a.gh-b.gh);
+    let worst=999;
+    for(let i=0;i<profile.length-1;i++){const dh=profile[i+1].gh-profile[i].gh; if(dh<=0)continue; const dNdh=(profile[i+1].N-profile[i].N)/dh*1000; if(dNdh<worst)worst=dNdh;}
+    // classificacao de 4 niveis (ITU-R P.453 pro limiar de ducting -157, bem estabelecido; o limiar de super-refracao varia por fonte entre -39 e -79 N/km -- uso -78 como valor central, citando a faixa)
+    let label,color,note;
+    if(worst>0){ label='Sub-refração'; color='var(--text-secondary)'; note='onda curva menos que o normal em direção à Terra.'; }
+    else if(worst>=-78){ label='Refração normal'; color='var(--good)'; note='comportamento atmosférico usual, sem propagação anômala.'; }
+    else if(worst>-157){ label='Super-refração'; color='var(--warn)'; note='horizonte radioelétrico pode aumentar, sem duto formado.'; }
+    else { label='Ducting / trapping'; color='var(--bad)'; note='possível aprisionamento — abertura VHF de longa distância.'; }
+    document.getElementById('tropo-verdict').innerHTML='<b style="color:'+color+';">'+label+'</b> — gradiente mínimo encontrado: '+worst.toFixed(0)+' N/km. '+note+'<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Limiares: sub-refração &gt;0 · normal 0 a −78 · super-refração −78 a −157 · ducting &lt;−157 N/km (ITU-R P.453; o limiar entre normal/super-refração varia entre −39 e −79 conforme a fonte — usamos −78 como valor central).</div>';
+    statusEl.textContent='Estimativa por modelo numérico (Open-Meteo/ECMWF) — não é medição local direta';
+  }catch(e){ statusEl.textContent='Open-Meteo indisponível agora.'; document.getElementById('tropo-verdict').textContent=''; }
+}
+// ===== AVISOS INMET (RSS real, public domain) =====
+function normalizeText(s){ return (s||'').replace(/\s+/g,' ').trim(); }
+function sevRank(sev){ if(sev.includes('Grande')) return 3; if(sev.includes('Perigo Potencial')) return 1; if(sev.includes('Perigo')) return 2; return 0; }
+function eventPriority(title){
+  const t=title.toLowerCase();
+  if(t.includes('vendaval')||t.includes('rajada')||t.includes('vento')||t.includes('ciclone')||t.includes('furacão')) return 4;
+  if(t.includes('raio')||t.includes('tempestade')||t.includes('trovoada')||t.includes('descarga')) return 3;
+  if(t.includes('chuva')||t.includes('enchente')||t.includes('alagamento')||t.includes('inundação')) return 2;
+  return 1; // umidade, calor, frio, etc -- baixa relevância estrutural para estação
+}
+async function loadInmetAvisos(regionName){
+  const statusEl=document.getElementById('inmet-status'); if(!statusEl) return;
+  statusEl.textContent='Buscando avisos oficiais…';
+  document.getElementById('inmet-avisos').innerHTML='';
+  const badge=document.getElementById('qth-alert-badge');
+  try{
+    const r=await fetch('https://apiprevmet3.inmet.gov.br/avisos/rss');
+    if(!r.ok) throw 0;
+    const xmlText=await r.text();
+    const xml=new DOMParser().parseFromString(xmlText, 'application/xml');
+    const items=[...xml.querySelectorAll('item')];
+    const normalizeForMatch=s=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    const regionNorm=normalizeForMatch(regionName);
+    const matched=items.filter(it=>{
+      const desc=it.querySelector('description')?.textContent||'';
+      return normalizeForMatch(desc).includes(regionNorm);
+    });
+    if(matched.length===0){
+      document.getElementById('inmet-avisos').innerHTML='<span style="color:var(--text-muted);">Nenhum aviso ativo mencionando "'+regionName+'" no momento.</span>';
+      if(badge){ badge.style.display='none'; }
+    } else {
+      // Deduplica por (titulo+descricao normalizada) -- INMET reemite o mesmo aviso com janelas de horario levemente diferentes conforme atualiza a previsao
+      const grouped={};
+      matched.forEach(it=>{
+        const title=it.querySelector('title')?.textContent||'';
+        const desc=it.querySelector('description')?.textContent||'';
+        const sevMatch=desc.match(/Severidade<\/th><td>([^<]*)</);
+        const inicioMatch=desc.match(/Início<\/th><td>([^<]*)</);
+        const fimMatch=desc.match(/Fim<\/th><td>([^<]*)</);
+        const descMatch=desc.match(/Descrição<\/th><td>([^<]*)</);
+        const areaMatch=desc.match(/Área<\/th><td>([^<]*)</);
+        const descText=normalizeText(descMatch?descMatch[1]:'');
+        const key=normalizeText(title)+'|'+descText;
+        const inicio=inicioMatch?inicioMatch[1]:'', fim=fimMatch?fimMatch[1]:'';
+        const area=(areaMatch?areaMatch[1]:'').replace(/^Aviso para as Áreas:\s*/,'');
+        if(!grouped[key]){
+          grouped[key]={title, sev:sevMatch?sevMatch[1]:'—', descText, area, inicio, fim, revisoes:1};
+        } else {
+          grouped[key].revisoes++;
+          if(inicio && inicio<grouped[key].inicio) grouped[key].inicio=inicio;
+          if(fim && fim>grouped[key].fim) grouped[key].fim=fim;
+        }
+      });
+      const allAlerts=Object.values(grouped);
+      allAlerts.sort((a,b)=> eventPriority(b.title)-eventPriority(a.title) || sevRank(b.sev)-sevRank(a.sev));
+      const top=allAlerts[0];
+      const color=top.sev.includes('Grande')?'var(--status-bad-fg)':top.sev.includes('Perigo Potencial')?'var(--status-warn-fg)':top.sev.includes('Perigo')?'var(--status-orange-fg)':'var(--text-secondary)';
+      const areaCount=top.area?top.area.split(',').length:0;
+      const resumo=top.descText.length>90?top.descText.slice(0,90).replace(/\s+\S*$/,'')+'…':top.descText;
+      let html='<div style="padding:6px 0;"><b style="color:'+color+';">'+top.title.replace(/\. Severidade.*/,'')+'</b>'+(top.revisoes>1?' <span style="font-size:11px;color:var(--text-muted);">('+top.revisoes+' atualizações)</span>':'')+'<br><span style="font-size:12px;color:var(--text-muted);">'+top.inicio+' até '+top.fim+' · ✓ '+regionName+(areaCount>1?' (entre '+areaCount+' áreas)':'')+'</span><br><span style="font-size:13px;">'+resumo+'</span></div>';
+      if(allAlerts.length>1) html+='<div style="font-size:12px;color:var(--text-muted);margin-top:6px;">+ '+(allAlerts.length-1)+' outro'+(allAlerts.length>2?'s':'')+' aviso'+(allAlerts.length>2?'s':'')+' ativo'+(allAlerts.length>2?'s':'')+' para '+regionName+' (menor prioridade para operação de estação)</div>';
+      document.getElementById('inmet-avisos').innerHTML=html;
+      if(badge){
+        const worst=top;
+        const n=allAlerts.length;
+        const tiers={0:{bg:'var(--surface-1)',fg:'var(--text-secondary)',label:'Atenção'},1:{bg:'var(--status-warn-bg)',fg:'var(--status-warn-fg)',label:'Atenção'},2:{bg:'var(--status-orange-bg)',fg:'var(--status-orange-fg)',label:'Fique atento'},3:{bg:'var(--status-bad-bg)',fg:'var(--status-bad-fg)',label:'Risco elevado'}};
+        const tier=tiers[sevRank(worst.sev)]||tiers[0];
+        badge.style.display='block'; badge.style.background=tier.bg; badge.style.color=tier.fg;
+        badge.innerHTML='⚠️ '+tier.label+' — sua região tem '+n+' aviso'+(n>1?'s':'')+' oficial'+(n>1?'is':'')+' ativo'+(n>1?'s':'')+' do INMET agora (mais grave: "'+worst.title.replace(/\. Severidade.*/,'')+'"). Veja detalhes na aba Meteorologia.';
+      }
+    }
+    statusEl.textContent='Dado real, oficial, INMET (public domain) — '+items.length+' avisos ativos no Brasil no total';
+  }catch(e){ statusEl.textContent='INMET indisponível agora.'; if(badge) badge.style.display='none'; }
+}
+function windSafetyTier(gustKmh){
+  if(gustKmh<30) return {label:'Verde — operação normal', bg:'var(--status-good-bg)', color:'var(--status-good-fg)'};
+  if(gustKmh<50) return {label:'Amarelo — monitorar, vento moderado (Beaufort 6)', bg:'var(--status-warn-bg)', color:'var(--status-warn-fg)'};
+  if(gustKmh<70) return {label:'Laranja — evite manutenção em altura (Beaufort 8, ventania)', bg:'var(--status-orange-bg)', color:'var(--status-orange-fg)'};
+  return {label:'Vermelho — risco elevado, muitas antenas comerciais têm limite de sobrevivência nesta faixa (Beaufort 10+)', bg:'var(--status-bad-bg)', color:'var(--status-bad-fg)'};
+}
+async function loadWeather(){
+  const statusEl=document.getElementById('weather-status'); if(!statusEl) return;
+  statusEl.textContent='Buscando condições atuais…';
+  try{
+    const url='https://api.open-meteo.com/v1/forecast?latitude='+QTH.lat.toFixed(3)+'&longitude='+QTH.lon.toFixed(3)+'&current=temperature_2m,relative_humidity_2m,surface_pressure,wind_speed_10m,wind_gusts_10m';
+    const r=await fetch(url); if(!r.ok) throw 0;
+    const j=await r.json(); const c=j.current;
+    document.getElementById('w-temp').textContent=c.temperature_2m.toFixed(1)+'°C';
+    document.getElementById('w-hum').textContent=c.relative_humidity_2m+'%';
+    document.getElementById('w-wind').textContent=c.wind_speed_10m.toFixed(0)+' km/h';
+    document.getElementById('w-gust').textContent=c.wind_gusts_10m.toFixed(0)+' km/h';
+    const tier=windSafetyTier(c.wind_gusts_10m);
+    const wsEl=document.getElementById('wind-safety');
+    wsEl.textContent=tier.label; wsEl.style.background=tier.bg; wsEl.style.color=tier.color;
+    statusEl.textContent='Dado real do Open-Meteo — agora';
+  }catch(e){ statusEl.textContent='Open-Meteo indisponível agora.'; document.getElementById('wind-safety').textContent=''; }
+}
+// ===== RADAR (Leaflet: OSM base + RainViewer overlay, real, sem chave) =====
+let radarMap=null, radarLayer=null, qthMarker=null, glmLayerGroup=null;
+async function loadRadar(){
+  const statusEl=document.getElementById('radar-status'); if(!statusEl) return;
+  statusEl.textContent='Buscando radar…';
+  try{
+    if(typeof L==='undefined') throw new Error('Leaflet não carregou');
+    const r=await fetch('https://api.rainviewer.com/public/weather-maps.json');
+    if(!r.ok) throw 0;
+    const j=await r.json();
+    const frames=j.radar?.past; if(!frames||!frames.length) throw 0;
+    const latest=frames[frames.length-1];
+    const tileUrl=j.host+latest.path+'/256/{z}/{x}/{y}/2/1_1.png';
+
+    if(!radarMap){
+      radarMap=L.map('radar-map',{preferCanvas:true}).setView([QTH.lat, QTH.lon], 7);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
+        maxZoom:12
+      }).addTo(radarMap);
+      qthMarker=L.marker([QTH.lat, QTH.lon]).addTo(radarMap).bindPopup('Seu QTH');
+      setTimeout(()=>radarMap.invalidateSize(), 50);
+    } else {
+      radarMap.setView([QTH.lat, QTH.lon], radarMap.getZoom());
+      if(radarLayer) radarMap.removeLayer(radarLayer);
+      if(qthMarker) qthMarker.setLatLng([QTH.lat, QTH.lon]);
+    }
+    radarLayer=L.tileLayer(tileUrl, {
+      opacity:0.6, maxZoom:12,
+      attribution:'Weather data by <a href="https://www.rainviewer.com/" target="_blank">RainViewer</a>'
+    }).addTo(radarMap);
+    const frameDate=new Date(latest.time*1000);
+    statusEl.textContent='Dado real, RainViewer — quadro de '+frameDate.toISOString().slice(11,16)+' UTC';
+  }catch(e){ statusEl.textContent='RainViewer/OSM indisponível agora: '+e.message; }
+}
+// ===== RAIOS BRASIL (GOES-19 GLM via S3 aberto + h5wasm, experimental) =====
+async function fetchWithTimeout(url, ms, opts){
+  const ctrl=new AbortController();
+  const timer=setTimeout(()=>ctrl.abort(), ms);
+  try{ return await fetch(url, {...(opts||{}), signal:ctrl.signal}); }
+  finally{ clearTimeout(timer); }
+}
+async function fetchLatestGlmKey(now, bucket){
+  async function listHour(t){
+    const year=t.getUTCFullYear();
+    const doy=String(Math.floor((t-new Date(Date.UTC(year,0,0)))/864e5)).padStart(3,'0');
+    const hour=String(t.getUTCHours()).padStart(2,'0');
+    const prefix='GLM-L2-LCFA/'+year+'/'+doy+'/'+hour+'/';
+    const url='https://'+bucket+'.s3.amazonaws.com/?list-type=2&prefix='+encodeURIComponent(prefix)+'&max-keys=500';
+    let r;
+    try{ r=await fetchWithTimeout(url, 20000); }
+    catch(e){ throw new Error(e.name==='AbortError'?'listagem S3 sem resposta em 20s':'falha de rede na listagem S3'); }
+    if(!r.ok) throw new Error('listagem S3 falhou (HTTP '+r.status+')');
+    const xmlText=await r.text();
+    const xml=new DOMParser().parseFromString(xmlText,'application/xml');
+    return [...xml.querySelectorAll('Contents Key')].map(k=>k.textContent).filter(k=>k && k.length>10 && k.endsWith('.nc'));
+  }
+  let keys=await listHour(now);
+  if(!keys.length){ keys=await listHour(new Date(now.getTime()-3600000)); }
+  if(!keys.length) throw new Error('nenhum arquivo GLM encontrado nas últimas 2 horas');
+  keys.sort();
+  return keys[keys.length-1];
+}
+let glmHistory=[]; // buffer em memoria, acumula entre chamadas na mesma sessao -- nao e historico retroativo real, comeca vazio a cada carregamento de pagina
+function glmAgeColor(ageMin){
+  if(ageMin<5) return '#a855f7'; // violeta/branco -- ativo agora
+  if(ageMin<15) return '#dc2626'; // vermelho
+  if(ageMin<30) return '#f59e0b'; // laranja
+  return '#78716c'; // cinza -- prestes a sair do buffer
+}
+async function loadGlmBrazil(){
+  const statusEl=document.getElementById('glm-status'); if(!statusEl) return;
+  const flashEl=document.getElementById('glm-flashes');
+  statusEl.textContent='Verificando h5wasm…';
+  try{
+    if(typeof window.h5wasm==='undefined'){ await Promise.race([window.__h5wasmReadyPromise, new Promise((_,rej)=>setTimeout(()=>rej(new Error('tempo esgotado carregando h5wasm')),15000))]); }
+    if(typeof window.h5wasm==='undefined') throw new Error('h5wasm não carregou');
+    const bucket='noaa-goes19'; // GOES East atual, confirmado — GOES-16 foi desativado em abr/2025
+    statusEl.textContent='Buscando arquivo GLM mais recente…';
+    const key=await fetchLatestGlmKey(new Date(), bucket);
+    statusEl.textContent='Baixando '+key.split('/').pop()+'…';
+    let fr;
+    try{ fr=await fetchWithTimeout('https://'+bucket+'.s3.amazonaws.com/'+key, 30000); }
+    catch(e){ throw new Error(e.name==='AbortError'?'download sem resposta em 30s':'falha de rede no download'); }
+    if(!fr.ok) throw new Error('download falhou (HTTP '+fr.status+')');
+    const ab=await fr.arrayBuffer();
+    window.__h5FS.writeFile('glm_latest.nc', new Uint8Array(ab));
+    const f=new window.h5wasm.File('glm_latest.nc','r');
+    const lat=f.get('flash_lat').value, lon=f.get('flash_lon').value, energy=f.get('flash_energy').value;
+    f.close();
+    const agora=Date.now();
+    const novos=[];
+    for(let i=0;i<lat.length;i++){ if(lat[i]>=-34&&lat[i]<=6&&lon[i]>=-74&&lon[i]<=-34) novos.push({lat:lat[i],lon:lon[i],energy:energy[i],t:agora}); }
+    glmHistory.push(...novos);
+    glmHistory=glmHistory.filter(b=>(agora-b.t)<=30*60000); // poda tudo com mais de 30min
+    const brasil=glmHistory;
+    statusEl.textContent=key.split('/').pop()+' — +'+novos.length+' novos, '+brasil.length+' no buffer de 30min (sessão atual, não histórico retroativo)';
+    if(brasil.length===0){
+      flashEl.innerHTML='<span style="color:var(--text-muted);">Nenhum raio sobre o Brasil no buffer — normal fora de tempestade ativa.</span>';
+    } else {
+      const porEnergia=[...brasil].sort((a,b)=>b.energy-a.energy);
+      function formatEnergyAdaptive(e){
+        if(!isFinite(e)||e<=0) return e+' J';
+        const units=[['GJ',1e9],['MJ',1e6],['kJ',1e3],['J',1],['mJ',1e-3],['µJ',1e-6],['nJ',1e-9],['pJ',1e-12],['fJ',1e-15]];
+        for(const[label,scale] of units){ if(e>=scale) return (e/scale).toFixed(2)+' '+label; }
+        return e.toExponential(2)+' J';
+      }
+      let html='<div style="font-size:14px;margin-bottom:8px;"><b>'+brasil.length+' raios no buffer</b> (últimos 30min desta sessão).</div>';
+      html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Descargas mais intensas (Top 3 de '+brasil.length+'):</div>';
+      porEnergia.slice(0,3).forEach((b,i)=>{
+        html+='<div id="glm-top-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span id="glm-loc-'+i+'">Localizando… (Lat '+b.lat.toFixed(2)+', Lon '+b.lon.toFixed(2)+')</span><span style="font-weight:600;color:var(--warn);">'+formatEnergyAdaptive(b.energy)+'</span></div>';
+      });
+      html+='<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Cor no mapa por idade: <span style="color:#a855f7;">●</span> &lt;5min <span style="color:#dc2626;">●</span> 5-15min <span style="color:#f59e0b;">●</span> 15-30min</div>';
+      html+='<div id="glm-geo-attrib" style="font-size:11px;color:var(--text-muted);margin-top:6px;display:none;">Localização: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>/© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</div>';
+      flashEl.innerHTML=html;
+      reverseGeocodeTop3(porEnergia.slice(0,3));
+      if(radarMap){
+        if(!glmLayerGroup){ glmLayerGroup=L.layerGroup().addTo(radarMap); }
+        else { glmLayerGroup.clearLayers(); }
+        brasil.forEach(b=>{
+          const ageMin=(agora-b.t)/60000;
+          const cor=glmAgeColor(ageMin);
+          const flashIcon=L.divIcon({className:'glm-flash-icon', html:'<div style="width:100%;height:100%;border-radius:50%;background:'+cor+';"></div>', iconSize:[ageMin<5?14:9,ageMin<5?14:9]});
+          L.marker([b.lat,b.lon],{icon:flashIcon}).bindPopup('<b>Raio GLM</b><br>Há '+ageMin.toFixed(0)+' min').addTo(glmLayerGroup);
+        });
+      }
+    }
+  }catch(e){ statusEl.textContent='GLM indisponível agora: '+e.message; flashEl.innerHTML=''; }
+}
+function sleep(ms){ return new Promise(res=>setTimeout(res,ms)); }
+async function reverseGeocodeOne(lat,lon){
+  const url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon+'&zoom=14';
+  const r=await fetch(url);
+  if(!r.ok) throw new Error('http '+r.status);
+  const j=await r.json();
+  if(j.error) return {label:'Provável oceano/área não mapeada', isWater:true};
+  const a=j.address||{};
+  const bairro=a.suburb||a.neighbourhood||a.city_district||'';
+  const cidade=a.city||a.town||a.village||a.municipality||'';
+  const estado=a.state||'';
+  const pais=a.country||'';
+  if(a.sea||a.ocean) return {label:(a.ocean||a.sea), isWater:true};
+  if(!cidade && !pais) return {label:'Provável oceano/área não mapeada', isWater:true};
+  let partes=[];
+  if(bairro) partes.push(bairro);
+  if(cidade) partes.push(cidade);
+  if(estado) partes.push(estado);
+  else if(pais && pais!=='Brasil' && pais!=='Brazil') partes.push(pais);
+  if(partes.length) return {label:partes.join(', '), isWater:false, cidade};
+  if(j.display_name) return {label:j.display_name.split(',').slice(0,2).join(','), isWater:false, cidade};
+  return {label:'Área não identificada', isWater:false, cidade};
+}
+async function updateQthRegionAndAlerts(){
+  const statusEl=document.getElementById('qth-region-status');
+  if(statusEl) statusEl.textContent='Detectando cidade a partir do grid…';
+  try{
+    const res=await reverseGeocodeOne(QTH.lat, QTH.lon);
+    const regiao=res.cidade || res.label;
+    if(statusEl) statusEl.innerHTML='Cidade detectada pelo grid: <b>'+regiao+'</b> <span style="color:var(--text-muted);">(via Nominatim/OpenStreetMap)</span>';
+    loadInmetAvisos(regiao);
+  }catch(e){
+    if(statusEl) statusEl.textContent='Não foi possível detectar a cidade pelo grid agora — avisos regionais indisponíveis nesta atualização.';
+  }
+}
+async function reverseGeocodeTop3(top3){
+  let anySuccess=false;
+  for(let i=0;i<top3.length;i++){
+    const el=document.getElementById('glm-loc-'+i);
+    if(!el) continue;
+    try{
+      const res=await reverseGeocodeOne(top3[i].lat, top3[i].lon);
+      el.textContent='#'+(i+1)+' — '+res.label;
+      el.style.color=res.isWater?'var(--text-muted)':'';
+      anySuccess=true;
+    }catch(e){ el.textContent='#'+(i+1)+' — Lat '+top3[i].lat.toFixed(2)+', Lon '+top3[i].lon.toFixed(2)+' (geocodificação indisponível)'; }
+    if(i<top3.length-1) await sleep(1100); // respeita limite de 1 req/s do Nominatim
+  }
+  if(anySuccess){ const at=document.getElementById('glm-geo-attrib'); if(at) at.style.display='block'; }
+}
+const METEOR_SHOWERS=[
+  {name:'Quadrantidas',month:1,day:4,zhrNum:65,zhrNote:'NASA/NN4NT (HamSCI 2026), previsão específica p/ 2026',raH:15.3,dec:49,circumpolarNorthOf:41},
+  {name:'Liridas',month:4,day:22,zhrNum:18,zhrNote:'valor histórico típico',raH:18.13,dec:32},
+  {name:'Eta Aquáridas',month:5,day:5,zhrNum:75,zhrNote:'NASA/NN4NT (HamSCI 2026)',raH:22.55,dec:-1},
+  {name:'Perseidas',month:8,day:12,zhrNum:92,zhrNote:'NASA/NN4NT (HamSCI 2026) — revisado de estimativa anterior de 30–50',raH:3.22,dec:58,circumpolarNorthOf:32},
+  {name:'Oriônidas',month:10,day:21,zhrNum:20,zhrNote:'valor histórico típico',raH:6.40,dec:15},
+  {name:'Leônidas',month:11,day:17,zhrNum:15,zhrNote:'valor histórico típico',raH:10.2,dec:22}, // confirmado: Wikipedia 10h17m+21,6°
+  {name:'Gemínidas',month:12,day:14,zhrNum:90,zhrNote:'NASA/NN4NT (HamSCI 2026)',raH:7.47,dec:33}
+];
+function nextMeteorShower(){
+  const now=new Date();
+  let best=null,bestDiff=Infinity;
+  for(let yOff=0;yOff<=1;yOff++){
+    METEOR_SHOWERS.forEach(s=>{
+      const peak=new Date(Date.UTC(now.getUTCFullYear()+yOff,s.month-1,s.day,3,0,0));
+      const diff=peak-now;
+      if(diff>=0 && diff<bestDiff){bestDiff=diff;best={...s,peak};}
+    });
+  }
+  return best;
+}
+function renderMeteor(){
+  const el=document.getElementById('meteor-info'); if(!el) return;
+  const next=nextMeteorShower();
+  if(!next){ el.textContent='—'; return; }
+  const days=Math.floor((next.peak-new Date())/864e5);
+  let html='<div style="font-size:16px;font-weight:600;margin-bottom:2px;">'+next.name+'</div>';
+  html+='<div style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">Pico em '+next.peak.toISOString().slice(0,10)+' (~'+days+' dia'+(days!==1?'s':'')+')</div>';
+  html+='<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:6px;">';
+  html+='<div class="metric"><div style="font-size:12px;color:var(--text-muted);">ZHR nominal</div><div style="font-size:20px;font-weight:600;">'+next.zhrNum+'</div></div>';
+  html+='<div class="metric"><div style="font-size:12px;color:var(--text-muted);">Bandas MSK144</div><div style="font-size:20px;font-weight:600;">6m+10m</div></div>';
+  html+='</div>';
+  html+='<div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">ZHR: '+next.zhrNote+'</div>';
+  html+='<div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;padding-top:4px;border-top:1px solid var(--border);">Bandas: 2m é fisicamente possível via MS, mas exige trilha <i>overdense</i> (meteoroide maior) — muito mais raro que 6m/10m, por isso fica fora da recomendação padrão.</div>';
+  if(next.raH!==null && next.dec!==null){
+    const now=new Date();
+    const azEl=azElFor(next.raH*15, next.dec, now, QTH.lat, QTH.lon);
+    const maxElToday=90-Math.abs(QTH.lat-next.dec); // elevacao teorica na culminacao, independe do horario atual
+    const OP_THRESHOLD=15; // limiar de regra pratica, nao constante fisica verificada -- abaixo disso, geometria muito rasante pra MS confiavel
+    if(maxElToday<OP_THRESHOLD){
+      html+='<div style="padding:8px 10px;border-radius:6px;background:var(--status-bad-bg);color:var(--status-bad-fg);font-size:13px;margin-bottom:8px;">⚠️ Elevação máxima do radiante hoje, no seu QTH: <b>'+maxElToday.toFixed(1)+'°</b> (mesmo na melhor hora) — abaixo de '+OP_THRESHOLD+'°, geometria rasante demais para MS confiável. Não é limite do cálculo, é a posição real do radiante em relação à sua latitude.</div>';
+    } else {
+      html+='<div style="padding:8px 10px;border-radius:6px;background:var(--status-good-bg);color:var(--status-good-fg);font-size:13px;margin-bottom:8px;">✓ Elevação máxima do radiante hoje, no seu QTH: <b>'+maxElToday.toFixed(1)+'°</b> — geometria viável para MS em algum horário do dia.</div>';
+    }
+    if(azEl.el>0){
+      const sinH=Math.sin(azEl.el*Math.PI/180);
+      html+='<div style="padding:8px 10px;border-radius:6px;background:var(--surface-1);color:var(--text-secondary);font-size:13px;margin-bottom:8px;">Agora: elevação '+azEl.el.toFixed(0)+'° (az. '+azEl.az.toFixed(0)+'°) — fator sen(h)='+sinH.toFixed(2)+'.</div>';
+    } else {
+      html+='<div style="padding:8px 10px;border-radius:6px;background:var(--surface-1);color:var(--text-secondary);font-size:13px;margin-bottom:8px;">Agora: radiante abaixo do horizonte (elevação '+azEl.el.toFixed(0)+'°) — contribuição praticamente nula neste momento.</div>';
+    }
+    html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Taxas de meteoro tendem a ser maiores nas horas antes do amanhecer local (lado de "ataque" da órbita da Terra) — confirmado por múltiplas fontes de astronomia.</div>';
+  } else {
+    html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Radiante desta chuva ainda não confirmado neste sistema.</div>';
+  }
+  html+='<div style="font-size:11px;color:var(--text-muted);">Modo: MSK144 · 50,260MHz (6m) e 28,145MHz (10m), frequências da campanha <a href="https://hamsci.org/msqp" target="_blank">HamSCI MSQP</a>. Fontes de radiante/ZHR: ver comentários no código-fonte por chuva.</div>';
+  el.innerHTML=html;
+}
+function renderVHF(){
+  const dest=DESTINATIONS[parseInt(document.getElementById('vhf-dest-sel').value)];
+  const now=new Date();
+  const esScore=esLikelihood(QTH.lat,QTH.lon,now);
+  const f2Possible=S.sfi>=150;
+  const tep6=peakTepIn24h(dest,false);
+  const tep2=peakTepIn24h(dest,true);
+  const isSouthern=QTH.lat<0;
+  const janelaEs=isSouthern?'nov-fev (pico dez-jan) + secundário mai-jun':'mai-ago (pico jun-jul) + secundário nov-dez';
+  const esOk=esScore>=40;
+  const tep6Ok=tep6.score>=15, tep2Ok=tep2.score>=15;
+  let html6='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(esOk?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(esOk?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Esporádica-E: '+(esOk?'Provável':'Improvável')+' '+esScore+'%</b><div style="font-size:11px;margin-top:2px;">Clima, '+(isSouthern?'hemisfério sul':'hemisfério norte')+', janela '+janelaEs+'</div></div>';
+  html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(f2Possible?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(f2Possible?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>F2: '+(f2Possible?'Possível':'Improvável')+'</b><div style="font-size:11px;margin-top:2px;">SFI='+Math.round(S.sfi)+'</div></div>';
+  html6+='<div style="padding:8px 10px;border-radius:6px;background:'+(tep6Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep6Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep6.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep6.h+'h</div></div>';
+  document.getElementById('vhf-6m').innerHTML=html6;
+  let html2='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(tep2Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep2Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep2.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep2.h+'h (mais raro que 6m)</div></div>';
+  html2+='<div style="font-size:12px;color:var(--text-muted);">Ver duto troposférico abaixo — modo dominante real em 2m.</div>';
+  document.getElementById('vhf-2m').innerHTML=html2;
+  renderMeteor();
+  loadTropo();
+}
+function renderMeteorologia(){
+  loadWeather();
+  updateQthRegionAndAlerts();
+  loadRadar().then(()=>loadGlmBrazil()).catch(()=>loadGlmBrazil());
+}
+
+// ===== EME =====
+function jc(d){return(d.getTime()/86400000+2440587.5-2451545.0)/36525;}
+function n360(x){return((x%360)+360)%360;}
+function moonEquatorial(date){
+  const T=jc(date);
+  const Lmoon=n360(218.3164477+481267.88123421*T);
+  const Mmoon=n360(134.9634114+477198.8676313*T)*Math.PI/180;
+  const lonTrue=n360(Lmoon+6.2886*Math.sin(Mmoon));
+  const Omega=n360(125.04452-1934.136261*T);
+  const F=(Lmoon-Omega)*Math.PI/180;
+  const latEcl=5.128*Math.sin(F);
+  const eps=(23.4392911-0.0130042*T)*Math.PI/180;
+  const l=lonTrue*Math.PI/180,b=latEcl*Math.PI/180;
+  const ra=n360(Math.atan2(Math.sin(l)*Math.cos(eps)-Math.tan(b)*Math.sin(eps),Math.cos(l))*180/Math.PI);
+  const dec=Math.asin(Math.sin(b)*Math.cos(eps)+Math.cos(b)*Math.sin(eps)*Math.sin(l))*180/Math.PI;
+  const dist=385000.56-20905*Math.cos(Mmoon); // km, termo dominante de excentricidade
+  return {ra,dec,dist};
+}
+function sunEquatorial(date){
+  const T=jc(date);
+  const Lsun=n360(280.4665+36000.7698*T);
+  const Msun=n360(357.5291+35999.0503*T)*Math.PI/180;
+  const lonTrue=n360(Lsun+1.9148*Math.sin(Msun));
+  const eps=(23.4392911-0.0130042*T)*Math.PI/180;
+  const l=lonTrue*Math.PI/180;
+  const ra=n360(Math.atan2(Math.sin(l)*Math.cos(eps),Math.cos(l))*180/Math.PI);
+  const dec=Math.asin(Math.sin(eps)*Math.sin(l))*180/Math.PI;
+  return {ra,dec};
+}
+const R_EARTH_KM=6378.14;
+function azElFor(ra,dec,date,lat,lon,distKm){
+  const JD=date.getTime()/86400000+2440587.5;
+  const gst=n360(280.46061837+360.98564736629*(JD-2451545.0));
+  const lst=n360(gst+lon);
+  let ha=n360(lst-ra); if(ha>180)ha-=360;
+  const haR=ha*Math.PI/180,decR=dec*Math.PI/180,latR=lat*Math.PI/180;
+  const elR=Math.asin(Math.sin(decR)*Math.sin(latR)+Math.cos(decR)*Math.cos(latR)*Math.cos(haR));
+  const azR=Math.atan2(Math.sin(haR),Math.cos(haR)*Math.sin(latR)-Math.tan(decR)*Math.cos(latR));
+  let elDeg=elR*180/Math.PI;
+  if(distKm){ const pi=Math.asin(Math.min(1,R_EARTH_KM/distKm))*180/Math.PI; elDeg=elDeg-pi*Math.cos(elR); } // paralaxe topocêntrica (Meeus), relevante só pra Lua
+  return {az:n360(azR*180/Math.PI+180), el:elDeg};
+}
+function galacticLatitude(raDeg, decDeg){
+  const NGP_RA=192.8595, NGP_DEC=27.1283; // J2000, validado contra Centro Galactico (deu 0,00 exato) e Polo (90,00 exato)
+  const ra=raDeg*Math.PI/180, dec=decDeg*Math.PI/180;
+  const raP=NGP_RA*Math.PI/180, decP=NGP_DEC*Math.PI/180;
+  const sinB=Math.sin(dec)*Math.sin(decP)+Math.cos(dec)*Math.cos(decP)*Math.cos(ra-raP);
+  return Math.asin(Math.max(-1,Math.min(1,sinB)))*180/Math.PI;
+}
+function angularSepEME(ra1,dec1,ra2,dec2){
+  const r1=ra1*Math.PI/180,d1=dec1*Math.PI/180,r2=ra2*Math.PI/180,d2=dec2*Math.PI/180;
+  const c=Math.sin(d1)*Math.sin(d2)+Math.cos(d1)*Math.cos(d2)*Math.cos(r1-r2);
+  return Math.acos(Math.max(-1,Math.min(1,c)))*180/Math.PI;
+}
+function galacticRelevance(freqMHz){ return Math.pow(144/freqMHz, 2.8); } // relativo a 144MHz=1.0 (banda EME mais comum), cai com frequencia (fonte: SWORD/arXiv, expoente -2.8)
+function renderEME(){
+  const now=new Date();
+  const moon=moonEquatorial(now);
+  const sun=sunEquatorial(now);
+  const freqMHz=parseFloat(document.getElementById('eme-band-sel')?.value||144);
+  const gb=galacticLatitude(moon.ra, moon.dec);
+  const GC_RA=266.405, GC_DEC=-28.936; // validado contra fonte cruzada (CIAO/Harvard, arXiv, UVA)
+  const distGC=angularSepEME(moon.ra,moon.dec,GC_RA,GC_DEC);
+  document.getElementById('moon-gb').textContent=(gb>=0?'+':'')+gb.toFixed(1)+'°';
+  document.getElementById('moon-gc-dist').textContent=distGC.toFixed(0)+'°';
+  const relev=galacticRelevance(freqMHz);
+  const galEl=document.getElementById('galactic-verdict');
+  const galHot=distGC<20||Math.abs(gb)<10;
+  if(relev<0.02){
+    galEl.innerHTML='Ruído galáctico praticamente irrelevante em '+freqMHz+'MHz (queda de f⁻²·⁸) — foque no ruído solar abaixo.';
+    galEl.style.background='var(--surface-1)'; galEl.style.color='var(--text-muted)';
+  } else if(galHot){
+    galEl.innerHTML='⚠️ Céu quente nesta banda ('+freqMHz+'MHz) — perto do plano/centro galáctico, ruído de fundo elevado.';
+    galEl.style.background='var(--status-warn-bg)'; galEl.style.color='var(--status-warn-fg)';
+  } else {
+    galEl.innerHTML='Céu relativamente frio para '+freqMHz+'MHz — ruído galáctico presente mas fora do pico.';
+      galEl.style.background='var(--status-good-bg)'; galEl.style.color='var(--status-good-fg)';
+  }
+  const horiz=azElFor(moon.ra,moon.dec,now,QTH.lat,QTH.lon,moon.dist);
+  document.getElementById('moon-az').textContent=horiz.az.toFixed(0)+'°';
+  document.getElementById('moon-el').textContent=horiz.el.toFixed(0)+'°';
+  document.getElementById('moon-dist').textContent=Math.round(moon.dist).toLocaleString('pt-BR')+' km';
+  const meanDist=385000.56;
+  document.getElementById('moon-perigee').textContent = moon.dist<meanDist-10000?'Perto do perigeu (+sinal)':moon.dist>meanDist+10000?'Perto do apogeu (−sinal)':'Distância média';
+
+  const sep=angularSepEME(moon.ra,moon.dec,sun.ra,sun.dec);
+  const solarEl=document.getElementById('solar-noise');
+  const bandaCritica=freqMHz>=432;
+  if(sep<10){ solarEl.style.background='var(--status-bad-bg)'; solarEl.style.color='var(--status-bad-fg)'; solarEl.innerHTML='<b>Ruído solar: separação '+sep.toFixed(0)+'° — Sol muito próximo'+(bandaCritica?', crítico em '+freqMHz+'MHz (galáctico não mascara mais)':'')+'</b>'; }
+  else if(sep<25){ solarEl.style.background='var(--status-warn-bg)'; solarEl.style.color='var(--status-warn-fg)'; solarEl.innerHTML='<b>Ruído solar: separação '+sep.toFixed(0)+'° — Sol relativamente próximo'+(bandaCritica?', atenção em '+freqMHz+'MHz':'')+'</b>'; }
+  else{ solarEl.style.background='var(--status-good-bg)'; solarEl.style.color='var(--status-good-fg)'; solarEl.innerHTML='<b>Ruído solar: separação '+sep.toFixed(0)+'° — Sol distante, sem impacto relevante</b>'; }
+
+  const otherGrid=gridToLatLon(document.getElementById('eme-other-grid').value);
+  const cwEl=document.getElementById('common-window');
+  if(!otherGrid){ cwEl.style.background='var(--surface-1)'; cwEl.style.color='var(--text-secondary)'; cwEl.textContent='Grid inválido.'; }
+  else {
+    let hoursCommon=0, windows=[]; let inWindow=false, wStart=null;
+    for(let h=0;h<=24;h++){
+      const t=new Date(now.getTime()+h*3600000);
+      const m=moonEquatorial(t);
+      const elHere=azElFor(m.ra,m.dec,t,QTH.lat,QTH.lon,m.dist).el;
+      const elThere=azElFor(m.ra,m.dec,t,otherGrid.lat,otherGrid.lon,m.dist).el;
+      const both=elHere>0 && elThere>0;
+      if(both) hoursCommon++;
+      if(both && !inWindow){ inWindow=true; wStart=h; }
+      if(!both && inWindow){ inWindow=false; windows.push([wStart,h]); }
+    }
+    if(inWindow) windows.push([wStart,24]);
+    if(hoursCommon>0){ cwEl.style.background='var(--status-good-bg)'; cwEl.style.color='var(--status-good-fg)'; }
+    else { cwEl.style.background='var(--status-bad-bg)'; cwEl.style.color='var(--status-bad-fg)'; }
+    cwEl.innerHTML = hoursCommon>0
+      ? '<b>'+hoursCommon+'h</b> em comum nas próximas 24h — janelas: '+windows.map(w=>'+'+w[0]+'h a +'+w[1]+'h').join(', ')
+      : 'Nenhuma janela comum nas próximas 24h com esse grid.';
+  }
+}
+
+// ===== CARGA DE DADOS =====
+async function loadAllData(){
+  document.getElementById('global-status').textContent='Buscando dados reais…';
+  const outcomes=await Promise.allSettled([
+    fetch('https://services.swpc.noaa.gov/products/summary/10cm-flux.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const row=Array.isArray(j)?j[0]:j;const v=numFrom(row,'flux','Flux');if(v===null)throw 0;S.sfi=v;}),
+    fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,kp:numFrom(r,'Kp','kp')})).filter(h=>h.t&&isFinite(h.kp)).slice(-16);if(!hist.length)throw 0;S.kpHist=hist;S.kp=hist[hist.length-1].kp;}),
+    fetch('https://services.swpc.noaa.gov/products/kyoto-dst.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,dst:numFrom(r,'dst','Dst')})).filter(h=>h.t&&isFinite(h.dst));if(!hist.length)throw 0;S.dst=hist[hist.length-1].dst;}),
+    fetch('https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{
+      // mag-2-hour.json foi depreciado pela NOAA (SCN 26-21, removido ~30/04/2026) -- substituido por este endpoint, formato de array de objetos, campos time_tag/bz_gsm mantidos iguais conforme mapeamento oficial
+      if(!Array.isArray(j)||!j.length) throw 0;
+      const rows=j.map(r=>({t:r.time_tag, bz:parseFloat(r.bz_gsm)})).filter(r=>r.t&&isFinite(r.bz));
+      if(!rows.length) throw 0;
+      rows.sort((a,b)=>new Date(a.t)-new Date(b.t)); // blindagem: garante cronologia ascendente mesmo se a API mudar/entregar fora de ordem
+      if(rows.length>240) rows.splice(0, rows.length-240); // cadencia de 1min pode trazer muito mais pontos que antes -- mantem so as ultimas ~4h, suficiente pra tendencia
+      S.bzHist=rows; S.bz=rows[rows.length-1].bz;
+    }),
+    fetch('https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const ch=(Array.isArray(j)?j:[]).filter(row=>row.energy==='0.1-0.8nm'&&isFinite(row.flux));if(!ch.length)throw 0;S.xrayFlux=ch[ch.length-1].flux;})
+  ]);
+  const ok=outcomes.filter(o=>o.status==='fulfilled').length;
+  document.getElementById('global-status').textContent = ok===outcomes.length ? 'Dados reais da NOAA carregados' : (ok+'/'+outcomes.length+' fontes responderam');
+  renderHF(); renderVHF(); renderEME(); renderMeteorologia(); drawMapOverlay();
+}
+
+initMap();
+loadBzLog();
+renderEME();
+setInterval(renderEME, 60000);
+setInterval(()=>{ if(mapSvg) drawGreyline(); }, 60000);
+setInterval(()=>{ const p=document.getElementById('panel-meteo'); if(p && p.classList.contains('active')) loadGlmBrazil(); }, 180000); // buffer de raios so enche sozinho se a aba estiver visivel, evita h5wasm rodando escondido
+loadAllData();
+</script>
+</body></html>
