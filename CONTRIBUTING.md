@@ -1,91 +1,71 @@
-How to Contribute to the AI HF Propagation Analyzer
-First off, thank you for considering contributing to this project! Every contribution, whether it's a bug report, a feature suggestion, or a code change, is immensely valued and welcomed.
+# Como contribuir com o AGHIP — Analisador de Propagação HF/VHF/EME
 
-This document is a guide to make the contribution process easy and effective for everyone.
+Antes de mais nada, obrigado por considerar contribuir com este projeto! Toda contribuição — relatório de bug, sugestão de funcionalidade, correção de física, ou revisão de dado — é bem-vinda.
 
-Code of Conduct
-This project and everyone participating in it are governed by our Code of Conduct. By participating, you are expected to uphold this code. Please take a moment to read it to ensure a respectful environment for all.
+Este documento explica como contribuir. Como o projeto é um único arquivo HTML sem processo de build, o fluxo é mais simples do que em projetos com framework.
 
-How Can You Contribute?
-There are many ways to contribute, and not all of them involve writing code.
+## Código de Conduta
 
-Reporting Bugs: If you find unexpected behavior or an error, please open an Issue. Provide as much detail as possible, including steps to reproduce the problem.
+Este projeto e todos que participam dele seguem nosso Código de Conduta. Ao contribuir, espera-se que você o respeite, mantendo um ambiente cordial para todos.
 
-Suggesting Enhancements: Have an idea for a new feature or an improvement to an existing one? Open an Issue with a clear description of your suggestion.
+## Como você pode contribuir
 
-Writing Code: If you want to fix a bug or implement a new feature, feel free to submit a Pull Request.
+Nem toda contribuição envolve escrever código.
 
-Your First Pull Request
-If you're ready to contribute code, follow the steps below to set up your development environment.
+- **Relatar bugs**: se algo se comportar de forma inesperada (um cálculo errado, uma API que parou de responder, um problema visual), abra uma *Issue* com o máximo de detalhe possível — o que você esperava ver, o que apareceu, e se possível, em qual navegador/tema (claro ou escuro).
+- **Sugerir melhorias**: tem uma ideia de funcionalidade nova ou um ajuste em algo existente? Abra uma *Issue* descrevendo a sugestão.
+- **Revisar física ou fontes de dados**: como o projeto se baseia em modelos de propagação HF/VHF/EME, correções fundamentadas em literatura (com fonte citada) são especialmente bem-vindas — mesmo sem código, um comentário numa *Issue* apontando uma imprecisão já ajuda.
+- **Escrever código**: para corrigir um bug ou implementar algo novo, envie um *Pull Request*.
 
-1. Setting Up Your Environment
-Fork the repository by clicking the "Fork" button in the top-right corner of this page.
+## Seu primeiro Pull Request
 
-Clone your fork to your local machine. (Remember to replace YOUR_USERNAME and YOUR_REPOSITORY):
+### 1. Preparando seu ambiente
 
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+Não há instalação, dependências ou build. O projeto inteiro é um único arquivo `index.html` com HTML, CSS e JavaScript puro.
 
-Navigate to the project directory:
+1. Faça um *Fork* do repositório clicando em "Fork" no canto superior direito da página.
+2. Clone o seu fork para a máquina local (troque `SEU_USUARIO` pelo seu usuário do GitHub):
+   ```bash
+   git clone https://github.com/SEU_USUARIO/propagacao.git
+   cd propagacao
+   ```
+3. Abra `index.html` diretamente no navegador (duplo clique, ou arraste para uma aba) para ver o estado atual do projeto.
 
-cd YOUR_REPOSITORY
+Não é necessário `npm install`, servidor de desenvolvimento, nem nenhuma variável de ambiente ou chave de API — o projeto não faz nenhuma chamada a serviços de IA em tempo de execução; todas as chamadas são para APIs públicas e gratuitas (NOAA, INMET, Open-Meteo, RainViewer, WSPR.live, OpenStreetMap/Nominatim), sem necessidade de autenticação.
 
-Install the project dependencies. This project uses npm.
+### 2. Fazendo suas alterações
 
-npm install
+- Edite `index.html` diretamente no seu editor de preferência.
+- Para ver o resultado, salve o arquivo e recarregue a aba do navegador onde ele está aberto.
+- Use o Console de Desenvolvedor do navegador (F12) para verificar erros de JavaScript — não há linter configurado no projeto; a validação principal é abrir o console e testar manualmente as abas afetadas pela sua mudança (Mapa, HF, VHF, EME, Meteorologia).
+- Se sua mudança envolver uma fórmula ou constante física, inclua no código um comentário citando a fonte (norma ITU-R, artigo, ou referência equivalente) — é o padrão já seguido no restante do arquivo.
+- Teste, quando possível, nos dois temas (claro e escuro) e em pelo menos uma largura de tela estreita (mobile), já que o painel é usado nos dois contextos.
 
-Set Up Environment Variables: The project requires an API key to communicate with the Anthropic service.
+### 3. Processo de Pull Request
 
-Create a file named .env.local in the root of the project.
+1. **Crie um branch descritivo** a partir do `main` do seu fork:
+   ```bash
+   git checkout -b feat/adiciona-grafico-comparativo
+   # ou
+   git checkout -b fix/corrige-calculo-muf
+   ```
+2. **Faça o commit** com uma mensagem clara. Recomendamos o padrão [Conventional Commits](https://www.conventionalcommits.org/):
+   ```bash
+   git commit -m "fix: corrige absorção de camada D em caminhos mistos dia/noite"
+   ```
+   Tipos comuns: `feat` (funcionalidade nova), `fix` (correção de bug), `docs` (documentação), `style` (formatação/visual), `refactor` (reorganização de código sem mudar comportamento).
+3. **Envie o branch** para o seu fork:
+   ```bash
+   git push origin feat/adiciona-grafico-comparativo
+   ```
+4. **Abra o Pull Request** na página do repositório original — o GitHub vai sugerir automaticamente a abertura a partir do seu branch recém-enviado. Descreva claramente o que mudou e por quê, incluindo a fonte, se a mudança for de física/dado.
 
-Inside this file, add your API key. The .gitignore file is already configured to ignore this file, ensuring your key is not sent to GitHub.
+## Guia de estilo
 
-ANTHROPIC_API_KEY=your_api_key_here
+- O projeto é HTML/CSS/JavaScript puro — sem framework, sem TypeScript, sem etapa de compilação. Mantenha esse padrão em novas contribuições.
+- Siga a formatação já usada no arquivo (indentação, nomes de função em inglês, comentários explicando a origem de fórmulas e constantes).
+- Para cores de interface, use as variáveis CSS já definidas em `:root` (`--good`, `--warn`, `--bad`, `--status-*`) em vez de valores hexadecimais soltos — isso mantém o suporte a tema claro/escuro consistente.
 
-Note: A future implementation will move the use of this key to the backend for security.
+## Licença
 
-Run the Development Server:
-
-npm run dev
-
-You can now access the project at http://localhost:3000 and start making your changes!
-
-2. Pull Request (PR) Process
-Create a New Branch: From the main branch of your fork, create a descriptive branch for your change.
-
-git checkout -b feat/add-new-chart
-# or
-git checkout -b fix/correct-input-bug
-
-Make Your Changes: Write your code, always keeping the existing style and patterns of the project in mind.
-
-Check Code Quality: Before committing, run the linter to ensure your code follows the project's standards.
-
-npm run lint
-
-Commit Your Changes: Use clear and descriptive commit messages. We recommend the Conventional Commits standard.
-
-git commit -m "feat: Add comparison chart for day and night bands"
-
-Push Your Branch to Your Fork:
-
-git push origin feat/add-new-chart
-
-Open a Pull Request: Go to the original repository's page on GitHub, and you will see a prompt to open a Pull Request from your new branch. Fill out the PR template with a clear description of what you did and why.
-
-Style Guides
-Commit Messages
-We use the "Conventional Commits" standard. This helps us maintain a clean commit history and automate the generation of changelogs. The format is:
-
-<type>[optional scope]: <description>
-
-Common types: feat (new feature), fix (bug fix), docs (documentation), style (formatting), refactor (code refactoring), test (adding tests).
-
-Code Style
-The project uses TypeScript for more robust code.
-
-Styling is done with Tailwind CSS.
-
-Please follow the standards defined by ESLint, which can be checked with the npm run lint command.
-
-License
-By contributing, you agree that your contributions will be licensed under the project's MIT License.
+Ao contribuir, você concorda que sua contribuição será licenciada sob os mesmos termos do projeto. Consulte o arquivo de licença na raiz do repositório.
