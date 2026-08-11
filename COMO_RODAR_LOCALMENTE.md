@@ -4,7 +4,7 @@ Não há instalação, build ou dependências — é um único arquivo `index.ht
 
 ## Opção 1 — Abrir direto (mais simples)
 
-1. Baixe o arquivo `index.html`.
+1. Baixe o arquivo `local_index.html`.
 2. Dê duplo clique nele, ou arraste para uma aba do navegador.
 
 Isso funciona para a grande maioria das funcionalidades: HF, VHF, EME, meteorologia, INMET, radar, gráficos. Foi o método usado durante praticamente todo o desenvolvimento e teste deste projeto.
