@@ -40,8 +40,7 @@ button:hover { background:var(--surface-1); }
 table { width:100%; font-size:14px; border-collapse:collapse; }
 th { text-align:left; font-size:12px; color:var(--text-muted); padding:6px; border-bottom:1px solid var(--border-strong); }
 td { padding:6px; border-bottom:1px solid var(--border); }
-.glm-flash-icon { background: radial-gradient(circle, #FDE68A 20%, #F59E0B 80%); border-radius: 50%; box-shadow: 0 0 10px 3px rgba(245, 158, 11, 0.6); animation: pulse-lightning 1.5s infinite; }
-@keyframes pulse-lightning { 0% { transform: scale(0.8); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.5; } 100% { transform: scale(0.8); opacity: 1; } }
+.glm-flash-icon { filter: drop-shadow(0 0 2px rgba(0,0,0,0.5)); }
 </style>
 </head>
 <body><div class="wrap">
@@ -747,13 +746,8 @@ async function loadInmetAvisos(regionName){
         html+='<div style="font-size:12px;color:var(--text-muted);">📍 Nenhum aviso específico mencionando "'+regionName+'" no momento.</div>';
       }
       document.getElementById('inmet-avisos').innerHTML=html;
-      if(badge){
-        const worst=allAlerts[0];
-        const tiers={0:{bg:'var(--surface-1)',fg:'var(--text-secondary)',label:'Atenção'},1:{bg:'var(--status-warn-bg)',fg:'var(--status-warn-fg)',label:'Atenção'},2:{bg:'var(--status-orange-bg)',fg:'var(--status-orange-fg)',label:'Fique atento'},3:{bg:'var(--status-bad-bg)',fg:'var(--status-bad-fg)',label:'Risco elevado'}};
-        const tier=tiers[sevRank(worst.sev)]||tiers[0];
-        badge.style.display='block'; badge.style.background=tier.bg; badge.style.color=tier.fg;
-        badge.innerHTML='⚠️ '+tier.label+' — '+allAlerts.length+' aviso'+(allAlerts.length>1?'s':'')+' ativo'+(allAlerts.length>1?'s':'')+' do INMET no Brasil (mais grave: "'+worst.title.replace(/\. Severidade.*/,'')+'")'+(qthAlerts.length>0?', incluindo '+qthAlerts.length+' pro seu QTH':', nenhum específico pro seu QTH')+'. Veja detalhes na aba Meteorologia.';
-      }
+      S_inmetBadge={allAlerts, qthAlerts, regionName};
+      renderAlertBadge();
     }
     statusEl.textContent='Dado real, oficial, INMET (public domain) — '+items.length+' itens no feed, '+allAlerts.length+' avisos únicos ativos no Brasil';
   }catch(e){ statusEl.textContent='INMET indisponível agora.'; if(badge) badge.style.display='none'; }
@@ -783,6 +777,29 @@ async function loadWeather(){
 }
 // ===== RADAR (Leaflet: OSM base + RainViewer overlay, real, sem chave) =====
 let radarMap=null, radarLayer=null, qthMarker=null, glmLayerGroup=null;
+let geocodingBusy=false; // trava global -- impede que chamadas sobrepostas de loadGlmBrazil (timer de 3min + clique manual) rodem geocodificacao em paralelo e violem o limite de 1 req/s do Nominatim
+let S_inmetBadge=null, S_lightningBadge=null;
+function renderAlertBadge(){
+  const badge=document.getElementById('qth-alert-badge'); if(!badge) return;
+  const RAIO_ALERTA_KM=30;
+  const raioProximo=S_lightningBadge && S_lightningBadge.nearestKm!==null && S_lightningBadge.nearestKm<=RAIO_ALERTA_KM;
+  const temInmet=S_inmetBadge && S_inmetBadge.allAlerts.length>0;
+  if(!temInmet && !raioProximo){ badge.style.display='none'; badge.innerHTML=''; return; }
+  const tiers={0:{bg:'var(--surface-1)',fg:'var(--text-secondary)',label:'Atenção'},1:{bg:'var(--status-warn-bg)',fg:'var(--status-warn-fg)',label:'Atenção'},2:{bg:'var(--status-orange-bg)',fg:'var(--status-orange-fg)',label:'Fique atento'},3:{bg:'var(--status-bad-bg)',fg:'var(--status-bad-fg)',label:'Risco elevado'}};
+  let tierIdx=0; const partes=[];
+  if(temInmet){
+    const worst=S_inmetBadge.allAlerts[0];
+    tierIdx=Math.max(tierIdx, sevRank(worst.sev));
+    partes.push(S_inmetBadge.allAlerts.length+' aviso'+(S_inmetBadge.allAlerts.length>1?'s':'')+' do INMET no Brasil (mais grave: "'+worst.title.replace(/\. Severidade.*/,'')+'")'+(S_inmetBadge.qthAlerts.length>0?', incluindo '+S_inmetBadge.qthAlerts.length+' pro seu QTH':''));
+  }
+  if(raioProximo){
+    tierIdx=3; // proximidade de raio tratada como prioridade maxima -- risco direto e imediato pra antena/torre, independente do que o INMET diga
+    partes.push('raio detectado a ~'+S_lightningBadge.nearestKm.toFixed(0)+'km do seu QTH (GOES-19/GLM) — considere desconectar antenas');
+  }
+  const tier=tiers[tierIdx];
+  badge.style.display='block'; badge.style.background=tier.bg; badge.style.color=tier.fg;
+  badge.innerHTML='⚠️ '+tier.label+' — '+partes.join(' · ')+'. Veja detalhes na aba Meteorologia.';
+}
 async function loadRadar(){
   const statusEl=document.getElementById('radar-status'); if(!statusEl) return;
   statusEl.textContent='Buscando radar…';
@@ -880,8 +897,14 @@ async function loadGlmBrazil(){
     statusEl.textContent=key.split('/').pop()+' — +'+novos.length+' novos, '+brasil.length+' no buffer de 30min (sessão atual, não histórico retroativo)';
     if(brasil.length===0){
       flashEl.innerHTML='<span style="color:var(--text-muted);">Nenhum raio sobre o Brasil no buffer — normal fora de tempestade ativa.</span>';
+      S_lightningBadge={count:0, nearestKm:null};
+      renderAlertBadge();
     } else {
       const porEnergia=[...brasil].sort((a,b)=>b.energy-a.energy);
+      const comDistancia=brasil.map(b=>({...b, distKm:greatCircleDist(QTH.lat,QTH.lon,b.lat,b.lon)}));
+      const porDistancia=[...comDistancia].sort((a,b)=>a.distKm-b.distKm);
+      const RAIO_PERTO_KM=400; // ordem de grandeza de um estado como SP -- proxy sem precisar de poligono de fronteira estadual
+      const pertoDoQth=porDistancia.filter(b=>b.distKm<=RAIO_PERTO_KM);
       function formatEnergyAdaptive(e){
         if(!isFinite(e)||e<=0) return e+' J';
         const units=[['GJ',1e9],['MJ',1e6],['kJ',1e3],['J',1],['mJ',1e-3],['µJ',1e-6],['nJ',1e-9],['pJ',1e-12],['fJ',1e-15]];
@@ -889,22 +912,55 @@ async function loadGlmBrazil(){
         return e.toExponential(2)+' J';
       }
       let html='<div style="font-size:14px;margin-bottom:8px;"><b>'+brasil.length+' raios no buffer</b> (últimos 30min desta sessão).</div>';
-      html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Descargas mais intensas (Top 3 de '+brasil.length+'):</div>';
+
+      html+='<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">📍 Perto do seu QTH (raio de '+RAIO_PERTO_KM+'km)</div>';
+      if(pertoDoQth.length===0){
+        html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Nenhum raio a menos de '+RAIO_PERTO_KM+'km do seu QTH no buffer atual.</div>';
+      } else {
+        pertoDoQth.slice(0,7).forEach((b,i)=>{
+          html+='<div id="glm-near-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span id="glm-near-loc-'+i+'">Localizando… (Lat '+b.lat.toFixed(2)+', Lon '+b.lon.toFixed(2)+')</span><span style="font-weight:600;color:var(--good);">'+b.distKm.toFixed(0)+'km</span></div>';
+        });
+        if(pertoDoQth.length>7) html+='<div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;">+ '+(pertoDoQth.length-7)+' outro(s) dentro do raio.</div>';
+      }
+
+      html+='<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-top:10px;margin-bottom:4px;">🇧🇷 Mais intensos no Brasil (Top 3 de '+brasil.length+')</div>';
       porEnergia.slice(0,3).forEach((b,i)=>{
         html+='<div id="glm-top-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span id="glm-loc-'+i+'">Localizando… (Lat '+b.lat.toFixed(2)+', Lon '+b.lon.toFixed(2)+')</span><span style="font-weight:600;color:var(--warn);">'+formatEnergyAdaptive(b.energy)+'</span></div>';
       });
       html+='<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Cor no mapa por idade: <span style="color:#a855f7;">●</span> &lt;5min <span style="color:#dc2626;">●</span> 5-15min <span style="color:#f59e0b;">●</span> 15-30min</div>';
       html+='<div id="glm-geo-attrib" style="font-size:11px;color:var(--text-muted);margin-top:6px;display:none;">Localização: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>/© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</div>';
       flashEl.innerHTML=html;
-      reverseGeocodeTop3(porEnergia.slice(0,3));
+      if(geocodingBusy){
+        // ja existe uma sequencia de geocodificacao rodando de uma chamada anterior de loadGlmBrazil ainda em andamento
+        // (timer de 3min ou clique manual podem sobrepor) -- pula desta vez, evita rodar 2 sequencias em paralelo e violar o limite do Nominatim
+        const attrib=document.getElementById('glm-geo-attrib'); if(attrib){ attrib.style.display='block'; attrib.innerHTML='Geocodificação da rodada anterior ainda em andamento — nomes devem aparecer na próxima atualização. Fonte: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>/© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'; }
+      } else {
+        geocodingBusy=true;
+        try{
+          await reverseGeocodeTop3(porEnergia.slice(0,3));
+          if(pertoDoQth.length>0) await reverseGeocodeNear(pertoDoQth.slice(0,7));
+        } finally { geocodingBusy=false; }
+      }
+      S_lightningBadge={count:brasil.length, nearestKm: porDistancia.length?porDistancia[0].distKm:null};
+      renderAlertBadge();
       if(radarMap){
         if(!glmLayerGroup){ glmLayerGroup=L.layerGroup().addTo(radarMap); }
         else { glmLayerGroup.clearLayers(); }
+        // acima de certo volume, renderizar TODOS como icone SVG detalhado (elemento DOM por marcador) pesa de verdade
+        // -- ícone de raio completo só pros mais relevantes (raio proximo ja calculado); resto em circleMarker leve (respeita preferCanvas do mapa)
+        const idsProximos=new Set(pertoDoQth.map(b=>b.lat+','+b.lon+','+b.t));
         brasil.forEach(b=>{
           const ageMin=(agora-b.t)/60000;
           const cor=glmAgeColor(ageMin);
-          const flashIcon=L.divIcon({className:'glm-flash-icon', html:'<div style="width:100%;height:100%;border-radius:50%;background:'+cor+';"></div>', iconSize:[ageMin<5?14:9,ageMin<5?14:9]});
-          L.marker([b.lat,b.lon],{icon:flashIcon}).bindPopup('<b>Raio GLM</b><br>Há '+ageMin.toFixed(0)+' min').addTo(glmLayerGroup);
+          const ehProximo=idsProximos.has(b.lat+','+b.lon+','+b.t);
+          if(ehProximo){
+            const tam=ageMin<5?18:14;
+            const svgBolt='<svg viewBox="0 0 24 24" width="'+tam+'" height="'+tam+'" xmlns="http://www.w3.org/2000/svg"><path d="M13 0 L3 14 L10 14 L8 24 L21 9 L13 9 Z" fill="'+cor+'" stroke="#fff" stroke-width="1"/></svg>';
+            const flashIcon=L.divIcon({className:'glm-flash-icon', html:svgBolt, iconSize:[tam,tam], iconAnchor:[tam/2,tam/2]});
+            L.marker([b.lat,b.lon],{icon:flashIcon}).bindPopup('<b>Raio GLM</b><br>Há '+ageMin.toFixed(0)+' min').addTo(glmLayerGroup);
+          } else {
+            L.circleMarker([b.lat,b.lon],{radius:ageMin<5?4:3,fillColor:cor,fillOpacity:0.85,color:'#fff',weight:0.5}).bindPopup('<b>Raio GLM</b><br>Há '+ageMin.toFixed(0)+' min').addTo(glmLayerGroup);
+          }
         });
       }
     }
@@ -958,7 +1014,26 @@ async function reverseGeocodeTop3(top3){
     }catch(e){ el.textContent='#'+(i+1)+' — Lat '+top3[i].lat.toFixed(2)+', Lon '+top3[i].lon.toFixed(2)+' (geocodificação indisponível)'; }
     if(i<top3.length-1) await sleep(1100); // respeita limite de 1 req/s do Nominatim
   }
-  if(anySuccess){ const at=document.getElementById('glm-geo-attrib'); if(at) at.style.display='block'; }
+  const attrib=document.getElementById('glm-geo-attrib');
+  if(anySuccess && attrib) attrib.style.display='block';
+  return anySuccess;
+}
+async function reverseGeocodeNear(near){
+  let anySuccess=false;
+  for(let i=0;i<near.length;i++){
+    const el=document.getElementById('glm-near-loc-'+i);
+    if(!el) continue;
+    try{
+      const res=await reverseGeocodeOne(near[i].lat, near[i].lon);
+      el.textContent=res.label+' — '+near[i].distKm.toFixed(0)+'km';
+      el.style.color=res.isWater?'var(--text-muted)':'';
+      anySuccess=true;
+    }catch(e){ /* mantem o texto de fallback "Localizando..." com lat/lon que ja estava la */ }
+    if(i<near.length-1) await sleep(1100); // respeita limite de 1 req/s do Nominatim
+  }
+  const attrib=document.getElementById('glm-geo-attrib');
+  if(anySuccess && attrib) attrib.style.display='block';
+  return anySuccess;
 }
 const METEOR_SHOWERS=[
   {name:'Quadrantidas',month:1,day:4,zhrNum:65,zhrNote:'NASA/NN4NT (HamSCI 2026), previsão específica p/ 2026',raH:15.3,dec:49,circumpolarNorthOf:41},
@@ -1190,6 +1265,5 @@ setInterval(renderEME, 60000);
 setInterval(()=>{ if(mapSvg) drawGreyline(); }, 60000);
 setInterval(()=>{ const p=document.getElementById('panel-meteo'); if(p && p.classList.contains('active')) loadGlmBrazil(); }, 180000); // buffer de raios so enche sozinho se a aba estiver visivel, evita h5wasm rodando escondido
 loadAllData();
-  
 </script>
 </body></html>
