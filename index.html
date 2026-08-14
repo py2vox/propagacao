@@ -753,10 +753,10 @@ async function loadInmetAvisos(regionName){
   }catch(e){ statusEl.textContent='INMET indisponível agora.'; if(badge) badge.style.display='none'; }
 }
 function windSafetyTier(gustKmh){
-  if(gustKmh<30) return {label:'Verde — operação normal', bg:'var(--status-good-bg)', color:'var(--status-good-fg)'};
-  if(gustKmh<50) return {label:'Amarelo — monitorar, vento moderado (Beaufort 6)', bg:'var(--status-warn-bg)', color:'var(--status-warn-fg)'};
-  if(gustKmh<70) return {label:'Laranja — evite manutenção em altura (Beaufort 8, ventania)', bg:'var(--status-orange-bg)', color:'var(--status-orange-fg)'};
-  return {label:'Vermelho — risco elevado, muitas antenas comerciais têm limite de sobrevivência nesta faixa (Beaufort 10+)', bg:'var(--status-bad-bg)', color:'var(--status-bad-fg)'};
+  if(gustKmh<30) return {label:'Vento no seu QTH: Verde — operação normal', bg:'var(--status-good-bg)', color:'var(--status-good-fg)'};
+  if(gustKmh<50) return {label:'Vento no seu QTH: Amarelo — monitorar, vento moderado (Beaufort 6)', bg:'var(--status-warn-bg)', color:'var(--status-warn-fg)'};
+  if(gustKmh<70) return {label:'Vento no seu QTH: Laranja — evite manutenção em altura (Beaufort 8, ventania)', bg:'var(--status-orange-bg)', color:'var(--status-orange-fg)'};
+  return {label:'Vento no seu QTH: Vermelho — risco elevado, muitas antenas comerciais têm limite de sobrevivência nesta faixa (Beaufort 10+)', bg:'var(--status-bad-bg)', color:'var(--status-bad-fg)'};
 }
 async function loadWeather(){
   const statusEl=document.getElementById('weather-status'); if(!statusEl) return;
