@@ -54,7 +54,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   <button class="tab-btn" data-tab="info" onclick="switchTab('info')">Info</button>
 </div>
 
-<div class="card">
+<div class="card" id="qth-card">
   <label style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Seu QTH (grid locator)</label>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
     <input id="qth-input" type="text" value="GG67" style="width:160px;text-transform:uppercase;" onchange="onQthChange()">
@@ -69,15 +69,14 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <div class="tab-panel active" id="panel-mapa">
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Indicadores globais</div>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;">
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">☀️ Atividade Solar</div><div style="font-size:16px;font-weight:600;" id="gi-kp">—</div></div>
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌙 Fase da Lua</div><div style="font-size:16px;font-weight:600;" id="gi-moon">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌑 Próximo Eclipse</div><div style="font-size:16px;font-weight:600;" id="gi-eclipse">—</div></div>
     </div>
-    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Dado real (NOAA / cálculo astronômico próprio, já usado nas abas HF e EME). CO2 atmosférico, anomalia térmica, nível do mar e extensão do gelo ártico não foram incluídos — não encontrei fonte gratuita com API direta em formato consumível pelo navegador para nenhum dos quatro (dados existem, mas majoritariamente como arquivo mensal para download em lote, não endpoint em tempo real).</div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Melhor banda HF por destino — próximas 3 horas</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Mapa real (Natural Earth via world-atlas), grande círculo por interpolação esférica. Cada ponto mostra a banda ao lado, não só a cor.</div>
     <div id="map-container" style="width:100%;"></div>
     <div style="display:flex;gap:14px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap;margin-top:10px;">
       <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:var(--good);display:inline-block;"></span>Excelente/boa</span>
@@ -190,6 +189,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <div class="tab-panel" id="panel-meteo">
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">🌧️ Radar de chuva no seu QTH</div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;"><b>Chuva e raios nos últimos 30 minutos</b>, centrado no seu grid.</div>
     <div id="radar-status" style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">—</div>
     <div id="radar-map" style="width:100%;height:320px;border-radius:8px;"></div>
     <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dado: <a href="https://www.rainviewer.com/" target="_blank" style="color:var(--text-muted);">RainViewer</a></div>
@@ -216,7 +216,8 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">⚡ Raios perto do seu QTH e no Brasil</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;"><b>Experimental</b> — lido direto do satélite GOES-19 (sensor GLM), já que redes terrestres têm cobertura fraca na América do Sul. Confirmado funcionando; se falhar, o motivo aparece abaixo sem travar o resto do painel.</div>
+    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;"><b>Descargas em tempo real, priorizadas pela distância do seu QTH</b> — um raio a até 30km eleva o alerta no topo da página automaticamente.</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">Lido direto do satélite GOES-19 (sensor GLM) — cobertura terrestre é fraca na América do Sul. Se falhar, o motivo aparece abaixo sem travar o resto do painel.</div>
     <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
     <div id="glm-flashes" style="font-size:13px;line-height:1.6;"></div>
   </div>
@@ -243,6 +244,11 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <b>EME</b> — seletor de banda (144/432/1296MHz); posição lunar validada contra lua cheia e nova reais, com correção de paralaxe topocêntrica (até ~1°, maior perto do horizonte); ruído galáctico ponderado por banda (cai com f⁻²·⁸, torna-se negligenciável perto de 1GHz); distância com contexto de perigeu/apogeu; ruído solar por separação angular, com destaque adicional em 432/1296MHz; janela de visibilidade comum entre duas estações quaisquer; rotação de Faraday como referência de severidade por banda (não calculada em tempo real).<br><br>
     <b>Meteorologia</b> — radar de precipitação logo após o grid locator, seguido de raios, condições numéricas da estação e o mapa complementar do Blitzortung; avisos oficiais do INMET (nacional e específico da sua região, priorizados por relevância — vento > raios/tempestade > chuva > demais avisos, não apenas o grau burocrático do órgão) ficam no final da página. Raios via sensor GLM do satélite GOES-19 (a cobertura terrestre do Blitzortung é esparsa na América do Sul): mostra os mais próximos do seu QTH por distância real e os mais intensos do Brasil por energia, separadamente. Um raio a até 30km do seu QTH eleva automaticamente o selo de alerta no topo da página, combinado com a gravidade dos avisos do INMET — o selo permanece visível independente de onde o card do INMET esteja posicionado. Índice de segurança de vento pela escala Beaufort, identificado explicitamente como referência do seu QTH (não um alerta geral). Mapa de raios para EUA/Europa via Blitzortung como referência complementar.<br><br>
     <b>Limites conhecidos:</b> física simplificada — não substitui ferramentas como VOACAP ou WSJT-X; sem infraestrutura persistente entre sessões (o histórico de Bz só é mantido quando o sistema roda como Artifact no Claude.ai, não no arquivo baixado localmente); sem modelo de IA treinado com dados reais de QSO; libração lunar exata e rotação de Faraday em tempo real ficaram de fora por exigirem fontes de dados gratuitas e confiáveis que não estão disponíveis; a calibração do modelo de SNR contra dados reais do WSPR é baseada em uma única sessão de observação — mais dados ao longo do tempo são necessários para confirmar ou ajustar esse valor; o raio de 400km usado para "raios perto do QTH" é uma aproximação de escala estadual, não um limite administrativo real.
+  </div>
+  <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
+    <b style="color:var(--text-primary);font-size:15px;">Sobre este projeto</b><br><br>
+    Levantamento, testes e refinamento contínuo por <b>Ricardo de Paula — PY2VOX</b>, radioamador em Campinas/SP, com apoio de IA (Claude, Anthropic) para pesquisa técnica, verificação de fontes e desenvolvimento.<br><br>
+    <a href="https://www.qrz.com/db/PY2VOX" target="_blank" style="color:var(--text-secondary);">QRZ.com — PY2VOX</a>
   </div>
 </div>
 
@@ -337,9 +343,10 @@ function toLatLon(v){return[Math.asin(Math.max(-1,Math.min(1,v[2])))*180/Math.PI
 function slerpPoint(lat1,lon1,lat2,lon2,f){const v0=toXYZ(lat1,lon1),v1=toXYZ(lat2,lon2);let dot=Math.max(-1,Math.min(1,v0[0]*v1[0]+v0[1]*v1[1]+v0[2]*v1[2]));const d=Math.acos(dot);if(d<1e-6||Math.PI-d<1e-6)return[lat1+(lat2-lat1)*f,lon1+(lon2-lon1)*f];const sd=Math.sin(d),a=Math.sin((1-f)*d)/sd,b=Math.sin(f*d)/sd;const v=[a*v0[0]+b*v1[0],a*v0[1]+b*v1[1],a*v0[2]+b*v1[2]];const norm=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])||1;return toLatLon([v[0]/norm,v[1]/norm,v[2]/norm]);}
 function samplePath(a,b,c,d,n){const p=[];for(let i=0;i<=n;i++)p.push(slerpPoint(a,b,c,d,i/n));return p;}
 function estMUF(lat,lon,sun,sfi){
+  const sfiSeguro=(isFinite(sfi)&&sfi>0)?sfi:150; // entrada invalida (ex: API da NOAA corrompida) cai pro default, nao quebra a cadeia de calculo
   const cz=Math.max(0,cosChi(lat,lon,sun));
   const latRad=lat*Math.PI/90;
-  const foF2max=4.5+0.0636*Math.max(0,sfi-65); // calibrado: SFI=65->foF2~4.5MHz, SFI=120->foF2~8MHz (faixa 7-9MHz citada na literatura)
+  const foF2max=4.5+0.0636*Math.max(0,sfiSeguro-65); // calibrado: SFI=65->foF2~4.5MHz, SFI=120->foF2~8MHz (faixa 7-9MHz citada na literatura)
   const secFactor=3.2; // fator geometrico salto unico ~3000km, ITU-R P.1240-2 cita tipicamente 3-4
   const foF2 = cz>0.02 ? foF2max*Math.pow(cz,0.2)*(1+0.2*Math.cos(latRad)) : foF2max*0.35*(1+0.15*Math.cos(latRad));
   return foF2*secFactor;
@@ -371,6 +378,8 @@ function switchTab(name){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
+  const qthCard=document.getElementById('qth-card');
+  if(qthCard) qthCard.style.display=(name==='info')?'none':'';
   if(name==='meteo' && radarMap){ setTimeout(()=>radarMap.invalidateSize(), 50); }
 }
 
@@ -658,6 +667,12 @@ function renderHF(){
     const fase=moonPhaseInfo(new Date());
     giMoon.textContent=fase.nome+' ('+fase.iluminado+'%)';
   }
+  const giEclipse=document.getElementById('gi-eclipse');
+  if(giEclipse){
+    const ecl=nextEclipse();
+    giEclipse.textContent=ecl?ecl.tipo+' — '+ecl.dias+'d':'—';
+    if(giEclipse) giEclipse.title=ecl?new Date(ecl.data+'T12:00:00Z').toLocaleDateString('pt-BR'):'';
+  }
   renderBzTrend();
   const now=new Date();
   let html='';
@@ -900,7 +915,8 @@ async function loadRadar(){
       attribution:'Weather data by <a href="https://www.rainviewer.com/" target="_blank">RainViewer</a>'
     }).addTo(radarMap);
     const frameDate=new Date(latest.time*1000);
-    statusEl.textContent='Dado real, RainViewer — quadro de '+frameDate.toISOString().slice(11,16)+' UTC';
+    const horaLocal=frameDate.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    statusEl.textContent='Horário local: '+horaLocal;
   }catch(e){ statusEl.textContent='RainViewer/OSM indisponível agora: '+e.message; }
 }
 // ===== RAIOS BRASIL (GOES-19 GLM via S3 aberto + h5wasm, experimental) =====
@@ -909,6 +925,19 @@ async function fetchWithTimeout(url, ms, opts){
   const timer=setTimeout(()=>ctrl.abort(), ms);
   try{ return await fetch(url, {...(opts||{}), signal:ctrl.signal}); }
   finally{ clearTimeout(timer); }
+}
+async function fetchWithRetry(url, tentativas=2, timeoutMs=10000){
+  // retry com backoff exponencial (500ms, 1000ms...) só pra falhas de rede/timeout -- HTTP 4xx nao tenta de novo, erro do lado do cliente nao se resolve repetindo
+  let ultimoErro;
+  for(let i=0;i<=tentativas;i++){
+    try{
+      const r=await fetchWithTimeout(url, timeoutMs);
+      if(r.ok || (r.status>=400&&r.status<500)) return r; // sucesso ou erro do cliente -- para de tentar
+      ultimoErro=new Error('HTTP '+r.status);
+    }catch(e){ ultimoErro=e; }
+    if(i<tentativas) await sleep(500*Math.pow(2,i));
+  }
+  throw ultimoErro;
 }
 async function fetchLatestGlmKey(now, bucket){
   async function listHour(t){
@@ -1058,7 +1087,7 @@ async function updateQthRegionAndAlerts(){
   try{
     const res=await reverseGeocodeOne(QTH.lat, QTH.lon);
     const regiao=res.cidade || res.label;
-    if(statusEl) statusEl.innerHTML='Cidade detectada pelo grid: <b>'+regiao+'</b> <span style="color:var(--text-muted);">(via Nominatim/OpenStreetMap)</span>';
+    if(statusEl) statusEl.innerHTML='Cidade detectada pelo grid: <b>'+regiao+'</b>';
     loadInmetAvisos(regiao);
   }catch(e){
     if(statusEl) statusEl.textContent='Não foi possível detectar a cidade pelo grid agora — avisos regionais indisponíveis nesta atualização.';
@@ -1097,6 +1126,23 @@ async function reverseGeocodeNear(near){
   const attrib=document.getElementById('glm-geo-attrib');
   if(anySuccess && attrib) attrib.style.display='block';
   return anySuccess;
+}
+const ECLIPSES_BRASIL=[
+  // datas cruzadas contra multiplas fontes independentes (timeanddate.com, ceudosul.com.br, ocalendario.com.br, exame.com)
+  {data:'2026-08-28', tipo:'Eclipse Lunar Parcial'},
+  {data:'2027-02-06', tipo:'Eclipse Solar Anular'},
+  {data:'2027-02-20', tipo:'Eclipse Lunar Penumbral'},
+  {data:'2027-08-17', tipo:'Eclipse Lunar Penumbral'},
+  {data:'2028-01-12', tipo:'Eclipse Lunar Parcial'},
+  {data:'2028-01-26', tipo:'Eclipse Solar Anular'}
+];
+function nextEclipse(){
+  const agora=new Date();
+  for(const ecl of ECLIPSES_BRASIL){
+    const dataEcl=new Date(ecl.data+'T12:00:00Z');
+    if(dataEcl>=agora) return {...ecl, dias:Math.ceil((dataEcl-agora)/864e5)};
+  }
+  return null;
 }
 const METEOR_SHOWERS=[
   {name:'Quadrantidas',month:1,day:4,zhrNum:65,zhrNote:'NASA/NN4NT (HamSCI 2026), previsão específica p/ 2026',raH:15.3,dec:49,circumpolarNorthOf:41},
@@ -1323,10 +1369,10 @@ function renderEME(){
 async function loadAllData(){
   document.getElementById('global-status').textContent='Buscando dados reais…';
   const outcomes=await Promise.allSettled([
-    fetch('https://services.swpc.noaa.gov/products/summary/10cm-flux.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const row=Array.isArray(j)?j[0]:j;const v=numFrom(row,'flux','Flux');if(v===null)throw 0;S.sfi=v;}),
-    fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,kp:numFrom(r,'Kp','kp')})).filter(h=>h.t&&isFinite(h.kp)).slice(-16);if(!hist.length)throw 0;S.kpHist=hist;S.kp=hist[hist.length-1].kp;}),
-    fetch('https://services.swpc.noaa.gov/products/kyoto-dst.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,dst:numFrom(r,'dst','Dst')})).filter(h=>h.t&&isFinite(h.dst));if(!hist.length)throw 0;S.dst=hist[hist.length-1].dst;}),
-    fetch('https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{
+    fetchWithRetry('https://services.swpc.noaa.gov/products/summary/10cm-flux.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const row=Array.isArray(j)?j[0]:j;const v=numFrom(row,'flux','Flux');if(v===null)throw 0;S.sfi=v;}),
+    fetchWithRetry('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,kp:numFrom(r,'Kp','kp')})).filter(h=>h.t&&isFinite(h.kp)).slice(-16);if(!hist.length)throw 0;S.kpHist=hist;S.kp=hist[hist.length-1].kp;}),
+    fetchWithRetry('https://services.swpc.noaa.gov/products/kyoto-dst.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,dst:numFrom(r,'dst','Dst')})).filter(h=>h.t&&isFinite(h.dst));if(!hist.length)throw 0;S.dst=hist[hist.length-1].dst;}),
+    fetchWithRetry('https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{
       // mag-2-hour.json foi depreciado pela NOAA (SCN 26-21, removido ~30/04/2026) -- substituido por este endpoint, formato de array de objetos, campos time_tag/bz_gsm mantidos iguais conforme mapeamento oficial
       if(!Array.isArray(j)||!j.length) throw 0;
       const rows=j.map(r=>({t:r.time_tag, bz:parseFloat(r.bz_gsm)})).filter(r=>r.t&&isFinite(r.bz));
@@ -1335,7 +1381,7 @@ async function loadAllData(){
       if(rows.length>240) rows.splice(0, rows.length-240); // cadencia de 1min pode trazer muito mais pontos que antes -- mantem so as ultimas ~4h, suficiente pra tendencia
       S.bzHist=rows; S.bz=rows[rows.length-1].bz;
     }),
-    fetch('https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const ch=(Array.isArray(j)?j:[]).filter(row=>row.energy==='0.1-0.8nm'&&isFinite(row.flux));if(!ch.length)throw 0;S.xrayFlux=ch[ch.length-1].flux;})
+    fetchWithRetry('https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const ch=(Array.isArray(j)?j:[]).filter(row=>row.energy==='0.1-0.8nm'&&isFinite(row.flux));if(!ch.length)throw 0;S.xrayFlux=ch[ch.length-1].flux;})
   ]);
   const ok=outcomes.filter(o=>o.status==='fulfilled').length;
   document.getElementById('global-status').textContent = ok===outcomes.length ? 'Dados reais da NOAA carregados' : (ok+'/'+outcomes.length+' fontes responderam');
