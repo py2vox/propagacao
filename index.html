@@ -26,8 +26,12 @@
 }
 * { box-sizing:border-box; }
 body { background:var(--surface-0); font-family:var(--font-sans); margin:0; padding:20px; color:var(--text-primary); font-size:16px; }
+@media (max-width: 400px) {
+  body { padding:12px; }
+  .metric-grid-3 { grid-template-columns:1fr !important; }
+}
 .wrap { max-width:760px; margin:0 auto; }
-button, select, input { font-family:var(--font-sans); min-height:44px; padding:8px 14px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface-2); color:var(--text-primary); }
+button, select, input { font-family:var(--font-sans); min-height:48px; padding:10px 14px; border-radius:8px; border:1px solid var(--border-strong); background:var(--surface-2); color:var(--text-primary); }
 button { cursor:pointer; }
 button:hover { background:var(--surface-1); }
 .tab-bar { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
@@ -55,21 +59,40 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 </div>
 
 <div class="card" id="qth-card">
-  <label style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Seu QTH (grid locator)</label>
+  <div id="qth-alert-badge" style="display:none;margin-bottom:12px;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;"></div>
+  <label style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Digite seu grid locator, exemplo: GG67</label>
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-    <input id="qth-input" type="text" value="GG67" style="width:160px;text-transform:uppercase;" onchange="onQthChange()">
+    <input id="qth-input" type="text" value="GG67" style="max-width:160px;width:100%;text-transform:uppercase;" onchange="onQthChange()">
     <button onclick="loadAllData()">Atualizar tudo</button>
     <span id="global-status" style="font-size:13px;color:var(--text-muted);"></span>
   </div>
   <div id="qth-region-status" style="font-size:12px;color:var(--text-muted);margin-top:8px;">Detectando cidade a partir do grid…</div>
-  <div id="qth-alert-badge" style="display:none;margin-top:10px;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;"></div>
+  <div id="hf-dest-wrap" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;margin-top:0;padding-top:0;border-top:1px solid var(--border);">
+    <label for="dest-sel" style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Destino (HF)</label>
+    <select id="dest-sel" onchange="renderHF()" style="width:100%;" aria-label="Destino para cálculo de propagação HF">
+      <optgroup label="América do Norte"><option value="0">EUA Leste (W3)</option><option value="1">EUA Oeste (W6)</option><option value="2">Canadá (VE3)</option></optgroup>
+      <optgroup label="América do Sul"><option value="3">Argentina (LU)</option><option value="4">Chile (CE)</option><option value="5">Peru (OA)</option></optgroup>
+      <optgroup label="Caribe"><option value="23">Porto Rico (KP4)</option></optgroup>
+      <optgroup label="Europa"><option value="6">Espanha (EA)</option><option value="7">Alemanha (DL)</option><option value="8">Reino Unido (G)</option><option value="9">Itália (I)</option><option value="10">Rússia (UA)</option><option value="11">Suécia (SM)</option></optgroup>
+      <optgroup label="Ásia"><option value="12">Japão (JA)</option><option value="13">China (BY)</option><option value="14">Índia (VU)</option><option value="15">Coreia do Sul (HL)</option><option value="16">Israel (4X)</option></optgroup>
+      <optgroup label="Oceania"><option value="17">Austrália (VK)</option><option value="18">Nova Zelândia (ZL)</option></optgroup>
+      <optgroup label="África"><option value="19">África do Sul (ZS)</option><option value="20">Quênia (5Z)</option><option value="21">Marrocos (CN)</option></optgroup>
+      <optgroup label="Ártico"><option value="22">Islândia (TF)</option></optgroup>
+    </select>
+  </div>
+  <div id="eme-window-wrap" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;margin-top:0;padding-top:0;border-top:1px solid var(--border);">
+    <label for="eme-other-grid" style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Janela comum da Lua — grid da outra estação</label>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Mostra quantas horas, nas próximas 24h, os dois enxergam a Lua ao mesmo tempo</div>
+    <input id="eme-other-grid" type="text" value="PM95" style="width:140px;text-transform:uppercase;margin-bottom:8px;" onchange="renderEME()">
+    <div id="common-window" style="font-size:14px;padding:8px;border-radius:6px;"></div>
+  </div>
 </div>
 
 <!-- ABA MAPA -->
 <div class="tab-panel active" id="panel-mapa">
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Indicadores globais</div>
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
+    <div class="metric-grid-3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">☀️ Atividade Solar</div><div style="font-size:16px;font-weight:600;" id="gi-kp">—</div></div>
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌙 Fase da Lua</div><div style="font-size:16px;font-weight:600;" id="gi-moon">—</div></div>
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌑 Próximo Eclipse</div><div style="font-size:16px;font-weight:600;" id="gi-eclipse">—</div></div>
@@ -87,7 +110,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
       <span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:50%;background:#f59e0b;display:inline-block;"></span>Terremoto M4.5+ (24h)</span>
     </div>
     <div id="quake-status" style="font-size:11px;color:var(--text-muted);margin-top:8px;">—</div>
-    <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Dado: <a href="https://earthquake.usgs.gov/" target="_blank" style="color:var(--text-muted);">USGS Earthquake Hazards Program</a>. Círculo maior = magnitude maior. Não afeta propagação de rádio — mostrado como contexto de infraestrutura crítica (rádio amador é recurso de comunicação em emergências).</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Círculo maior = magnitude maior. Contexto de infraestrutura crítica (rádio amador é recurso de comunicação em emergências) — <b>lembre de manter as frequências de emergência livres.</b> Dado: <a href="https://earthquake.usgs.gov/" target="_blank" style="color:var(--text-muted);">USGS Earthquake Hazards Program</a>.</div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Lista completa — mesma informação do mapa, em texto</div>
@@ -97,37 +120,6 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 
 <!-- ABA HF -->
 <div class="tab-panel" id="panel-hf">
-  <div class="card">
-    <label style="font-size:14px;color:var(--text-secondary);">Destino</label>
-    <select id="dest-sel" onchange="renderHF()" style="width:100%;margin-top:6px;">
-      <optgroup label="América do Norte"><option value="0">EUA Leste (W3)</option><option value="1">EUA Oeste (W6)</option><option value="2">Canadá (VE3)</option></optgroup>
-      <optgroup label="América do Sul"><option value="3">Argentina (LU)</option><option value="4">Chile (CE)</option><option value="5">Peru (OA)</option></optgroup>
-      <optgroup label="Caribe"><option value="23">Porto Rico (KP4)</option></optgroup>
-      <optgroup label="Europa"><option value="6">Espanha (EA)</option><option value="7">Alemanha (DL)</option><option value="8">Reino Unido (G)</option><option value="10">Rússia (UA)</option></optgroup>
-      <optgroup label="Ásia"><option value="12">Japão (JA)</option><option value="14">Índia (VU)</option></optgroup>
-      <optgroup label="Oceania"><option value="17">Austrália (VK)</option></optgroup>
-      <optgroup label="África"><option value="19">África do Sul (ZS)</option></optgroup>
-      <optgroup label="Ártico"><option value="22">Islândia (TF)</option></optgroup>
-    </select>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px;">
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">SFI</div><div style="font-size:18px;font-weight:600;" id="m-sfi">—</div></div>
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Kp</div><div style="font-size:18px;font-weight:600;" id="m-kp">—</div></div>
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Dst</div><div style="font-size:18px;font-weight:600;" id="m-dst">—</div></div>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px;">
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Bz</div><div style="font-size:18px;font-weight:600;" id="m-bz">—</div></div>
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">A-index</div><div style="font-size:18px;font-weight:600;" id="m-aidx">—</div></div>
-    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Raio-X</div><div style="font-size:18px;font-weight:600;" id="m-xray">—</div></div>
-  </div>
-  <div id="bz-trend-alert" style="display:none;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;margin-bottom:14px;"></div>
-  <div class="card">
-    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Histórico real de Bz (registrado neste navegador)</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Cada vez que a página carrega, a leitura atual é anexada aqui — não é observação minha, é registro do próprio sistema ao longo do tempo. Útil para revisar o comportamento durante uma tempestade real, depois do fato.</div>
-    <div id="bz-log-status" style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">—</div>
-    <div id="bz-log-table" style="font-size:12px;max-height:200px;overflow-y:auto;"></div>
-    <button onclick="clearBzLog()" style="font-size:12px;margin-top:8px;padding:4px 10px;min-height:32px;">Limpar histórico</button>
-  </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Previsão por banda — próximas 36h (horários em UTC)</div>
     <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Rótulos marcam virada de dia · <span id="utc-offset-note">Brasília = UTC−3</span></div>
@@ -139,6 +131,37 @@ td { padding:6px; border-bottom:1px solid var(--border); }
       <span style="display:flex;align-items:center;gap:5px;"><span style="width:18px;height:18px;border-radius:4px;background:var(--bad);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;">F</span>Fechada</span>
     </div>
   </div>
+  <div class="metric-grid-3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px;">
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">SFI</div><div style="font-size:18px;font-weight:600;" id="m-sfi">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Kp</div><div style="font-size:18px;font-weight:600;" id="m-kp">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Dst</div><div style="font-size:18px;font-weight:600;" id="m-dst">—</div></div>
+  </div>
+  <div class="metric-grid-3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px;">
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Bz</div><div style="font-size:18px;font-weight:600;" id="m-bz">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">A-index</div><div style="font-size:18px;font-weight:600;" id="m-aidx">—</div></div>
+    <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Raio-X</div><div style="font-size:18px;font-weight:600;" id="m-xray">—</div></div>
+  </div>
+  <div id="bz-trend-alert" style="display:none;padding:8px 12px;border-radius:8px;font-size:13px;font-weight:500;margin-bottom:14px;"></div>
+  <div style="font-size:11px;color:var(--text-muted);margin-bottom:14px;line-height:1.6;padding:8px 10px;background:var(--surface-1);border-radius:8px;">
+    <b>Dois tipos de evento, dois tempos de viagem diferentes:</b> raio-X de uma explosão solar viaja à velocidade da luz — leva ~8,3min do Sol até a Terra. Quando o <b>Raio-X</b> acima muda, o efeito na Camada D (SID/apagão de HF, se for dia no seu QTH) já está acontecendo agora, não é previsão. Já uma CME (ejeção de massa coronal) é matéria, não luz — viaja bem mais devagar (400–1000km/s) e leva de 1 a 3 dias pra chegar. <b>Bz e Kp</b> aqui refletem o vento solar como está agora; a estimativa de chegada de CME (quando disponível) aparece no card abaixo, calculada a partir de dado real da NASA.
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Tendência do Kp (horários em UTC)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Kp mede <b>perturbação geomagnética</b>, não propagação diretamente — é uma entre várias variáveis (SFI, foF2, hora local, caminho). Tempestades ionosféricas têm duas fases: <b>negativa</b> (foF2 cai, pior propagação — domina durante o pico) e <b>positiva</b> (foF2 sobe, propagação pode melhorar — mais comum no início da recuperação, após o pico). Por isso "Kp alto" não é sinônimo automático de "banda fechada" — vale olhar a tendência e o horário, não só o número isolado.</div>
+    <div style="position:relative;width:100%;height:140px;"><canvas id="kpChart" role="img" aria-label="Gráfico do índice Kp nas últimas horas">Histórico de Kp.</canvas></div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">☄️ Estimativa de chegada da ejeção solar</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Nuvem de plasma (matéria, não luz) lançada pelo Sol — diferente da explosão de raio-X que já vimos acima, viaja bem mais devagar e pode afetar o campo magnético da Terra em 1 a 3 dias. Fonte: NASA/DONKI.</div>
+    <div id="cme-analysis" style="font-size:13px;color:var(--text-secondary);">Buscando…</div>
+  </div>
+  <div class="card">
+    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Histórico real de Bz (registrado neste navegador)</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Cada vez que a página carrega, a leitura atual é anexada aqui — não é observação minha, é registro do próprio sistema ao longo do tempo. Útil para revisar o comportamento durante uma tempestade real, depois do fato.</div>
+    <div id="bz-log-status" style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">—</div>
+    <div id="bz-log-table" style="font-size:12px;max-height:200px;overflow-y:auto;"></div>
+    <button onclick="clearBzLog()" style="font-size:12px;margin-top:8px;padding:4px 10px;min-height:32px;">Limpar histórico</button>
+  </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Melhor janela por banda (UTC)</div>
     <table><thead><tr><th>Banda</th><th>Horário UTC</th><th>Confiança</th></tr></thead><tbody id="band-detail"></tbody></table>
@@ -148,21 +171,14 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <div id="gt-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
     <table><thead><tr><th>Banda</th><th>Spots</th><th>SNR obs.</th><th>SNR prev.</th></tr></thead><tbody id="gt-tbody"></tbody></table>
   </div>
-  <div class="card">
-    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Tendência do Kp (horários em UTC)</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Kp mede <b>perturbação geomagnética</b>, não propagação diretamente — é uma entre várias variáveis (SFI, foF2, hora local, caminho). Tempestades ionosféricas têm duas fases: <b>negativa</b> (foF2 cai, pior propagação — domina durante o pico) e <b>positiva</b> (foF2 sobe, propagação pode melhorar — mais comum no início da recuperação, após o pico). Por isso "Kp alto" não é sinônimo automático de "banda fechada" — vale olhar a tendência e o horário, não só o número isolado.</div>
-    <div style="position:relative;width:100%;height:140px;"><canvas id="kpChart" role="img" aria-label="Gráfico do índice Kp nas últimas horas">Histórico de Kp.</canvas></div>
-  </div>
 </div>
 
 <!-- ABA VHF -->
 <div class="tab-panel" id="panel-vhf">
   <div class="card">
-    <label style="font-size:14px;color:var(--text-secondary);">Destino (para TEP)</label>
-    <select id="vhf-dest-sel" onchange="renderVHF()" style="width:100%;margin-top:6px;">
-      <option value="3">Argentina (LU)</option><option value="4">Chile (CE)</option><option value="5">Peru (OA)</option>
-      <option value="23">Porto Rico (KP4)</option><option value="6">Espanha (EA)</option><option value="19">África do Sul (ZS)</option>
-    </select>
+    <label for="vhf-dest-grid" style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Grid do contato desejado (VHF)</label>
+    <input id="vhf-dest-grid" type="text" value="PM95" style="max-width:140px;width:100%;text-transform:uppercase;" onchange="renderVHF()">
+    <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Diferente da HF: aqui você decide exatamente qual grid está tentando alcançar — TEP, Esporádica-E e Meteor Scatter dependem da geometria precisa entre os dois pontos, não só do país.</div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">6 metros</div>
@@ -205,26 +221,22 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     </div>
     <div id="wind-safety" style="font-size:14px;padding:10px;border-radius:8px;"></div>
     <div style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.6;">
-      <b>Escala Beaufort aplicada aos quatro níveis deste painel</b> — sistema de 1805 que relaciona velocidade do vento a efeitos visíveis observáveis, ainda usado como referência meteorológica padrão:<br>
+      <b>Escala Beaufort</b> aplicada aos quatro níveis, usada como referência meteorológica padrão:<br>
       <b style="color:var(--status-good-fg);">Verde (&lt;30km/h)</b>: brisa fraca a moderada — folhas e galhos finos se movem, sem risco a antenas.<br>
       <b style="color:var(--status-warn-fg);">Amarelo (30–50km/h)</b>: vento moderado a fresco — galhos maiores se movem; vale acompanhar fixações temporárias.<br>
       <b style="color:var(--status-orange-fg);">Laranja (50–70km/h)</b>: vento muito fresco a forte — dificuldade para caminhar contra o vento; evite subir em torre.<br>
-      <b style="color:var(--status-bad-fg);">Vermelho (&gt;70km/h)</b>: força de tempestade — risco estrutural real; muitos equipamentos comerciais têm limite de sobrevivência nesta faixa.<br>
-      Referência geral, não o limite da sua antena/torre específica — priorize sempre a especificação do fabricante.
+      <b style="color:var(--status-bad-fg);">Vermelho (&gt;70km/h)</b>: força de tempestade — risco estrutural real; muitos equipamentos comerciais têm limite de sobrevivência nesta faixa.
     </div>
-    <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Dado: <a href="https://open-meteo.com/" target="_blank" style="color:var(--text-muted);">Open-Meteo</a>, CC BY 4.0. O INMET (card no final da página) publica avisos oficiais, mas não uma API de condições numéricas.</div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">⚡ Raios perto do seu QTH e no Brasil</div>
-    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;"><b>Descargas em tempo real, priorizadas pela distância do seu QTH</b> — um raio a até 30km eleva o alerta no topo da página automaticamente.</div>
-    <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">Lido direto do satélite GOES-19 (sensor GLM) — cobertura terrestre é fraca na América do Sul. Se falhar, o motivo aparece abaixo sem travar o resto do painel.</div>
     <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
     <div id="glm-flashes" style="font-size:13px;line-height:1.6;"></div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Raios — EUA e Europa (Blitzortung.org)</div>
     <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Rede comunitária, não oficial — para segurança use os avisos INMET no final da página.</div>
-    <iframe src="https://www.blitzortung.org/en/live_lightning_maps.php?Advertisment=0#3/45/-25" style="width:100%;height:400px;border:1px solid var(--border);border-radius:8px;" loading="lazy" title="Mapa de raios em tempo real, EUA e Europa, Blitzortung.org"></iframe>
+    <iframe src="https://www.blitzortung.org/en/live_lightning_maps.php?Advertisment=0&Cookies=0#3/45/-25" style="width:100%;height:400px;border:1px solid var(--border);border-radius:8px;" loading="lazy" title="Mapa de raios em tempo real, EUA e Europa, Blitzortung.org"></iframe>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">📢 Avisos oficiais INMET</div>
@@ -239,17 +251,18 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   <div class="card" style="font-size:13px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:16px;">Especificações e capacidades do sistema</b><br><br>
     <b>Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth) com 24 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino.<br><br>
-    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN para bandas baixas); amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
-    <b>VHF (6m/2m)</b> — Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
+    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN para bandas baixas); amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
+    <b>VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
     <b>EME</b> — suporte para 144/432/1296MHz; correção de paralaxe topocêntrica (até ~1° em baixas elevações); ruído galáctico com decaimento f⁻²·⁸, destacando zonas de saturação por ruído solar em UHF/SHF; janela de visibilidade mútua entre duas estações; severidade de Rotação de Faraday por banda (referência qualitativa, não calculada em tempo real).<br><br>
-    <b>Telemetria meteorológica e segurança operacional</b> — radar de precipitação georreferenciado (RainViewer) e avisos oficiais do INMET, priorizados por matriz de risco (vento > raios > chuva); raios via sensor GLM do satélite GOES-19, contornando a cobertura fraca do Blitzortung na América do Sul, com alerta automático para descargas em raio de 30km do QTH; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
+    <b>Telemetria meteorológica e segurança operacional</b> — radar de precipitação georreferenciado (RainViewer), condições numéricas da estação e raios via sensor GLM do satélite GOES-19 logo após o grid locator, com avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva) no final da página; raios contornam a cobertura fraca do Blitzortung na América do Sul, com alerta automático para descargas em raio de 30km do QTH; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
     <b>Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) persiste só no ciclo de vida da aba/Artifact, não no arquivo baixado; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo.
   </div>
   <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:15px;">Sobre a arquitetura e o autor</b><br><br>
     Levantamento, modelagem e testes práticos por <b>Ricardo de Paula — PY2VOX</b>, radioamador Classe A em Campinas/SP, com formação em Sistemas de Informação e mais de 30 anos de atuação em Tecnologia da Informação — aplicando esse rigor à ciência do radioamadorismo.<br><br>
     Desenvolvimento com apoio de IA (Claude, Anthropic) para consolidação matemática, auditoria de fontes e refinamento de código, resultando num painel client-side, resiliente e sem dependências externas.<br><br>
-    <a href="https://www.qrz.com/db/PY2VOX" target="_blank" style="color:var(--text-secondary);">QRZ.com — PY2VOX</a>
+    <a href="https://www.qrz.com/db/PY2VOX" target="_blank" style="color:var(--text-secondary);">QRZ.com — PY2VOX</a><br><br>
+    <div style="font-size:11px;color:var(--text-muted);padding-top:10px;border-top:1px solid var(--border);">Uso e reaproveitamento: qualquer pessoa pode usar este código, no todo ou em parte, desde que sejam informadas as fontes de dados originais (NOAA, INMET, Open-Meteo, RainViewer, USGS, NASA, OpenStreetMap/Nominatim, WSPR.live, Blitzortung.org, conforme listadas acima) e mencionada a parceria com PY2VOX.</div>
   </div>
 </div>
 
@@ -281,12 +294,6 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     </div>
     <div id="galactic-verdict" style="font-size:14px;padding:8px;border-radius:6px;margin-bottom:10px;"></div>
     <div id="solar-noise" style="font-size:14px;padding:8px;border-radius:6px;">—</div>
-  </div>
-  <div class="card">
-    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Janela comum da Lua</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Grid locator da outra estação — mostra quantas horas, nas próximas 24h, os dois enxergam a Lua ao mesmo tempo</div>
-    <input id="eme-other-grid" type="text" value="PM95" style="width:140px;text-transform:uppercase;margin-bottom:8px;" onchange="renderEME()">
-    <div id="common-window" style="font-size:14px;padding:8px;border-radius:6px;"></div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Rotação de Faraday — severidade típica por banda</div>
@@ -381,7 +388,15 @@ function switchTab(name){
   document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
   const qthCard=document.getElementById('qth-card');
   if(qthCard) qthCard.style.display=(name==='info')?'none':'';
+  const hfDestWrap=document.getElementById('hf-dest-wrap');
+  if(hfDestWrap) aplicarExpansaoSuave(hfDestWrap, name==='hf');
+  const emeWindowWrap=document.getElementById('eme-window-wrap');
+  if(emeWindowWrap) aplicarExpansaoSuave(emeWindowWrap, name==='eme');
   if(name==='meteo' && radarMap){ setTimeout(()=>radarMap.invalidateSize(), 50); }
+}
+function aplicarExpansaoSuave(el, aberto){
+  if(aberto){ el.style.maxHeight='500px'; el.style.marginTop='14px'; el.style.paddingTop='14px'; }
+  else{ el.style.maxHeight='0'; el.style.marginTop='0'; el.style.paddingTop='0'; }
 }
 
 // ===== MAPA =====
@@ -433,7 +448,7 @@ async function loadEarthquakes(){
     })).filter(e=>isFinite(e.mag)&&isFinite(e.lon)&&isFinite(e.lat));
     drawEarthquakes();
     const statusEl=document.getElementById('quake-status');
-    if(statusEl) statusEl.textContent=earthquakeData.length+' terremotos M4.5+ nas últimas 24h — dado real, USGS';
+    if(statusEl) statusEl.textContent='Dados reais USGS: '+earthquakeData.length+' terremotos M4.5+ nas últimas 24h.';
   }catch(e){
     const statusEl=document.getElementById('quake-status');
     if(statusEl) statusEl.textContent='USGS indisponível agora.';
@@ -994,7 +1009,7 @@ async function loadGlmBrazil(){
     glmHistory.push(...novos);
     glmHistory=glmHistory.filter(b=>(agora-b.t)<=30*60000); // poda tudo com mais de 30min
     const brasil=glmHistory;
-    statusEl.textContent=key.split('/').pop()+' — +'+novos.length+' novos, '+brasil.length+' no buffer de 30min (sessão atual, não histórico retroativo)';
+    statusEl.textContent='+'+novos.length+' novos, '+brasil.length+' no buffer de 30min (sessão atual, não histórico retroativo)';
     if(brasil.length===0){
       flashEl.innerHTML='<span style="color:var(--text-muted);">Nenhum raio sobre o Brasil no buffer — normal fora de tempestade ativa.</span>';
       S_lightningBadge={count:0, nearestKm:null};
@@ -1203,7 +1218,14 @@ function renderMeteor(){
   el.innerHTML=html;
 }
 function renderVHF(){
-  const dest=DESTINATIONS[parseInt(document.getElementById('vhf-dest-sel').value)];
+  const gridTxt=(document.getElementById('vhf-dest-grid').value||'').trim().toUpperCase();
+  const coords=gridToLatLon(gridTxt);
+  if(!coords){
+    document.getElementById('vhf-6m').innerHTML='<span style="color:var(--status-bad-fg);">Grid inválido — use o formato tipo PM95 ou GG67LX.</span>';
+    document.getElementById('vhf-2m').innerHTML='';
+    return;
+  }
+  const dest={name:gridTxt, lat:coords.lat, lon:coords.lon};
   const now=new Date();
   const esScore=esLikelihood(QTH.lat,QTH.lon,now);
   const f2Possible=S.sfi>=150;
@@ -1366,6 +1388,50 @@ function renderEME(){
   }
 }
 
+async function loadCmeAnalysis(){
+  const elBox=document.getElementById('cme-analysis');
+  if(!elBox) return;
+  try{
+    const hoje=new Date(); const inicio=new Date(hoje.getTime()-7*864e5);
+    const fmt=d=>d.toISOString().slice(0,10);
+    const url='https://api.nasa.gov/DONKI/CMEAnalysis?startDate='+fmt(inicio)+'&endDate='+fmt(hoje)+'&mostAccurateOnly=true&api_key=DEMO_KEY';
+    const r=await fetchWithRetry(url, 1, 12000); // so 1 retry -- DEMO_KEY e compartilhada globalmente, nao adianta insistir muito
+    if(!r.ok) throw new Error(r.status===429?'limite da chave pública DEMO_KEY do NASA excedido agora':'HTTP '+r.status);
+    const j=await r.json();
+    if(!Array.isArray(j)||!j.length){
+      elBox.innerHTML='<span style="color:var(--text-muted);">Nenhuma ejeção solar registrada pela NASA nos últimos 7 dias.</span>';
+      return;
+    }
+    const UA_KM=149597870;
+    const cmes=j.filter(c=>isFinite(c.speed)&&c.speed>0).map(c=>({
+      tempo:c.time21_5, vel:c.speed,
+      horasViagem:UA_KM/c.speed/3600
+    })).sort((a,b)=>new Date(b.tempo)-new Date(a.tempo));
+    if(!cmes.length){ elBox.innerHTML='<span style="color:var(--text-muted);">Ejeções solares no período sem velocidade estimada.</span>'; return; }
+    const mais=cmes[0];
+    const dataDetec=new Date(mais.tempo);
+    const chegadaEstimada=new Date(dataDetec.getTime()+mais.horasViagem*3600000);
+    const horasRestantes=(chegadaEstimada-new Date())/3600000;
+    const diasViagem=(mais.horasViagem/24).toFixed(1);
+
+    let html='<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px;">';
+    html+='<div class="metric"><div style="font-size:12px;color:var(--text-muted);">Velocidade</div><div style="font-size:20px;font-weight:600;">'+Math.round(mais.vel)+' km/s</div></div>';
+    html+='<div class="metric"><div style="font-size:12px;color:var(--text-muted);">Tempo de viagem</div><div style="font-size:20px;font-weight:600;">'+diasViagem+' dias</div></div>';
+    html+='</div>';
+
+    if(horasRestantes>0){
+      html+='<div style="padding:10px;border-radius:8px;background:var(--status-warn-bg);color:var(--status-warn-fg);font-size:14px;margin-bottom:8px;"><b>Chegada estimada em ~'+horasRestantes.toFixed(0)+'h</b>, se Terra-direcionada. Fique de olho no Bz/Kp acima quando chegar perto.</div>';
+    } else {
+      html+='<div style="padding:10px;border-radius:8px;background:var(--surface-1);color:var(--text-secondary);font-size:14px;margin-bottom:8px;">Janela estimada já passou, sem confirmação de impacto — confira o Bz/Kp acima para ver se algo mudou de verdade.</div>';
+    }
+
+    html+='<div style="font-size:12px;color:var(--text-muted);">Detectada '+dataDetec.toISOString().slice(0,16).replace('T',' ')+' UTC.</div>';
+    html+='<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Estimativa simples (distância ÷ velocidade), sem simular desaceleração pelo vento solar nem confirmar se é Terra-direcionada — não é o modelo completo da NOAA. Fonte: <a href="https://api.nasa.gov/" target="_blank" style="color:var(--text-muted);">NASA DONKI</a> (chave pública compartilhada, pode ficar indisponível por uso alto).</div>';
+    elBox.innerHTML=html;
+  }catch(e){
+    elBox.innerHTML='<span style="color:var(--text-muted);">CME/DONKI indisponível agora: '+e.message+'</span>';
+  }
+}
 // ===== CARGA DE DADOS =====
 async function loadAllData(){
   document.getElementById('global-status').textContent='Buscando dados reais…';
@@ -1373,6 +1439,7 @@ async function loadAllData(){
     fetchWithRetry('https://services.swpc.noaa.gov/products/summary/10cm-flux.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const row=Array.isArray(j)?j[0]:j;const v=numFrom(row,'flux','Flux');if(v===null)throw 0;S.sfi=v;}),
     fetchWithRetry('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,kp:numFrom(r,'Kp','kp')})).filter(h=>h.t&&isFinite(h.kp)).slice(-16);if(!hist.length)throw 0;S.kpHist=hist;S.kp=hist[hist.length-1].kp;}),
     fetchWithRetry('https://services.swpc.noaa.gov/products/kyoto-dst.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{const hist=(Array.isArray(j)?j:[]).map(r=>({t:r.time_tag,dst:numFrom(r,'dst','Dst')})).filter(h=>h.t&&isFinite(h.dst));if(!hist.length)throw 0;S.dst=hist[hist.length-1].dst;}),
+    loadCmeAnalysis(),
     fetchWithRetry('https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json').then(r=>{if(!r.ok)throw 0;return r.json();}).then(j=>{
       // mag-2-hour.json foi depreciado pela NOAA (SCN 26-21, removido ~30/04/2026) -- substituido por este endpoint, formato de array de objetos, campos time_tag/bz_gsm mantidos iguais conforme mapeamento oficial
       if(!Array.isArray(j)||!j.length) throw 0;
