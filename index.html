@@ -133,7 +133,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">160m — proximidade da giro-frequência do elétron</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Mecanismo diferente da absorção normal de camada D: quando a portadora está perto da frequência de giro do elétron no campo magnético local (700–1600kHz tipicamente), a absorção aumenta por ressonância — documentado por Oler/N4XX (CQ Magazine, 1998; citado em ON4UN's Low-Band DXing) e confirmado em estudo peer-reviewed mais recente (Vanhamel et al., Int. J. Antennas Propag., 2022, via medições WSPR). América do Sul tem giro-frequência mais baixa que América do Norte, então fica naturalmente mais longe dessa faixa crítica.</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Diferente da absorção normal (que depende de quanto a camada D está ionizada), aqui o problema é a <b>proximidade de frequência</b>: o sinal de 160m fica perto de uma frequência natural em que os elétrons já estão "girando" no campo magnético da Terra (700–1600kHz, dependendo do lugar) — quanto mais perto dessa frequência, mais energia o sinal perde pro caminho. Documentado por Oler/N4XX (CQ Magazine, 1998, citado em ON4UN's Low-Band DXing) e reconhecido como característica ativa de pesquisa do 160m em estudo peer-reviewed mais recente sobre WSPR (Vanhamel et al., Int. J. Antennas Propag., 2022). Efeito prático: América do Sul tem essa frequência natural mais baixa que América do Norte, então opera naturalmente mais longe da faixa problemática.</div>
     <div id="gyrofreq-160" style="font-size:14px;padding:8px;border-radius:6px;">—</div>
   </div>
   <div class="metric-grid-3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px;">
@@ -227,21 +227,16 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <div id="wind-safety" style="font-size:14px;padding:10px;border-radius:8px;"></div>
     <div style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.6;">
       <b>Escala Beaufort</b> aplicada aos quatro níveis, usada como referência meteorológica padrão:<br>
-      <b style="color:var(--status-good-fg);">Verde (&lt;30km/h)</b>: brisa fraca a moderada — folhas e galhos finos se movem, sem risco a antenas.<br>
-      <b style="color:var(--status-warn-fg);">Amarelo (30–50km/h)</b>: vento moderado a fresco — galhos maiores se movem; vale acompanhar fixações temporárias.<br>
-      <b style="color:var(--status-orange-fg);">Laranja (50–70km/h)</b>: vento muito fresco a forte — dificuldade para caminhar contra o vento; evite subir em torre.<br>
-      <b style="color:var(--status-bad-fg);">Vermelho (&gt;70km/h)</b>: força de tempestade — risco estrutural real; muitos equipamentos comerciais têm limite de sobrevivência nesta faixa.
+      <b style="color:var(--good);">Verde (&lt;30km/h)</b>: brisa fraca a moderada — folhas e galhos finos se movem, sem risco a antenas.<br>
+      <b style="color:#eab308;">Amarelo (30–50km/h)</b>: vento moderado a fresco — galhos maiores se movem; vale acompanhar fixações temporárias.<br>
+      <b style="color:#f59e0b;">Laranja (50–70km/h)</b>: vento muito fresco a forte — dificuldade para caminhar contra o vento; evite subir em torre.<br>
+      <b style="color:var(--bad);">Vermelho (&gt;70km/h)</b>: força de tempestade — risco estrutural real; muitos equipamentos comerciais têm limite de sobrevivência nesta faixa.
     </div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">⚡ Raios perto do seu QTH e no Brasil</div>
     <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
     <div id="glm-flashes" style="font-size:13px;line-height:1.6;"></div>
-  </div>
-  <div class="card">
-    <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Raios — EUA e Europa (Blitzortung.org)</div>
-    <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Rede comunitária, não oficial — para segurança use os avisos INMET no final da página.</div>
-    <iframe src="https://www.blitzortung.org/en/live_lightning_maps.php?Advertisment=0&Cookies=0#3/45/-25" style="width:100%;height:400px;border:1px solid var(--border);border-radius:8px;" loading="lazy" title="Mapa de raios em tempo real, EUA e Europa, Blitzortung.org"></iframe>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">📢 Avisos oficiais INMET</div>
@@ -255,11 +250,11 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <div class="tab-panel" id="panel-info">
   <div class="card" style="font-size:13px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:16px;">Especificações e capacidades do sistema</b><br><br>
-    <b>Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth) com 24 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino.<br><br>
-    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
-    <b>VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
-    <b>EME</b> — suporte para 144/432/1296MHz; correção de paralaxe topocêntrica (até ~1° em baixas elevações); ruído galáctico com decaimento f⁻²·⁸, destacando zonas de saturação por ruído solar em UHF/SHF; janela de visibilidade mútua entre duas estações; severidade de Rotação de Faraday por banda (referência qualitativa, não calculada em tempo real).<br><br>
-    <b>Telemetria meteorológica e segurança operacional</b> — radar de precipitação georreferenciado (RainViewer), condições numéricas da estação e raios via sensor GLM do satélite GOES-19 logo após o grid locator, com avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva) no final da página; raios contornam a cobertura fraca do Blitzortung na América do Sul, com alerta automático para descargas em raio de 30km do QTH; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
+    <b>Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth) com 24 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); polo geomagnético via WMM2025 oficial (base de latitude geomagnética usada em aurora, TEP, giro-frequência do 160m e Es Equatorial); monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino.<br><br>
+    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); giro-frequência do elétron estimada por QTH em 160m especificamente, calculada via aproximação dipolar do campo magnético (Oler/N4XX, CQ Magazine 1998; Vanhamel et al., Int. J. Antennas Propag. 2022); amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
+    <b>VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); Es Equatorial como indicador separado quando o QTH está a até 20° do equador magnético — mecanismo diferente (instabilidade do eletrojet, não vento), com Kp alto favorecendo em vez de atrapalhar; F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
+    <b>EME</b> — suporte para 144/432/1296MHz; correção de paralaxe topocêntrica (até ~1° em baixas elevações); ruído galáctico com decaimento f⁻²·⁸, destacando zonas de saturação por ruído solar em UHF/SHF; rotação espacial calculada por geometria pura (ângulo paraláctico entre as duas estações e a Lua), distinta da Faraday e sem depender de TEC — sinaliza risco de propagação de mão única perto de ±45° (mecanismo identificado por N1BUG na comunidade EME); janela de visibilidade mútua entre duas estações; severidade de Rotação de Faraday por banda (referência qualitativa, não calculada em tempo real).<br><br>
+    <b>Telemetria meteorológica e segurança operacional</b> — radar de precipitação georreferenciado (RainViewer), condições numéricas da estação e raios via sensor GLM do satélite GOES-19 logo após o grid locator, com avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva) no final da página; raios via satélite contornam a cobertura terrestre fraca na América do Sul, com alerta automático para descargas em raio de 30km do QTH; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
     <b>Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) persiste só no ciclo de vida da aba/Artifact, não no arquivo baixado; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo. Além disso: modelos de propagação baseados em SFI (o meu incluso) são fundamentalmente <b>modelos de mediana mensal</b> — o SFI descreve apenas 1 de 3 fontes de variabilidade dia-a-dia da camada F2 (as outras duas são atividade geomagnética, que o Kp cobre parcialmente, e acoplamento com a atmosfera baixa/TIDs, que nenhum modelo amador cobre bem hoje). Isso não é peculiaridade deste sistema — é limite reconhecido pela própria comunidade de pesquisa de propagação (K9LA, HamSCI Space Weather Knowledge Exchange 2017).
   </div>
   <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
@@ -267,7 +262,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     Levantamento, modelagem e testes práticos por <b>Ricardo de Paula — PY2VOX</b>, radioamador Classe A em Campinas/SP, com formação em Sistemas de Informação e mais de 30 anos de atuação em Tecnologia da Informação — aplicando esse rigor à ciência do radioamadorismo.<br><br>
     Desenvolvimento com apoio de IA (Claude, Anthropic) para consolidação matemática, auditoria de fontes e refinamento de código, resultando num painel client-side, resiliente e sem dependências externas.<br><br>
     <a href="https://www.qrz.com/db/PY2VOX" target="_blank" style="color:var(--text-secondary);">QRZ.com — PY2VOX</a><br><br>
-    <div style="font-size:11px;color:var(--text-muted);padding-top:10px;border-top:1px solid var(--border);">Uso e reaproveitamento: qualquer pessoa pode usar este código, no todo ou em parte, desde que sejam informadas as fontes de dados originais (NOAA, INMET, Open-Meteo, RainViewer, USGS, NASA, OpenStreetMap/Nominatim, WSPR.live, Blitzortung.org, conforme listadas acima) e mencionada a parceria com PY2VOX.</div>
+    <div style="font-size:11px;color:var(--text-muted);padding-top:10px;border-top:1px solid var(--border);">Uso e reaproveitamento: qualquer pessoa pode usar este código, no todo ou em parte, desde que sejam informadas as fontes de dados originais (NOAA, INMET, Open-Meteo, RainViewer, USGS, NASA, OpenStreetMap/Nominatim, WSPR.live, conforme listadas acima) e mencionada a parceria com PY2VOX.</div>
   </div>
 </div>
 
@@ -851,7 +846,7 @@ async function loadInmetAvisos(regionName){
     const qthAlerts=allAlerts.filter(a=>normalizeForMatch(a.rawDesc).includes(regionNorm));
 
     function renderCard(alert, contexto, totalNesseGrupo){
-      const color=alert.sev.includes('Grande')?'var(--status-bad-fg)':alert.sev.includes('Perigo Potencial')?'var(--status-warn-fg)':alert.sev.includes('Perigo')?'var(--status-orange-fg)':'var(--text-secondary)';
+      const color=alert.sev.includes('Grande')?'var(--bad)':alert.sev.includes('Perigo Potencial')?'var(--warn)':alert.sev.includes('Perigo')?'#f59e0b':'var(--text-secondary)';
       const areaCount=alert.area?alert.area.split(',').length:0;
       const resumo=alert.descText.length>90?alert.descText.slice(0,90).replace(/\s+\S*$/,'')+'…':alert.descText;
       let html='<div style="padding:6px 0;"><b style="color:'+color+';">'+alert.title.replace(/\. Severidade.*/,'')+'</b>'+(alert.revisoes>1?' <span style="font-size:11px;color:var(--text-muted);">('+alert.revisoes+' atualizações)</span>':'')+'<br><span style="font-size:12px;color:var(--text-muted);">'+alert.inicio+' até '+alert.fim+(areaCount>1?' · entre '+areaCount+' áreas':'')+'</span><br><span style="font-size:13px;">'+resumo+'</span></div>';
@@ -1248,7 +1243,7 @@ function renderVHF(){
   const gridTxt=(document.getElementById('vhf-dest-grid').value||'').trim().toUpperCase();
   const coords=gridToLatLon(gridTxt);
   if(!coords){
-    document.getElementById('vhf-6m').innerHTML='<span style="color:var(--status-bad-fg);">Grid inválido — use o formato tipo PM95 ou GG67LX.</span>';
+    document.getElementById('vhf-6m').innerHTML='<span style="color:var(--bad);">Grid inválido — use o formato tipo PM95 ou GG67LX.</span>';
     document.getElementById('vhf-2m').innerHTML='';
     return;
   }
@@ -1264,6 +1259,11 @@ function renderVHF(){
   const tep6Ok=tep6.score>=15, tep2Ok=tep2.score>=15;
   let html6='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(esOk?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(esOk?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Esporádica-E: '+(esOk?'Provável':'Improvável')+' '+esScore+'%</b><div style="font-size:11px;margin-top:2px;">Clima, '+(isSouthern?'hemisfério sul':'hemisfério norte')+', janela '+janelaEs+'</div></div>';
   html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(f2Possible?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(f2Possible?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>F2: '+(f2Possible?'Possível':'Improvável')+'</b><div style="font-size:11px;margin-top:2px;">SFI='+Math.round(S.sfi)+'</div></div>';
+  const gmLatAbs=Math.abs(geomagLat(QTH.lat,QTH.lon));
+  if(gmLatAbs<=20){
+    const eeqFavoravel=S.kp<=2; // contra-intuitivo: Kp baixo enfraquece o eletrojet, favorecendo a Es equatorial -- oposto do resto do sistema
+    html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(eeqFavoravel?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(eeqFavoravel?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Es Equatorial: '+(eeqFavoravel?'Condição favorável':'Kp alto pode suprimir')+'</b><div style="font-size:11px;margin-top:2px;">Seu QTH está a '+gmLatAbs.toFixed(0)+'° do equador magnético — mecanismo diferente da Es acima (eletrojet, não vento). Kp alto <b>enfraquece</b> o eletrojet e favorece esse tipo — o oposto do padrão usual.</div></div>';
+  }
   html6+='<div style="padding:8px 10px;border-radius:6px;background:'+(tep6Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep6Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep6.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep6.h+'h</div></div>';
   document.getElementById('vhf-6m').innerHTML=html6;
   let html2='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(tep2Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep2Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep2.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep2.h+'h (mais raro que 6m)</div></div>';
@@ -1417,9 +1417,13 @@ function renderEME(){
     else{
       const offset=spatialPolOffset(QTH.lat,QTH.lon,otherGrid.lat,otherGrid.lon,moon.ra,moon.dec,now);
       const perdaDb=-20*Math.log10(Math.cos(Math.abs(offset)*Math.PI/180));
-      if(Math.abs(offset)>=45-5 && Math.abs(offset)<=45+5){
+      const zonaCritica45=Math.abs(offset)>=45-5 && Math.abs(offset)<=45+5;
+      if(zonaCritica45){
         spatialEl.style.background='var(--status-bad-bg)'; spatialEl.style.color='var(--status-bad-fg)';
         spatialEl.innerHTML='<b>Diferença espacial: '+offset.toFixed(0)+'°</b> (perda ~'+perdaDb.toFixed(1)+'dB) — perto de ±45°, zona de risco pra propagação de mão única se a Faraday também estiver perto de ±45°.';
+      } else if(perdaDb>10){
+        spatialEl.style.background='var(--status-bad-bg)'; spatialEl.style.color='var(--status-bad-fg)';
+        spatialEl.innerHTML='<b>Diferença espacial: '+offset.toFixed(0)+'°</b> (perda ~'+perdaDb.toFixed(1)+'dB) — perda severa, praticamente cross-polarizado.';
       } else if(perdaDb>3){
         spatialEl.style.background='var(--status-warn-bg)'; spatialEl.style.color='var(--status-warn-fg)';
         spatialEl.innerHTML='<b>Diferença espacial: '+offset.toFixed(0)+'°</b> (perda ~'+perdaDb.toFixed(1)+'dB) — perda perceptível, mas fora da zona crítica de ±45°.';
