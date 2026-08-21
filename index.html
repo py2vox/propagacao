@@ -66,7 +66,10 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <button onclick="loadAllData()">Atualizar tudo</button>
     <span id="global-status" style="font-size:13px;color:var(--text-muted);"></span>
   </div>
-  <div id="qth-region-status" style="font-size:12px;color:var(--text-muted);margin-top:8px;">Detectando cidade a partir do grid…</div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;">
+    <input id="qth-cidade-input" type="text" placeholder="Sua cidade (opcional)" style="max-width:200px;width:100%;" onchange="updateQthRegionAndAlerts()" aria-label="Cidade para refinar os avisos do INMET">
+  </div>
+  <div id="qth-region-status" style="font-size:12px;color:var(--text-muted);margin-top:8px;">Detectando região a partir do grid…</div>
   <div id="hf-dest-wrap" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease;margin-top:0;padding-top:0;border-top:1px solid var(--border);">
     <label for="dest-sel" style="font-size:14px;color:var(--text-secondary);display:block;margin-bottom:6px;">Destino (HF)</label>
     <select id="dest-sel" onchange="renderHF()" style="width:100%;" aria-label="Destino para cálculo de propagação HF">
@@ -208,6 +211,10 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 
 <!-- ABA METEOROLOGIA -->
 <div class="tab-panel" id="panel-meteo">
+  <div class="card" style="border-left:4px solid var(--warn);">
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px;">⚠️ Isto não é fonte oficial de alerta</div>
+    <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Esta aba existe para consciência situacional de estação de rádio — decidir se vale subir na torre, recolher antena ou desligar equipamento. Não use como base para decisão de segurança de vida. Para isso, as fontes oficiais são o <a href="https://alertas2.inmet.gov.br/" target="_blank" style="color:var(--text-secondary);">INMET</a> e a Defesa Civil (telefone 199). Os dados aqui podem estar atrasados, incompletos ou indisponíveis se qualquer fonte externa estiver fora do ar.</div>
+  </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">🌧️ Radar de chuva no seu QTH</div>
     <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;"><b>Chuva e raios nos últimos 30 minutos</b>, centrado no seu grid.</div>
@@ -235,7 +242,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">⚡ Raios perto do seu QTH e no Brasil</div>
-    <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
+    <div id="glm-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">Aguardando primeira leitura do satélite…</div>
     <div id="glm-flashes" style="font-size:13px;line-height:1.6;"></div>
   </div>
   <div class="card">
@@ -250,19 +257,26 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <div class="tab-panel" id="panel-info">
   <div class="card" style="font-size:13px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:16px;">Especificações e capacidades do sistema</b><br><br>
-    <b>Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth) com 24 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); polo geomagnético via WMM2025 oficial (base de latitude geomagnética usada em aurora, TEP, giro-frequência do 160m e Es Equatorial); monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino.<br><br>
-    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); giro-frequência do elétron estimada por QTH em 160m especificamente, calculada via aproximação dipolar do campo magnético (Oler/N4XX, CQ Magazine 1998; Vanhamel et al., Int. J. Antennas Propag. 2022); amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
-    <b>VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); Es Equatorial como indicador separado quando o QTH está a até 20° do equador magnético — mecanismo diferente (instabilidade do eletrojet, não vento), com Kp alto favorecendo em vez de atrapalhar; F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
+    <b>Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth, via world-atlas) com 28 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); campo geomagnético pelo <b>WMM2025 completo</b> (expansão em harmônicos esféricos grau/ordem 12, 90 coeficientes de Gauss oficiais NOAA/BGS embarcados, validada contra os 100 valores de teste oficiais com erro máximo de 0,0007nT) — base de giro-frequência, TEP e Es Equatorial; oval auroral segue em coordenada dipolar por ser o proxy correto para CGM; monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino; o arquivo carrega os 100 pontos de teste oficiais da NOAA e verifica o próprio modelo geomagnético offline, pelo botão na aba Info ou por <code>validarWMM()</code> no console.<br><br>
+    <b>Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); giro-frequência do elétron por QTH em 160m, calculada a partir da <b>intensidade real do campo</b> a 90km (altura da camada D) pelo WMM2025, e não por aproximação dipolar (Oler/N4XX, CQ Magazine 1998; Vanhamel et al., Int. J. Antennas Propag. 2022) — a correção importa especialmente no Brasil: sob a Anomalia Magnética do Atlântico Sul o dipolo superestima o campo em cerca de 40%, e a giro-frequência em Campinas cai de 916kHz para 615kHz, aliviando uma penalidade de absorção em 160m que estava superestimada; amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base.<br><br>
+    <b>VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); Es Equatorial como indicador separado quando o QTH está a até 20° de <b>latitude de mergulho</b> — referenciada ao equador magnético real (I=0, localizado por bissecção no meridiano do QTH), que sobre a América do Sul varia de ~10°S em 70°O a ~9°N em 35°O, deslocamento que o equador dipolar não captura — mecanismo diferente (instabilidade do eletrojet, não vento), com Kp alto favorecendo em vez de atrapalhar; F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; duto troposférico classificado conforme ITU-R P.453 (sub-refração / normal / super-refração / ducting <-157N/km); Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
     <b>EME</b> — suporte para 144/432/1296MHz; correção de paralaxe topocêntrica (até ~1° em baixas elevações); ruído galáctico com decaimento f⁻²·⁸, destacando zonas de saturação por ruído solar em UHF/SHF; rotação espacial calculada por geometria pura (ângulo paraláctico entre as duas estações e a Lua), distinta da Faraday e sem depender de TEC — sinaliza risco de propagação de mão única perto de ±45° (mecanismo identificado por N1BUG na comunidade EME); janela de visibilidade mútua entre duas estações; severidade de Rotação de Faraday por banda (referência qualitativa, não calculada em tempo real).<br><br>
-    <b>Telemetria meteorológica e segurança operacional</b> — radar de precipitação georreferenciado (RainViewer), condições numéricas da estação e raios via sensor GLM do satélite GOES-19 logo após o grid locator, com avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva) no final da página; raios via satélite contornam a cobertura terrestre fraca na América do Sul, com alerta automático para descargas em raio de 30km do QTH; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
-    <b>Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) persiste só no ciclo de vida da aba/Artifact, não no arquivo baixado; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo. Além disso: modelos de propagação baseados em SFI (o meu incluso) são fundamentalmente <b>modelos de mediana mensal</b> — o SFI descreve apenas 1 de 3 fontes de variabilidade dia-a-dia da camada F2 (as outras duas são atividade geomagnética, que o Kp cobre parcialmente, e acoplamento com a atmosfera baixa/TIDs, que nenhum modelo amador cobre bem hoje). Isso não é peculiaridade deste sistema — é limite reconhecido pela própria comunidade de pesquisa de propagação (K9LA, HamSCI Space Weather Knowledge Exchange 2017).
+    <b>Telemetria meteorológica e segurança operacional</b> — reunidos na aba <b>Meteorologia</b>: radar de precipitação georreferenciado (RainViewer), condições numéricas da estação, raios via sensor GLM do satélite GOES-19 e avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva); raios via satélite contornam a cobertura terrestre fraca na América do Sul, com alerta automático para descargas em raio de 30km do QTH e buffer de 30 minutos que se realimenta sozinho a cada 3 minutos enquanto a aba estiver visível; posição de cada descarga em rumo e distância a partir do seu QTH, calculada localmente, sem serviço externo de geocodificação; região do QTH para filtrar avisos do INMET resolvida por tabela local das 27 UFs (validada contra as 27 capitais e 8 cidades de fronteira difícil), com campo opcional de cidade que tem prioridade sobre a detecção automática; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
+    <b>Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) agora persiste no armazenamento local do navegador e sobrevive a recarregamentos, mas fica preso ao navegador e ao dispositivo — não sincroniza, e some em janela anônima; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo; o WMM2025 representa só o campo principal, gerado no núcleo — campo crustal e de perturbação ficam de fora, o que responde por dezenas a centenas de nT em regiões de anomalia crustal; as bibliotecas vêm de CDN sem verificação de integridade (SRI), então uma indisponibilidade do CDN degrada mapa, gráficos e raios; o mapa base do radar usa tiles do OpenStreetMap, cuja política proíbe uso pesado — quem for publicar este painel para muita gente precisa trocar as três linhas de <code>MAPA_BASE</code> no topo do script por um provedor com chave gratuita. Além disso: modelos de propagação baseados em SFI (o meu incluso) são fundamentalmente <b>modelos de mediana mensal</b> — o SFI descreve apenas 1 de 3 fontes de variabilidade dia-a-dia da camada F2 (as outras duas são atividade geomagnética, que o Kp cobre parcialmente, e acoplamento com a atmosfera baixa/TIDs, que nenhum modelo amador cobre bem hoje). Isso não é peculiaridade deste sistema — é limite reconhecido pela própria comunidade de pesquisa de propagação (K9LA, HamSCI Space Weather Knowledge Exchange 2017).
+  </div>
+  <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
+    <b style="color:var(--text-primary);font-size:15px;">Auditoria independente do modelo geomagnético</b><br><br>
+    Este arquivo carrega os <b>100 pontos de teste oficiais da NOAA</b> para o WMM2025. Você não precisa acreditar em ninguém: rode a verificação e compare o cálculo deste painel contra a referência oficial, sem rede e sem instalar nada.<br><br>
+    <button onclick="rodarAutovalidacao()">Verificar o modelo agora</button>
+    <div id="wmm-validacao-saida" style="display:none;margin-top:10px;"></div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:10px;">Também disponível pelo console do navegador: <code>validarWMM()</code> devolve o relatório completo, incluindo cada falha caso exista alguma.</div>
   </div>
   <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:15px;">Sobre a arquitetura e o autor</b><br><br>
     Levantamento, modelagem e testes práticos por <b>Ricardo de Paula — PY2VOX</b>, radioamador Classe A em Campinas/SP, com formação em Sistemas de Informação e mais de 30 anos de atuação em Tecnologia da Informação — aplicando esse rigor à ciência do radioamadorismo.<br><br>
-    Desenvolvimento com apoio de IA (Claude, Anthropic) para consolidação matemática, auditoria de fontes e refinamento de código, resultando num painel client-side, resiliente e sem dependências externas.<br><br>
+    Desenvolvimento com apoio de IA (Claude, Anthropic) para consolidação matemática, auditoria de fontes e refinamento de código, resultando num painel client-side em arquivo único, sem servidor e sem build. Ele <b>não</b> é livre de dependências: usa quatro bibliotecas por CDN (D3, TopoJSON, Chart.js, Leaflet, além do h5wasm carregado sob demanda) e consulta cerca de quinze fontes de dados externas. O que ele não tem é backend próprio — toda a física roda no seu navegador, e o modelo geomagnético funciona mesmo offline, já que os coeficientes estão embarcados no arquivo.<br><br>
     <a href="https://www.qrz.com/db/PY2VOX" target="_blank" style="color:var(--text-secondary);">QRZ.com — PY2VOX</a><br><br>
-    <div style="font-size:11px;color:var(--text-muted);padding-top:10px;border-top:1px solid var(--border);">Uso e reaproveitamento: qualquer pessoa pode usar este código, no todo ou em parte, desde que sejam informadas as fontes de dados originais (NOAA, INMET, Open-Meteo, RainViewer, USGS, NASA, OpenStreetMap/Nominatim, WSPR.live, conforme listadas acima) e mencionada a parceria com PY2VOX.</div>
+    <div style="font-size:11px;color:var(--text-muted);padding-top:10px;border-top:1px solid var(--border);">Uso e reaproveitamento: qualquer pessoa pode usar este código, no todo ou em parte, desde que sejam informadas as fontes de dados originais (NOAA — incluindo o World Magnetic Model 2025, de domínio público, produzido por NOAA/NCEI e British Geological Survey —, INMET, Open-Meteo, RainViewer, USGS, NASA, OpenStreetMap, WSPR.live, conforme listadas acima) e mencionada a parceria com PY2VOX.</div>
   </div>
 </div>
 
@@ -319,11 +333,31 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script type="module">
-  import h5wasm from "https://cdn.jsdelivr.net/npm/h5wasm@latest/dist/esm/hdf5_hl.js";
+  import h5wasm from "https://cdn.jsdelivr.net/npm/h5wasm@0.10.1/dist/esm/hdf5_hl.js"; // versao FIXA de proposito: @latest deixaria o painel refem de um major novo publicado a qualquer momento
   window.__h5wasmReadyPromise = h5wasm.ready.then(Module => { window.h5wasm = h5wasm; window.__h5FS = Module.FS; return Module; });
 </script>
 <script>
+// ===== CONFIGURACAO DO MAPA BASE =====
+// ATENCAO ANTES DE DIVULGAR EM LARGA ESCALA:
+// A Tile Usage Policy do OpenStreetMap (operations.osmfoundation.org/policies/tiles/)
+// proibe explicitamente "uso pesado, por exemplo distribuir um app que usa tiles do
+// openstreetmap.org", e o bloqueio pode ocorrer sem aviso. Os servidores deles rodam
+// com recurso doado e nao suportam um app distribuido a milhares de pessoas.
+//
+// Para uso pessoal ou de poucos operadores, o padrao abaixo funciona.
+// Para publicar para muita gente, registre uma chave gratuita em um provedor feito
+// para isso (Stadia Maps ou MapTiler, ambos com plano gratuito e chave restringivel
+// ao seu dominio, o que a torna segura de deixar visivel aqui) e troque SOMENTE
+// as tres linhas de MAPA_BASE. Nenhuma outra parte do sistema precisa mudar.
+const MAPA_BASE = {
+  url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
+  maxZoom:10   // reduzido de 12: cada nivel de zoom a mais multiplica por 4 o numero de tiles pedidos
+};
+
 // ===== ESTADO GLOBAL =====
+let meteoIniciado=false; // radar e GLM so carregam quando a aba Meteorologia e aberta -- evita que
+                         // todo visitante baixe tiles e arquivos GLM de varios MB sem nunca ver o mapa
 let QTH = {lat:-22.8156, lon:-47.0578}; // posição oficial da estação CEPAGRI/UNICAMP, 664m (22°48'56"S, 47°03'28"W) — antes era aproximação própria
 let S = { sfi:150, kp:2, dst:0, bz:0, bzHist:[], xrayFlux:8e-7, kpHist:[], kpFcst:[], groundTruth:{} };
 let kpChartObj = null;
@@ -350,15 +384,171 @@ function numFrom(obj){for(let i=1;i<arguments.length;i++){const k=arguments[i];i
 function gridToLatLon(locator){locator=(locator||'').trim().toUpperCase();if(!/^[A-R]{2}[0-9]{2}([A-X]{2})?$/.test(locator))return null;const A='A'.charCodeAt(0);const fieldLon=locator.charCodeAt(0)-A,fieldLat=locator.charCodeAt(1)-A;const squareLon=parseInt(locator[2]),squareLat=parseInt(locator[3]);let lon=fieldLon*20-180+squareLon*2,lat=fieldLat*10-90+squareLat*1;let lonSize=2,latSize=1;if(locator.length>=6){const subLon=locator.charCodeAt(4)-A,subLat=locator.charCodeAt(5)-A;lon=lon+subLon*(2/24);lat=lat+subLat*(1/24);lonSize=2/24;latSize=1/24;}return{lat:lat+latSize/2,lon:lon+lonSize/2};}
 function sunPos(d){const n=(d-new Date(Date.UTC(d.getUTCFullYear(),0,0)))/864e5;const decl=-23.44*Math.cos(2*Math.PI/365*(n+10))*Math.PI/180;return{decl,sunLon:(12-(d.getUTCHours()+d.getUTCMinutes()/60))*15};}
 function cosChi(lat,lon,sun){const lr=lat*Math.PI/180,ha=((lon-sun.sunLon+540)%360-180)*Math.PI/180;return Math.sin(lr)*Math.sin(sun.decl)+Math.cos(lr)*Math.cos(sun.decl)*Math.cos(ha);}
-function geomagLat(lat,lon){const phi=lat*Math.PI/180,lam=lon*Math.PI/180,phi0=GEOMAG_POLE.lat*Math.PI/180,lam0=GEOMAG_POLE.lon*Math.PI/180;const s=Math.sin(phi)*Math.sin(phi0)+Math.cos(phi)*Math.cos(phi0)*Math.cos(lam-lam0);return Math.asin(Math.max(-1,Math.min(1,s)))*180/Math.PI;}
-function electronGyrofreqKHz(latGeomagDeg){
-  // giro-frequencia do eletron = eB/(2*pi*me), com B via aproximacao dipolar B=Beq*sqrt(1+3sin^2(lat_geomag))
-  // validado: cadeia inteira reproduz a faixa real documentada (700-1600kHz) para latitudes geomagneticas terrestres
-  const E=1.602176634e-19, ME=9.1093837015e-31, B_EQ=3.0e-5; // Coulombs, kg, Tesla (campo equatorial tipico)
-  const lat=latGeomagDeg*Math.PI/180;
-  const B=B_EQ*Math.sqrt(1+3*Math.pow(Math.sin(lat),2));
+// ===== WMM2025 -- MODELO GEOMAGNETICO REAL (harmonicos esfericos, grau/ordem 12) =====
+// Substitui a aproximacao dipolar, que erra ~40% sobre o Brasil por causa da Anomalia
+// Magnetica do Atlantico Sul -- uma feicao NAO-dipolar, ou seja, exatamente onde um
+// modelo de dipolo falha por construcao.
+// Coeficientes de Gauss oficiais: NOAA NCEI / British Geological Survey, arquivo WMM.COF,
+// epoca 2025.0, valido ate 2030.0. O codigo-fonte do WMM e de dominio publico (17 U.S.C. 403).
+// Esta implementacao foi validada contra os 100 valores de teste oficiais da NOAA:
+// erro maximo 0,0007nT em X, 0,0000nT em Y e Z, 0,0004nT em F, 0,005 grau em D e I
+// (o residuo em D e I e a propria casa decimal em que a NOAA publica).
+const WMM_EPOCH=2025.0, WMM_NMAX=12, WMM_A=6371.2;
+const WMM_RAW='1,0,-29351.8,0.0,12.0,0.0;1,1,-1410.8,4545.4,9.7,-21.5;2,0,-2556.6,0.0,-11.6,0.0;2,1,2951.1,-3133.6,-5.2,-27.7;2,2,1649.3,-815.1,-8.0,-12.1;3,0,1361.0,0.0,-1.3,0.0;3,1,-2404.1,-56.6,-4.2,4.0;3,2,1243.8,237.5,0.4,-0.3;3,3,453.6,-549.5,-15.6,-4.1;4,0,895.0,0.0,-1.6,0.0;4,1,799.5,278.6,-2.4,-1.1;4,2,55.7,-133.9,-6.0,4.1;4,3,-281.1,212.0,5.6,1.6;4,4,12.1,-375.6,-7.0,-4.4;5,0,-233.2,0.0,0.6,0.0;5,1,368.9,45.4,1.4,-0.5;5,2,187.2,220.2,0.0,2.2;5,3,-138.7,-122.9,0.6,0.4;5,4,-142.0,43.0,2.2,1.7;5,5,20.9,106.1,0.9,1.9;6,0,64.4,0.0,-0.2,0.0;6,1,63.8,-18.4,-0.4,0.3;6,2,76.9,16.8,0.9,-1.6;6,3,-115.7,48.8,1.2,-0.4;6,4,-40.9,-59.8,-0.9,0.9;6,5,14.9,10.9,0.3,0.7;6,6,-60.7,72.7,0.9,0.9;7,0,79.5,0.0,-0.0,0.0;7,1,-77.0,-48.9,-0.1,0.6;7,2,-8.8,-14.4,-0.1,0.5;7,3,59.3,-1.0,0.5,-0.8;7,4,15.8,23.4,-0.1,0.0;7,5,2.5,-7.4,-0.8,-1.0;7,6,-11.1,-25.1,-0.8,0.6;7,7,14.2,-2.3,0.8,-0.2;8,0,23.2,0.0,-0.1,0.0;8,1,10.8,7.1,0.2,-0.2;8,2,-17.5,-12.6,0.0,0.5;8,3,2.0,11.4,0.5,-0.4;8,4,-21.7,-9.7,-0.1,0.4;8,5,16.9,12.7,0.3,-0.5;8,6,15.0,0.7,0.2,-0.6;8,7,-16.8,-5.2,-0.0,0.3;8,8,0.9,3.9,0.2,0.2;9,0,4.6,0.0,-0.0,0.0;9,1,7.8,-24.8,-0.1,-0.3;9,2,3.0,12.2,0.1,0.3;9,3,-0.2,8.3,0.3,-0.3;9,4,-2.5,-3.3,-0.3,0.3;9,5,-13.1,-5.2,0.0,0.2;9,6,2.4,7.2,0.3,-0.1;9,7,8.6,-0.6,-0.1,-0.2;9,8,-8.7,0.8,0.1,0.4;9,9,-12.9,10.0,-0.1,0.1;10,0,-1.3,0.0,0.1,0.0;10,1,-6.4,3.3,0.0,0.0;10,2,0.2,0.0,0.1,-0.0;10,3,2.0,2.4,0.1,-0.2;10,4,-1.0,5.3,-0.0,0.1;10,5,-0.6,-9.1,-0.3,-0.1;10,6,-0.9,0.4,0.0,0.1;10,7,1.5,-4.2,-0.1,0.0;10,8,0.9,-3.8,-0.1,-0.1;10,9,-2.7,0.9,-0.0,0.2;10,10,-3.9,-9.1,-0.0,-0.0;11,0,2.9,0.0,0.0,0.0;11,1,-1.5,0.0,-0.0,-0.0;11,2,-2.5,2.9,0.0,0.1;11,3,2.4,-0.6,0.0,-0.0;11,4,-0.6,0.2,0.0,0.1;11,5,-0.1,0.5,-0.1,-0.0;11,6,-0.6,-0.3,0.0,-0.0;11,7,-0.1,-1.2,-0.0,0.1;11,8,1.1,-1.7,-0.1,-0.0;11,9,-1.0,-2.9,-0.1,0.0;11,10,-0.2,-1.8,-0.1,0.0;11,11,2.6,-2.3,-0.1,0.0;12,0,-2.0,0.0,0.0,0.0;12,1,-0.2,-1.3,0.0,-0.0;12,2,0.3,0.7,-0.0,0.0;12,3,1.2,1.0,-0.0,-0.1;12,4,-1.3,-1.4,-0.0,0.1;12,5,0.6,-0.0,-0.0,-0.0;12,6,0.6,0.6,0.1,-0.0;12,7,0.5,-0.1,-0.0,-0.0;12,8,-0.1,0.8,0.0,0.0;12,9,-0.4,0.1,0.0,-0.0;12,10,-0.2,-1.0,-0.1,-0.0;12,11,-1.3,0.1,-0.0,0.0;12,12,-0.7,0.2,-0.1,-0.1';
+const WMM_G=[],WMM_H=[],WMM_GD=[],WMM_HD=[];
+(function(){
+  for(let n=0;n<=WMM_NMAX;n++){WMM_G[n]=new Array(WMM_NMAX+1).fill(0);WMM_H[n]=new Array(WMM_NMAX+1).fill(0);WMM_GD[n]=new Array(WMM_NMAX+1).fill(0);WMM_HD[n]=new Array(WMM_NMAX+1).fill(0);}
+  WMM_RAW.split(';').forEach(r=>{const v=r.split(',');const n=+v[0],m=+v[1];WMM_G[n][m]=+v[2];WMM_H[n][m]=+v[3];WMM_GD[n][m]=+v[4];WMM_HD[n][m]=+v[5];});
+})();
+const WMM_S=(function(){ // fatores de Schmidt semi-normalizados: P_schmidt = S * P_gauss
+  const S=[];for(let n=0;n<=WMM_NMAX;n++)S[n]=new Array(WMM_NMAX+1).fill(0);
+  S[0][0]=1;
+  for(let n=1;n<=WMM_NMAX;n++){
+    S[n][0]=S[n-1][0]*(2*n-1)/n;
+    for(let m=1;m<=n;m++) S[n][m]=S[n][m-1]*Math.sqrt((n-m+1)*(m===1?2:1)/(n+m));
+  }
+  return S;
+})();
+const WMM_CACHE=new Map(); // o campo principal varia em decadas: cache por 0,1 grau e meio ano
+function wmmField(lat,lon,altKm,year){
+  const alt=altKm||0;
+  const key=lat.toFixed(1)+'|'+lon.toFixed(1)+'|'+alt.toFixed(0)+'|'+Math.round(year*2);
+  const hit=WMM_CACHE.get(key); if(hit) return hit;
+  const dt=year-WMM_EPOCH;
+  const rlat=lat*Math.PI/180, rlon=lon*Math.PI/180;
+  const sinlat=Math.sin(rlat), coslat=Math.cos(rlat);
+  const A=6378.137, F=1/298.257223563, E2=F*(2-F); // WGS-84
+  const N=A/Math.sqrt(1-E2*sinlat*sinlat);
+  const xg=(N+alt)*coslat, zg=(N*(1-E2)+alt)*sinlat;
+  const r=Math.hypot(xg,zg), theta=Math.atan2(xg,zg); // colatitude geocentrica
+  const ct=Math.cos(theta), st=Math.sin(theta);
+  const P=[],dP=[];
+  for(let n=0;n<=WMM_NMAX;n++){P[n]=new Array(WMM_NMAX+1).fill(0);dP[n]=new Array(WMM_NMAX+1).fill(0);}
+  P[0][0]=1;
+  for(let n=1;n<=WMM_NMAX;n++){
+    for(let m=0;m<=n;m++){
+      if(n===m){ P[n][m]=st*P[n-1][m-1]; dP[n][m]=st*dP[n-1][m-1]+ct*P[n-1][m-1]; }
+      else if(n===1&&m===0){ P[n][m]=ct*P[n-1][m]; dP[n][m]=ct*dP[n-1][m]-st*P[n-1][m]; }
+      else{ const k=((n-1)*(n-1)-m*m)/((2*n-1)*(2*n-3));
+            P[n][m]=ct*P[n-1][m]-k*P[n-2][m];
+            dP[n][m]=ct*dP[n-1][m]-st*P[n-1][m]-k*dP[n-2][m]; }
+    }
+  }
+  let Br=0,Bt=0,Bl=0;
+  for(let n=1;n<=WMM_NMAX;n++){
+    const rn=Math.pow(WMM_A/r,n+2);
+    for(let m=0;m<=n;m++){
+      const g=WMM_G[n][m]+dt*WMM_GD[n][m], h=WMM_H[n][m]+dt*WMM_HD[n][m];
+      const cml=Math.cos(m*rlon), sml=Math.sin(m*rlon);
+      const Ps=WMM_S[n][m]*P[n][m], dPs=WMM_S[n][m]*dP[n][m];
+      Br+=rn*(n+1)*(g*cml+h*sml)*Ps;
+      Bt-=rn*(g*cml+h*sml)*dPs;
+      if(st!==0) Bl+=rn*m*(g*sml-h*cml)*Ps/st;
+    }
+  }
+  const Xg=-Bt, Yg=Bl, Zg=-Br;
+  const psi=(Math.PI/2-rlat)-theta; // rotacao geocentrica -> geodesica
+  const X=Xg*Math.cos(psi)-Zg*Math.sin(psi);
+  const Z=Xg*Math.sin(psi)+Zg*Math.cos(psi);
+  const Y=Yg, Hh=Math.hypot(X,Y), Ftot=Math.sqrt(Hh*Hh+Z*Z);
+  const out={X:X,Y:Y,Z:Z,H:Hh,F:Ftot,
+             D:Math.atan2(Y,X)*180/Math.PI,
+             I:Math.atan2(Z,Hh)*180/Math.PI};
+  if(WMM_CACHE.size>4000) WMM_CACHE.clear();
+  WMM_CACHE.set(key,out);
+  return out;
+}
+
+// ===== AUTOVALIDACAO DO MODELO GEOMAGNETICO =====================================
+// Os 100 pontos de teste oficiais da NOAA para o WMM2025, embarcados para que este
+// arquivo possa PROVAR a propria correcao sem rede e sem depender de terceiros.
+// Qualquer pessoa pode auditar: abra o console do navegador e digite validarWMM().
+// Campos por ponto: ano, altitude(km), latitude, longitude, D, I, H, X, Y, Z, F
+const WMM_TESTES='2025.000000,28,89,-121,-99.77,88.47,1504.298146,-255.388723,-1482.460628,56194.288771,56214.419888;2025.000000,48,80,-96,-29.91,87.77,2164.285547,1875.982280,-1079.269389,55623.044051,55665.134163;2025.000000,54,82,87,54.89,87.68,2302.427342,1324.336929,1883.428620,56740.772059,56787.466800;2025.000000,65,43,93,0.50,64.10,24300.764692,24299.852822,210.517066,50037.923998,55626.621348;2025.000000,51,-33,109,-5.49,-67.50,21838.046477,21737.778822,-2090.274098,-52710.003920,57054.752538;2025.000000,39,-59,-8,-15.75,-58.55,14918.115796,14358.095523,-4049.107540,-24389.086374,28589.818346;2025.000000,3,-50,-103,27.96,-54.89,22106.041373,19526.532799,10362.990980,-31437.562789,38431.724126;2025.000000,94,-29,-110,15.74,-38.25,24181.990098,23275.471080,6559.046509,-19063.605287,30792.688931;2025.000000,66,14,143,-0.19,12.82,35003.635649,35003.441364,-116.624818,7966.315182,35898.700342;2025.000000,18,0,21,1.29,-26.06,29282.246275,29274.811882,659.800118,-14316.722540,32594.761714;2025.500000,6,-36,-137,20.28,-52.11,25353.230658,23781.930678,8786.698927,-32577.518648,41280.516301;2025.500000,63,26,81,0.51,41.07,34803.980117,34802.613433,308.431881,30332.056989,46166.554053;2025.500000,69,38,-144,12.93,56.97,23096.337032,22510.804524,5167.636206,35525.990264,42373.774537;2025.500000,50,-70,-133,57.21,-71.94,16656.709403,9021.847823,14001.865232,-51084.838301,53731.803175;2025.500000,8,-52,-75,14.91,-49.63,20005.506364,19331.857134,5147.774727,-23532.664273,30886.996822;2025.500000,8,-66,17,-33.14,-59.55,18154.870136,15201.438652,-9925.501123,-30881.123197,35822.382382;2025.500000,22,-37,140,9.28,-68.62,21688.847590,21404.761773,3498.897430,-55397.587760,59492.006517;2025.500000,40,-12,-129,10.76,-15.46,29105.866326,28594.451238,5432.201489,-8052.525092,30199.248583;2025.500000,44,33,-118,11.10,57.89,23678.743422,23235.835850,4558.379362,37727.715752,44542.826874;2025.500000,50,-81,-67,28.13,-67.61,18292.842720,16132.682326,8623.494405,-44412.283868,48032.062762;2026.000000,74,-57,3,-22.51,-58.65,14362.206593,13268.119649,-5498.179626,-23576.062921,27606.226129;2026.000000,46,-24,-122,14.01,-34.17,26638.500090,25846.118652,6448.863284,-18080.399376,32194.883578;2026.000000,69,23,63,1.17,35.92,34565.858527,34558.605297,708.078839,25043.405885,42684.549360;2026.000000,33,-3,-147,9.71,-2.12,30957.666082,30514.086409,5221.840663,-1146.978999,30978.906535;2026.000000,47,-72,-22,-6.32,-61.16,18392.516222,18280.800055,-2024.105320,-33397.486160,38127.112857;2026.000000,62,-14,99,-1.43,-44.70,33448.275663,33437.828630,-835.919473,-33100.922253,47058.030120;2026.000000,83,86,-46,-30.61,86.84,3000.255301,2582.099403,-1527.839829,54279.308437,54362.163830;2026.000000,82,-64,87,-81.74,-75.40,13974.248411,2007.074870,-13829.362571,-53663.514288,55453.154865;2026.000000,34,-19,43,-14.98,-52.33,20212.448819,19525.694050,-5224.017527,-26182.862330,33076.961273;2026.000000,56,-81,40,-59.77,-68.45,17877.818542,9000.536024,-15446.900890,-45267.890393,48670.301997;2026.500000,14,0,80,-3.10,-17.15,39489.089663,39431.415992,-2133.456168,-12188.838466,41327.424134;2026.500000,12,-82,-68,29.79,-68.07,18497.480257,16052.819558,9190.416754,-45940.146795,49524.275496;2026.500000,44,-46,-42,-11.36,-54.39,14140.316272,13863.176808,-2785.834358,-19744.304022,24285.511845;2026.500000,43,17,52,1.19,23.95,36002.676553,35994.907968,747.876551,15990.895993,39394.180708;2026.500000,64,10,78,-1.53,7.53,39441.702532,39427.724480,-1049.971869,5214.811025,39784.948821;2026.500000,12,33,-145,11.96,52.51,24672.289649,24136.839639,5112.225422,32162.934508,40536.110231;2026.500000,12,-79,115,-137.58,-77.37,13023.480845,-9613.650418,-8785.714482,-58104.306533,59545.961164;2026.500000,14,-33,-114,18.12,-44.10,24613.183584,23393.133584,7653.110952,-23854.293436,34275.882505;2026.500000,19,29,66,2.24,46.04,32749.959268,32725.000691,1278.343380,33958.454002,47177.711160;2026.500000,86,-11,167,10.24,-31.60,33105.255278,32578.377044,5882.794932,-20368.224196,38869.300019;2027.000000,37,-66,-5,-17.22,-59.04,17159.836500,16390.771268,-5079.626554,-28608.243575,33360.029814;2027.000000,67,72,-115,13.73,84.84,5026.868699,4883.287833,1192.857435,55689.615237,55916.032175;2027.000000,44,22,174,6.46,31.89,28867.487799,28683.972510,3249.857362,17961.198575,33999.066253;2027.000000,54,54,178,0.63,65.46,20617.099795,20615.871559,225.041793,45149.631876,49634.202547;2027.000000,57,-43,50,-48.27,-63.13,16833.417225,11203.748204,-12563.437494,-33221.366617,37242.759503;2027.000000,44,-43,-111,24.31,-52.57,22462.470699,20471.522067,9245.505620,-29347.556906,36957.295441;2027.000000,12,-63,178,57.87,-79.14,11720.691727,6233.774935,9925.455386,-61075.730989,62190.188377;2027.000000,38,27,-169,8.48,42.66,26106.758229,25821.061601,3851.701313,24058.365347,35501.658671;2027.000000,61,59,-77,-16.48,78.68,10884.812802,10437.775689,-3087.391846,54397.713552,55476.034370;2027.000000,67,-47,-32,-13.52,-57.98,12805.786103,12450.832543,-2994.148743,-20475.298079,24150.072239;2027.500000,8,62,53,19.39,76.67,12997.751893,12260.425578,4315.497527,54849.810218,56368.814385;2027.500000,77,-68,-7,-16.19,-59.82,17262.817301,16578.099495,-4813.676173,-29680.383821,34335.550744;2027.500000,98,-5,159,7.79,-23.22,33857.496691,33544.960996,4589.735713,-14525.780052,36841.937629;2027.500000,34,-29,-107,15.64,-37.45,24446.053109,23540.396213,6592.363667,-18723.097084,30792.269761;2027.500000,60,27,65,1.85,42.83,33079.422542,33062.159421,1068.555172,30667.425573,45108.083389;2027.500000,73,-72,95,-102.64,-76.49,13306.747292,-2912.418045,-12984.118939,-55399.217725,56974.931751;2027.500000,96,-46,-85,17.93,-47.37,19914.457641,18947.658009,6129.590452,-21631.434316,29402.458634;2027.500000,0,-13,-59,-17.49,-15.26,22401.493010,21365.849306,-6732.560620,-6112.313520,23220.406233;2027.500000,16,66,-178,0.37,75.67,13821.614337,13821.326215,89.244328,54092.646409,55830.559897;2027.500000,72,-87,38,-65.44,-70.97,16661.696834,6926.051596,-15153.941754,-48295.635435,51088.947370;2028.000000,49,20,167,5.10,26.82,30251.262453,30131.436134,2689.876669,15295.611788,33898.298187;2028.000000,71,5,-13,-6.47,-17.66,28323.200567,28142.647915,-3192.970202,-9017.928693,29724.177504;2028.000000,95,14,65,-0.51,17.44,36933.940251,36932.466767,-329.910612,11601.180703,38713.089985;2028.000000,86,-85,-79,41.09,-70.25,16867.459172,12713.115116,11085.480728,-46988.258092,49924.018042;2028.000000,30,-36,-64,-4.65,-40.08,17398.651081,17341.333537,-1411.102609,-14639.967305,22738.551012;2028.000000,75,79,125,-18.59,87.42,2582.332595,2447.595900,-823.235047,57308.751756,57366.902212;2028.000000,21,6,-32,-14.34,-8.70,28453.070088,27567.094260,-7045.034525,-4352.046687,28783.980055;2028.000000,1,-76,-75,29.87,-65.23,19597.635210,16993.742946,9761.147808,-42479.847250,46782.525885;2028.000000,45,-46,-41,-11.68,-54.96,13897.562372,13609.973828,-2812.623735,-19816.196211,24203.798713;2028.000000,11,-22,-21,-23.24,-57.67,13528.270036,12430.606447,-5337.987778,-21373.837958,25295.356080;2028.500000,28,54,-120,15.43,73.74,15286.094495,14735.145798,4066.959949,52393.678137,54578.037650;2028.500000,68,-58,156,41.57,-81.52,9282.943032,6944.959164,6159.591995,-62264.415929,62952.605366;2028.500000,39,-65,-88,29.45,-60.20,20609.270068,17946.905687,10131.662696,-35982.872979,41466.964689;2028.500000,27,-23,81,-13.27,-58.58,25625.329284,24940.672257,-5883.907569,-41948.733657,49156.421313;2028.500000,11,34,0,1.57,46.77,29089.194286,29078.234597,798.434048,30945.577813,42471.284539;2028.500000,72,-62,65,-67.87,-68.50,17434.847799,6567.891205,-16150.440331,-44267.327811,47576.992646;2028.500000,55,86,70,67.64,87.57,2370.361097,901.741754,2192.139033,55926.154052,55976.363930;2028.500000,59,32,163,0.15,43.10,28217.204381,28217.104175,75.200106,26405.862611,38645.571587;2028.500000,65,48,148,-9.55,61.79,23693.546804,23365.167010,-3931.047029,44177.553125,50130.233993;2028.500000,95,30,28,4.56,44.27,29786.406936,29692.133298,2367.965026,29039.808439,41599.765773;2029.000000,95,-60,-59,8.58,-55.17,18095.598879,17893.018948,2700.105868,-26011.845842,31687.013474;2029.000000,95,-70,42,-55.06,-64.54,18202.660480,10426.249753,-14920.796381,-38237.047006,42348.655378;2029.000000,50,87,-154,-73.48,89.07,906.920459,257.877420,-869.484879,55992.308183,55999.652503;2029.000000,58,32,19,4.11,46.03,29434.989012,29359.395781,2108.188210,30508.465542,42393.219362;2029.000000,57,34,-13,-1.89,45.74,28257.277809,28241.863242,-933.225495,28997.458189,40488.595068;2029.000000,38,-76,49,-64.28,-67.36,18412.640681,7991.121323,-16588.167977,-44151.303941,47836.837024;2029.000000,49,-50,-179,32.11,-71.33,18080.593790,15315.042731,9610.272521,-53522.651338,56494.088877;2029.000000,90,-55,-171,38.65,-72.79,16416.538468,12821.507915,10252.398258,-52995.143972,55479.618058;2029.000000,41,42,-19,-4.13,56.44,24503.475397,24439.977735,-1762.893879,36929.897501,44319.720622;2029.000000,19,46,-22,-5.65,60.89,22632.016516,22522.142232,-2227.393290,40651.688191,46527.066578;2029.500000,31,13,-132,9.04,31.41,28145.022897,27795.620707,4421.061344,17187.983590,32978.312476;2029.500000,93,-2,158,7.09,-17.84,34067.301020,33806.520595,4207.156292,-10964.647547,35788.329028;2029.500000,51,-76,40,-56.34,-66.22,18517.441118,10263.650094,-15412.758102,-42018.541264,45917.898858;2029.500000,64,22,-132,10.23,43.76,26014.780783,25601.266218,4619.955329,24914.378368,36020.758857;2029.500000,26,-65,55,-63.48,-65.71,18695.741849,8347.198524,-16728.868464,-41431.528035,45454.397791;2029.500000,66,-21,32,-14.63,-56.68,16100.322907,15578.335534,-4066.430831,-24494.877642,29312.444941;2029.500000,18,9,-172,9.24,15.85,30922.514410,30520.999126,4966.941695,8779.472279,32144.689001;2029.500000,63,88,26,36.52,87.37,2539.900024,2041.140972,1511.567287,55286.620082,55344.931586;2029.500000,33,17,5,0.89,13.77,34026.126581,34021.976056,531.446418,8341.137769,35033.582023;2029.500000,77,-18,138,4.45,-47.55,31847.600506,31751.497580,2472.257962,-34817.395113,47186.021876';
+function validarWMM(opcoes){
+  const o=opcoes||{};
+  const tolNT=isFinite(o.tolNT)?o.tolNT:0.01;   // NOAA publica X/Y/Z/H/F com 6 casas
+  const tolDeg=isFinite(o.tolDeg)?o.tolDeg:0.005; // D e I com 2 casas: 0,005 e meia casa
+  const pontos=WMM_TESTES.split(';').map(r=>r.split(',').map(Number));
+  const pior={D:0,I:0,H:0,X:0,Y:0,Z:0,F:0};
+  const falhas=[];
+  let assercoes=0;
+  pontos.forEach((t,i)=>{
+    const f=wmmField(t[2],t[3],t[1],t[0]);
+    const checa=[['D',f.D,t[4],tolDeg],['I',f.I,t[5],tolDeg],['H',f.H,t[6],tolNT],
+                 ['X',f.X,t[7],tolNT],['Y',f.Y,t[8],tolNT],['Z',f.Z,t[9],tolNT],['F',f.F,t[10],tolNT]];
+    checa.forEach(([nome,calc,esp,tol])=>{
+      assercoes++;
+      const err=Math.abs(calc-esp);
+      if(err>pior[nome]) pior[nome]=err;
+      if(err>tol) falhas.push({ponto:i+1,grandeza:nome,calculado:calc,oficial:esp,erro:err,tolerancia:tol});
+    });
+  });
+  const rel={
+    modelo:'WMM2025 (epoca 2025.0, grau/ordem 12, 90 coeficientes)',
+    fonte:'NOAA NCEI / British Geological Survey -- dominio publico',
+    pontos:pontos.length, assercoes:assercoes, falhas:falhas.length,
+    erroMaximo:pior, toleranciaNT:tolNT, toleranciaGraus:tolDeg,
+    resultado: falhas.length===0?'APROVADO':'REPROVADO',
+    detalheFalhas: falhas.slice(0,20)
+  };
+  if(typeof console!=='undefined'&&console.table){
+    console.log('%cAGHIP -- autovalidacao do WMM2025','font-weight:bold');
+    console.log(rel.pontos+' pontos oficiais, '+rel.assercoes+' assercoes, '+rel.falhas+' falhas -> '+rel.resultado);
+    console.table(Object.fromEntries(Object.entries(pior).map(([k,v])=>[k,+v.toFixed(6)])));
+  }
+  return rel;
+}
+function rodarAutovalidacao(){
+  const el=document.getElementById('wmm-validacao-saida'); if(!el) return;
+  el.style.display='block';
+  el.innerHTML='Rodando 700 asserções contra os valores oficiais…';
+  setTimeout(()=>{
+    let r; try{ r=validarWMM(); }catch(e){ el.innerHTML='<b style="color:var(--bad);">Falhou ao executar:</b> '+e.message; return; }
+    const ok=r.resultado==='APROVADO';
+    const linhas=['D','I','H','X','Y','Z','F'].map(k=>{
+      const unid=(k==='D'||k==='I')?'°':' nT';
+      return '<tr><td style="padding:1px 10px 1px 0;">'+k+'</td><td style="padding:1px 0;font-variant-numeric:tabular-nums;">'+r.erroMaximo[k].toFixed(6)+unid+'</td></tr>';
+    }).join('');
+    el.innerHTML='<div style="padding:8px 10px;border-radius:6px;background:'+(ok?'var(--status-good-bg)':'var(--status-bad-bg)')+';color:'+(ok?'var(--status-good-fg)':'var(--status-bad-fg)')+';font-weight:600;margin-bottom:8px;">'
+      +(ok?'APROVADO':'REPROVADO')+' — '+r.pontos+' pontos oficiais, '+r.assercoes+' asserções, '+r.falhas+' falha'+(r.falhas===1?'':'s')+'</div>'
+      +'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">Erro máximo por grandeza:</div>'
+      +'<table style="font-size:12px;color:var(--text-secondary);">'+linhas+'</table>'
+      +'<div style="font-size:11px;color:var(--text-muted);margin-top:8px;">Tolerância: '+r.toleranciaNT+' nT e '+r.toleranciaGraus+'°. Os resíduos em D e I são a própria meia casa decimal em que a NOAA publica esses dois valores — arredondamento da referência, não erro do cálculo.</div>';
+  },30);
+}
+
+function anoDecimal(d){const y=d.getUTCFullYear(),ini=Date.UTC(y,0,1),fim=Date.UTC(y+1,0,1);return y+(d.getTime()-ini)/(fim-ini);}
+// Latitude de mergulho: tan(dipLat) = tan(I)/2. E a coordenada que organiza a fisica
+// ionosferica de baixa latitude -- eletrojet, Es equatorial, anomalia de ionizacao e TEP
+// se referenciam ao equador de MERGULHO, que sobre a America do Sul esta deslocado
+// varios graus do equador dipolar justamente por causa da AMAS.
+function dipLat(lat,lon,date){
+  const I=wmmField(lat,lon,0,anoDecimal(date||new Date())).I;
+  return Math.atan(Math.tan(I*Math.PI/180)/2)*180/Math.PI;
+}
+// Latitude onde I=0 no meridiano informado, por bisseccao.
+function equadorMagneticoLat(lon,date){
+  const yr=anoDecimal(date||new Date());
+  let a=-45,b=45;
+  if(wmmField(a,lon,0,yr).I*wmmField(b,lon,0,yr).I>0) return null;
+  for(let i=0;i<45;i++){ const mid=(a+b)/2;
+    if(wmmField(a,lon,0,yr).I*wmmField(mid,lon,0,yr).I<=0) b=mid; else a=mid; }
+  return (a+b)/2;
+}
+// Giro-frequencia do eletron a partir do campo REAL: f_H = eB/(2*pi*me).
+// Avaliada a 90km, altura da camada D, que e onde a absorcao giro-magnetica acontece.
+function gyrofreqKHzReal(lat,lon,date){
+  const B=wmmField(lat,lon,90,anoDecimal(date||new Date())).F*1e-9; // nT -> T
+  const E=1.602176634e-19, ME=9.1093837015e-31;
   return (E*B)/(2*Math.PI*ME)/1000;
 }
+
+// Mantido DELIBERADAMENTE dipolar: o oval auroral se organiza em coordenadas geomagneticas
+// corrigidas (CGM), obtidas por tracado de linha de campo, e o dipolo e o proxy barato usual
+// para CGM em alta latitude. A latitude de MERGULHO seria pior aqui -- ela e a coordenada certa
+// para fisica equatorial, nao auroral. Aurora tambem e irrelevante para QTH brasileiro.
+function geomagLat(lat,lon){const phi=lat*Math.PI/180,lam=lon*Math.PI/180,phi0=GEOMAG_POLE.lat*Math.PI/180,lam0=GEOMAG_POLE.lon*Math.PI/180;const s=Math.sin(phi)*Math.sin(phi0)+Math.cos(phi)*Math.cos(phi0)*Math.cos(lam-lam0);return Math.asin(Math.max(-1,Math.min(1,s)))*180/Math.PI;}
 function toXYZ(lat,lon){const la=lat*Math.PI/180,lo=lon*Math.PI/180;return[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)];}
 function toLatLon(v){return[Math.asin(Math.max(-1,Math.min(1,v[2])))*180/Math.PI,Math.atan2(v[1],v[0])*180/Math.PI];}
 function slerpPoint(lat1,lon1,lat2,lon2,f){const v0=toXYZ(lat1,lon1),v1=toXYZ(lat2,lon2);let dot=Math.max(-1,Math.min(1,v0[0]*v1[0]+v0[1]*v1[1]+v0[2]*v1[2]));const d=Math.acos(dot);if(d<1e-6||Math.PI-d<1e-6)return[lat1+(lat2-lat1)*f,lon1+(lon2-lon1)*f];const sd=Math.sin(d),a=Math.sin((1-f)*d)/sd,b=Math.sin(f*d)/sd;const v=[a*v0[0]+b*v1[0],a*v0[1]+b*v1[1],a*v0[2]+b*v1[2]];const norm=Math.sqrt(v[0]*v[0]+v[1]*v[1]+v[2]*v[2])||1;return toLatLon([v[0]/norm,v[1]/norm,v[2]/norm]);}
@@ -405,7 +595,10 @@ function switchTab(name){
   if(hfDestWrap) aplicarExpansaoSuave(hfDestWrap, name==='hf');
   const emeWindowWrap=document.getElementById('eme-window-wrap');
   if(emeWindowWrap) aplicarExpansaoSuave(emeWindowWrap, name==='eme');
-  if(name==='meteo' && radarMap){ setTimeout(()=>radarMap.invalidateSize(), 50); }
+  if(name==='meteo'){
+    if(!meteoIniciado){ meteoIniciado=true; loadRadar().then(()=>loadGlmBrazil()).catch(()=>loadGlmBrazil()); }
+    if(radarMap) setTimeout(()=>radarMap.invalidateSize(), 50);
+  }
 }
 function aplicarExpansaoSuave(el, aberto){
   if(aberto){ el.style.maxHeight='500px'; el.style.marginTop='14px'; el.style.paddingTop='14px'; }
@@ -602,10 +795,10 @@ async function appendBzLog(bz, rate, level){
   try{
     const key='bz-trend-log';
     let entries=[];
-    try{ const r=await window.storage.get(key,false); if(r&&r.value) entries=JSON.parse(r.value); }catch(e){ entries=[]; }
+    try{ const raw=await AGHIP_STORE.get(key); if(raw) entries=JSON.parse(raw); }catch(e){ entries=[]; }
     entries.push({t:new Date().toISOString(), bz:+bz.toFixed(1), rate:+rate.toFixed(1), level});
     if(entries.length>500) entries=entries.slice(entries.length-500); // cap para nao crescer sem limite
-    await window.storage.set(key, JSON.stringify(entries), false);
+    await AGHIP_STORE.set(key, JSON.stringify(entries));
     renderBzLog(entries);
   }catch(e){ document.getElementById('bz-log-status').textContent='Armazenamento indisponível neste ambiente.'; }
 }
@@ -617,16 +810,50 @@ function renderBzLog(entries){
   const cores={CRITICO:'#991B1B',ATENCAO:'#92400E',RECUPERACAO:'#166534',NORMAL:'var(--text-muted)'};
   tableEl.innerHTML=recent.map(e=>'<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border);"><span>'+e.t.slice(0,16).replace('T',' ')+'</span><span>'+e.bz+'nT</span><span style="color:'+(cores[e.level]||'var(--text-muted)')+';">'+e.level+'</span></div>').join('');
 }
+// Armazenamento portatil. O painel foi escrito originalmente como Artifact do Claude.ai,
+// que expoe window.storage -- API que NAO existe num arquivo hospedado em GitHub Pages ou
+// aberto localmente. Aqui a ordem de preferencia e: window.storage (se existir), depois
+// localStorage (o caso real de quem baixa o arquivo), e por fim memoria da sessao.
+const AGHIP_STORE=(function(){
+  const mem={};
+  const temLocal=(function(){ try{ const k='__aghip_t'; localStorage.setItem(k,'1'); localStorage.removeItem(k); return true; }catch(e){ return false; } })();
+  return {
+    modo: (typeof window!=='undefined'&&window.storage)?'artifact':(temLocal?'local':'sessao'),
+    async get(k){
+      try{
+        if(typeof window!=='undefined'&&window.storage){ const r=await window.storage.get(k,false); return r&&r.value?r.value:null; }
+        if(temLocal) return localStorage.getItem('aghip:'+k);
+        return mem[k]||null;
+      }catch(e){ return mem[k]||null; }
+    },
+    async set(k,v){
+      try{
+        if(typeof window!=='undefined'&&window.storage){ await window.storage.set(k,v,false); return true; }
+        if(temLocal){ localStorage.setItem('aghip:'+k,v); return true; }
+        mem[k]=v; return true;
+      }catch(e){ mem[k]=v; return false; }
+    },
+    async del(k){
+      try{
+        if(typeof window!=='undefined'&&window.storage){ await window.storage.delete(k,false); return; }
+        if(temLocal){ localStorage.removeItem('aghip:'+k); return; }
+        delete mem[k];
+      }catch(e){ delete mem[k]; }
+    }
+  };
+})();
 async function clearBzLog(){
-  try{ await window.storage.delete('bz-trend-log', false); }catch(e){}
+  await AGHIP_STORE.del('bz-trend-log');
   renderBzLog([]);
 }
 async function loadBzLog(){
   try{
-    if(typeof window.storage==='undefined') throw new Error('sem storage');
-    const r=await window.storage.get('bz-trend-log', false); const entries=r&&r.value?JSON.parse(r.value):[]; renderBzLog(entries);
+    const raw=await AGHIP_STORE.get('bz-trend-log');
+    renderBzLog(raw?JSON.parse(raw):[]);
+    const s=document.getElementById('bz-log-status');
+    if(s && AGHIP_STORE.modo==='sessao') s.textContent='Histórico só nesta sessão: o navegador bloqueou o armazenamento local (comum em janela anônima).';
   }
-  catch(e){ const s=document.getElementById('bz-log-status'); if(s) s.textContent='Armazenamento persistente indisponível neste ambiente (funciona quando publicado como Artifact no Claude.ai).'; }
+  catch(e){ const s=document.getElementById('bz-log-status'); if(s) s.textContent='Histórico de Bz indisponível nesta sessão.'; }
 }
 function renderBzTrend(){
   const el=document.getElementById('bz-trend-alert'); if(!el) return;
@@ -681,12 +908,11 @@ function renderHF(){
   const dest=DESTINATIONS[parseInt(document.getElementById('dest-sel').value)];
   const gyroEl=document.getElementById('gyrofreq-160');
   if(gyroEl){
-    const latG=geomagLat(QTH.lat,QTH.lon);
-    const fGyro=electronGyrofreqKHz(latG);
+    const fGyro=gyrofreqKHzReal(QTH.lat,QTH.lon,new Date());
     const distKHz=Math.abs(1800-fGyro);
-    if(distKHz<300){ gyroEl.style.background='var(--status-bad-bg)'; gyroEl.style.color='var(--status-bad-fg)'; gyroEl.innerHTML='<b>Giro-freq. estimada no seu QTH: '+fGyro.toFixed(0)+'kHz</b> — só '+distKHz.toFixed(0)+'kHz dos 160m, absorção extra provável.'; }
-    else if(distKHz<600){ gyroEl.style.background='var(--status-warn-bg)'; gyroEl.style.color='var(--status-warn-fg)'; gyroEl.innerHTML='<b>Giro-freq. estimada no seu QTH: '+fGyro.toFixed(0)+'kHz</b> — '+distKHz.toFixed(0)+'kHz dos 160m, alguma proximidade.'; }
-    else{ gyroEl.style.background='var(--status-good-bg)'; gyroEl.style.color='var(--status-good-fg)'; gyroEl.innerHTML='<b>Giro-freq. estimada no seu QTH: '+fGyro.toFixed(0)+'kHz</b> — '+distKHz.toFixed(0)+'kHz dos 160m, bem afastado, condição favorável.'; }
+    if(distKHz<300){ gyroEl.style.background='var(--status-bad-bg)'; gyroEl.style.color='var(--status-bad-fg)'; gyroEl.innerHTML='<b>Giro-freq. no seu QTH (WMM2025): '+fGyro.toFixed(0)+'kHz</b> — só '+distKHz.toFixed(0)+'kHz dos 160m, absorção extra provável.'; }
+    else if(distKHz<600){ gyroEl.style.background='var(--status-warn-bg)'; gyroEl.style.color='var(--status-warn-fg)'; gyroEl.innerHTML='<b>Giro-freq. no seu QTH (WMM2025): '+fGyro.toFixed(0)+'kHz</b> — '+distKHz.toFixed(0)+'kHz dos 160m, alguma proximidade.'; }
+    else{ gyroEl.style.background='var(--status-good-bg)'; gyroEl.style.color='var(--status-good-fg)'; gyroEl.innerHTML='<b>Giro-freq. no seu QTH (WMM2025): '+fGyro.toFixed(0)+'kHz</b> — '+distKHz.toFixed(0)+'kHz dos 160m, bem afastado, condição favorável.'; }
   }
   document.getElementById('m-sfi').textContent=Math.round(S.sfi);
   document.getElementById('m-kp').textContent=S.kp.toFixed(1).replace('.0','');
@@ -746,7 +972,7 @@ function nsAlignment(brng){const d0=Math.min(brng,360-brng),d180=Math.abs(brng-1
 function geomFactorTEP(gmTx,gmRx){const crossesEq=(gmTx*gmRx)<0;const absTx=Math.abs(gmTx),absRx=Math.abs(gmRx);const nearAnomaly=(absTx>=3&&absTx<=35)||(absRx>=3&&absRx<=35);let f=crossesEq?0.6:0.15;if(nearAnomaly)f+=0.4;return Math.min(1,f);}
 function initialBearing(lat1,lon1,lat2,lon2){const tr=Math.PI/180;const y=Math.sin((lon2-lon1)*tr)*Math.cos(lat2*tr);const x=Math.cos(lat1*tr)*Math.sin(lat2*tr)-Math.sin(lat1*tr)*Math.cos(lat2*tr)*Math.cos((lon2-lon1)*tr);return(Math.atan2(y,x)*180/Math.PI+360)%360;}
 function tepScoreAt(tx,rx,date,sfi,is2m){
-  const gmTx=geomagLat(tx.lat,tx.lon),gmRx=geomagLat(rx.lat,rx.lon);
+  const gmTx=dipLat(tx.lat,tx.lon,date),gmRx=dipLat(rx.lat,rx.lon,date);
   const brng=initialBearing(tx.lat,tx.lon,rx.lat,rx.lon);
   const geomF=geomFactorTEP(gmTx,gmRx), nsF=nsAlignment(brng);
   const midLon=(tx.lon+rx.lon)/2;
@@ -900,7 +1126,6 @@ async function loadWeather(){
 }
 // ===== RADAR (Leaflet: OSM base + RainViewer overlay, real, sem chave) =====
 let radarMap=null, radarLayer=null, qthMarker=null, glmLayerGroup=null;
-let geocodingBusy=false; // trava global -- impede que chamadas sobrepostas de loadGlmBrazil (timer de 3min + clique manual) rodem geocodificacao em paralelo e violem o limite de 1 req/s do Nominatim
 let S_inmetBadge=null, S_lightningBadge=null;
 function renderAlertBadge(){
   const badge=document.getElementById('qth-alert-badge'); if(!badge) return;
@@ -937,10 +1162,7 @@ async function loadRadar(){
 
     if(!radarMap){
       radarMap=L.map('radar-map',{preferCanvas:true}).setView([QTH.lat, QTH.lon], 7);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
-        maxZoom:12
-      }).addTo(radarMap);
+      L.tileLayer(MAPA_BASE.url, {attribution:MAPA_BASE.attribution, maxZoom:MAPA_BASE.maxZoom}).addTo(radarMap);
       qthMarker=L.marker([QTH.lat, QTH.lon]).addTo(radarMap).bindPopup('Seu QTH');
       setTimeout(()=>radarMap.invalidateSize(), 50);
     } else {
@@ -1055,29 +1277,21 @@ async function loadGlmBrazil(){
         html+='<div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Nenhum raio a menos de '+RAIO_PERTO_KM+'km do seu QTH no buffer atual.</div>';
       } else {
         pertoDoQth.slice(0,7).forEach((b,i)=>{
-          html+='<div id="glm-near-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span id="glm-near-loc-'+i+'">Localizando… (Lat '+b.lat.toFixed(2)+', Lon '+b.lon.toFixed(2)+')</span><span style="font-weight:600;color:var(--good);">'+b.distKm.toFixed(0)+'km</span></div>';
+          const rumo=rumo16(initialBearing(QTH.lat,QTH.lon,b.lat,b.lon));
+          html+='<div id="glm-near-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span>Ao <b>'+rumo+'</b> <span style="color:var(--text-muted);font-size:11px;">('+b.lat.toFixed(2)+', '+b.lon.toFixed(2)+')</span></span><span style="font-weight:600;color:var(--good);">'+b.distKm.toFixed(0)+'km</span></div>';
         });
         if(pertoDoQth.length>7) html+='<div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;">+ '+(pertoDoQth.length-7)+' outro(s) dentro do raio.</div>';
       }
 
       html+='<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-top:10px;margin-bottom:4px;">🇧🇷 Mais intensos no Brasil (Top 3 de '+brasil.length+')</div>';
       porEnergia.slice(0,3).forEach((b,i)=>{
-        html+='<div id="glm-top-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span id="glm-loc-'+i+'">Localizando… (Lat '+b.lat.toFixed(2)+', Lon '+b.lon.toFixed(2)+')</span><span style="font-weight:600;color:var(--warn);">'+formatEnergyAdaptive(b.energy)+'</span></div>';
+        const dKm=greatCircleDist(QTH.lat,QTH.lon,b.lat,b.lon);
+        const rumo=rumo16(initialBearing(QTH.lat,QTH.lon,b.lat,b.lon));
+        html+='<div id="glm-top-'+i+'" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:4px 0;font-size:13px;"><span>'+dKm.toFixed(0)+'km ao <b>'+rumo+'</b> <span style="color:var(--text-muted);font-size:11px;">('+b.lat.toFixed(2)+', '+b.lon.toFixed(2)+')</span></span><span style="font-weight:600;color:var(--warn);">'+formatEnergyAdaptive(b.energy)+'</span></div>';
       });
       html+='<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Cor no mapa por idade: <span style="color:#a855f7;">●</span> &lt;5min <span style="color:#dc2626;">●</span> 5-15min <span style="color:#f59e0b;">●</span> 15-30min</div>';
-      html+='<div id="glm-geo-attrib" style="font-size:11px;color:var(--text-muted);margin-top:6px;display:none;">Localização: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>/© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</div>';
+      html+='<div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Atualiza sozinho a cada 3 minutos enquanto esta aba estiver aberta. Rumo e distância a partir do seu QTH, calculados localmente — sem serviço externo de geocodificação.</div>';
       flashEl.innerHTML=html;
-      if(geocodingBusy){
-        // ja existe uma sequencia de geocodificacao rodando de uma chamada anterior de loadGlmBrazil ainda em andamento
-        // (timer de 3min ou clique manual podem sobrepor) -- pula desta vez, evita rodar 2 sequencias em paralelo e violar o limite do Nominatim
-        const attrib=document.getElementById('glm-geo-attrib'); if(attrib){ attrib.style.display='block'; attrib.innerHTML='Geocodificação da rodada anterior ainda em andamento — nomes devem aparecer na próxima atualização. Fonte: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>/© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'; }
-      } else {
-        geocodingBusy=true;
-        try{
-          await reverseGeocodeTop3(porEnergia.slice(0,3));
-          if(pertoDoQth.length>0) await reverseGeocodeNear(pertoDoQth.slice(0,7));
-        } finally { geocodingBusy=false; }
-      }
       S_lightningBadge={count:brasil.length, nearestKm: porDistancia.length?porDistancia[0].distKm:null};
       renderAlertBadge();
       if(radarMap){
@@ -1097,73 +1311,70 @@ async function loadGlmBrazil(){
   }catch(e){ statusEl.textContent='GLM indisponível agora: '+e.message; flashEl.innerHTML=''; }
 }
 function sleep(ms){ return new Promise(res=>setTimeout(res,ms)); }
-async function reverseGeocodeOne(lat,lon){
-  const url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon+'&zoom=14';
-  const r=await fetch(url);
-  if(!r.ok) throw new Error('http '+r.status);
-  const j=await r.json();
-  if(j.error) return {label:'Provável oceano/área não mapeada', isWater:true};
-  const a=j.address||{};
-  const bairro=a.suburb||a.neighbourhood||a.city_district||'';
-  const cidade=a.city||a.town||a.village||a.municipality||'';
-  const estado=a.state||'';
-  const pais=a.country||'';
-  if(a.sea||a.ocean) return {label:(a.ocean||a.sea), isWater:true};
-  if(!cidade && !pais) return {label:'Provável oceano/área não mapeada', isWater:true};
-  let partes=[];
-  if(bairro) partes.push(bairro);
-  if(cidade) partes.push(cidade);
-  if(estado) partes.push(estado);
-  else if(pais && pais!=='Brasil' && pais!=='Brazil') partes.push(pais);
-  if(partes.length) return {label:partes.join(', '), isWater:false, cidade};
-  if(j.display_name) return {label:j.display_name.split(',').slice(0,2).join(','), isWater:false, cidade};
-  return {label:'Área não identificada', isWater:false, cidade};
+function rumo16(deg){
+  const pontos=['N','NNE','NE','ENE','L','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'];
+  return pontos[Math.round(((deg%360)+360)%360/22.5)%16];
 }
-async function updateQthRegionAndAlerts(){
+// Tabela local de UFs (centroide aproximado). Substitui a geocodificacao reversa por
+// servico externo: o filtro de avisos do INMET so precisa da granularidade estadual,
+// e resolver isso localmente elimina a dependencia de um servico de terceiros que
+// nao suporta uso distribuido por muitos usuarios simultaneos.
+const UF_REFS=[
+  // Cada UF tem varios pontos de referencia (capital + interior), nao um centroide so:
+  // no litoral do Nordeste os estados sao estreitos e o centroide unico erra de vizinho.
+  {uf:'AC',nome:'Acre',pts:[[-9.97,-67.81],[-8.16,-70.34],[-9.02,-72.79]]},
+  {uf:'AL',nome:'Alagoas',pts:[[-9.67,-35.74],[-9.40,-36.62],[-9.75,-37.44]]},
+  {uf:'AP',nome:'Amapá',pts:[[0.03,-51.07],[1.76,-50.83],[3.84,-51.83]]},
+  {uf:'AM',nome:'Amazonas',pts:[[-3.12,-60.02],[-7.26,-64.80],[-2.63,-56.73],[-4.09,-69.94]]},
+  {uf:'BA',nome:'Bahia',pts:[[-12.97,-38.51],[-12.26,-38.96],[-14.86,-40.84],[-10.45,-40.19],[-16.44,-39.07],[-9.42,-40.50],[-12.15,-44.99]]},
+  {uf:'CE',nome:'Ceará',pts:[[-3.73,-38.53],[-5.19,-39.29],[-7.23,-39.31],[-3.68,-40.35]]},
+  {uf:'DF',nome:'Distrito Federal',pts:[[-15.78,-47.93]]},
+  {uf:'ES',nome:'Espírito Santo',pts:[[-20.32,-40.34],[-19.13,-40.07],[-21.13,-41.05],[-18.55,-39.74]]},
+  {uf:'GO',nome:'Goiás',pts:[[-16.68,-49.25],[-14.13,-49.10],[-18.15,-47.94],[-17.80,-50.92]]},
+  {uf:'MA',nome:'Maranhão',pts:[[-2.53,-44.30],[-5.53,-45.24],[-8.20,-45.98],[-3.74,-43.36]]},
+  {uf:'MT',nome:'Mato Grosso',pts:[[-15.60,-56.10],[-11.86,-55.51],[-9.90,-56.09],[-16.07,-57.68]]},
+  {uf:'MS',nome:'Mato Grosso do Sul',pts:[[-20.44,-54.65],[-22.22,-54.81],[-19.01,-57.65],[-21.71,-52.18]]},
+  {uf:'MG',nome:'Minas Gerais',pts:[[-19.92,-43.94],[-16.73,-43.86],[-21.76,-43.35],[-19.75,-47.93],[-16.18,-40.69],[-18.91,-48.27],[-19.51,-46.94]]},
+  {uf:'PA',nome:'Pará',pts:[[-1.46,-48.50],[-5.37,-49.12],[-3.20,-52.21],[-6.75,-51.99],[-1.75,-55.51]]},
+  {uf:'PR',nome:'Paraná',pts:[[-25.43,-49.27],[-23.31,-51.16],[-23.42,-51.94],[-24.96,-53.46],[-25.09,-50.16],[-25.55,-54.59],[-26.23,-52.67]]},
+  {uf:'PB',nome:'Paraíba',pts:[[-7.12,-34.86],[-7.23,-35.88],[-7.02,-37.28],[-6.88,-38.56]]},
+  {uf:'PE',nome:'Pernambuco',pts:[[-8.05,-34.88],[-8.28,-35.97],[-8.28,-36.70],[-8.89,-36.49],[-9.39,-38.22],[-3.85,-32.42],[-9.39,-40.50],[-8.29,-39.30]]},
+  {uf:'PI',nome:'Piauí',pts:[[-5.09,-42.80],[-7.08,-41.47],[-9.08,-44.34],[-3.79,-42.28]]},
+  {uf:'RJ',nome:'Rio de Janeiro',pts:[[-22.91,-43.20],[-22.52,-41.95],[-21.76,-41.33],[-22.51,-44.10]]},
+  {uf:'RN',nome:'Rio Grande do Norte',pts:[[-5.79,-35.21],[-5.19,-37.34],[-6.46,-37.09],[-5.10,-36.13]]},
+  {uf:'RS',nome:'Rio Grande do Sul',pts:[[-30.03,-51.23],[-31.77,-52.34],[-29.17,-54.87],[-27.63,-52.27],[-33.52,-53.37]]},
+  {uf:'RO',nome:'Rondônia',pts:[[-8.76,-63.90],[-11.44,-61.45],[-12.74,-60.14],[-10.88,-65.34]]},
+  {uf:'RR',nome:'Roraima',pts:[[2.82,-60.67],[4.48,-61.15],[0.94,-59.87]]},
+  {uf:'SC',nome:'Santa Catarina',pts:[[-27.59,-48.55],[-26.92,-49.07],[-27.10,-52.62],[-28.68,-49.37]]},
+  {uf:'SP',nome:'São Paulo',pts:[[-23.55,-46.63],[-22.90,-47.06],[-21.18,-47.81],[-20.81,-49.38],[-23.96,-46.33],[-22.12,-51.39]]},
+  {uf:'SE',nome:'Sergipe',pts:[[-10.91,-37.07],[-10.22,-36.86],[-10.68,-37.79]]},
+  {uf:'TO',nome:'Tocantins',pts:[[-10.18,-48.33],[-7.19,-48.21],[-12.41,-46.44],[-11.73,-49.07]]}
+];
+function ufMaisProxima(lat,lon){
+  let melhor=null,melhorD=Infinity;
+  UF_REFS.forEach(u=>{
+    u.pts.forEach(pt=>{ const d=greatCircleDist(lat,lon,pt[0],pt[1]); if(d<melhorD){melhorD=d;melhor=u;} });
+  });
+  return {uf:melhor, distKm:melhorD};
+}
+function updateQthRegionAndAlerts(){
   const statusEl=document.getElementById('qth-region-status');
-  if(statusEl) statusEl.textContent='Detectando cidade a partir do grid…';
-  try{
-    const res=await reverseGeocodeOne(QTH.lat, QTH.lon);
-    const regiao=res.cidade || res.label;
-    if(statusEl) statusEl.innerHTML='Cidade detectada pelo grid: <b>'+regiao+'</b>';
-    loadInmetAvisos(regiao);
-  }catch(e){
-    if(statusEl) statusEl.textContent='Não foi possível detectar a cidade pelo grid agora — avisos regionais indisponíveis nesta atualização.';
+  const manual=(document.getElementById('qth-cidade-input')||{}).value;
+  if(manual && manual.trim().length>=3){
+    const cidade=manual.trim();
+    if(statusEl) statusEl.innerHTML='Filtrando avisos por: <b>'+cidade+'</b> <span style="color:var(--text-muted);font-size:12px;">(informado por você)</span>';
+    loadInmetAvisos(cidade);
+    return;
   }
-}
-async function reverseGeocodeTop3(top3){
-  let anySuccess=false;
-  for(let i=0;i<top3.length;i++){
-    const el=document.getElementById('glm-loc-'+i);
-    if(!el) continue;
-    try{
-      const res=await reverseGeocodeOne(top3[i].lat, top3[i].lon);
-      el.textContent='#'+(i+1)+' — '+res.label;
-      el.style.color=res.isWater?'var(--text-muted)':'';
-      anySuccess=true;
-    }catch(e){ el.textContent='#'+(i+1)+' — Lat '+top3[i].lat.toFixed(2)+', Lon '+top3[i].lon.toFixed(2)+' (geocodificação indisponível)'; }
-    if(i<top3.length-1) await sleep(1100); // respeita limite de 1 req/s do Nominatim
+  const r=ufMaisProxima(QTH.lat, QTH.lon);
+  // fora do Brasil: nenhum centroide de UF fica a menos de ~1400km de um QTH brasileiro real
+  if(r.distKm>1400){
+    if(statusEl) statusEl.textContent='QTH fora do Brasil — avisos do INMET não se aplicam. Os avisos nacionais continuam listados abaixo.';
+    loadInmetAvisos('\u0000');
+    return;
   }
-  const attrib=document.getElementById('glm-geo-attrib');
-  if(anySuccess && attrib) attrib.style.display='block';
-  return anySuccess;
-}
-async function reverseGeocodeNear(near){
-  let anySuccess=false;
-  for(let i=0;i<near.length;i++){
-    const el=document.getElementById('glm-near-loc-'+i);
-    if(!el) continue;
-    try{
-      const res=await reverseGeocodeOne(near[i].lat, near[i].lon);
-      el.textContent=res.label+' — '+near[i].distKm.toFixed(0)+'km';
-      el.style.color=res.isWater?'var(--text-muted)':'';
-      anySuccess=true;
-    }catch(e){ /* mantem o texto de fallback "Localizando..." com lat/lon que ja estava la */ }
-    if(i<near.length-1) await sleep(1100); // respeita limite de 1 req/s do Nominatim
-  }
-  const attrib=document.getElementById('glm-geo-attrib');
-  if(anySuccess && attrib) attrib.style.display='block';
-  return anySuccess;
+  if(statusEl) statusEl.innerHTML='Região detectada pelo grid: <b>'+r.uf.nome+'</b> <span style="color:var(--text-muted);font-size:12px;">(nível estadual — informe sua cidade acima para refinar)</span>';
+  loadInmetAvisos(r.uf.nome);
 }
 const ECLIPSES_BRASIL=[
   // datas cruzadas contra multiplas fontes independentes (timeanddate.com, ceudosul.com.br, ocalendario.com.br, exame.com)
@@ -1259,10 +1470,12 @@ function renderVHF(){
   const tep6Ok=tep6.score>=15, tep2Ok=tep2.score>=15;
   let html6='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(esOk?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(esOk?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Esporádica-E: '+(esOk?'Provável':'Improvável')+' '+esScore+'%</b><div style="font-size:11px;margin-top:2px;">Clima, '+(isSouthern?'hemisfério sul':'hemisfério norte')+', janela '+janelaEs+'</div></div>';
   html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(f2Possible?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(f2Possible?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>F2: '+(f2Possible?'Possível':'Improvável')+'</b><div style="font-size:11px;margin-top:2px;">SFI='+Math.round(S.sfi)+'</div></div>';
-  const gmLatAbs=Math.abs(geomagLat(QTH.lat,QTH.lon));
+  const agoraEq=new Date();
+  const gmLatAbs=Math.abs(dipLat(QTH.lat,QTH.lon,agoraEq));
+  const eqLat=equadorMagneticoLat(QTH.lon,agoraEq);
   if(gmLatAbs<=20){
     const eeqFavoravel=S.kp<=2; // contra-intuitivo: Kp baixo enfraquece o eletrojet, favorecendo a Es equatorial -- oposto do resto do sistema
-    html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(eeqFavoravel?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(eeqFavoravel?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Es Equatorial: '+(eeqFavoravel?'Condição favorável':'Kp alto pode suprimir')+'</b><div style="font-size:11px;margin-top:2px;">Seu QTH está a '+gmLatAbs.toFixed(0)+'° do equador magnético — mecanismo diferente da Es acima (eletrojet, não vento). Kp alto <b>enfraquece</b> o eletrojet e favorece esse tipo — o oposto do padrão usual.</div></div>';
+    html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(eeqFavoravel?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(eeqFavoravel?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Es Equatorial: '+(eeqFavoravel?'Condição favorável':'Kp alto pode suprimir')+'</b><div style="font-size:11px;margin-top:2px;">Seu QTH está a '+gmLatAbs.toFixed(1)+'° de latitude de mergulho'+(eqLat!==null?' (equador magnético real cruza seu meridiano em '+Math.abs(eqLat).toFixed(1)+'°'+(eqLat<0?'S':'N')+')':'')+' — mecanismo diferente da Es acima (eletrojet, não vento). Kp alto <b>enfraquece</b> o eletrojet e favorece esse tipo — o oposto do padrão usual.</div></div>';
   }
   html6+='<div style="padding:8px 10px;border-radius:6px;background:'+(tep6Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep6Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep6.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep6.h+'h</div></div>';
   document.getElementById('vhf-6m').innerHTML=html6;
@@ -1275,7 +1488,7 @@ function renderVHF(){
 function renderMeteorologia(){
   loadWeather();
   updateQthRegionAndAlerts();
-  loadRadar().then(()=>loadGlmBrazil()).catch(()=>loadGlmBrazil());
+  if(meteoIniciado) loadRadar().then(()=>loadGlmBrazil()).catch(()=>loadGlmBrazil());
 }
 
 // ===== EME =====
@@ -1529,7 +1742,23 @@ loadBzLog();
 renderEME();
 setInterval(renderEME, 60000);
 setInterval(()=>{ if(mapSvg) drawGreyline(); }, 60000);
-setInterval(()=>{ const p=document.getElementById('panel-meteo'); if(p && p.classList.contains('active')) loadGlmBrazil(); }, 180000); // buffer de raios so enche sozinho se a aba estiver visivel, evita h5wasm rodando escondido
+// Buffer de raios se realimenta sozinho a cada 3min. Tres guardas evitam trafego inutil:
+// a aba Meteorologia precisa estar ativa, a pagina precisa estar visivel (document.hidden
+// cobre celular com a tela apagada ou app em segundo plano), e o usuario precisa ja ter
+// aberto a aba ao menos uma vez nesta sessao. Sem isso o h5wasm ficaria baixando arquivos
+// de varios MB escondido.
+setInterval(()=>{
+  if(!meteoIniciado) return;
+  if(document.hidden) return;
+  const p=document.getElementById('panel-meteo');
+  if(p && p.classList.contains('active')) loadGlmBrazil();
+}, 180000);
+// Volta a atualizar assim que a pagina reaparece, para nao mostrar buffer velho
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden || !meteoIniciado) return;
+  const p=document.getElementById('panel-meteo');
+  if(p && p.classList.contains('active')) loadGlmBrazil();
+});
 loadAllData();
 </script>
 </body></html>
