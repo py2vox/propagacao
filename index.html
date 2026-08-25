@@ -98,7 +98,7 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Indicadores globais</div>
     <div class="metric-grid-3" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;">
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">☀️ Atividade Solar</div><div style="font-size:16px;font-weight:600;" id="gi-kp">—</div></div>
-      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌙 Fase da Lua</div><div style="font-size:16px;font-weight:600;" id="gi-moon">—</div></div>
+      <div class="metric"><div style="font-size:12px;color:var(--text-muted);">Fase da Lua</div><div style="font-size:16px;font-weight:600;" id="gi-moon">—</div></div>
       <div class="metric"><div style="font-size:12px;color:var(--text-muted);">🌑 Próximo Eclipse</div><div style="font-size:16px;font-weight:600;" id="gi-eclipse">—</div></div>
     </div>
   </div>
@@ -139,9 +139,10 @@ td { padding:6px; border-bottom:1px solid var(--border); }
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">160m — proximidade da giro-frequência do elétron</div>
     <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Diferente da absorção normal (que depende de quanto a camada D está ionizada), aqui o problema é a <b>proximidade de frequência</b>: o sinal de 160m fica perto de uma frequência natural em que os elétrons já estão "girando" no campo magnético da Terra (700–1600kHz, dependendo do lugar) — quanto mais perto dessa frequência, mais energia o sinal perde pro caminho. Documentado por Oler/N4XX (CQ Magazine, 1998, citado em ON4UN's Low-Band DXing) e reconhecido como característica ativa de pesquisa do 160m em estudo peer-reviewed mais recente sobre WSPR (Vanhamel et al., Int. J. Antennas Propag., 2022). Efeito prático: América do Sul tem essa frequência natural mais baixa que América do Norte, então opera naturalmente mais longe da faixa problemática.</div>
     <div id="gyrofreq-160" style="font-size:14px;padding:8px;border-radius:6px;">—</div>
+    <div id="perfil-caminho" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);"></div>
     <div id="geomag-panel" style="margin-top:10px;font-size:12px;color:var(--text-secondary);"></div>
     <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
-      <div style="font-size:14px;font-weight:500;margin-bottom:2px;">Ruído de rádio — ITU-R P.372-17</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:2px;">Ruído de rádio — ITU-R P.372-17 '+selo('CLIMATOLOGICO')+'</div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0;">
         <select id="ruido-ambiente" onchange="renderHF()" aria-label="Categoria de ambiente para ruído man-made">
           <option value="city">Cidade</option>
@@ -187,12 +188,14 @@ td { padding:6px; border-bottom:1px solid var(--border); }
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Melhor janela por banda (UTC)</div>
-    <table><thead><tr><th>Banda</th><th>Horário UTC</th><th>Confiança</th></tr></thead><tbody id="band-detail"></tbody></table>
+    <table><thead><tr><th>Banda</th><th>Horário UTC</th><th title="Agregação de quatro fatores mensuráveis: fontes de dados que responderam (30%), horizonte da previsão (25%), spots WSPR reais na banda (25%) e calmaria geomagnética (20%). Passe o cursor sobre o valor para ver a decomposição.">Índice de confiança</th></tr></thead><tbody id="band-detail"></tbody></table>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">O índice é uma <b>agregação de fatores mensuráveis</b>, não uma probabilidade calibrada — passe o cursor sobre o valor para ver a decomposição.</div>
   </div>
   <div class="card">
     <div style="font-size:15px;font-weight:500;margin-bottom:4px;">Verificação com spots reais (WSPR)</div>
     <div id="gt-status" style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">—</div>
-    <table><thead><tr><th>Banda</th><th>Spots</th><th>SNR obs.</th><th>SNR prev.</th></tr></thead><tbody id="gt-tbody"></tbody></table>
+    <table><thead><tr><th>Banda</th><th>Spots</th><th title="Média observada ± desvio padrão dos spots">SNR obs.</th><th>SNR prev.</th><th title="Observado − previsto. Passe o cursor para ver MAE e RMSE da banda.">Resíduo</th></tr></thead><tbody id="gt-tbody"></tbody></table>
+    <div id="gt-resumo" style="font-size:12px;color:var(--text-secondary);margin-top:8px;"></div>
   </div>
 </div>
 
@@ -272,14 +275,23 @@ td { padding:6px; border-bottom:1px solid var(--border); }
 <div class="tab-panel" id="panel-info">
   <div class="card" style="font-size:13px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:16px;">Especificações técnicas</b>
-    <div style="font-size:12px;color:var(--text-muted);margin:4px 0 10px 0;">Toque em cada seção para abrir. Tudo é calculado no seu navegador — não há servidor.</div>
+    <div style="font-size:12px;color:var(--text-muted);margin:4px 0 8px 0;">Toque em cada seção para abrir. Tudo é calculado no seu navegador — não há servidor.</div>
+    <div style="font-size:11px;color:var(--text-secondary);margin-bottom:10px;padding:8px 10px;border-radius:6px;background:var(--surface-1);">
+      <b style="color:var(--text-primary);">Natureza de cada número.</b> Os cards trazem selos que dizem o que o valor é, porque tratar medição e hipótese com o mesmo peso induz a erro:<br>
+      <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#2e7d32;color:#fff;">OBSERVADO</span> medição real obtida agora ·
+      <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#1565c0;color:#fff;">MODELADO</span> modelo físico avaliado no seu ponto ·
+      <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#6a1b9a;color:#fff;">CLIMATOLOGIA</span> estatística de longo prazo, descreve o típico ·
+      <span style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;background:#ef6c00;color:#fff;">EXPERIMENTAL</span> em avaliação, não entra em cálculo algum.
+    </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;font-size:11px;color:var(--text-muted);"><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">11 bandas HF</span><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">3 recomendações ITU-R</span><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">2 modelos autovalidáveis</span><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">10 serviços de dados</span><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">5.571 municípios</span><span style="padding:2px 8px;border-radius:10px;background:var(--surface-1);">arquivo único</span></div>
-<details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">🗺️ Mapa e indicadores astrodinâmicos</summary><div style="padding:6px 0 2px 0;">Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth, via world-atlas) com 28 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); campo geomagnético pelo <b>WMM2025 completo</b> (expansão em harmônicos esféricos grau/ordem 12, 90 coeficientes de Gauss oficiais NOAA/BGS embarcados, validada contra os 100 valores de teste oficiais com erro máximo de 0,0007nT) — base de giro-frequência, TEP e Es Equatorial; oval auroral segue em coordenada dipolar por ser o proxy correto para CGM; monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, fase lunar e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino; painel do <b>campo geomagnético no QTH</b> expondo B, declinação, inclinação, latitude de mergulho, giro-frequência e a razão f/f<sub>H</sub> em 160m — esta última apresentada como indicador físico que <b>não</b> entra em nenhum cálculo de SNR; variação do fluxo de raio-X em 5, 15 e 60 minutos com rótulo de tendência, extraída da série de 1 dia que já era baixada e descartada, sem requisição adicional; o arquivo carrega os 100 pontos de teste oficiais da NOAA e verifica o próprio modelo geomagnético offline, pelo botão na aba Info ou por <code>validarWMM()</code> no console.<br><br>
-    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">📻 Propagação HF — 160m a 11m</summary><div style="padding:6px 0 2px 0;">Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); giro-frequência do elétron por QTH em 160m, calculada a partir da <b>intensidade real do campo</b> a 90km (altura da camada D) pelo WMM2025, e não por aproximação dipolar (Oler/N4XX, CQ Magazine 1998; Vanhamel et al., Int. J. Antennas Propag. 2022) — a correção importa especialmente no Brasil: sob a Anomalia Magnética do Atlântico Sul o dipolo superestima o campo em cerca de 40%, e a giro-frequência em Campinas cai de 916kHz para 615kHz, aliviando uma penalidade de absorção em 160m que estava superestimada; amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contra 159 spots reais do WSPR (janela de 8h, ±9°), resultando em correção de -3dB no ganho base; <b>ruído de rádio pela ITU-R P.372-17, modelo completo</b>: componente <b>atmosférico</b> (raios, Parte 5) pelos coeficientes oficiais CCIR — série dupla de Fourier de 15×29 harmônicos no espaço, lei de frequência do CCIR Report 322 (u = (8·2^log₁₀f − 11)/4, que não é logarítmica, conforme NBS Tech Note 318 de Lucas e Harper), interpolação entre blocos de 4h feita em potência linear e não em dB, e índice de hemisfério sul separado; <b>man-made</b> (equação 17 e Tabela 1, quatro categorias com decis da Tabela 2); <b>galáctico</b> (equação 15); e a <b>combinação log-normal</b> (equações 18 a 26) em duas passagens, com decis superior e inferior, tomando o pior caso — mais as conversões para potência e campo (equações 6 e 7), com o piso de ruído em 160m mostrado em dBm para larguras de SSB e CW. <b>Validado contra o caso de referência oficial do ITU-R Study Group 3</b> (janeiro, 14 UTC, 40°N 165°E, 1 MHz, categoria Cidade): as 12 grandezas — FaA, DuA, DlA, FaM, DuM, DlM, FaG, DuG, DlG, FamT, DuT e DlT — reproduzidas com erro máximo de <b>0,0005 dB</b>, que é a casa decimal em que o ITU-R publica. Os coeficientes estão embarcados em Float32: <b>13.056 valores</b>, não 39.168 — verifiquei por hash que os 12 arquivos mensais do CCIR contêm apenas <b>4 blocos sazonais distintos</b>, replicados três vezes cada, e guardar só os quatro economiza 136KB sem perder um único valor. A redução para Float32 introduz erro máximo de 0,000014 dB, medido em 3.240 pontos globais. Conformidade: REFERENCE_COMPATIBLE — reproduz a implementação oficial ITU-R-HF v14.3. Nenhum componente de ruído entra no cálculo de SNR das previsões: ionosfera e piso de ruído permanecem grandezas separadas, porque "propagação possível" não é o mesmo que "sinal audível".<br><br>
-    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">📡 VHF — 6m e 2m</summary><div style="padding:6px 0 2px 0;">VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; o QTH usa <b>grid de 6 dígitos</b> (ex.: GG67KD), que resolve o sub-quadrado de ~4,6 × 9,3km em vez dos ~111 × 205km de um grid de 4 — diferença de até 80km na posição assumida, relevante para geometria de TEP, radiante de meteoros e paralaxe lunar; o painel mostra a precisão real do grid informado e avisa quando só 4 dígitos foram digitados; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); Es Equatorial como indicador separado quando o QTH está a até 20° de <b>latitude de mergulho</b> — referenciada ao equador magnético real (I=0, localizado por bissecção no meridiano do QTH), que sobre a América do Sul varia de ~10°S em 70°O a ~9°N em 35°O, deslocamento que o equador dipolar não captura — mecanismo diferente (instabilidade do eletrojet, não vento), com Kp alto favorecendo em vez de atrapalhar; F2 em 50MHz atrelado ao SFI; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; indicador <b>experimental</b> de maré lunar semidiurna (M2) sobre o horário de início das bolhas de plasma equatoriais, calculado em tempo lunar local segundo Matsushita (1967) e parametrizado pelo ajuste de Paulino et al. 2020 (Annales Geophysicae 38, 437 — 10 anos de imagens de airglow em São João do Cariri, 7,4°S, corroborado por digissonda em São Luís): amplitude de 13,5min, início mais cedo por volta das 21h de tempo lunar e mais tarde por volta das 03h — exibido como variável de diagnóstico separada, que <b>não</b> altera o score de TEP nem é convertida em dB; propagação troposférica pela <b>ITU-R P.453-14</b> (recomendação em vigor, 08/2019): refratividade pela equação 6 completa (N = 77,6·P/T − 5,6·e/T + 3,75×10⁵·e/T²) e pressão de vapor de saturação pela equação 9 com fator de aumento, sobre perfil de até 7 níveis — superfície mais 1000/975/950/925/900/850 hPa, descartando os níveis de pressão abaixo do solo pela elevação real do QTH; refratividade modificada M = N + 157h (equação 17), que identifica aprisionamento por <b>dM/dh negativo</b> em vez de depender de um limiar arbitrário de N, reportando base, topo, espessura e força em M-units de uma <b>camada coerente</b> e não de um ponto isolado; limiares derivados da própria recomendação — o perfil exponencial de referência (N₀=315, h₀=7,35km) dá −43 N/km na superfície, −79 N/km equivale a fator k=2 e −157 N/km anula dM/dh; fator k do raio terrestre efetivo exibido junto; linha do tempo de 24h com janelas previstas de super-refração e ducting, extraída da mesma requisição, sem custo adicional de rede; Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
+<details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">🗺️ Mapa e indicadores astrodinâmicos</summary><div style="padding:6px 0 2px 0;">Mapeamento global e indicadores astrodinâmicos</b> — cartografia real (Natural Earth, via world-atlas) com 28 destinos por grande círculo; greyline (terminador solar a 90°, redesenhado a cada 60s isoladamente); campo geomagnético pelo <b>WMM2025 completo</b> (expansão em harmônicos esféricos grau/ordem 12, 90 coeficientes de Gauss oficiais NOAA/BGS embarcados, validada contra os 100 valores de teste oficiais com erro máximo de 0,0007nT) — base de giro-frequência, TEP e Es Equatorial; oval auroral segue em coordenada dipolar por ser o proxy correto para CGM; monitoramento sísmico (USGS, M4.5+ em 24h, símbolo de epicentro por magnitude) incluído como contexto de infraestrutura crítica para comunicações de emergência, não como fator de propagação; indicadores de atividade solar, <b>fase lunar desenhada</b> — disco em SVG com o terminador projetado como semi-elipse de semi-eixo R·|cos(elongação)|, e <b>orientação do hemisfério sul</b>, em que a Lua crescente aparece iluminada do lado esquerdo, ao contrário do padrão do hemisfério norte; a área iluminada do desenho foi conferida por contagem de pixels contra a fração física, com erro máximo de 2 pontos percentuais — e próximo eclipse visível do Brasil; painel de melhor banda, horário e SNR projetado por destino; painel do <b>campo geomagnético no QTH</b> expondo B, declinação, inclinação, latitude de mergulho, giro-frequência e a razão f/f<sub>H</sub> em 160m — esta última apresentada como indicador físico que <b>não</b> entra em nenhum cálculo de SNR; variação do fluxo de raio-X em 5, 15 e 60 minutos com rótulo de tendência, extraída da série de 1 dia que já era baixada e descartada, sem requisição adicional; o arquivo carrega os 100 pontos de teste oficiais da NOAA e verifica o próprio modelo geomagnético offline, pelo botão na aba Info ou por <code>validarWMM()</code> no console.<br><br>
+    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">📻 Propagação HF — 160m a 11m</summary><div style="padding:6px 0 2px 0;">Propagação HF (160m–11m)</b> — modelagem preditiva em 11 bandas; telemetria real da NOAA (SFI, Kp, Dst, Bz, raio-X) com A-index calculado e heatmap preditivo de 36h; MUF calibrada contra literatura de referência (SFI≈120 já abre 10m, modelos anteriores exigiam SFI≈250); absorção de camada D pelo ponto mais iluminado do caminho, não pela média (consistente com NM7M e ON4UN, 5ª edição/ARRL, para bandas baixas); giro-frequência do elétron por QTH em 160m, calculada a partir da <b>intensidade real do campo</b> a 90km (altura da camada D) pelo WMM2025, e não por aproximação dipolar (Oler/N4XX, CQ Magazine 1998; Vanhamel et al., Int. J. Antennas Propag. 2022) — a correção importa especialmente no Brasil: sob a Anomalia Magnética do Atlântico Sul o dipolo superestima o campo em cerca de 40%, e a giro-frequência em Campinas cai de 916kHz para 615kHz, aliviando uma penalidade de absorção em 160m que estava superestimada; amostragem adaptativa em rotas quase-antipodais; alerta de tendência de Bz com suavização; distinção física entre eventos imediatos (raio-X, velocidade da luz, ~8,3min) e preditivos (CME, matéria, 1–3 dias — estimativa de chegada via NASA/DONKI quando disponível); verificação empírica contínua contra spots reais do WSPR (janela de 8h, ±9° de cada ponta): os spots individuais são retidos, e o painel calcula por banda o <b>viés</b> (observado − previsto), o <b>desvio padrão</b> da amostra, o <b>MAE</b> e o <b>RMSE</b>, mais um resíduo agregado ponderado por número de spots — substituindo o número único de −3dB que veio de uma sessão de 159 spots por uma medição do erro que <b>ainda resta em cada banda, agora</b>; a correção de −3dB continua embutida no cálculo e está declarada como tal, e o resíduo exibido é o que sobra depois dela;
+<b>perfil longitudinal do caminho</b> mostrando, ponto a ponto ao longo do grande círculo, a iluminação solar (que governa a absorção da camada D) e a latitude de mergulho (que indica risco de absorção auroral) — construído com as mesmas amostras que o cálculo de qualidade já fazia e descartava, sem requisição nem custo adicional, para responder <b>por que</b> uma rota está ruim e não apenas <b>quanto</b>;
+<b>índice de confiança da previsão</b> por banda, agregando quatro fatores mensuráveis com pesos declarados — fontes de dados que responderam (30%), horizonte da janela (25%), spots WSPR reais na banda (25%) e calmaria geomagnética prevista (20%) — apresentado como índice 0–100 e <b>não</b> como probabilidade, com a decomposição visível ao passar o cursor. A versão anterior calculava confiança como <code>90 − início_da_janela × 0,8</code>, um número que dependia apenas de quão distante no futuro a janela começava e não media confiança alguma; <b>ruído de rádio pela ITU-R P.372-17, modelo completo</b>: componente <b>atmosférico</b> (raios, Parte 5) pelos coeficientes oficiais CCIR — série dupla de Fourier de 15×29 harmônicos no espaço, lei de frequência do CCIR Report 322 (u = (8·2^log₁₀f − 11)/4, que não é logarítmica, conforme NBS Tech Note 318 de Lucas e Harper), interpolação entre blocos de 4h feita em potência linear e não em dB, e índice de hemisfério sul separado; <b>man-made</b> (equação 17 e Tabela 1, quatro categorias com decis da Tabela 2); <b>galáctico</b> (equação 15); e a <b>combinação log-normal</b> (equações 18 a 26) em duas passagens, com decis superior e inferior, tomando o pior caso — mais as conversões para potência e campo (equações 6 e 7), com o piso de ruído em 160m mostrado em dBm para larguras de SSB e CW. <b>Validado contra o caso de referência oficial do ITU-R Study Group 3</b> (janeiro, 14 UTC, 40°N 165°E, 1 MHz, categoria Cidade): as 12 grandezas — FaA, DuA, DlA, FaM, DuM, DlM, FaG, DuG, DlG, FamT, DuT e DlT — reproduzidas com erro máximo de <b>0,0005 dB</b>, que é a casa decimal em que o ITU-R publica. Os coeficientes estão embarcados em Float32: <b>13.056 valores</b>, não 39.168 — verifiquei por hash que os 12 arquivos mensais do CCIR contêm apenas <b>4 blocos sazonais distintos</b>, replicados três vezes cada, e guardar só os quatro economiza 136KB sem perder um único valor. A redução para Float32 introduz erro máximo de 0,000014 dB, medido em 3.240 pontos globais. Conformidade: REFERENCE_COMPATIBLE — reproduz a implementação oficial ITU-R-HF v14.3. Nenhum componente de ruído entra no cálculo de SNR das previsões: ionosfera e piso de ruído permanecem grandezas separadas, porque "propagação possível" não é o mesmo que "sinal audível".<br><br>
+    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">📡 VHF — 6m e 2m</summary><div style="padding:6px 0 2px 0;">VHF (6m/2m)</b> — destino por grid locator preciso (não lista de país como na HF), porque TEP/Es/Meteor Scatter dependem da geometria exata do caminho; o QTH usa <b>grid de 6 dígitos</b> (ex.: GG67KD), que resolve o sub-quadrado de ~4,6 × 9,3km em vez dos ~111 × 205km de um grid de 4 — diferença de até 80km na posição assumida, relevante para geometria de TEP, radiante de meteoros e paralaxe lunar; o painel mostra a precisão real do grid informado e avisa quando só 4 dígitos foram digitados; Esporádica-E por ciclo sazonal (pico principal verão, secundário início do inverno); Es Equatorial como indicador separado quando o QTH está a até 20° de <b>latitude de mergulho</b> — referenciada ao equador magnético real (I=0, localizado por bissecção no meridiano do QTH), que sobre a América do Sul varia de ~10°S em 70°O a ~9°N em 35°O, deslocamento que o equador dipolar não captura — mecanismo diferente (instabilidade do eletrojet, não vento), com Kp alto favorecendo em vez de atrapalhar; F2 em 50MHz atrelado ao SFI; TEP apresentado como <b>índice de favorabilidade 0–100</b>, e não como probabilidade física — o valor sai do produto de fatores empíricos (geometria, estação, hora, SFI) e não tem calibração que autorize chamá-lo de porcentagem; TEP com janelas independentes por banda (6m: modos vespertino e noturno; 2m: só noturno via bolhas de plasma), calibrado contra o circuito real EA7→PY; indicador <b>experimental</b> de maré lunar semidiurna (M2) sobre o horário de início das bolhas de plasma equatoriais, calculado em tempo lunar local segundo Matsushita (1967) e parametrizado pelo ajuste de Paulino et al. 2020 (Annales Geophysicae 38, 437 — 10 anos de imagens de airglow em São João do Cariri, 7,4°S, corroborado por digissonda em São Luís): amplitude de 13,5min, início mais cedo por volta das 21h de tempo lunar e mais tarde por volta das 03h — exibido como variável de diagnóstico separada, que <b>não</b> altera o score de TEP nem é convertida em dB; propagação troposférica pela <b>ITU-R P.453-14</b> (recomendação em vigor, 08/2019): refratividade pela equação 6 completa (N = 77,6·P/T − 5,6·e/T + 3,75×10⁵·e/T²) e pressão de vapor de saturação pela equação 9 com fator de aumento, sobre perfil de até 7 níveis — superfície mais 1000/975/950/925/900/850 hPa, descartando os níveis de pressão abaixo do solo pela elevação real do QTH; refratividade modificada M = N + 157h (equação 17), que identifica aprisionamento por <b>dM/dh negativo</b> em vez de depender de um limiar arbitrário de N, reportando base, topo, espessura e força em M-units de uma <b>camada coerente</b> e não de um ponto isolado; limiares derivados da própria recomendação — o perfil exponencial de referência (N₀=315, h₀=7,35km) dá −43 N/km na superfície, −79 N/km equivale a fator k=2 e −157 N/km anula dM/dh; fator k do raio terrestre efetivo exibido junto; linha do tempo de 24h com janelas previstas de super-refração e ducting, extraída da mesma requisição, sem custo adicional de rede; Meteor Scatter com radiante, elevação e viabilidade geométrica calculados para o seu QTH.<br><br>
     <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">🌙 EME — 144, 432 e 1296 MHz</summary><div style="padding:6px 0 2px 0;">EME</b> — suporte para 144/432/1296MHz; correção de paralaxe topocêntrica (até ~1° em baixas elevações); ruído galáctico com decaimento f⁻²·⁸, destacando zonas de saturação por ruído solar em UHF/SHF; rotação espacial calculada por geometria pura (ângulo paraláctico entre as duas estações e a Lua), distinta da Faraday e sem depender de TEC — sinaliza risco de propagação de mão única perto de ±45° (mecanismo identificado por N1BUG na comunidade EME); janela de visibilidade mútua entre duas estações; severidade de Rotação de Faraday por banda (referência qualitativa, não calculada em tempo real).<br><br>
     <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">🌧️ Meteorologia e segurança operacional</summary><div style="padding:6px 0 2px 0;">Telemetria meteorológica e segurança operacional</b> — reunidos na aba <b>Meteorologia</b>: radar de precipitação georreferenciado (RainViewer), condições numéricas da estação, raios via sensor GLM do satélite GOES-19 e avisos oficiais do INMET (priorizados por matriz de risco: vento > raios > chuva); raios via satélite contornam a cobertura terrestre fraca na América do Sul, com alerta automático para descargas em raio de 30km do QTH e buffer de 30 minutos que se realimenta sozinho a cada 3 minutos enquanto a aba estiver visível; posição de cada descarga em rumo e distância a partir do seu QTH, calculada localmente, sem serviço externo de geocodificação; cada descarga rotulada com o <b>município</b> mais próximo, a partir de base embarcada de <b>5.571 sedes municipais</b> do IBGE (fonte kelvins/municipios-brasileiros, licença MIT), comprimida com dicionário de tokens e verificada por checksum na carga — se a descompressão divergir, os dados são descartados em vez de exibir nome errado; quando não há sede a menos de 150km, cai para a <b>UF</b> por tabela de pontos de referência — validada contra as 27 capitais mais casos de fronteira difícil, litoral norte de São Paulo, sudoeste do Amazonas e três pontos oceânicos, com guarda de 350km que marca "fora do Brasil" em vez de atribuir estado a raio no mar; resumo de concentração por estado com percentual sobre o total do buffer; região do QTH para filtrar avisos do INMET pela mesma tabela, com campo opcional de cidade que tem prioridade sobre a detecção automática; intensidade eólica em quatro níveis de segurança pela escala Beaufort.<br><br>
-    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">⚠️ Limitações declaradas</summary><div style="padding:6px 0 2px 0;">Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) agora persiste no armazenamento local do navegador e sobrevive a recarregamentos, mas fica preso ao navegador e ao dispositivo — não sincroniza, e some em janela anônima; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo; a coordenada municipal é da <b>sede</b>, não do centroide da área: em municípios extensos como Altamira ou Barcelos a sede pode ficar a centenas de km de parte do território, e por isso o painel sempre mostra a distância até ela em vez de sugerir precisão que o dado não tem; descarga em país vizinho próximo da fronteira pode receber a UF brasileira adjacente; o indicador de maré lunar M2 é média estatística de uma década — em noites individuais o artigo de origem mediu desvios de 37 a 70min, e a maré não é o fator dominante da variabilidade dia a dia das bolhas, então ele indica tendência de horário, não previsão de noite específica; a parametrização foi obtida a 7,4°S e sua validade em outras latitudes não foi estabelecida pelos autores; a efeméride lunar do painel usa série truncada, com erro de até 7,7min no tempo lunar — irrelevante diante dos ±38min de incerteza de fase do próprio ajuste publicado; o WMM2025 representa só o campo principal, gerado no núcleo — campo crustal e de perturbação ficam de fora, o que responde por dezenas a centenas de nT em regiões de anomalia crustal; as bibliotecas vêm de CDN sem verificação de integridade (SRI), então uma indisponibilidade do CDN degrada mapa, gráficos e raios; os coeficientes atmosféricos da P.372 são <b>sazonais</b>, não mensais: os arquivos CCIR replicam o mesmo trimestre nos três meses correspondentes, então dezembro, janeiro e fevereiro devolvem valores idênticos — é propriedade do dado de origem, não do painel; o ruído mostrado é climatologia de longo prazo, não a atividade elétrica de hoje, e por isso convive com o card de raios do GLM na aba Meteorologia sem se confundir com ele: um é estatística acumulada, o outro é observação em tempo real; o perfil troposférico vem de modelo numérico com seleção automática de fonte pelo Open-Meteo — não é radiossondagem local, e o espaçamento vertical dos níveis de pressão, de centenas de metros, não resolve dutos de superfície rasos; a própria P.453 adverte que <b>entre 40°N e 40°S e em locais costeiros os gradientes severos da camada superficial tendem a ser subestimados</b>, faixa que cobre todo o Brasil — ausência de duto indicada aqui não é evidência de ausência real; o mapa base do radar usa tiles do OpenStreetMap, cuja política proíbe uso pesado — quem for publicar este painel para muita gente precisa trocar as três linhas de <code>MAPA_BASE</code> no topo do script por um provedor com chave gratuita. Além disso: modelos de propagação baseados em SFI (o meu incluso) são fundamentalmente <b>modelos de mediana mensal</b> — o SFI descreve apenas 1 de 3 fontes de variabilidade dia-a-dia da camada F2 (as outras duas são atividade geomagnética, que o Kp cobre parcialmente, e acoplamento com a atmosfera baixa/TIDs, que nenhum modelo amador cobre bem hoje). Isso não é peculiaridade deste sistema — é limite reconhecido pela própria comunidade de pesquisa de propagação (K9LA, HamSCI Space Weather Knowledge Exchange 2017).</div></details>
+    <b></div></details><details style="border-top:1px solid var(--border);padding:8px 0;"><summary style="cursor:pointer;font-weight:600;color:var(--text-primary);font-size:13px;">⚠️ Limitações declaradas</summary><div style="padding:6px 0 2px 0;">Limitações do modelo:</b> arquitetura prioriza entrega em arquivo único e física simplificada — não substitui VOACAP (ray-tracing) ou WSJT-X (DSP nativo); histórico de tendências (Bz) agora persiste no armazenamento local do navegador e sobrevive a recarregamentos, mas fica preso ao navegador e ao dispositivo — não sincroniza, e some em janela anônima; TEC real para Rotação de Faraday exata e libração lunar avançada ficaram fora por falta de API pública gratuita; o SNR previsto é <b>escala relativa</b>, não potência absoluta: a fórmula parte de constantes de referência (50 e 27) e desconta penalidades, então serve para comparar bandas, horários e rotas entre si, mas <b>não</b> é um dBm que possa ser subtraído do piso de ruído da P.372 para produzir margem de enlace — por isso o painel não exibe "margem", que exigiria um balanço de enlace completo (perda de percurso, potência de transmissão e ganho de antenas) ainda não implementado; modelo de SNR precisa de mais amostragem longitudinal para refinamento; raio de 400km para "raios perto do QTH" é aproximação de escala estadual, não limite administrativo; a coordenada municipal é da <b>sede</b>, não do centroide da área: em municípios extensos como Altamira ou Barcelos a sede pode ficar a centenas de km de parte do território, e por isso o painel sempre mostra a distância até ela em vez de sugerir precisão que o dado não tem; descarga em país vizinho próximo da fronteira pode receber a UF brasileira adjacente; o indicador de maré lunar M2 é média estatística de uma década — em noites individuais o artigo de origem mediu desvios de 37 a 70min, e a maré não é o fator dominante da variabilidade dia a dia das bolhas, então ele indica tendência de horário, não previsão de noite específica; a parametrização foi obtida a 7,4°S e sua validade em outras latitudes não foi estabelecida pelos autores; a efeméride lunar do painel usa série truncada, com erro de até 7,7min no tempo lunar — irrelevante diante dos ±38min de incerteza de fase do próprio ajuste publicado; o WMM2025 representa só o campo principal, gerado no núcleo — campo crustal e de perturbação ficam de fora, o que responde por dezenas a centenas de nT em regiões de anomalia crustal; as bibliotecas vêm de CDN sem verificação de integridade (SRI), então uma indisponibilidade do CDN degrada mapa, gráficos e raios; os coeficientes atmosféricos da P.372 são <b>sazonais</b>, não mensais: os arquivos CCIR replicam o mesmo trimestre nos três meses correspondentes, então dezembro, janeiro e fevereiro devolvem valores idênticos — é propriedade do dado de origem, não do painel; o ruído mostrado é climatologia de longo prazo, não a atividade elétrica de hoje, e por isso convive com o card de raios do GLM na aba Meteorologia sem se confundir com ele: um é estatística acumulada, o outro é observação em tempo real; o perfil troposférico vem de modelo numérico com seleção automática de fonte pelo Open-Meteo — não é radiossondagem local, e o espaçamento vertical dos níveis de pressão, de centenas de metros, não resolve dutos de superfície rasos; a própria P.453 adverte que <b>entre 40°N e 40°S e em locais costeiros os gradientes severos da camada superficial tendem a ser subestimados</b>, faixa que cobre todo o Brasil — ausência de duto indicada aqui não é evidência de ausência real; o mapa base do radar usa tiles do OpenStreetMap, cuja política proíbe uso pesado — quem for publicar este painel para muita gente precisa trocar as três linhas de <code>MAPA_BASE</code> no topo do script por um provedor com chave gratuita. Além disso: modelos de propagação baseados em SFI (o meu incluso) são fundamentalmente <b>modelos de mediana mensal</b> — o SFI descreve apenas 1 de 3 fontes de variabilidade dia-a-dia da camada F2 (as outras duas são atividade geomagnética, que o Kp cobre parcialmente, e acoplamento com a atmosfera baixa/TIDs, que nenhum modelo amador cobre bem hoje). Isso não é peculiaridade deste sistema — é limite reconhecido pela própria comunidade de pesquisa de propagação (K9LA, HamSCI Space Weather Knowledge Exchange 2017).</div></details>
   </div>
   <div class="card" style="font-size:12px;color:var(--text-secondary);line-height:1.7;">
     <b style="color:var(--text-primary);font-size:15px;">Auditoria independente dos modelos científicos</b><br><br>
@@ -479,6 +491,21 @@ function wmmField(lat,lon,altKm,year){
   return out;
 }
 
+// ===== SELO DE NATUREZA DA EVIDENCIA ============================================
+// Um painel que mistura medicao, modelo, climatologia e hipotese sem distinguir os
+// tres induz o operador a tratar tudo com o mesmo peso. Cada selo declara o que o
+// numero e, e a aba Info traz a legenda.
+const SELOS={
+  OBSERVADO:    {cor:'#2e7d32', txt:'OBSERVADO',    ajuda:'Medição real de instrumento ou rede de observação, obtida agora.'},
+  MODELADO:     {cor:'#1565c0', txt:'MODELADO',     ajuda:'Resultado de modelo físico avaliado para o seu ponto e horário.'},
+  CLIMATOLOGICO:{cor:'#6a1b9a', txt:'CLIMATOLOGIA', ajuda:'Estatística de longo prazo. Descreve o típico, não o de hoje.'},
+  EXPERIMENTAL: {cor:'#ef6c00', txt:'EXPERIMENTAL', ajuda:'Indicador em avaliação. Não entra em nenhum cálculo de qualidade.'}
+};
+function selo(tipo){
+  const e=SELOS[tipo]; if(!e) return '';
+  return '<span title="'+e.ajuda+'" style="font-size:9px;font-weight:700;letter-spacing:.4px;'
+    +'padding:1px 5px;border-radius:3px;background:'+e.cor+';color:#fff;vertical-align:1px;">'+e.txt+'</span>';
+}
 // ===== RUIDO DE RADIO -- ITU-R P.372-17 (08/2024) ===============================
 // ATENCAO AO ESCOPO. Estao implementados APENAS os componentes cujas formulas e
 // tabelas constam integralmente no texto da recomendacao:
@@ -839,9 +866,70 @@ function xrayTendencia(){
 }
 function xrayClass(flux){if(!isFinite(flux)||flux<=0)return'—';if(flux<1e-7)return'A'+(flux/1e-8).toFixed(1);if(flux<1e-6)return'B'+(flux/1e-7).toFixed(1);if(flux<1e-5)return'C'+(flux/1e-6).toFixed(1);if(flux<1e-4)return'M'+(flux/1e-5).toFixed(1);return'X'+(flux/1e-4).toFixed(1);}
 function xraySidPenalty(flux,band,sunlitFrac){if(flux<1e-5)return 0;const excess=Math.log10(flux/1e-5);const bandSens=(ABS_MAX[band]??10)/5;return Math.min(30,excess*15*bandSens)*sunlitFrac;}
-function pathQualityAt(dest,band,futureDate){const sun=sunPos(futureDate);const distKm=greatCircleDist(QTH.lat,QTH.lon,dest.lat,dest.lon);const nSamples=distKm>15000?12:distKm>8000?8:4;const pts=samplePath(QTH.lat,QTH.lon,dest.lat,dest.lon,nSamples);let czSum=0,czMax=0,gmMax=0;pts.forEach(([la,lo])=>{const cz=Math.max(0,cosChi(la,lo,sun));czSum+=cz;if(cz>czMax)czMax=cz;const gm=Math.abs(geomagLat(la,lo));if(gm>gmMax)gmMax=gm;});const czAvg=czSum/pts.length,czEff=0.35*czAvg+0.65*czMax,mid=pts[Math.floor(pts.length/2)];const freq=BAND_FREQ[band];const muf=estMUF(mid[0],mid[1],sun,S.sfi);const{kp}=kpForecastAt(futureDate);const absD=(ABS_MAX[band]??10)*czEff;const mufPen=mufOwfPenalty(freq,muf);const ovalBoundary=Math.max(45,67-2*kp);const aurExcess=Math.max(0,gmMax-ovalBoundary);const aurPen=Math.min(45,(AUR_SENS[band]??0.3)*aurExcess);const noisePen=NOISE_PEN[band]??0;const stormPen=S.dst<-30?Math.min(20,Math.abs(S.dst+30)*0.25*((AUR_SENS[band]??0.3)/2.4)):0;const bzPen=S.bz<-5?Math.min(6,Math.abs(S.bz+5)*0.4):0;const xrayPen=xraySidPenalty(S.xrayFlux,band,czAvg>0.05?1:0);const snr=50-21*Math.log10(Math.max(distKm,50))+27-absD-mufPen-aurPen-noisePen-stormPen-bzPen-xrayPen;return{snr};} // "+27" era "+30": corrigido -3dB (conservador, não os 4.1dB completos) após primeira validação real contra WSPR (159 spots, 6/7 bandas otimistas, viés ponderado +4.1dB) -- ajuste parcial de uma sessão só, não recalibração completa por banda
+function pathQualityAt(dest,band,futureDate){const sun=sunPos(futureDate);const distKm=greatCircleDist(QTH.lat,QTH.lon,dest.lat,dest.lon);const nSamples=distKm>15000?12:distKm>8000?8:4;const pts=samplePath(QTH.lat,QTH.lon,dest.lat,dest.lon,nSamples);let czSum=0,czMax=0,gmMax=0;pts.forEach(([la,lo])=>{const cz=Math.max(0,cosChi(la,lo,sun));czSum+=cz;if(cz>czMax)czMax=cz;const gm=Math.abs(geomagLat(la,lo));if(gm>gmMax)gmMax=gm;});const czAvg=czSum/pts.length,czEff=0.35*czAvg+0.65*czMax,mid=pts[Math.floor(pts.length/2)];const _pts=pts;const freq=BAND_FREQ[band];const muf=estMUF(mid[0],mid[1],sun,S.sfi);const{kp}=kpForecastAt(futureDate);const absD=(ABS_MAX[band]??10)*czEff;const mufPen=mufOwfPenalty(freq,muf);const ovalBoundary=Math.max(45,67-2*kp);const aurExcess=Math.max(0,gmMax-ovalBoundary);const aurPen=Math.min(45,(AUR_SENS[band]??0.3)*aurExcess);const noisePen=NOISE_PEN[band]??0;const stormPen=S.dst<-30?Math.min(20,Math.abs(S.dst+30)*0.25*((AUR_SENS[band]??0.3)/2.4)):0;const bzPen=S.bz<-5?Math.min(6,Math.abs(S.bz+5)*0.4):0;const xrayPen=xraySidPenalty(S.xrayFlux,band,czAvg>0.05?1:0);const snr=50-21*Math.log10(Math.max(distKm,50))+27-absD-mufPen-aurPen-noisePen-stormPen-bzPen-xrayPen;
+  return {snr, perfil:{pts:_pts, sun, distKm, muf, czEff, gmMax}};}
+// Perfil longitudinal: ilumina o "porque" de uma rota estar ruim, usando exatamente
+// os pontos que pathQualityAt ja amostra -- nenhum calculo novo, nenhuma requisicao.
+function renderPerfilCaminho(dest, band, quando){
+  const el=document.getElementById('perfil-caminho'); if(!el) return;
+  const q=pathQualityAt(dest, band, quando||new Date());
+  const P=q.perfil; if(!P||!P.pts||P.pts.length<2){ el.innerHTML=''; return; }
+  const n=P.pts.length;
+  const cel=P.pts.map((pt,i)=>{
+    const cz=Math.max(0,cosChi(pt[0],pt[1],P.sun));
+    const gm=Math.abs(dipLat(pt[0],pt[1],quando||new Date()));
+    const solar = cz>0.5?'☀':cz>0.15?'◐':cz>0.02?'◔':'☾';
+    // absorcao da camada D acompanha a iluminacao; latitude de mergulho alta = risco auroral
+    const cor = cz>0.5?'var(--bad)':cz>0.15?'var(--warn)':'var(--good)';
+    const km=(P.distKm*i/(n-1)).toFixed(0);
+    return '<div title="'+km+'km · '+pt[0].toFixed(1)+', '+pt[1].toFixed(1)
+      +' · Sol cos(χ)='+cz.toFixed(2)+' · latitude de mergulho '+gm.toFixed(0)+'°" '
+      +'style="flex:1;text-align:center;font-size:11px;">'
+      +'<div style="color:var(--text-secondary);">'+solar+'</div>'
+      +'<div style="height:14px;border-radius:2px;background:'+cor+';margin:2px 1px;"></div>'
+      +'<div style="color:var(--text-muted);font-size:9px;">'+gm.toFixed(0)+'°</div></div>';
+  }).join('');
+  el.innerHTML='<div style="font-size:12px;color:var(--text-secondary);margin-bottom:3px;">'
+    +'Perfil do caminho em '+(BAND_LABEL[band]||band)+' '+selo('MODELADO')+' — '+P.distKm.toFixed(0)+'km, '+n+' pontos amostrados</div>'
+    +'<div style="display:flex;gap:1px;align-items:flex-end;">'+cel+'</div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:2px;">'
+    +'<span>QTH</span><span>'+dest.name+'</span></div>'
+    +'<div style="font-size:11px;color:var(--text-muted);margin-top:5px;">A barra colora a <b>absorção da camada D</b>, que segue a iluminação solar: '
+    +'<span style="color:var(--bad);">vermelho</span> = trecho em pleno dia e portanto absorvente, '
+    +'<span style="color:var(--warn);">amarelo</span> = crepúsculo, '
+    +'<span style="color:var(--good);">verde</span> = noite. Abaixo, a latitude de mergulho de cada ponto — valores altos indicam trecho sujeito a absorção auroral. '
+    +'MUF no ponto médio: '+P.muf.toFixed(1)+' MHz.</div>';
+} // "+27" era "+30": corrigido -3dB (conservador, não os 4.1dB completos) após primeira validação real contra WSPR (159 spots, 6/7 bandas otimistas, viés ponderado +4.1dB) -- ajuste parcial de uma sessão só, não recalibração completa por banda
 function bestWindow(hourly,threshold){threshold=threshold??-20;let windows=[],cur=null;hourly.forEach(pt=>{if(pt.snr>=threshold){if(!cur)cur={start:pt.h,end:pt.h,sum:pt.snr,n:1};else{cur.end=pt.h;cur.sum+=pt.snr;cur.n++;}}else if(cur){windows.push(cur);cur=null;}});if(cur)windows.push(cur);if(!windows.length)return null;windows.forEach(w=>w.avgSnr=w.sum/w.n);windows.sort((a,b)=>b.avgSnr-a.avgSnr);return windows[0];}
-function confidenceFor(win){if(!win)return null;let conf=90-win.start*0.8;return Math.round(Math.max(40,Math.min(95,conf)));}
+// A versao anterior era conf = 90 - inicio_da_janela*0.8, ou seja: um numero que
+// dependia SO de quao longe no futuro a janela comeca, apresentado como "Confiança %".
+// Nao media confianca nenhuma. Substituido por agregacao de fatores mensuraveis, com
+// pesos declarados e motivos expostos -- e o resultado e rotulado como INDICE, nao
+// como probabilidade, porque nao ha calibracao que autorize chamar isso de %.
+const CONF_PESOS={fontes:0.30, horizonte:0.25, observacao:0.25, geomagnetico:0.20};
+function confiancaPrevisao(win, band){
+  if(!win) return null;
+  const motivos=[];
+  // 1) fracao das fontes de dados que responderam nesta atualizacao
+  const tot=S.fontesTotal||7, ok=Object.values(S.fontes||{}).filter(x=>x.ok).length;
+  const fFontes=tot?ok/tot:0;
+  motivos.push({rot:'Fontes de dados', v:fFontes, txt:ok+' de '+tot+' responderam'});
+  // 2) horizonte: o modelo e de mediana; quanto mais longe, menos vale
+  const fHoriz=Math.max(0, 1-win.start/36);
+  motivos.push({rot:'Horizonte', v:fHoriz, txt:'janela começa em +'+win.start+'h'});
+  // 3) evidencia observacional real na banda (spots WSPR)
+  const gt=(S.groundTruth||{})[band];
+  const n=gt?gt.count:0;
+  const fObs=Math.min(1, n/30);
+  motivos.push({rot:'Evidência WSPR', v:fObs, txt: n? (n+' spots reais na banda') : 'sem spots nesta janela'});
+  // 4) perturbacao geomagnetica degrada modelo empirico de mediana mensal
+  const kpAt=kpForecastAt(new Date(Date.now()+win.start*3600000)).kp;
+  const fGeo=Math.max(0, 1-Math.max(0,kpAt-2)/5);
+  motivos.push({rot:'Calmaria geomagnética', v:fGeo, txt:'Kp previsto '+kpAt.toFixed(1)});
+  const score=Math.round(100*(CONF_PESOS.fontes*fFontes + CONF_PESOS.horizonte*fHoriz
+             + CONF_PESOS.observacao*fObs + CONF_PESOS.geomagnetico*fGeo));
+  return {score, motivos};
+}
 function heatColor(snr){if(snr>=5)return'var(--good)';if(snr>=-10)return'var(--boa)';if(snr>=-20)return'var(--warn)';return'var(--bad)';}
 function bestBandFor(dest){
   const now=new Date(); let best={band:null,snr:-999,h:0};
@@ -1052,7 +1140,13 @@ async function loadGroundTruth(dest){
     const r=await fetchWithTimeout('https://db1.wspr.live/?query='+encodeURIComponent(q), 20000);
     if(!r.ok) throw 0;
     const j=await r.json();
-    (j.data||[]).forEach(d=>{const band=+d.band,snr=+d.snr;if(!isFinite(band)||!isFinite(snr))return;if(!S.groundTruth[band])S.groundTruth[band]={count:0,sum:0};S.groundTruth[band].count++;S.groundTruth[band].sum+=snr;});
+    // guarda os spots individuais: sem eles nao ha desvio padrao, RMSE nem distribuicao
+    // de residuos -- so media, que foi o que limitou a validacao anterior a um unico
+    // numero global de -3dB.
+    (j.data||[]).forEach(d=>{const band=+d.band,snr=+d.snr;if(!isFinite(band)||!isFinite(snr))return;
+      if(!S.groundTruth[band])S.groundTruth[band]={count:0,sum:0,spots:[]};
+      S.groundTruth[band].count++;S.groundTruth[band].sum+=snr;
+      if(S.groundTruth[band].spots.length<800) S.groundTruth[band].spots.push(snr);});
     const total=Object.values(S.groundTruth).reduce((a,g)=>a+g.count,0);
     const agora=new Date();
     const horaUTC=agora.toISOString().slice(11,16);
@@ -1063,15 +1157,53 @@ async function loadGroundTruth(dest){
   }catch(e){ statusEl.textContent='wspr.live indisponível agora.'; }
   renderGroundTruth(dest);
 }
+// Estatistica de residuos por banda. Residuo = observado - previsto, em dB.
+// Com os spots individuais e possivel calcular desvio padrao e RMSE, o que antes
+// nao era possivel -- e e o que permite falar em erro por banda em vez de um
+// unico ajuste global.
+function estatGroundTruth(dest, band, quando){
+  const gt=(S.groundTruth||{})[band];
+  if(!gt||!gt.count) return null;
+  const prev=pathQualityAt(dest,band,quando).snr;
+  const sp=gt.spots&&gt.spots.length?gt.spots:null;
+  const media=gt.sum/gt.count;
+  let sd=null, mae=null, rmse=null;
+  if(sp){
+    let s2=0, sabs=0, sq=0;
+    sp.forEach(v=>{ s2+=(v-media)*(v-media); const r=v-prev; sabs+=Math.abs(r); sq+=r*r; });
+    sd=Math.sqrt(s2/sp.length); mae=sabs/sp.length; rmse=Math.sqrt(sq/sp.length);
+  }
+  return {n:gt.count, obs:media, prev:prev, vies:media-prev, sd:sd, mae:mae, rmse:rmse};
+}
 function renderGroundTruth(dest){
   const tbody=document.getElementById('gt-tbody'); if(!tbody) return;
-  const now=new Date(); let html='';
+  const now=new Date(); let html=''; const linhas=[];
   [1,3,5,7,10,14,18,21,24,28].forEach(b=>{
-    const gt=S.groundTruth[b]; const predicted=pathQualityAt(dest,b,now).snr;
-    if(gt&&gt.count>0){ const avgObs=gt.sum/gt.count; html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+gt.count+'</td><td>'+avgObs.toFixed(1)+'</td><td style="color:var(--text-muted);">'+predicted.toFixed(1)+'</td></tr>'; }
-    else { html+='<tr><td>'+BAND_LABEL[b]+'</td><td colspan="3" style="color:var(--text-muted);">sem spots reais</td></tr>'; }
+    const e=estatGroundTruth(dest,b,now);
+    if(e){
+      linhas.push({b,e});
+      const cor = Math.abs(e.vies)<3?'var(--good)':Math.abs(e.vies)<6?'var(--warn)':'var(--bad)';
+      html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+e.n+'</td>'
+        +'<td>'+e.obs.toFixed(1)+(e.sd!==null?' <span style="color:var(--text-muted);font-size:11px;">±'+e.sd.toFixed(1)+'</span>':'')+'</td>'
+        +'<td style="color:var(--text-muted);">'+e.prev.toFixed(1)+'</td>'
+        +'<td style="color:'+cor+';font-weight:600;" title="MAE '+(e.mae!==null?e.mae.toFixed(1):'—')+'dB · RMSE '+(e.rmse!==null?e.rmse.toFixed(1):'—')+'dB">'
+        +(e.vies>=0?'+':'')+e.vies.toFixed(1)+'</td></tr>';
+    }
+    else html+='<tr><td>'+BAND_LABEL[b]+'</td><td colspan="4" style="color:var(--text-muted);">sem spots reais</td></tr>';
   });
   tbody.innerHTML=html;
+  const resumo=document.getElementById('gt-resumo');
+  if(resumo){
+    if(!linhas.length){ resumo.innerHTML=''; return; }
+    const N=linhas.reduce((a,x)=>a+x.e.n,0);
+    const viesP=linhas.reduce((a,x)=>a+x.e.vies*x.e.n,0)/N;
+    const maeP=linhas.reduce((a,x)=>a+(x.e.mae||0)*x.e.n,0)/N;
+    const rmseP=Math.sqrt(linhas.reduce((a,x)=>a+Math.pow(x.e.rmse||0,2)*x.e.n,0)/N);
+    resumo.innerHTML='<b>Resíduo agregado desta janela</b> '+selo('OBSERVADO')+' — '+N+' spots em '+linhas.length+' banda(s): '
+      +'viés ponderado <b>'+(viesP>=0?'+':'')+viesP.toFixed(1)+' dB</b> · MAE '+maeP.toFixed(1)+' dB · RMSE '+rmseP.toFixed(1)+' dB.'
+      +'<div style="font-size:11px;color:var(--text-muted);margin-top:3px;">Viés positivo = o modelo está <b>pessimista</b> (o real chega melhor); negativo = otimista. '
+      +'A correção fixa de −3 dB embutida no cálculo veio de uma única sessão com 159 spots; esta tabela mostra o resíduo <b>que ainda resta por banda</b>, medido agora.</div>';
+  }
 }
 function drawKpChart(){
   const canvas=document.getElementById('kpChart'); if(!canvas||typeof Chart==='undefined') return;
@@ -1220,7 +1352,7 @@ function renderHF(){
     const fOp=1.840; // centro da faixa brasileira de 160m
     const razao=fOp*1000/fH;
     const lin=(r,v)=>'<tr><td style="padding:1px 12px 1px 0;color:var(--text-muted);">'+r+'</td><td style="font-variant-numeric:tabular-nums;">'+v+'</td></tr>';
-    gp.innerHTML='<div style="font-weight:500;color:var(--text-primary);margin-bottom:4px;">Campo geomagnético no QTH — WMM2025</div><table>'
+    gp.innerHTML='<div style="font-weight:500;color:var(--text-primary);margin-bottom:4px;">Campo geomagnético no QTH — WMM2025 '+selo('MODELADO')+'</div><table>'
       +lin('Intensidade B', Math.round(f.F).toLocaleString('pt-BR')+' nT')
       +lin('Declinação D', f.D.toFixed(2)+'°')
       +lin('Inclinação I', f.I.toFixed(2)+'°')
@@ -1229,6 +1361,11 @@ function renderHF(){
       +lin('f / f<sub>H</sub> em '+fOp.toFixed(3)+' MHz', razao.toFixed(2))
       +'</table><div style="font-size:11px;color:var(--text-muted);margin-top:4px;">f/f<sub>H</sub> é indicador físico da relação entre frequência de operação e giro-frequência local. <b>Não</b> representa, isoladamente, absorção nem qualidade de propagação — não entra em nenhum cálculo de SNR deste painel.</div>';
   }
+  // ----- perfil longitudinal do caminho, na melhor banda do momento -----
+  // catch com log: um catch mudo aqui escondeu um ReferenceError e o perfil ficou
+  // vazio sem qualquer sinal de erro
+  try{ renderPerfilCaminho(dest, bestBandFor(dest).band||14, new Date()); }
+  catch(e){ console.error('perfil do caminho:', e.message); }
   // ----- painel de ruido P.372: apenas os componentes verificados -----
   const rp=document.getElementById('ruido-panel');
   if(rp){
@@ -1294,7 +1431,7 @@ function renderHF(){
   const giMoon=document.getElementById('gi-moon');
   if(giMoon){
     const fase=moonPhaseInfo(new Date());
-    giMoon.textContent=fase.nome+' ('+fase.iluminado+'%)';
+    giMoon.innerHTML=moonSvg(fase.elong, QTH.lat, 20)+' '+fase.nome+' ('+fase.iluminado+'%)';
   }
   const giEclipse=document.getElementById('gi-eclipse');
   if(giEclipse){
@@ -1311,8 +1448,11 @@ function renderHF(){
     const win=bestWindow(hourly);
     if(!win){ html+='<tr><td>'+BAND_LABEL[b]+'</td><td colspan="2" style="color:var(--text-muted);">Sem abertura clara</td></tr>'; return; }
     const fmt=t=>String(t.getUTCHours()).padStart(2,'0')+':'+String(t.getUTCMinutes()).padStart(2,'0');
-    const conf=confidenceFor(win);
-    html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+fmt(hourly[win.start].t)+'–'+fmt(hourly[win.end].t)+'</td><td style="font-weight:600;">'+conf+'%</td></tr>';
+    const conf=confiancaPrevisao(win, b);
+    const cor = conf.score>=70?'var(--good)':conf.score>=45?'var(--warn)':'var(--bad)';
+    const detalhe = conf.motivos.map(m=>m.rot+': '+Math.round(m.v*100)+'% ('+m.txt+')').join(' · ');
+    html+='<tr><td>'+BAND_LABEL[b]+'</td><td>'+fmt(hourly[win.start].t)+'–'+fmt(hourly[win.end].t)+'</td>'
+      +'<td style="font-weight:600;color:'+cor+';" title="'+detalhe+'">'+conf.score+'/100</td></tr>';
   });
   document.getElementById('band-detail').innerHTML=html;
   drawHeatmap(dest,now);
@@ -2101,16 +2241,16 @@ function renderVHF(){
     const eeqFavoravel=S.kp<=2; // contra-intuitivo: Kp baixo enfraquece o eletrojet, favorecendo a Es equatorial -- oposto do resto do sistema
     html6+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(eeqFavoravel?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(eeqFavoravel?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>Es Equatorial: '+(eeqFavoravel?'Condição favorável':'Kp alto pode suprimir')+'</b><div style="font-size:11px;margin-top:2px;">Seu QTH está a '+gmLatAbs.toFixed(1)+'° de latitude de mergulho'+(eqLat!==null?' (equador magnético real cruza seu meridiano em '+Math.abs(eqLat).toFixed(1)+'°'+(eqLat<0?'S':'N')+')':'')+' — mecanismo diferente da Es acima (eletrojet, não vento). Kp alto <b>enfraquece</b> o eletrojet e favorece esse tipo — o oposto do padrão usual.</div></div>';
   }
-  html6+='<div style="padding:8px 10px;border-radius:6px;background:'+(tep6Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep6Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep6.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep6.h+'h</div></div>';
+  html6+='<div style="padding:8px 10px;border-radius:6px;background:'+(tep6Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep6Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': favorabilidade '+tep6.score+'/100</b><div style="font-size:11px;margin-top:2px;">em '+tep6.h+'h</div></div>';
   document.getElementById('vhf-6m').innerHTML=html6;
-  let html2='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(tep2Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep2Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': pico '+tep2.score+'%</b><div style="font-size:11px;margin-top:2px;">em '+tep2.h+'h (mais raro que 6m)</div></div>';
+  let html2='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:'+(tep2Ok?'var(--status-good-bg)':'var(--surface-1)')+';color:'+(tep2Ok?'var(--status-good-fg)':'var(--text-secondary)')+';"><b>TEP p/ '+dest.name+': favorabilidade '+tep2.score+'/100</b><div style="font-size:11px;margin-top:2px;">em '+tep2.h+'h (mais raro que 6m)</div></div>';
   const agoraM2=new Date();
   const tauM2=tempoLunarLocal(agoraM2, QTH.lon);
   const desvioM2=desvioInicioBolhasMin(tauM2);
   const maisCedo=desvioM2<0;
   html2+='<div style="padding:8px 10px;border-radius:6px;margin-bottom:8px;background:var(--surface-1);color:var(--text-secondary);">'
-    +'<b>Maré lunar M2: bolhas de plasma ~'+Math.abs(desvioM2).toFixed(0)+'min '+(maisCedo?'mais cedo':'mais tarde')+'</b>'
-    +' <span style="font-size:10px;padding:1px 5px;border-radius:3px;background:var(--surface-2);color:var(--text-muted);">EXPERIMENTAL</span>'
+    +selo('EXPERIMENTAL')+' <b>Maré lunar M2: bolhas de plasma ~'+Math.abs(desvioM2).toFixed(0)+'min '+(maisCedo?'mais cedo':'mais tarde')+'</b>'
+    +''
     +'<div style="font-size:11px;margin-top:2px;">Tempo lunar local '+tauM2.toFixed(1)+'h · incerteza publicada ±'+EPB_M2_SIGMA_AMP_MIN+'min em amplitude e ±'+(EPB_M2_SIGMA_FASE_H*60).toFixed(0)+'min em fase. '
     +'Desloca o <b>horário</b> em que as bolhas começam, não a intensidade — e como o TEP noturno em 2m depende delas, desloca junto a abertura da janela. '
     +'Ajuste M2 de Paulino et al. 2020 (Annales Geophysicae 38, 437), sobre 10 anos de imagens de airglow em São João do Cariri (7,4°S). '
@@ -2172,6 +2312,42 @@ function tempoLunarLocal(date, lonDeg){
 // Positivo = mais tarde que a media; negativo = mais cedo.
 function desvioInicioBolhasMin(tau){
   return EPB_M2_AMPLITUDE_MIN*Math.cos(2*Math.PI*(tau-EPB_M2_FASE_MAX_H)/12);
+}
+// Desenho da fase lunar. A geometria e a projecao do terminador: o limbo e um
+// semicirculo de raio R e o terminador e uma semi-elipse de semi-eixo R*|cos(elong)|.
+// Crescente (k<0,5) -> terminador concavo; gibosa (k>0,5) -> convexo.
+// A face escura usa tom fixo, nao variavel de tema: com var(--surface-2) a Lua nova
+// aparecia branca no tema claro.
+//
+// ORIENTACAO: no hemisferio SUL a Lua crescente aparece iluminada do lado ESQUERDO,
+// ao contrario do hemisferio norte. Como o painel e brasileiro, o desenho e espelhado
+// conforme a latitude do QTH -- desenhar no padrao do hemisferio norte mostraria a
+// Lua ao contrario do que o operador ve no ceu.
+function moonSvg(elong, latQth, tamanho){
+  const R=(tamanho||20)/2, cx=R, cy=R;
+  const e=((elong%360)+360)%360;
+  const k=(1-Math.cos(e*Math.PI/180))/2;       // fracao iluminada
+  const crescendo = e<180;
+  const sul = (latQth||0) < 0;
+  const luzNaDireita = sul ? !crescendo : crescendo;
+  const rx=Math.abs(Math.cos(e*Math.PI/180))*R;
+  const gibosa = k>0.5;
+  const idg='mg'+Math.round(e*10);
+  let luz='';
+  if(k<=0.005){ luz=''; }
+  else if(k>=0.995){ luz='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="url(#'+idg+')"/>'; }
+  else {
+    // semicirculo do limbo + semi-elipse do terminador
+    const d='M '+cx+' '+(cy-R)+' A '+R+' '+R+' 0 0 1 '+cx+' '+(cy+R)
+           +' A '+rx.toFixed(3)+' '+R+' 0 0 '+(gibosa?1:0)+' '+cx+' '+(cy-R)+' Z';
+    luz='<path d="'+d+'" fill="url(#'+idg+')"'+(luzNaDireita?'':' transform="scale(-1,1) translate('+(-2*cx)+',0)"')+'/>';
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+(R*2)+'" height="'+(R*2)+'" viewBox="0 0 '+(R*2)+' '+(R*2)+'" role="img" '
+    +'aria-label="Fase da Lua, '+Math.round(k*100)+' por cento iluminada" style="vertical-align:-3px;">'
+    +'<defs><radialGradient id="'+idg+'" cx="35%" cy="30%">'
+    +'<stop offset="0%" stop-color="#fffdf2"/><stop offset="100%" stop-color="#e8e2cf"/></radialGradient></defs>'
+    +'<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="#31313a" stroke="#5a5a66" stroke-width="0.5"/>'
+    +luz+'</svg>';
 }
 function moonPhaseInfo(date){
   const T=jc(date);
