@@ -8,6 +8,14 @@ The selected **Maidenhead grid locator** anchors location-dependent calculations
 
 **Scientific status:** research software submitted for independent evaluation. AGHIP is not a certified warning system, a guarantee of reception, or an independently validated predictor for every supported operating scenario.
 
+## DOI metadata edition
+
+Version: **AGHIP-review-2026.09.09-r11-doi.1**. Reserved DOI: [10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135). The maintainer supplied this identifier for the existing Zenodo draft; registration occurs upon publication. This edition updates publication text and metadata; the numerical implementation is unchanged. See [DOI preparation](docs/DOI-PREPARATION.md).
+
+Application-script SHA-256: `5d1b840e40f3d6ba3148dc6b4f68871109bf6b8e3fe26d13cf3079285e19a813`. See [release notes](RELEASE-NOTES.md).
+
+Current HTML SHA-256: `769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c`. The r11 hash and reports below describe the preserved historical baseline.
+
 ## Getting started
 
 1. Obtain `index.html` from the version you intend to use and save it locally.
@@ -126,7 +134,7 @@ The provenance manifest and preserved reports identify the exact tested artifact
 
 ### Reproducing the reviewed tests
 
-This repository includes the nine suites in `tests/`, supporting fixtures, and preserved r11 reports in `reports/r11/`. The runtime HTML is unchanged.
+This repository includes the nine suites in `tests/`, supporting fixtures, and preserved r11 reports in `reports/r11/`. This DOI edition changes publication metadata and retains the baseline numerical implementation.
 
 With Node.js 24 installed, run these commands from the repository root:
 

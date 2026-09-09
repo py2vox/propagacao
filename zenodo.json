@@ -1,0 +1,30 @@
+{
+  "title": "AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation",
+  "upload_type": "software",
+  "description": "Single-HTML research software for HF/VHF/EME propagation and space-weather analysis. Release candidate for independent scientific review, not certified. The accompanying review and tests disclose model limits and unresolved external-validation gates, including the P.1147 Figure 4 discrepancy. Offline numerical operation does not provide live weather observations or official alerts.",
+  "creators": [
+    {
+      "name": "de Paula, José Ricardo"
+    }
+  ],
+  "version": "AGHIP-review-2026.09.09-r11-doi.1",
+  "publication_date": "2026-09-09",
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "radio propagation",
+    "ionosphere",
+    "amateur radio",
+    "space weather",
+    "reproducible research",
+    "160 meters"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/py2vox/propagacao",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "doi": "10.5281/zenodo.22682135"
+}

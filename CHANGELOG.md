@@ -14,3 +14,7 @@
 ## AGHIP-review-2026.09.09-r11
 
 See `docs/SUBMISSION-REVIEW.md` for corrections, the 1,717-check internal regression snapshot and unresolved independent-validation gates. That snapshot is not a certification or a claim of zero possible failures.
+
+## AGHIP-review-2026.09.09-r11-doi.1
+
+Reserved DOI 10.5281/zenodo.22682135 integrated into publication metadata and Science text. Numerical implementation preserved. Added DOI consistency and metadata-only comparison checks; retained historical r11 evidence.

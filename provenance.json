@@ -1,12 +1,12 @@
 {
-  "runtimeRelease": "AGHIP-review-2026.09.09-r11",
-  "runtimeSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "runtimeRelease": "AGHIP-review-2026.09.09-r11-doi.1",
+  "runtimeSha256": "769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c",
   "repositoryPreparation": "2026-09-09",
   "source": "Preserved local r11 review package; remote repository was not inspected",
-  "note": "Copied evidence retains original package-relative paths. Repository metadata changed; application HTML did not.",
+  "note": "DOI metadata edition. Baseline reports retain their original hashes. Numerical application scripts are unchanged after reversing only the documented publication text, release label and digest substitutions.",
   "preservedFiles": [
     {
-      "path": "index.html",
+      "path": "reports/baseline/index.html",
       "sourcePath": "index.html",
       "sha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0"
     },
@@ -71,12 +71,12 @@
       "sha256": "d9a7005528e53e75caeceb97ec62afa100d94eb9bc936c4a825e9bae9f9705b9"
     },
     {
-      "path": "tests/verify-submission.cjs",
+      "path": "reports/baseline/verify-submission.cjs",
       "sourcePath": "verify-submission.cjs",
       "sha256": "830535684b714783484a8ba7ac26e3b791fb159d4683bb81d5edc4926900d084"
     },
     {
-      "path": "tests/verify-topband160.cjs",
+      "path": "reports/baseline/verify-topband160.cjs",
       "sourcePath": "verify-topband160.cjs",
       "sha256": "3ae623b4e33193e41eaf13c1921c3fc80dca8176763423695787e33356d8943e"
     },
@@ -230,5 +230,19 @@
       "sourcePath": "release-manifest.json",
       "sha256": "7fd877c94c601b471e983f68064827deb373f277c573777677251fc7d706b6b0"
     }
-  ]
+  ],
+  "baselineRuntimeSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "publication": {
+    "doi": "10.5281/zenodo.22682135",
+    "status": "reserved",
+    "source": "DOI supplied by the maintainer in this task",
+    "registration": "Zenodo registers the DOI when the deposit is published"
+  },
+  "scriptDigest": "5d1b840e40f3d6ba3148dc6b4f68871109bf6b8e3fe26d13cf3079285e19a813",
+  "scriptChanges": {
+    "englishBefore": "Collaboration is invited on reproducible equation review, NEC antenna models, ionosonde/WSPR validation and radio-propagation observations. Repository, DOI and ORCID remain pending until supplied and verified.",
+    "englishAfter": "Repository: https://github.com/py2vox/propagacao. Reserved DOI: 10.5281/zenodo.22682135; registration occurs when the Zenodo deposit is published. ORCID not supplied.",
+    "baselineRelease": "AGHIP-review-2026.09.09-r11",
+    "release": "AGHIP-review-2026.09.09-r11-doi.1"
+  }
 }

@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "Cite the exact release used. The DOI has not been assigned."
+message: "Cite the exact release used. The supplied DOI is reserved; it becomes registered upon Zenodo publication."
 title: "AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation"
 type: software
-version: "AGHIP-review-2026.09.09-r11"
+version: "AGHIP-review-2026.09.09-r11-doi.1"
 date-released: 2026-09-09
 authors:
   - family-names: "de Paula"
@@ -12,3 +12,4 @@ license: MIT
 abstract: "An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis. Single-file research software with declared model limits. Candidate for independent scientific review; not certified."
 
 repository-code: "https://github.com/py2vox/propagacao"
+doi: "10.5281/zenodo.22682135"
