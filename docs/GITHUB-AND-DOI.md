@@ -21,7 +21,7 @@ The prepared CI file cannot enable repository settings. The owner must review Ac
 5. Prepare the final commit/tag, review manifests and archive the exact intended files. Verify the archive contents against hashes before publishing.
 6. Publish only after approval. Confirm the DOI resolves to the intended version and update documentation without silently replacing the cited artifact.
 
-`CITATION.cff` and `.zenodo.json` contain real authorship and version information but no invented DOI or ORCID. A commit cannot conveniently contain its own final commit hash; record that hash in an external release manifest or deposit metadata after the commit exists.
+`CITATION.cff` and `.zenodo.json` now contain the reserved DOI 10.5281/zenodo.22682135 supplied by the maintainer. No ORCID was supplied. Use the existing draft; see DOI-PREPARATION.md. A commit cannot conveniently contain its own final commit hash; record that hash in an external release manifest or deposit metadata after the commit exists.
 
 Official guidance: [Zenodo DOI reservation](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/) and [GitHub integration](https://help.zenodo.org/docs/github/).
 

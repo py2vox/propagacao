@@ -6,7 +6,7 @@ The baseline is **AGHIP-review-2026.09.09-r11**, HTML SHA-256:
 a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0
 ```
 
-Repository preparation did not modify that file. It remains a candidate for independent scientific evaluation, not a certified operational system.
+That historical HTML is preserved under reports/baseline/index.html. The current AGHIP-review-2026.09.09-r11-doi.1 edition updates publication metadata and retains its numerical implementation. It remains a candidate for independent scientific evaluation, not a certified operational system.
 
 The r11 package recorded 1,717 passing internal checks across nine suites. Re-running tests after moving them verifies the packaging and exercised behavior; it does not create independent scientific validation. Public API sample probes are separate evidence, with time-limited applicability.
 
