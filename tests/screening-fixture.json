@@ -1,0 +1,16 @@
+{
+  "id": "screening-only-fixed-circuits-v1",
+  "scope": "Synthetic intervention on Table 1b foE only, not observed ionosphere or predictive validation",
+  "qth": {"lat": -22.8541666667, "lon": -47.125},
+  "utc": "2026-09-08T17:50:00.000Z",
+  "r12": 72,
+  "band": 7,
+  "frequencyMHz": 7.04,
+  "station": {"PtdBkW": -10, "W": 100, "Gt": 2.15, "Gr": 2.15, "perfilTx": "constant", "perfilRx": "cmp_dipole_050", "catRuido": "city", "bwHz": 2400},
+  "foEStagesMHz": [0.1, 1, 2, 4, 8, 20],
+  "circuits": [
+    {"id": "campinas-brasilia-midpoint", "lat": -15.8, "lon": -47.9, "expectedControlPoints": 1},
+    {"id": "campinas-natal-two-controls", "lat": -5.7945, "lon": -35.211, "expectedControlPoints": 2}
+  ],
+  "toleranceDb": 1e-8
+}
