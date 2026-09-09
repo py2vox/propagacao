@@ -1,0 +1,123 @@
+{
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "at": "2026-09-09T18:16:29.804Z",
+  "summary": {
+    "suites": 9,
+    "passedSuites": 9,
+    "failedSuites": 0,
+    "passedChecks": 1717,
+    "failedChecks": 0
+  },
+  "results": [
+    {
+      "name": "p1147",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 505,
+        "passed": 505,
+        "failed": 0
+      },
+      "report": "p1147.json"
+    },
+    {
+      "name": "scientific",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 335,
+        "passed": 335,
+        "failed": 0,
+        "wmmAssertions": 700,
+        "p533EmbeddedAssertions": 12
+      },
+      "report": "scientific.json"
+    },
+    {
+      "name": "screening",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 198,
+        "passed": 198,
+        "failed": 0
+      },
+      "report": "screening.json"
+    },
+    {
+      "name": "hf-presentation",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 87,
+        "passed": 87,
+        "failed": 0
+      },
+      "report": "hf-presentation.json"
+    },
+    {
+      "name": "accessibility",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 157,
+        "passed": 157,
+        "failed": 0
+      },
+      "report": "accessibility.json"
+    },
+    {
+      "name": "listening-domains",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 120,
+        "passed": 120,
+        "failed": 0
+      },
+      "report": "listening-domains.json"
+    },
+    {
+      "name": "submission",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 101,
+        "passed": 101,
+        "failed": 0
+      },
+      "report": "submission.json"
+    },
+    {
+      "name": "topband",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "passed": 161,
+        "failed": 0
+      },
+      "report": "topband-stage\\topband160-results.json"
+    },
+    {
+      "name": "overview-welcome",
+      "passed": true,
+      "exitCode": 0,
+      "artifactHashMatches": true,
+      "summary": {
+        "checks": 53,
+        "passed": 53,
+        "failed": 0
+      },
+      "report": "overview-welcome.json"
+    }
+  ],
+  "scope": "Internal deterministic and DOM-emulated regression; embedded subassertions not double-counted; no live or predictive validation"
+}

@@ -1,0 +1,216 @@
+{
+  "scope": "Server-side response/schema samples; not browser or predictive validation. No personal key used.",
+  "unverified": [
+    "NASA DONKI authenticated request",
+    "GLM object download and WASM decode",
+    "Radar tile rendering",
+    "continuous uptime"
+  ],
+  "results": [
+    {
+      "provider": "SFI",
+      "url": "https://services.swpc.noaa.gov/products/summary/10cm-flux.json",
+      "at": "2026-09-09T17:13:20.795Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 1,
+      "keys": [
+        "flux",
+        "time_tag"
+      ],
+      "sampleTime": "2026-09-08T20:00:00"
+    },
+    {
+      "provider": "Kp",
+      "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json",
+      "at": "2026-09-09T17:13:21.104Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 61,
+      "keys": [
+        "time_tag",
+        "Kp",
+        "a_running",
+        "station_count"
+      ],
+      "sampleTime": "2026-09-02T00:00:00"
+    },
+    {
+      "provider": "Dst",
+      "url": "https://services.swpc.noaa.gov/products/kyoto-dst.json",
+      "at": "2026-09-09T17:13:21.728Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 167,
+      "keys": [
+        "time_tag",
+        "dst"
+      ],
+      "sampleTime": "2026-09-02T18:00:00"
+    },
+    {
+      "provider": "R12",
+      "url": "https://services.swpc.noaa.gov/json/solar-cycle/observed-solar-cycle-indices.json",
+      "at": "2026-09-09T17:13:21.738Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 3332,
+      "keys": [
+        "time-tag",
+        "ssn",
+        "smoothed_ssn",
+        "observed_swpc_ssn",
+        "smoothed_swpc_ssn",
+        "f10.7",
+        "smoothed_f10.7"
+      ],
+      "sampleTime": null
+    },
+    {
+      "provider": "X-ray",
+      "url": "https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json",
+      "at": "2026-09-09T17:13:21.981Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 2874,
+      "keys": [
+        "time_tag",
+        "satellite",
+        "flux",
+        "observed_flux",
+        "electron_correction",
+        "electron_contaminaton",
+        "energy"
+      ],
+      "sampleTime": "2026-09-08T17:13:00Z"
+    },
+    {
+      "provider": "Bz",
+      "url": "https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json",
+      "at": "2026-09-09T17:13:21.924Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 3517,
+      "keys": [
+        "time_tag",
+        "active",
+        "source",
+        "range",
+        "scale",
+        "sensitivity",
+        "manual_mode",
+        "sample_size",
+        "bt",
+        "bx_gse",
+        "by_gse",
+        "bz_gse",
+        "theta_gse",
+        "phi_gse",
+        "bx_gsm",
+        "by_gsm",
+        "bz_gsm",
+        "theta_gsm",
+        "phi_gsm",
+        "max_telemetry_flag",
+        "max_data_flag",
+        "overall_quality"
+      ],
+      "sampleTime": "2026-09-09T17:07:00"
+    },
+    {
+      "provider": "GIRO relay",
+      "url": "https://ionocast.org/api/kc2g",
+      "at": "2026-09-09T17:13:22.376Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 101,
+      "keys": [
+        "data",
+        "source",
+        "attempts",
+        "_fetched_at",
+        "stale",
+        "proxy"
+      ],
+      "sampleTime": "2026-03-19T22:10:05"
+    },
+    {
+      "provider": "USGS",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson",
+      "at": "2026-09-09T17:13:22.490Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": 8,
+      "keys": [
+        "type",
+        "metadata",
+        "features",
+        "bbox"
+      ],
+      "sampleTime": null
+    },
+    {
+      "provider": "RainViewer",
+      "url": "https://api.rainviewer.com/public/weather-maps.json",
+      "at": "2026-09-09T17:13:22.508Z",
+      "httpStatus": 200,
+      "cors": "*",
+      "json": true,
+      "records": null,
+      "keys": [
+        "version",
+        "generated",
+        "host",
+        "radar",
+        "satellite"
+      ],
+      "sampleTime": null
+    },
+    {
+      "provider": "Open-Meteo public reference point",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=38.9&longitude=-77.04&current=temperature_2m,relative_humidity_2m,surface_pressure,wind_speed_10m,wind_gusts_10m",
+      "at": "2026-09-09T17:13:23.012Z",
+      "httpStatus": 200,
+      "cors": null,
+      "json": true,
+      "records": null,
+      "keys": [
+        "latitude",
+        "longitude",
+        "generationtime_ms",
+        "utc_offset_seconds",
+        "timezone",
+        "timezone_abbreviation",
+        "elevation",
+        "current_units",
+        "current"
+      ],
+      "sampleTime": "2026-09-09T17:00"
+    },
+    {
+      "provider": "WSPR sample",
+      "url": "https://db1.wspr.live/?query=SELECT%20time%2C%20band%2C%20frequency%2C%20power%2C%20snr%2C%20code%2C%20tx_sign%2C%20rx_sign%2C%20tx_loc%2C%20rx_loc%2C%20tx_lat%2C%20tx_lon%2C%20rx_lat%2C%20rx_lon%20FROM%20wspr.rx%20WHERE%20band%20%3D%201%20AND%20time%20%3E%20subtractHours(now()%2C2)%20AND%20code%20IN%20(1%2C2)%20ORDER%20BY%20time%20DESC%20LIMIT%201%20FORMAT%20JSON",
+      "at": "2026-09-09T17:13:23.238Z",
+      "httpStatus": 200,
+      "cors": null,
+      "json": true,
+      "records": 1,
+      "keys": [
+        "meta",
+        "data",
+        "rows",
+        "rows_before_limit_at_least",
+        "statistics"
+      ],
+      "sampleTime": "2026-09-09 17:10:00"
+    }
+  ]
+}

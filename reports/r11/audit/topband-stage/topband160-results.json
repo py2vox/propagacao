@@ -1,0 +1,664 @@
+{
+  "release": "AGHIP-review-2026.09.09-r11",
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "summary": {
+    "passed": 161,
+    "failed": 0
+  },
+  "limits": {
+    "realBrowser": false,
+    "liveApi": false,
+    "predictiveValidation": false,
+    "p1147Figure4": "OPEN"
+  },
+  "checks": [
+    {
+      "name": "Existing functions outside declared scope unchanged",
+      "passed": true,
+      "detail": {
+        "compared": 353
+      }
+    },
+    {
+      "name": "HF P.533 equations unchanged",
+      "passed": true
+    },
+    {
+      "name": "P.1147 budget equations unchanged",
+      "passed": true
+    },
+    {
+      "name": "WSPR provider hardened with request identity",
+      "passed": true
+    },
+    {
+      "name": "All vendor scripts unchanged",
+      "passed": true
+    },
+    {
+      "name": "P1147 1836 kHz rejected",
+      "passed": true
+    },
+    {
+      "name": "P533 1.836 MHz rejected",
+      "passed": true
+    },
+    {
+      "name": "Strict number null",
+      "passed": true
+    },
+    {
+      "name": "Strict number \"\"",
+      "passed": true
+    },
+    {
+      "name": "Strict number \" \"",
+      "passed": true
+    },
+    {
+      "name": "Strict number \"x\"",
+      "passed": true
+    },
+    {
+      "name": "Strict number \"0\"",
+      "passed": true
+    },
+    {
+      "name": "Strict number 0",
+      "passed": true
+    },
+    {
+      "name": "Strict number \"10\"",
+      "passed": true
+    },
+    {
+      "name": "Strict number false",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid UTC ",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid UTC null",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid UTC 2026-09-09",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid UTC 2026-02-30T03:00:00Z",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid UTC 2026-09-09T99:00:00Z",
+      "passed": true
+    },
+    {
+      "name": "UTC SQL string equals ISO Z",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 0.01",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 0.01",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 0.1",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 0.1",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 0.5",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 0.5",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 1",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 1",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 2",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 2",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 10",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 10",
+      "passed": true
+    },
+    {
+      "name": "Power ratio 100",
+      "passed": true
+    },
+    {
+      "name": "Bandwidth ratio 100",
+      "passed": true
+    },
+    {
+      "name": "10 dB additional noise reduces SNR by 10 dB",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid power null",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid power NaN",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid power Infinity",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid power 0",
+      "passed": true
+    },
+    {
+      "name": "Reject invalid power -1",
+      "passed": true
+    },
+    {
+      "name": "Conditional reference 10x power and 5x narrower bandwidth",
+      "passed": true
+    },
+    {
+      "name": "Reference gate SYSTEM_CONFIRMATION_REQUIRED{\"sameSystem\":false}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate TRANSMITTER_GRID_REQUIRED{\"exactTransmitter\":false}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate CONFIGURATION_CHANGED{\"routeKey\":\"different\"}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate CONFIGURATION_CHANGED{\"antennaKey\":\"other\"}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate FREQUENCY_MISMATCH{\"frequencyMHz\":1.9}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate REFERENCE_TIME{\"at\":null}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate REFERENCE_TIME{\"at\":1788922801000}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate REFERENCE_TIME{\"at\":1788920999000}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate PAIRED_NOISE_REQUIRED{\"noiseDbm\":-100}",
+      "passed": true
+    },
+    {
+      "name": "Reference gate INVALID_NUMERIC_INPUT{\"snrDb\":null}",
+      "passed": true
+    },
+    {
+      "name": "Noise measured at same RBW adjusts SNR",
+      "passed": true
+    },
+    {
+      "name": "Analytical equatorial arc half in night",
+      "passed": true
+    },
+    {
+      "name": "90 km shadow boundary angle",
+      "passed": true
+    },
+    {
+      "name": "90 km shadow fraction less than surface night",
+      "passed": true
+    },
+    {
+      "name": "Fully sunlit arc has zero night/shadow",
+      "passed": true
+    },
+    {
+      "name": "Date-line short arc fully shadowed",
+      "passed": true
+    },
+    {
+      "name": "Sol above horizon is not night",
+      "passed": true
+    },
+    {
+      "name": "Exact antipodes refused",
+      "passed": true
+    },
+    {
+      "name": "Coincident points finite",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 0",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 0",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 0",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 1",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 1",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 1",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 2",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 2",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 2",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 3",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 3",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 3",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 4",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 4",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 4",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 5",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 5",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 5",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 6",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 6",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 6",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 7",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 7",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 7",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 8",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 8",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 8",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 9",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 9",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 9",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 10",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 10",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 10",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 11",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 11",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 11",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 12",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 12",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 12",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 13",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 13",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 13",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 14",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 14",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 14",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 15",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 15",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 15",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 16",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 16",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 16",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 17",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 17",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 17",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 18",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 18",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 18",
+      "passed": true
+    },
+    {
+      "name": "Arc integration vs 12000-point independent sample 19",
+      "passed": true
+    },
+    {
+      "name": "Arc reversal invariant 19",
+      "passed": true
+    },
+    {
+      "name": "Shadow subset of night 19",
+      "passed": true
+    },
+    {
+      "name": "Valid incoming spot kept",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"time\":null}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"time\":\"2026-09-09T03:01:00Z\"}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"time\":\"2026-09-09T00:59:59Z\"}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"power\":null}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"snr\":\"\"}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"rx_lat\":null}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"tx_sign\":\"<script>\"}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"frequency\":1700000}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"code\":3}",
+      "passed": true
+    },
+    {
+      "name": "Spot rejection {\"rx_lat\":20}",
+      "passed": true
+    },
+    {
+      "name": "Zero dBm is valid declared power",
+      "passed": true
+    },
+    {
+      "name": "Duplicate excluded",
+      "passed": true
+    },
+    {
+      "name": "Reverse path is separate",
+      "passed": true
+    },
+    {
+      "name": "Antimeridian SQL handles wrap",
+      "passed": true
+    },
+    {
+      "name": "Polar box needs no longitude filter",
+      "passed": true
+    },
+    {
+      "name": "Native title true137",
+      "passed": true
+    },
+    {
+      "name": "No fallback placeholder in new panel true138",
+      "passed": true
+    },
+    {
+      "name": "P1147 limits remain visible true139",
+      "passed": true
+    },
+    {
+      "name": "Native title false140",
+      "passed": true
+    },
+    {
+      "name": "No fallback placeholder in new panel false141",
+      "passed": true
+    },
+    {
+      "name": "P1147 limits remain visible false142",
+      "passed": true
+    },
+    {
+      "name": "Native title true143",
+      "passed": true
+    },
+    {
+      "name": "No fallback placeholder in new panel true144",
+      "passed": true
+    },
+    {
+      "name": "P1147 limits remain visible true145",
+      "passed": true
+    },
+    {
+      "name": "Native title false146",
+      "passed": true
+    },
+    {
+      "name": "No fallback placeholder in new panel false147",
+      "passed": true
+    },
+    {
+      "name": "P1147 limits remain visible false148",
+      "passed": true
+    },
+    {
+      "name": "Full HF render keeps Top Band panel en",
+      "passed": true
+    },
+    {
+      "name": "Scientific identity preserved en",
+      "passed": true
+    },
+    {
+      "name": "Full HF render keeps Top Band panel pt",
+      "passed": true
+    },
+    {
+      "name": "Scientific identity preserved pt",
+      "passed": true
+    },
+    {
+      "name": "UI reference produces conditional result",
+      "passed": true
+    },
+    {
+      "name": "Changing transmitter invalidates calibration",
+      "passed": true
+    },
+    {
+      "name": "Invalid transmitter suppresses stale output",
+      "passed": true
+    },
+    {
+      "name": "Adapter requests its own band-specific data",
+      "passed": true
+    },
+    {
+      "name": "Late old-grid response ignored",
+      "passed": true
+    },
+    {
+      "name": "HTTP failure is unavailable, not zero reception",
+      "passed": true
+    },
+    {
+      "name": "No console errors in exercised rendering",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "No actual network calls during deterministic checks",
+      "passed": true
+    }
+  ]
+}

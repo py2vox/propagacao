@@ -1,0 +1,52 @@
+{
+  "release": "AGHIP-review-2026.09.09-r11",
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "applicationScriptsSha256": "3ce32598ac09af5fc3ef749e62c677368d5993ff42898ba3ea928cf52bccaa61",
+  "parentHtmlSha256": "61b45da4d50db4f1bc34130b271b52fb4e73f303d13436ce69c4764f5ac6845e",
+  "singleHtmlRuntime": true,
+  "status": "Candidate for independent review; not independently validated or certified",
+  "validation": {
+    "realBrowser": {
+      "status": "NOT_TESTED",
+      "reason": "Local-file access blocked by browser tool URL policy; no bypass"
+    },
+    "predictiveFieldValidation": false,
+    "automatedChecks": {
+      "suites": 9,
+      "passedSuites": 9,
+      "failedSuites": 0,
+      "passedChecks": 1717,
+      "failedChecks": 0
+    },
+    "node": "24.19.0",
+    "domEmulator": "linkedom 0.18.12",
+    "liveEndpointSamples": {
+      "status": "HTTP 200 on sampled services",
+      "reports": [
+        "evidence/live-contracts.json",
+        "evidence/live-data.json"
+      ],
+      "scope": "Server-side read-only schema samples, not browser end-to-end tests"
+    },
+    "p1147ExternalComparison": "OPEN_DISCREPANCY_NOT_TUNED_AWAY"
+  },
+  "publication": {
+    "repository": null,
+    "doi": null,
+    "orcid": null
+  },
+  "openGates": [
+    "P1147_FIGURE4_DISCREPANCY",
+    "ITURHFPROP_FULL_CHAIN_COMPARISON",
+    "PREDICTIVE_HELD_OUT_FIELD_VALIDATION",
+    "REAL_BROWSER_AND_ASSISTIVE_TECHNOLOGY_ACCEPTANCE",
+    "INMET_BROWSER_CORS",
+    "REAL_ANTENNA_NEC_VALIDATION"
+  ],
+  "reports": {
+    "review": "SUBMISSION-REVIEW.md",
+    "automated": "audit/audit-summary.json",
+    "before": "evidence/r10-reproduced-defects.json"
+  },
+  "createdAt": "2026-09-09T17:23:23.547Z"
+}

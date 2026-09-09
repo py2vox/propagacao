@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "checks": 53,
+    "passed": 53,
+    "failed": 0
+  },
+  "cases": [
+    {
+      "grid": "GG67KD",
+      "elapsedMs": 12633,
+      "top": [
+        {
+          "band": 24,
+          "destination": "Uruguai (CX)",
+          "snr": 17.019824913484797,
+          "distanceKm": 1602.8031070170857
+        },
+        {
+          "band": 21,
+          "destination": "Uruguai (CX)",
+          "snr": 15.324315818008927,
+          "distanceKm": 1602.8031070170857
+        },
+        {
+          "band": 18,
+          "destination": "Uruguai (CX)",
+          "snr": 13.41726655094152,
+          "distanceKm": 1602.8031070170857
+        }
+      ],
+      "valid": 423,
+      "attempts": 423
+    },
+    {
+      "grid": "FN31PR",
+      "elapsedMs": 9578,
+      "top": [
+        {
+          "band": 7,
+          "destination": "EUA Leste (W3)",
+          "snr": 10.663142575793444,
+          "distanceKm": 480.89574283067776
+        },
+        {
+          "band": 5,
+          "destination": "EUA Leste (W3)",
+          "snr": 4.638571293601956,
+          "distanceKm": 480.89574283067776
+        },
+        {
+          "band": 21,
+          "destination": "Porto Rico (KP4)",
+          "snr": 3.2028755006406584,
+          "distanceKm": 2679.8346015585635
+        }
+      ],
+      "valid": 432,
+      "attempts": 432
+    },
+    {
+      "grid": "FN03FR",
+      "elapsedMs": 8766,
+      "top": [
+        {
+          "band": 7,
+          "destination": "EUA Leste (W3)",
+          "snr": 9.949231834616398,
+          "distanceKm": 577.3345885218713
+        },
+        {
+          "band": 18,
+          "destination": "Porto Rico (KP4)",
+          "snr": 3.6708616380284695,
+          "distanceKm": 3086.463553613724
+        },
+        {
+          "band": 5,
+          "destination": "EUA Leste (W3)",
+          "snr": 2.1551008906625952,
+          "distanceKm": 577.3345885218713
+        }
+      ],
+      "valid": 423,
+      "attempts": 423
+    }
+  ],
+  "failures": []
+}

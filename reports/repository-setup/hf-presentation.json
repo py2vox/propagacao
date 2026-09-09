@@ -1,0 +1,426 @@
+{
+  "artifact": "index.html",
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "generatedAt": "2026-09-09T18:15:29.136Z",
+  "summary": {
+    "checks": 87,
+    "passed": 87,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "Nine panels in requested DOM order",
+      "ok": true,
+      "detail": [
+        "forecast",
+        "windows",
+        "wspr",
+        "kp",
+        "bz",
+        "cme",
+        "gyro",
+        "topband160",
+        "listening"
+      ]
+    },
+    {
+      "name": "Preserved binding heatmap",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding band-detail",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding gt-status",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding gt-tbody",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding gt-resumo",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding kpChart",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding bz-log-status",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding bz-log-table",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding bz-trend-alert",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding cme-analysis",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding gyrofreq-160",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding radioescuta-panel",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding explicacao-bandas",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding perfil-caminho",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding iono-panel",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding geomag-panel",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-sfi",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-kp",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-dst",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-bz",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-aidx",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-r12",
+      "ok": true
+    },
+    {
+      "name": "Preserved binding m-xray",
+      "ok": true
+    },
+    {
+      "name": "Advanced calculation details retained under radio listening",
+      "ok": true
+    },
+    {
+      "name": "Advanced details initially collapsed",
+      "ok": true
+    },
+    {
+      "name": "pt has nine intact panel headings",
+      "ok": true,
+      "detail": [
+        "Previsão por banda — próximas 36h (horários em UTC)",
+        "Melhor janela por banda (UTC)",
+        "Verificação com spots reais (WSPR)",
+        "Tendência do Kp (horários em UTC)",
+        "Histórico real de Bz (registrado neste navegador)",
+        "Estimativa de chegada da ejeção solar",
+        "160m — proximidade da giro-frequência do elétron",
+        "160 m — laboratório de recepção e geometria",
+        "📻 Radioescuta científica"
+      ]
+    },
+    {
+      "name": "pt first heading matches catalog",
+      "ok": true
+    },
+    {
+      "name": "pt no generic translation fallback",
+      "ok": true
+    },
+    {
+      "name": "pt no dBW claimed for S/N",
+      "ok": true
+    },
+    {
+      "name": "pt window factors accessible by keyboard/touch",
+      "ok": true
+    },
+    {
+      "name": "pt localized Kp tooltip",
+      "ok": true
+    },
+    {
+      "name": "pt localized canvas alternative",
+      "ok": true
+    },
+    {
+      "name": "pt localized time-zone waiting state",
+      "ok": true
+    },
+    {
+      "name": "pt Bz summary avoids singular/plural mismatch",
+      "ok": true
+    },
+    {
+      "name": "pt Bz history localized",
+      "ok": true
+    },
+    {
+      "name": "pt CME explicitly illustrative",
+      "ok": true
+    },
+    {
+      "name": "pt 160 m does not claim favorable propagation",
+      "ok": true
+    },
+    {
+      "name": "pt listening options are not PT/EN slash pairs",
+      "ok": true
+    },
+    {
+      "name": "pt measured-noise placeholder localized",
+      "ok": true
+    },
+    {
+      "name": "en has nine intact panel headings",
+      "ok": true,
+      "detail": [
+        "Band forecast — next 36 hours (UTC)",
+        "Best window by band (UTC)",
+        "Cross-check with real WSPR spots",
+        "Kp trend (UTC)",
+        "Measured Bz history (recorded in this browser)",
+        "Estimated solar-ejection arrival",
+        "160 meters — proximity to the electron gyrofrequency",
+        "160 meters — reception and geometry laboratory",
+        "📻 Scientific Radio Listening"
+      ]
+    },
+    {
+      "name": "en first heading matches catalog",
+      "ok": true
+    },
+    {
+      "name": "en no generic translation fallback",
+      "ok": true
+    },
+    {
+      "name": "en no dBW claimed for S/N",
+      "ok": true
+    },
+    {
+      "name": "en window factors accessible by keyboard/touch",
+      "ok": true
+    },
+    {
+      "name": "en localized Kp tooltip",
+      "ok": true
+    },
+    {
+      "name": "en localized canvas alternative",
+      "ok": true
+    },
+    {
+      "name": "en localized time-zone waiting state",
+      "ok": true
+    },
+    {
+      "name": "en Bz summary avoids singular/plural mismatch",
+      "ok": true
+    },
+    {
+      "name": "en Bz history localized",
+      "ok": true
+    },
+    {
+      "name": "en CME explicitly illustrative",
+      "ok": true
+    },
+    {
+      "name": "en 160 m does not claim favorable propagation",
+      "ok": true
+    },
+    {
+      "name": "en listening options are not PT/EN slash pairs",
+      "ok": true
+    },
+    {
+      "name": "en measured-noise placeholder localized",
+      "ok": true
+    },
+    {
+      "name": "pt has nine intact panel headings",
+      "ok": true,
+      "detail": [
+        "Previsão por banda — próximas 36h (horários em UTC)",
+        "Melhor janela por banda (UTC)",
+        "Verificação com spots reais (WSPR)",
+        "Tendência do Kp (horários em UTC)",
+        "Histórico real de Bz (registrado neste navegador)",
+        "Estimativa de chegada da ejeção solar",
+        "160m — proximidade da giro-frequência do elétron",
+        "160 m — laboratório de recepção e geometria",
+        "📻 Radioescuta científica"
+      ]
+    },
+    {
+      "name": "pt first heading matches catalog",
+      "ok": true
+    },
+    {
+      "name": "pt no generic translation fallback",
+      "ok": true
+    },
+    {
+      "name": "pt no dBW claimed for S/N",
+      "ok": true
+    },
+    {
+      "name": "pt window factors accessible by keyboard/touch",
+      "ok": true
+    },
+    {
+      "name": "pt localized Kp tooltip",
+      "ok": true
+    },
+    {
+      "name": "pt localized canvas alternative",
+      "ok": true
+    },
+    {
+      "name": "pt localized time-zone waiting state",
+      "ok": true
+    },
+    {
+      "name": "pt Bz summary avoids singular/plural mismatch",
+      "ok": true
+    },
+    {
+      "name": "pt Bz history localized",
+      "ok": true
+    },
+    {
+      "name": "pt CME explicitly illustrative",
+      "ok": true
+    },
+    {
+      "name": "pt 160 m does not claim favorable propagation",
+      "ok": true
+    },
+    {
+      "name": "pt listening options are not PT/EN slash pairs",
+      "ok": true
+    },
+    {
+      "name": "pt measured-noise placeholder localized",
+      "ok": true
+    },
+    {
+      "name": "en has nine intact panel headings",
+      "ok": true,
+      "detail": [
+        "Band forecast — next 36 hours (UTC)",
+        "Best window by band (UTC)",
+        "Cross-check with real WSPR spots",
+        "Kp trend (UTC)",
+        "Measured Bz history (recorded in this browser)",
+        "Estimated solar-ejection arrival",
+        "160 meters — proximity to the electron gyrofrequency",
+        "160 meters — reception and geometry laboratory",
+        "📻 Scientific Radio Listening"
+      ]
+    },
+    {
+      "name": "en first heading matches catalog",
+      "ok": true
+    },
+    {
+      "name": "en no generic translation fallback",
+      "ok": true
+    },
+    {
+      "name": "en no dBW claimed for S/N",
+      "ok": true
+    },
+    {
+      "name": "en window factors accessible by keyboard/touch",
+      "ok": true
+    },
+    {
+      "name": "en localized Kp tooltip",
+      "ok": true
+    },
+    {
+      "name": "en localized canvas alternative",
+      "ok": true
+    },
+    {
+      "name": "en localized time-zone waiting state",
+      "ok": true
+    },
+    {
+      "name": "en Bz summary avoids singular/plural mismatch",
+      "ok": true
+    },
+    {
+      "name": "en Bz history localized",
+      "ok": true
+    },
+    {
+      "name": "en CME explicitly illustrative",
+      "ok": true
+    },
+    {
+      "name": "en 160 m does not claim favorable propagation",
+      "ok": true
+    },
+    {
+      "name": "en listening options are not PT/EN slash pairs",
+      "ok": true
+    },
+    {
+      "name": "en measured-noise placeholder localized",
+      "ok": true
+    },
+    {
+      "name": "Language changes keep details open",
+      "ok": true
+    },
+    {
+      "name": "Language changes keep selected antenna",
+      "ok": true
+    },
+    {
+      "name": "Language changes do not query providers",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "Language changes keep CME heading",
+      "ok": true
+    },
+    {
+      "name": "No console errors during tested HF renders",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "limitations": [
+    "DOM emulation, not a real browser or pixel/layout validation",
+    "No live API calls",
+    "No scientific predictive validation"
+  ],
+  "snapshots": {
+    "pt": "\n  Escolha uma banda e um horário; depois confira os relatos de recepção e o contexto espacial. Na radioescuta, ajuste a estação e examine as premissas do cálculo.\n  \n    Previsão por banda — próximas 36h (horários em UTC)\n    Cada coluna resume três horas do índice operacional para o seu QTH e o destino HF selecionado. Use as cores para escolher quando tentar; elas não garantem um contato nem representam S/N absoluto.\n    Dados da previsão por banda — 36 horasOs valores são as mesmas médias de três amostras horárias do mapa de cores. Índice operacional relativo, não S/N absoluto nem probabilidade de recepção.Dados da previsão por banda — 36 horasBandaInício UTCÍndice operacionalInterpretação operacional160m2026-09-08 17:50 UTC—— Não disponível160m2026-09-08 20:50 UTC—— Não disponível160m2026-09-08 23:50 UTC—— Não disponível160m2026-09-09 02:50 UTC—— Não disponível160m2026-09-09 05:50 UTC—— Não disponível160m2026-09-09 08:50 UTC—— Não disponível160m2026-09-09 11:50 UTC—— Não disponível160m2026-09-09 14:50 UTC—— Não disponível160m2026-09-09 17:50 UTC—— Não disponível160m2026-09-09 20:50 UTC—— Não disponível160m2026-09-09 23:50 UTC—— Não disponível160m2026-09-10 02:50 UTC—— Não disponível80m2026-09-08 17:50 UTC-130.5D — Desfavorável80m2026-09-08 20:50 UTC-53.9D — Desfavorável80m2026-09-08 23:50 UTC-21.4D — Desfavorável80m2026-09-09 02:50 UTC-18.4M — Marginal80m2026-09-09 05:50 UTC-14.2M — Marginal80m2026-09-09 08:50 UTC-39.4D — Desfavorável80m2026-09-09 11:50 UTC-134.1D — Desfavorável80m2026-09-09 14:50 UTC-179.8D — Desfavorável80m2026-09-09 17:50 UTC-136.6D — Desfavorável80m2026-09-09 20:50 UTC-53.9D — Desfavorável80m2026-09-09 23:50 UTC-21.4D — Desfavorável80m2026-09-10 02:50 UTC-18.4M — Marginal60m2026-09-08 17:50 UTC-82.0D — Desfavorável60m2026-09-08 20:50 UTC-36.4D — Desfavorável60m2026-09-08 23:50 UTC-12.3M — Marginal60m2026-09-09 02:50 UTC-11.7M — Marginal60m2026-09-09 05:50 UTC-9.3B — Boa60m2026-09-09 08:50 UTC-27.2D — Desfavorável60m2026-09-09 11:50 UTC-84.6D — Desfavorável60m2026-09-09 14:50 UTC-110.5D — Desfavorável60m2026-09-09 17:50 UTC-88.1D — Desfavorável60m2026-09-09 20:50 UTC-36.4D — Desfavorável60m2026-09-09 23:50 UTC-12.3M — Marginal60m2026-09-10 02:50 UTC-11.7M — Marginal40m2026-09-08 17:50 UTC-60.7D — Desfavorável40m2026-09-08 20:50 UTC-26.3D — Desfavorável40m2026-09-08 23:50 UTC-7.8B — Boa40m2026-09-09 02:50 UTC-7.9B — Boa40m2026-09-09 05:50 UTC-7.5B — Boa40m2026-09-09 08:50 UTC-20.7D — Desfavorável40m2026-09-09 11:50 UTC-62.3D — Desfavorável40m2026-09-09 14:50 UTC-81.3D — Desfavorável40m2026-09-09 17:50 UTC-66.8D — Desfavorável40m2026-09-09 20:50 UTC-26.3D — Desfavorável40m2026-09-09 23:50 UTC-7.8B — Boa40m2026-09-10 02:50 UTC-7.9B — Boa30m2026-09-08 17:50 UTC-40.3D — Desfavorável30m2026-09-08 20:50 UTC-15.3M — Marginal30m2026-09-08 23:50 UTC-4.4B — Boa30m2026-09-09 02:50 UTC-6.5B — Boa30m2026-09-09 05:50 UTC-7.6B — Boa30m2026-09-09 08:50 UTC-15.8M — Marginal30m2026-09-09 11:50 UTC-42.1D — Desfavorável30m2026-09-09 14:50 UTC-54.4D — Desfavorável30m2026-09-09 17:50 UTC-46.3D — Desfavorável30m2026-09-09 20:50 UTC-15.3M — Marginal30m2026-09-09 23:50 UTC-4.4B — Boa30m2026-09-10 02:50 UTC-6.5B — Boa20m2026-09-08 17:50 UTC-22.5D — Desfavorável20m2026-09-08 20:50 UTC-8.1B — Boa20m2026-09-08 23:50 UTC-7.2B — Boa20m2026-09-09 02:50 UTC-18.8M — Marginal20m2026-09-09 05:50 UTC-26.0D — Desfavorável20m2026-09-09 08:50 UTC-28.6D — Desfavorável20m2026-09-09 11:50 UTC-28.7D — Desfavorável20m2026-09-09 14:50 UTC-37.1D — Desfavorável20m2026-09-09 17:50 UTC-28.5D — Desfavorável20m2026-09-09 20:50 UTC-8.1B — Boa20m2026-09-09 23:50 UTC-7.2B — Boa20m2026-09-10 02:50 UTC-18.8M — Marginal17m2026-09-08 17:50 UTC-12.2M — Marginal17m2026-09-08 20:50 UTC-6.9B — Boa17m2026-09-08 23:50 UTC-17.8M — Marginal17m2026-09-09 02:50 UTC-38.2D — Desfavorável17m2026-09-09 05:50 UTC-48.0D — Desfavorável17m2026-09-09 08:50 UTC-48.0D — Desfavorável17m2026-09-09 11:50 UTC-20.3D — Desfavorável17m2026-09-09 14:50 UTC-24.6D — Desfavorável17m2026-09-09 17:50 UTC-18.2M — Marginal17m2026-09-09 20:50 UTC-6.9B — Boa17m2026-09-09 23:50 UTC-17.8M — Marginal17m2026-09-10 02:50 UTC-38.2D — Desfavorável15m2026-09-08 17:50 UTC-9.8B — Boa15m2026-09-08 20:50 UTC-9.8B — Boa15m2026-09-08 23:50 UTC-29.6D — Desfavorável15m2026-09-09 02:50 UTC-53.9D — Desfavorável15m2026-09-09 05:50 UTC-65.5D — Desfavorável15m2026-09-09 08:50 UTC-63.8D — Desfavorável15m2026-09-09 11:50 UTC-17.4M — Marginal15m2026-09-09 14:50 UTC-20.3D — Desfavorável15m2026-09-09 17:50 UTC-15.9M — Marginal15m2026-09-09 20:50 UTC-9.8B — Boa15m2026-09-09 23:50 UTC-29.6D — Desfavorável15m2026-09-10 02:50 UTC-53.9D — Desfavorável12m2026-09-08 17:50 UTC-16.2M — Marginal12m2026-09-08 20:50 UTC-20.4D — Desfavorável12m2026-09-08 23:50 UTC-44.6D — Desfavorável12m2026-09-09 02:50 UTC-74.5D — Desfavorável12m2026-09-09 05:50 UTC-82.7D — Desfavorável12m2026-09-09 08:50 UTC-77.5D — Desfavorável12m2026-09-09 11:50 UTC-27.0D — Desfavorável12m2026-09-09 14:50 UTC-25.7D — Desfavorável12m2026-09-09 17:50 UTC-22.2D — Desfavorável12m2026-09-09 20:50 UTC-20.4D — Desfavorável12m2026-09-09 23:50 UTC-44.6D — Desfavorável12m2026-09-10 02:50 UTC-74.5D — Desfavorável11m (CB)2026-09-08 17:50 UTC-21.0D — Desfavorável11m (CB)2026-09-08 20:50 UTC-26.6D — Desfavorável11m (CB)2026-09-08 23:50 UTC-53.8D — Desfavorável11m (CB)2026-09-09 02:50 UTC-83.2D — Desfavorável11m (CB)2026-09-09 05:50 UTC-86.3D — Desfavorável11m (CB)2026-09-09 08:50 UTC-82.3D — Desfavorável11m (CB)2026-09-09 11:50 UTC-32.4D — Desfavorável11m (CB)2026-09-09 14:50 UTC-30.0D — Desfavorável11m (CB)2026-09-09 17:50 UTC-27.0D — Desfavorável11m (CB)2026-09-09 20:50 UTC-26.6D — Desfavorável11m (CB)2026-09-09 23:50 UTC-53.8D — Desfavorável11m (CB)2026-09-10 02:50 UTC-83.2D — Desfavorável10m2026-09-08 17:50 UTC-23.1D — Desfavorável10m2026-09-08 20:50 UTC-29.1D — Desfavorável10m2026-09-08 23:50 UTC-57.3D — Desfavorável10m2026-09-09 02:50 UTC-84.5D — Desfavorável10m2026-09-09 05:50 UTC-87.3D — Desfavorável10m2026-09-09 08:50 UTC-84.1D — Desfavorável10m2026-09-09 11:50 UTC-34.7D — Desfavorável10m2026-09-09 14:50 UTC-31.9D — Desfavorável10m2026-09-09 17:50 UTC-29.1D — Desfavorável10m2026-09-09 20:50 UTC-29.1D — Desfavorável10m2026-09-09 23:50 UTC-57.3D — Desfavorável10m2026-09-10 02:50 UTC-84.5D — Desfavorável\nRótulos marcam a mudança de dia em UTC. · Referência de fuso local ainda não disponível; os horários do gráfico permanecem em UTC.\n    17h20h23hqua 02h05h08h11h14h17h20h23hqui 02h160m————————————80mDDDMMDDDDDDM60mDDMMBDDDDDMM40mDDBBBDDDDDBB30mDMBBBMDDDMBB20mDBBMDDDDDBBM17mMBMDDDDDMBMD15mBBDDDDMDMBDD12mMDDDDDDDDDDD11m (CB)DDDDDDDDDDDD10mDDDDDDDDDDDD\n    E ExcelenteB BoaM MarginalD Desfavorável\n  \n  \n    Melhor janela por banda (UTC)\n    A tabela destaca o intervalo com melhor média do índice operacional entre os horários amostrados nas próximas 36 horas. Consulte a data e o índice; abra o valor para ver os fatores usados.\n    Melhor janela por banda (UTC)BandaData/hora UTC (MM-DD HH:mm)Índice de apoio à decisão160mNenhum intervalo favorável identificado por este índice80m09-09 01:50–09-09 08:5012/100Qualidade do enlace (P.533): 45% (S/N absoluto -16 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 78% (janela começa em +8h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)60m09-08 22:50–09-09 08:5018/100Qualidade do enlace (P.533): 59% (S/N absoluto -12 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 86% (janela começa em +5h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)40m09-09 22:50–09-10 04:509/100Qualidade do enlace (P.533): 72% (S/N absoluto -7 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 19% (janela começa em +29h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)30m09-09 21:50–09-10 04:5011/100Qualidade do enlace (P.533): 78% (S/N absoluto -5 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 22% (janela começa em +28h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)20m09-09 20:50–09-10 03:5011/100Qualidade do enlace (P.533): 80% (S/N absoluto -4 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 25% (janela começa em +27h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)17m09-08 17:50–09-09 00:5025/100Qualidade do enlace (P.533): 74% (S/N absoluto -6 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 100% (janela começa em +0h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)15m09-08 17:50–09-08 23:5022/100Qualidade do enlace (P.533): 66% (S/N absoluto -10 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 100% (janela começa em +0h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)12m09-08 17:50–09-08 21:5012/100Qualidade do enlace (P.533): 37% (S/N absoluto -19 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 100% (janela começa em +0h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)11m (CB)09-08 19:50–09-08 19:507/100Qualidade do enlace (P.533): 24% (S/N absoluto -24 dB no centro da janela) · Fontes de dados: 0% (0 de 9 responderam) · Horizonte: 94% (janela começa em +2h) · Evidência WSPR: 0% (sem spots nesta janela) · Calmaria geomagnética: 40% (Kp previsto 5.0)10mNenhum intervalo favorável identificado por este índice\n    Como interpretar o índiceO índice combina uma transformação do S/N modelado no centro da janela com quatro fatores: fontes disponíveis (30%), horizonte (25%), spots WSPR (25%) e contexto geomagnético (20%). Pesos e curva são escolhas heurísticas do AGHIP, não uma probabilidade de contato nem confiabilidade de circuito ITU. Sem S/N calculável, aparece um travessão.\n  \n  \n    Verificação com spots reais (WSPR)\n    Um spot é um relato de recepção enviado por outra estação. A consulta reúne as últimas 8 horas em áreas amplas, até ±9° ao redor de cada ponta: são indícios regionais, não medições feitas exatamente no seu QTH. Sem spots não significa banda fechada.\n    —\n    Verificação com spots reais (WSPR)BandaSpotsS/N ajustado (dB)Índice atualResíduo (dB)160msem spots reais80msem spots reais60msem spots reais40msem spots reais30msem spots reais20msem spots reais17msem spots reais15msem spots reais12msem spots reais10msem spots reais\n    \n    Alcance desta comparaçãoO comparador legado usa o índice operacional, que inclui ajustes heurísticos; por isso, seus resíduos não validam o S/N absoluto da P.533. Antenas, ruído local, distribuição dos operadores e estações que não foram recebidas limitam a comparação. Confirme a escuta e registre suas próprias condições.\n  \n  \n    Tendência do Kp (horários em UTC)\n    Kp é um índice global de perturbação geomagnética. O gráfico mostra o histórico recebido, não a abertura de uma banda no seu grid. Kp elevado merece atenção, sobretudo em rotas de altas latitudes, mas o efeito em HF depende também da ionosfera, do horário e do percurso.\n    Histórico de Kp em UTC; linhas de referência em Kp 5 e 7\n    Linha contínua: Kp observado. Linha tracejada longa: Kp 5. Linha pontilhada: Kp 7. Marcadores: círculo abaixo de 4; quadrado de 4 a menos de 5; losango de 5 a menos de 7; triângulo em 7 ou mais.Valores do gráfico KpValores do gráfico KpHorário UTCKpCategoria2026-09-08 12:00 UTC2.0Calmo2026-09-08 15:00 UTC5.0G1\nVer os indicadores solares e geomagnéticos\n      SFI descreve o fluxo solar em 10,7 cm; R12 é o índice suavizado de manchas solares na convenção usada pelo modelo. Kp, Dst e A descrevem atividade geomagnética; Bz é uma componente do campo interplanetário. Confira a idade e a origem de cada dado: estes valores não são medições locais no grid.\n      \n        SFI107sem dado\n        Kp2sem dado\n        Dst (nT)-8sem dado\n        Bz (nT)-1.0sem dado\n        Índice A28\n        R1272Conversão aproximada para V1 INFERIDOV2 — ÷ 1,44 · —\n        Raios XB8.0sem dado\n      \n    \n  \n  \n    Histórico real de Bz (registrado neste navegador)\n    O AGHIP registra automaticamente resumos de Bz quando há dados suficientes para calcular a tendência. O horário da tabela é o do registro, em UTC; não é a hora de uma observação feita no QTH. Bz ao sul pode favorecer o acoplamento com a magnetosfera, mas sua intensidade, duração e o vento solar também importam. Os rótulos são diagnósticos do painel, não alertas oficiais.\n    \n    Resumos armazenados: 1 · exibidos: 1. Horários de registro em UTC.\n    UTCBz (nT)Diagnóstico do painel2026-09-08 17:49-3.2Em queda\n    Limpar histórico\n  \n  \n    Estimativa de chegada da ejeção solar\n    Uma ejeção de massa coronal (CME) transporta plasma e campo magnético. Este quadro usa análises NASA/DONKI para uma estimativa simplificada de trânsito, feita pelo AGHIP. Não confirma direção à Terra, impacto, tempestade ou horário de chegada no seu grid.\n    ESTIMATIVA ILUSTRATIVA — calculada pelo AGHIPVelocidade informada: 800 km/s1 UA / velocidade: 2.2 diasO horário de referência a velocidade constante está a cerca de 46 horas.Época de referência DONKI (time21_5): 2026-09-08 12:00 UTC.A ilustração soma 1 UA dividida pela velocidade à época de referência; não desconta a distância heliocêntrica inicial, não modela o arrasto do vento solar e não confirma direção à Terra. Não a utilize como previsão operacional de chegada.NASA/DONKI · resposta em cache 2026-09-08 17:49 UTC.\n    Erupção solar e CME: qual é a diferença para HF?Raios X de uma erupção chegam com a luz e podem afetar a região D no lado diurno. A CME viaja mais lentamente: as mais rápidas podem chegar em menos de um dia, outras levam vários dias. Nem toda ejeção atinge a Terra. Acompanhe as observações e os boletins oficiais, sem tratar a contagem regressiva como confirmação.\n  \n  \n    160m — proximidade da giro-frequência do elétron\n    Em 160 metros, o campo magnético é contexto físico. O painel calcula fH com o WMM2025 atual a 90 km e compara a frequência RF de referência de 1,836 MHz por meio da razão adimensional f/fH. Isso não é previsão de abertura nem perda de percurso.\n    fH 614.7 kHz · fRF 1836 kHzWMM2025 a 90 km · inclinação -39.4° · 2026-09-08 17:50 UTCRazão adimensional f/fH: 2.99 — somente contexto; não é perda de percurso nem S/N.\n    Hipóteses e limites do diagnósticoA frequência de 1,836 MHz é uma referência de análise declarada. fH depende da intensidade do campo, altitude e data; f/fH é adimensional. A projeção vertical não resolve a equação magnetoiônica, densidade eletrônica, colisões, polarização ou o percurso completo. A P.533 permanece em 2–30 MHz e a P.1147 adotada em aproximadamente 150–1.700 kHz; o módulo de 160 m não afirma S/N ionosférico normativo.\n  \n  160 m — laboratório de recepção e geometriaO que é possível observar e calcular neste percurso? Consulte recepções recentes de 160 m, geometria solar e ruído. O S/N condicionado exige uma medição sua; não extrapola a P.1147 e não prevê a abertura da banda.Grid do transmissor de 160 m (opcional)Consultar WSPR de 160 mExportar dados e premissas (JSON)Consulta ainda não feita para este percurso.Referência RF: 1.836 MHz · λ 163.3 m · GG67KD ← EUA Leste (W3) · 2026-09-08 17:50 UTCTransmissor aproximado: destino HF, não uma estação identificada. Informe o grid transmissor para estudar um circuito definido.1. Evidência de recepção0 relato(s) na direção do QTH · 0 receptor(es) distinto(s) · 0 no sentido inverso (separados).Cada extremo observado deve estar a até 200 km do extremo selecionado. São pontos centrais dos grids informados, não posições GPS. Idade máxima: 2 h. Esses critérios são filtros operacionais, não limites físicos nem amostras independentes.Ausência de relatos não significa banda fechada. Não sabemos se havia transmissor ativo e receptor operacional no percurso.Linhas excluídas pelos filtros: 0. 2. Geometria solar e ruídoPercurso: 7538 km · azimute no QTH: 335.2° · elevação solar QTH/TX: 41.0° / 55.1°.Fração do arco com Sol abaixo do horizonte geométrico: 0.0%. A 90 km de altitude, fração na sombra geométrica da Terra: 0.0%.Próximas 24 h — todo o arco a 90 km na sombra (grade temporal de 10 min): 2026-09-09 00:20 UTC — 2026-09-09 08:40 UTCSombra não equivale ao desaparecimento da região D ou a uma abertura: não modela recombinação, absorção, colisões ou refração atmosférica.Ruído externo de referência P.372 no QTH: -69.7 dBm / 2400 Hz · climatologia, não medição do seu receptor.Experimento de S/N com recepção de referênciaInforme o grid real do transmissor acima e uma recepção medida no seu QTH, em 1,836 MHz, nos últimos 30 minutos. A potência e a largura do cenário são as selecionadas em Radioescuta científica. Use potência média na mesma convenção, não misture portadora AM, PEP e potência média SSB. Alterações físicas na instalação exigem nova referência.S/N medido (dB)Potência TX durante a medição (W)Largura equivalente de ruído da referência (Hz)Instante da medição (UTC ISO 8601)Ruído na referência (dBm, opcional)Ruído no cenário (mesma RBW e porta)Confirmo a mesma frequência RF, circuito, antenas, orientação, polarização e instalação; o receptor é linear e a densidade de ruído é aproximadamente plana na faixa.Registrar referência e calcularRegistre uma recepção de referência.Matemática, referências e limitesS/N₂ = S/N₁ + 10 log₁₀(P₂/P₁) − 10 log₁₀(B₂/B₁) − ΔN₀.P é potência média do sinal; B é largura equivalente de ruído. A regra supõe que o sinal permaneça dentro do filtro e que ruído/interferência possam ser tratados por densidade aproximadamente constante. Não transfira a calibração para outra antena, frequência ou estação. O limite de 30 min é uma política conservadora de atualização, não tempo de coerência comprovado.A P.1147 permanece limitada ao domínio adotado de 150–1.700 kHz, com a divergência da Figura 4 ainda em aberto. Nenhum ganho é inventado a partir de Kp, Bz, f/fH ou presença da linha cinzenta.ITU-R P.1147 · ITU-R P.372 · WSJT-X / WSPR · wspr.live — dados brutos; uso não comercial · Vanhamel et al. (2022) · NOAA solar geometry\n  \n    📻 Radioescuta científicaAjuste o ruído, a antena receptora, a potência da estação distante e a largura de banda para comparar tentativas de escuta no seu QTH. Os resultados HF descrevem um modelo de mediana mensal, não a probabilidade de recepção de hoje nem uma garantia.Ruído no local de recepçãoUrbanoResidencialRuralRural silenciosoAntena de recepçãoDipolo ½λ a 0,50λDipolo ½λ a 0,25λDipolo ½λ a 1,00λVertical ideal ¼λReferência constante 2,15 dBiV invertido · diagrama não validadoFio longo / alimentação pela extremidade · diagrama não validadoBeverage 1λ · diagrama não validado4-Square · diagrama não validadoArranjo Hi-Z · diagrama não validadoK9AY · diagrama não validadoFlag / Pennant / EWE · diagrama não validadoPequeno loop magnético · diagrama não validadoPotência da estação transmissora100 W500 W1 kW3 kW5 kW7 kW10 kWLargura de banda do receptorCW estreito · 500 HzSSB · 2,4 kHzAM · 6 kHzAM larga · 10 kHzRuído medido opcional no receptor (preferível à climatologia)Piso de ruído (dBm)RBW da medição (Hz)Frequência (MHz)Enlace HF7538 kmPotência relativa a 100 W0.0 dBLargura de banda do receptor2.4 kHzComparação controlada de diagramas: Dipolo de meia onda a 0,50λ do solo · pico comum de referência 2.15 dBi · modelo idealizado; não é solução NEC · hipótese de solo: perfeitamente condutor (ideal) · escala de sensibilidade assumida ±2 dB. Todos os diagramas selecionáveis de recepção são normalizados para o mesmo pico. Portanto, o balanço compara o acoplamento do diagrama vertical em cada ângulo de chegada, não o ganho realizado absoluto. Assume-se alinhamento do lóbulo principal. RDF, relação frente/costas, eficiência, perda do alimentador, figura de ruído do receptor e rejeição direcional de ruído não são convertidos em ganho.MAIOR S/N MODELADO AGORA15m · DesfavorávelS/N -18.3 dB · limiar de planejamento 6 dB · margem -24.3 dB (sensibilidade às premissas +6.5/−9.5 dB)P.533 interpolada 7.000–9.000 km. Esta banda apresenta o maior S/N modelado após soma multimodo, absorção da região D, ganho do diagrama no ângulo de chegada e ruído do local receptor.🔬 Detalhes do cálculoPotência recebida-118.2 dBmRuído no receptor-99.9 dBm · Fa 40.3 dB · climatologiaMUF / f23.50 / 21.096 MHz · f/MUF 0.90foF2 / foE8.57 / 3.55 MHzPerda do modo dominante162.6 dBAbsorção da região D12.5 dBElevação de chegada / ganho RX9.1° / -4.2 dBiSensibilidade às premissas (não é intervalo de confiança)+6.5 / −9.5 dB · termo dominante: ruídoContexto de meteorologia espacialSFI 107 · Kp 2.0 · contexto observado, não somado ao S/N mediano mensal de referênciaComparação de diagramas na mesma banda e com pico igual: Vertical ideal de quarto de onda -10.8 dB · Dipolo de meia onda a 1,00λ do solo -13.1 dB · Dipolo de meia onda a 0,50λ do solo -18.3 dB · Dipolo de meia onda a 0,25λ do solo -24.1 dBOs diagramas são normalizados em 2,15 dBi e avaliados no ângulo de chegada calculado. Trata-se de comparação controlada de diagrama, não de modelo NEC da instalação real nem de predição da rejeição direcional de ruído.BandaS/NAvaliação de recepçãoEvidência160m—Não modelada pela P.533 — use o painel de evidências de 160 mFORA DO DOMÍNIO P.533 (<2 MHz)80m-160.7 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37260m-101.8 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37240m-76.3 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37230m-52.3 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37220m-33.8 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37217m-21.7 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37215m-18.3 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37212m-24.5 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37211m (CB)-29.0 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.37210m-31.0 dBDesfavorávelP.533 §5.4 INTERPOLADA + P.372A potência de sinal usa a ITU-R P.533-14: modos discretos abaixo de 7.000 km, interpolação da §5.4 entre 7.000 e 9.000 km e formulação de caminho longo da §5.3 acima de 9.000 km. O ruído no receptor usa climatologia ITU-R P.372-17 ou o piso medido opcional. “Favorável” significa que o S/N mediano supera o limiar declarado em pelo menos 6 dB; “vale tentar” significa que alcança o limiar. São decisões voltadas ao operador, não confiabilidade de circuito ITU nem garantia. Para quem escuta radiodifusão: os limiares aqui são de tentativa de escuta, não os critérios de qualidade de radiodifusão da ITU-R (BS.560, BS.703), que exigem relações bem maiores para áudio de programa sem degradação percebida. A antena remota permanece como referência declarada de 2,15 dBi enquanto seu diagrama real não for informado. Horário: 2026-09-08 17:50 UTC.LF/MF — previsão de onda ionosféricaIMPLEMENTAÇÃO EXPERIMENTAL EM REVISÃO — não validada por medições independentes.Agora é possível estimar o campo elétrico pela P.1147. O resultado representa uma mediana anual, não uma medição nem a previsão exata de hoje. Onda de superfície (P.368) não está incluída.A potência e a largura de banda são as selecionadas acima. A antena receptora do quadro HF não é reutilizada: LF/MF exige sua própria referência de recepção.Grid do transmissor LF/MF (opcional)LF / ondas longas (kHz)MF / ondas médias (kHz)Monopolo transmissor ideal (h/λ)Curto em relação a λ0.25 λ0.40 λ0.50 λ0.60 λEficiência de radiação (%)Fator horizontal TX GH (dB)Perfil regional — seleção explícitaGeral (BR/EUA/Canadá)Percurso europeu: b = 1Ponto médio na Região 3 ao sul de 11°SR12 V1 de estudo (vazio: índice do painel)Padrão: 100% de eficiência e GH = 0 dB são hipóteses ideais, não medições. h/λ é a altura elétrica em cada frequência, não uma instalação multibanda real. Informe a potência da portadora para estudar recepção AM; não a PEP. Sem grid próprio, a rota é apenas um cenário com o destino HF, não uma emissora identificada.Terminais costeiros — correção opcionalSem ganho marítimo é o cenário inicial, não uma classificação geográfica automática. Para ativar: informe s₁ até o mar e s₂ até a próxima terra ao longo do percurso. α é a fração de terra; 0,5 é a aproximação da recomendação quando não há base de terreno. Não se aplica a água doce.TransmissorCenárioSem ganho marítimoAplicar com os dados abaixos₁ (km)s₂ (km)α (0–1)Receptor / QTHCenárioSem ganho marítimoAplicar com os dados abaixos₁ (km)s₂ (km)α (0–1)S/N opcional — somente com calibração de recepçãoÉ necessário um fator de antena do sistema (AF) calibrado nesta frequência, direção e polarização, referido à entrada de 50 Ω do receptor, incluindo cabos, adaptação e pré-amplificador. Meça o ruído sem o sinal desejado nessa mesma entrada. Não informe dBi no campo AF. A mudança de frequência ou rota limpa AF e ruído para evitar reutilização indevida.LF / ondas longasAF do sistema (dB/m)Ruído medido (dBm)Largura equivalente da medição (Hz)MF / ondas médiasAF do sistema (dB/m)Ruído medido (dBm)Largura equivalente da medição (Hz)A conversão entre larguras de banda assume densidade espectral de ruído localmente constante. Interferência, fading, seletividade e inteligibilidade não são determinados apenas pelo S/N. Não reutilizamos a medição HF nem presumimos uma antena sem perdas.Transmissor → seu QTH: destino HF (cenário) · 38.900, -77.000 → -22.854, -47.125.R12: 72.0 · proxy V1 do painel (0,6 × índice V2 suavizado); fixo no estudo de 24 h.LF / ondas longas · 198,000 kHzSem previsão para estas entradasConfira coordenadas, frequência e parâmetros.INVALID_INPUTMF / ondas médias · 1.000,000 kHzSem previsão para estas entradasConfira coordenadas, frequência e parâmetros.INVALID_INPUTReferência, hipóteses e limites da implementaçãoITU-R P.1147-4 · AGHIP-P1147-4-EQUATIONS-WMM2025-r7.Figuras 1 e 2 incorporadas como tabelas de interpolação; equações 1–13 e Apêndice 1 implementados. Campo de referência para loop no solo, no plano vertical do grande círculo. Solo terminal médio: 3–10 mS/m; solo muito resistivo pode reduzir substancialmente o campo. Não foram adicionadas correções arbitrárias de solo, antena HF ou meteorologia espacial.Implementação de pesquisa, ainda sem validação preditiva independente. A comparação auxiliar com a Figura 4 não reproduziu todas as curvas dentro da tolerância de leitura; o cálculo segue explicitamente as equações publicadas. Esse ponto permanece aberto no relatório, sem ajuste empírico oculto.A geometria usa as coordenadas do QTH selecionado; o grid próprio do transmissor representa o centro da célula. O perfil geomagnético usa WMM2025, não o mapa histórico. A aproximação diurna de 30 dB não substitui o modelo diurno específico do Anexo 2. Não há soma de onda de superfície, validação NEC da instalação, cadastro de emissoras ou garantia de recepção.VHF 6 m / 2 mPercurso fora da triagem disponívelSeu QTH → grid VHF PM95 · 18.489 km.Esta rota está fora das triagens de distância aqui disponíveis. Isso é uma limitação dos modelos, não prova de impossibilidade física. Confira o grid da estação que deseja ouvir.EME é um enlace separado, via Terra–Lua–Terra; consulte a aba EME.Entenda os cálculos e os limitesFiltros de distância do AGHIP — não são probabilidadesMecanismoSituaçãoEsporádica E (Es)Fora da triagem de distânciaDispersão meteórica (MS)Fora da triagem de distânciaPropagação transequatorial (TEP), 6 m / 2 mFora da triagem de distânciaLimites de triagem existentes no AGHIP: Es 500–2.200 km; MS 300–2.200 km; TEP 2.500–9.000 km. São filtros experimentais, não fronteiras físicas universais nem critérios da ITU-R. Geometria magnética, frequência e condições atuais ainda importam. Nenhum índice 0–100 é convertido em probabilidade de escuta.P.1546: excede o limite superior de 1.000 km. P.1812-8: fora da faixa aproximada de 0,25–3.000 km.Essas verificações não executam os métodos terrestres. Faltam implementações validadas e entradas como alturas, perfil do terreno, cobertura e obstáculos (clutter). Não há campo recebido ou S/N calculado neste quadro.ITU-R P.1546-6 / ITU-R P.1812-8\n    Entenda os cálculos: bandas, percurso, ionosfera e campo magnético\n      Estes detalhes ajudam a examinar as hipóteses do modelo. Separe os exemplos no ponto médio do cálculo completo por pontos de controle. Potência recebida usa dBW ou dBm; S/N é uma razão expressa em dB.\n      Por que cada banda está assim — EUA Leste (W3) MODELADOPasse o cursor sobre cada célula para ver a grandeza que a sustenta.BandaIonosferaAbsorção DRuídoGeomag.GeometriaS/NResultado80mFAVORÁVELDOMINANTEALTOTRANQUILO3 salto(s)—INVIÁVEL60mFAVORÁVELDOMINANTEALTOTRANQUILO3 salto(s)—INVIÁVEL40mFAVORÁVELDOMINANTEALTOTRANQUILO3 salto(s)-76INVIÁVEL30mFAVORÁVELDOMINANTEALTOTRANQUILO3 salto(s)-52INVIÁVEL20mFAVORÁVELDOMINANTEALTOTRANQUILO3 salto(s)-34INVIÁVEL17mFAVORÁVELALTAALTOTRANQUILO3 salto(s)-22INVIÁVEL15mMARGINALALTAALTOTRANQUILO3 salto(s)-18INVIÁVEL12mACIMA DA MUFMODERADAALTOTRANQUILO3 salto(s)-24INVIÁVEL11m (CB)ACIMA DA MUFMODERADAALTOTRANQUILO3 salto(s)-29INVIÁVEL10mACIMA DA MUFMODERADAALTOTRANQUILO3 salto(s)-31INVIÁVELMaior S/N calculado: 15m — INVIÁVEL, S/N -18.3 dB. Fator que ainda limita: absorção d (12.5 dB).A recomendação não vem de uma pontuação única: vem da decomposição nos mecanismos físicos que produzem o resultado. Ionosfera, absorção e geometria são da P.533; ruído é climatologia da P.372; geomagnetismo é observação da NOAA e não entra no cálculo da P.533, que é mediana mensal — aparece aqui como fator declarado à parte.\n      Perfil do caminho em 15m MODELADO — 7538km, 5 pontos amostrados☀23°☀5°☀12°☀29°☀47°QTHEUA Leste (W3)A barra mostra a iluminação solar como contexto para a absorção da região D, não como medição de perda: vermelho = maior iluminação modelada, amarelo = iluminação intermediária, verde = pouca ou nenhuma iluminação. Abaixo, a latitude de mergulho de cada ponto — valores altos indicam trecho sujeito a absorção auroral. MUF F2 do circuito: 23.5 MHz · MODELADO CCIR + P.1239/P.533.\n      Ionosfera no ponto médio do caminho — CCIR MODELADOfoF212.24 MHzM(3000)F22.909foE3.61 MHzAssimilação GIROsem dadosx = foF2/foE3.39Altura de reflexão hr336 kmModo mais baixo3F2 · salto de 2513kmdmax4000 kmGiro-freq. a 300km (época 1960)0.889 MHzMUF diagnóstica no ponto médio33.64 MHzTermo de absorção AT em 20m257.8 (adimensional, eq. 20)Perda auroral Lh0.0 dBMUF pela heurística antiga26.85 MHzBalanço de enlace em 20m — ITU-R P.533-14 MODELADOModos considerados (seção 5.2.1), os blindados pela camada E já descartados:ModoElev.MUFLiGt(Δ)Gr(Δ)Pr dBWF239.1°23.532.72.1-4.2-162.0F2415.2°19.929.72.1-0.5-157.6F2520.4°17.427.02.11.1-155.4F2625.1°15.626.22.11.9-156.2Modo dominanteF25 · -155.4 dBWPotência do método selecionado menos modo discreto dominante-2.23 dBPotência recebida: método da distância selecionado-157.7 dBW = -127.7 dBmRuído Fa (P.372)46.3 dB CLIMATOLOGIAS/N em 2.4 kHz-33.8 dBSensibilidade do S/N (premissas)+6.1 / −9.2 dBFator dominanteruído (foF2 3.8 · ruído 8.2 · antena 1.4 dB)S/N no destino (você TX)-22.2 dBS/N no seu QTH (você RX)-33.8 dBSentido limitantevocê recebendo · -33.8 dBCom 100 W e ganhos de referência das antenas de 2.1/2.1 dBi. Os ganhos de cada modo estão na tabela. A P.533 §5.2.2 manda somar a potência de todos os modos abertos, não escolher o melhor — o método selecionado para a distância difere do modo discreto dominante em -2.23 dB. A diferença pode ser negativa após a interpolação entre métodos. O modelo de referência assume perda de percurso recíproca. Diferenças entre os sentidos modelados refletem as premissas das estações e do ruído; não demonstram reciprocidade em todo percurso ionosférico real. A potência recebida é expressa em dBW ou dBm; S/N é uma razão em dB; o do heatmap é índice relativo de propagação e inclui penalidades de meteorologia espacial que a P.533 não modela. São dois modelos, não uma inconsistência.O cartão científico usa o modelo numérico CCIR pela ITU-R P.1239-4 e a cadeia de balanço mediano da P.533-14. Modos E (até 4.000 km) e modos F2 não blindados são avaliados separadamente e somados em potência linear; absorção, perda auroral, ganho da antena no ângulo de elevação do modo e ruído P.372 estão incluídos. O heatmap permanece um índice operacional relativo separado e nunca é apresentado como S/N absoluto P.533.\n      Campo geomagnético no QTH — WMM2025 MODELADOIntensidade B22.792 nTDeclinação D-21.84°Inclinação I-39.80°Latitude de mergulho-22.61°Giro-frequência fH614.7 kHz (a 90 km)f / fH em 1.836 MHz2.99f/fH é indicador físico da relação entre frequência de operação e giro-frequência local. Não representa, isoladamente, absorção nem qualidade de propagação — não entra em nenhum cálculo de SNR deste painel.\n    \n  \n",
+    "en": "\n  Start with a band and a time, then check reception reports and space-weather context. In Radio Listening, adjust the station assumptions and inspect the calculation.\n  \n    Band forecast — next 36 hours (UTC)\n    Each column summarizes three hours of the operational index for your QTH and selected HF destination. Use the colors to plan a listening or contact attempt; they are not a guarantee or absolute S/N.\n    Dados da previsão por banda — 36 horasOs valores são as mesmas médias de três amostras horárias do mapa de cores. Índice operacional relativo, não S/N absoluto nem probabilidade de recepção.Band forecast data — 36 hoursBandStart time UTCOperational indexOperational interpretation160m2026-09-08 17:50 UTC—— Unavailable160m2026-09-08 20:50 UTC—— Unavailable160m2026-09-08 23:50 UTC—— Unavailable160m2026-09-09 02:50 UTC—— Unavailable160m2026-09-09 05:50 UTC—— Unavailable160m2026-09-09 08:50 UTC—— Unavailable160m2026-09-09 11:50 UTC—— Unavailable160m2026-09-09 14:50 UTC—— Unavailable160m2026-09-09 17:50 UTC—— Unavailable160m2026-09-09 20:50 UTC—— Unavailable160m2026-09-09 23:50 UTC—— Unavailable160m2026-09-10 02:50 UTC—— Unavailable80m2026-09-08 17:50 UTC-130.5U — Unfavorable80m2026-09-08 20:50 UTC-53.9U — Unfavorable80m2026-09-08 23:50 UTC-21.4U — Unfavorable80m2026-09-09 02:50 UTC-18.4M — Marginal80m2026-09-09 05:50 UTC-14.2M — Marginal80m2026-09-09 08:50 UTC-39.4U — Unfavorable80m2026-09-09 11:50 UTC-134.1U — Unfavorable80m2026-09-09 14:50 UTC-179.8U — Unfavorable80m2026-09-09 17:50 UTC-136.6U — Unfavorable80m2026-09-09 20:50 UTC-53.9U — Unfavorable80m2026-09-09 23:50 UTC-21.4U — Unfavorable80m2026-09-10 02:50 UTC-18.4M — Marginal60m2026-09-08 17:50 UTC-82.0U — Unfavorable60m2026-09-08 20:50 UTC-36.4U — Unfavorable60m2026-09-08 23:50 UTC-12.3M — Marginal60m2026-09-09 02:50 UTC-11.7M — Marginal60m2026-09-09 05:50 UTC-9.3G — Good60m2026-09-09 08:50 UTC-27.2U — Unfavorable60m2026-09-09 11:50 UTC-84.6U — Unfavorable60m2026-09-09 14:50 UTC-110.5U — Unfavorable60m2026-09-09 17:50 UTC-88.1U — Unfavorable60m2026-09-09 20:50 UTC-36.4U — Unfavorable60m2026-09-09 23:50 UTC-12.3M — Marginal60m2026-09-10 02:50 UTC-11.7M — Marginal40m2026-09-08 17:50 UTC-60.7U — Unfavorable40m2026-09-08 20:50 UTC-26.3U — Unfavorable40m2026-09-08 23:50 UTC-7.8G — Good40m2026-09-09 02:50 UTC-7.9G — Good40m2026-09-09 05:50 UTC-7.5G — Good40m2026-09-09 08:50 UTC-20.7U — Unfavorable40m2026-09-09 11:50 UTC-62.3U — Unfavorable40m2026-09-09 14:50 UTC-81.3U — Unfavorable40m2026-09-09 17:50 UTC-66.8U — Unfavorable40m2026-09-09 20:50 UTC-26.3U — Unfavorable40m2026-09-09 23:50 UTC-7.8G — Good40m2026-09-10 02:50 UTC-7.9G — Good30m2026-09-08 17:50 UTC-40.3U — Unfavorable30m2026-09-08 20:50 UTC-15.3M — Marginal30m2026-09-08 23:50 UTC-4.4G — Good30m2026-09-09 02:50 UTC-6.5G — Good30m2026-09-09 05:50 UTC-7.6G — Good30m2026-09-09 08:50 UTC-15.8M — Marginal30m2026-09-09 11:50 UTC-42.1U — Unfavorable30m2026-09-09 14:50 UTC-54.4U — Unfavorable30m2026-09-09 17:50 UTC-46.3U — Unfavorable30m2026-09-09 20:50 UTC-15.3M — Marginal30m2026-09-09 23:50 UTC-4.4G — Good30m2026-09-10 02:50 UTC-6.5G — Good20m2026-09-08 17:50 UTC-22.5U — Unfavorable20m2026-09-08 20:50 UTC-8.1G — Good20m2026-09-08 23:50 UTC-7.2G — Good20m2026-09-09 02:50 UTC-18.8M — Marginal20m2026-09-09 05:50 UTC-26.0U — Unfavorable20m2026-09-09 08:50 UTC-28.6U — Unfavorable20m2026-09-09 11:50 UTC-28.7U — Unfavorable20m2026-09-09 14:50 UTC-37.1U — Unfavorable20m2026-09-09 17:50 UTC-28.5U — Unfavorable20m2026-09-09 20:50 UTC-8.1G — Good20m2026-09-09 23:50 UTC-7.2G — Good20m2026-09-10 02:50 UTC-18.8M — Marginal17m2026-09-08 17:50 UTC-12.2M — Marginal17m2026-09-08 20:50 UTC-6.9G — Good17m2026-09-08 23:50 UTC-17.8M — Marginal17m2026-09-09 02:50 UTC-38.2U — Unfavorable17m2026-09-09 05:50 UTC-48.0U — Unfavorable17m2026-09-09 08:50 UTC-48.0U — Unfavorable17m2026-09-09 11:50 UTC-20.3U — Unfavorable17m2026-09-09 14:50 UTC-24.6U — Unfavorable17m2026-09-09 17:50 UTC-18.2M — Marginal17m2026-09-09 20:50 UTC-6.9G — Good17m2026-09-09 23:50 UTC-17.8M — Marginal17m2026-09-10 02:50 UTC-38.2U — Unfavorable15m2026-09-08 17:50 UTC-9.8G — Good15m2026-09-08 20:50 UTC-9.8G — Good15m2026-09-08 23:50 UTC-29.6U — Unfavorable15m2026-09-09 02:50 UTC-53.9U — Unfavorable15m2026-09-09 05:50 UTC-65.5U — Unfavorable15m2026-09-09 08:50 UTC-63.8U — Unfavorable15m2026-09-09 11:50 UTC-17.4M — Marginal15m2026-09-09 14:50 UTC-20.3U — Unfavorable15m2026-09-09 17:50 UTC-15.9M — Marginal15m2026-09-09 20:50 UTC-9.8G — Good15m2026-09-09 23:50 UTC-29.6U — Unfavorable15m2026-09-10 02:50 UTC-53.9U — Unfavorable12m2026-09-08 17:50 UTC-16.2M — Marginal12m2026-09-08 20:50 UTC-20.4U — Unfavorable12m2026-09-08 23:50 UTC-44.6U — Unfavorable12m2026-09-09 02:50 UTC-74.5U — Unfavorable12m2026-09-09 05:50 UTC-82.7U — Unfavorable12m2026-09-09 08:50 UTC-77.5U — Unfavorable12m2026-09-09 11:50 UTC-27.0U — Unfavorable12m2026-09-09 14:50 UTC-25.7U — Unfavorable12m2026-09-09 17:50 UTC-22.2U — Unfavorable12m2026-09-09 20:50 UTC-20.4U — Unfavorable12m2026-09-09 23:50 UTC-44.6U — Unfavorable12m2026-09-10 02:50 UTC-74.5U — Unfavorable11m (CB)2026-09-08 17:50 UTC-21.0U — Unfavorable11m (CB)2026-09-08 20:50 UTC-26.6U — Unfavorable11m (CB)2026-09-08 23:50 UTC-53.8U — Unfavorable11m (CB)2026-09-09 02:50 UTC-83.2U — Unfavorable11m (CB)2026-09-09 05:50 UTC-86.3U — Unfavorable11m (CB)2026-09-09 08:50 UTC-82.3U — Unfavorable11m (CB)2026-09-09 11:50 UTC-32.4U — Unfavorable11m (CB)2026-09-09 14:50 UTC-30.0U — Unfavorable11m (CB)2026-09-09 17:50 UTC-27.0U — Unfavorable11m (CB)2026-09-09 20:50 UTC-26.6U — Unfavorable11m (CB)2026-09-09 23:50 UTC-53.8U — Unfavorable11m (CB)2026-09-10 02:50 UTC-83.2U — Unfavorable10m2026-09-08 17:50 UTC-23.1U — Unfavorable10m2026-09-08 20:50 UTC-29.1U — Unfavorable10m2026-09-08 23:50 UTC-57.3U — Unfavorable10m2026-09-09 02:50 UTC-84.5U — Unfavorable10m2026-09-09 05:50 UTC-87.3U — Unfavorable10m2026-09-09 08:50 UTC-84.1U — Unfavorable10m2026-09-09 11:50 UTC-34.7U — Unfavorable10m2026-09-09 14:50 UTC-31.9U — Unfavorable10m2026-09-09 17:50 UTC-29.1U — Unfavorable10m2026-09-09 20:50 UTC-29.1U — Unfavorable10m2026-09-09 23:50 UTC-57.3U — Unfavorable10m2026-09-10 02:50 UTC-84.5U — Unfavorable\nLabels mark a new UTC day. · Local time-zone reference not yet available; chart times remain UTC.\n    17h20h23hWed 02h05h08h11h14h17h20h23hThu 02h160m————————————80mUUUMMUUUUUUM60mUUMMGUUUUUMM40mUUGGGUUUUUGG30mUMGGGMUUUMGG20mUGGMUUUUUGGM17mMGMUUUUUMGMU15mGGUUUUMUMGUU12mMUUUUUUUUUUU11m (CB)UUUUUUUUUUUU10mUUUUUUUUUUUU\n    E ExcellentG GoodM MarginalU Unfavorable\n  \n  \n    Best window by band (UTC)\n    The table highlights the interval with the highest average operational index among the samples in the next 36 hours. Check the date and index; expand a value to inspect its factors.\n    Best window by band (UTC)BandUTC date/time (MM-DD HH:mm)Decision-support index160mNo favorable interval identified by this index80m09-09 01:50–09-09 08:5012/100Link quality (P.533): 45% (absolute S/N -16 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 78% (window begins at +8h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)60m09-08 22:50–09-09 08:5018/100Link quality (P.533): 59% (absolute S/N -12 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 86% (window begins at +5h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)40m09-09 22:50–09-10 04:509/100Link quality (P.533): 72% (absolute S/N -7 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 19% (window begins at +29h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)30m09-09 21:50–09-10 04:5011/100Link quality (P.533): 78% (absolute S/N -5 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 22% (window begins at +28h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)20m09-09 20:50–09-10 03:5011/100Link quality (P.533): 80% (absolute S/N -4 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 25% (window begins at +27h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)17m09-08 17:50–09-09 00:5025/100Link quality (P.533): 74% (absolute S/N -6 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 100% (window begins at +0h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)15m09-08 17:50–09-08 23:5022/100Link quality (P.533): 66% (absolute S/N -10 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 100% (window begins at +0h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)12m09-08 17:50–09-08 21:5012/100Link quality (P.533): 37% (absolute S/N -19 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 100% (window begins at +0h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)11m (CB)09-08 19:50–09-08 19:507/100Link quality (P.533): 24% (absolute S/N -24 dB at the window midpoint) · Data sources: 0% (0 of 9 responding) · Forecast horizon: 94% (window begins at +2h) · WSPR evidence: 0% (no spots in this window) · Geomagnetic quietness: 40% (predicted Kp 5.0)10mNo favorable interval identified by this index\n    How to read the indexThe index combines a transformation of modeled S/N at the window midpoint with four factors: available sources (30%), forecast horizon (25%), WSPR spots (25%), and geomagnetic context (20%). Its weights and curve are AGHIP heuristics, not contact probability or ITU circuit reliability. A dash means S/N could not be calculated.\n  \n  \n    Cross-check with real WSPR spots\n    A spot is a reception report submitted by another station. This query covers the last 8 hours in broad areas extending ±9° around each endpoint: regional evidence, not measurements at your exact QTH. No spots does not mean the band is closed.\n    —\n    Cross-check with real WSPR spotsBandSpotsAdjusted S/N (dB)Current indexResidual (dB)160mno live spots80mno live spots60mno live spots40mno live spots30mno live spots20mno live spots17mno live spots15mno live spots12mno live spots10mno live spots\n    \n    What this comparison can tell youThe legacy comparator uses the operational index, which includes heuristic adjustments; its residuals therefore do not validate absolute P.533 S/N. Antennas, local noise, operator distribution, and stations that were not received limit the comparison. Try listening and record your own station conditions.\n  \n  \n    Kp trend (UTC)\n    Kp is a global index of geomagnetic disturbance. This chart shows the received history, not whether a band is open at your grid. Elevated Kp warrants attention, especially on high-latitude paths, but HF effects also depend on the ionosphere, time, and route.\n    Kp history in UTC, with reference lines at Kp 5 and 7\n    Linha contínua: Kp observado. Linha tracejada longa: Kp 5. Linha pontilhada: Kp 7. Marcadores: círculo abaixo de 4; quadrado de 4 a menos de 5; losango de 5 a menos de 7; triângulo em 7 ou mais.Valores do gráfico KpKp chart valuesTime UTCKpCategory2026-09-08 12:00 UTC2.0Quiet2026-09-08 15:00 UTC5.0G1\nShow solar and geomagnetic indicators\n      SFI describes 10.7 cm solar radio flux; R12 is the smoothed sunspot index in the model’s convention. Kp, Dst, and A describe geomagnetic activity; Bz is a component of the interplanetary magnetic field. Check each value’s age and source: these are not local measurements at the grid.\n      \n        SFI107no data\n        Kp2no data\n        Dst (nT)-8no data\n        Bz (nT)-1.0no data\n        A index28\n        R1272Approximate V1 conversion INFERREDV2 — ÷ 1.44 · —\n        X-raysB8.0no data\n      \n    \n  \n  \n    Measured Bz history (recorded in this browser)\n    AGHIP automatically records Bz summaries when enough data are available to calculate a trend. Table times are logging times in UTC, not observations made at the QTH. Southward Bz can favor coupling with the magnetosphere, but its strength, duration, and solar-wind conditions also matter. Labels are dashboard diagnostics, not official alerts.\n    \n    Stored summaries: 1 · displayed: 1. Times are UTC logging times.\n    UTCBz (nT)Dashboard diagnostic2026-09-08 17:49-3.2Decreasing\n    Clear history\n  \n  \n    Estimated solar-ejection arrival\n    A coronal mass ejection (CME) carries plasma and magnetic field. This panel uses NASA/DONKI analyses for an AGHIP-generated, simplified transit estimate. It does not confirm an Earth-directed trajectory, impact, storm, or arrival time at your grid.\n    ILLUSTRATIVE ESTIMATE — calculated by AGHIPReported speed: 800 km/s1 AU / speed: 2.2 daysThe constant-speed reference time is about 46 hours from now.DONKI reference epoch (time21_5): 2026-09-08 12:00 UTC.The illustration adds 1 AU divided by speed to this reference epoch; it does not subtract the initial heliocentric distance, model solar-wind drag, or confirm an Earth-directed trajectory. Do not use it as an operational arrival forecast.NASA/DONKI · cached response 2026-09-08 17:49 UTC.\n    Solar flares and CMEs: why does the difference matter for HF?Flare X-rays arrive with the light and can affect the D region on the dayside. A CME travels more slowly: the fastest can arrive in less than a day, while others take several days. Not every ejection reaches Earth. Follow observations and official forecasts; do not treat a countdown as confirmation.\n  \n  \n    160 meters — proximity to the electron gyrofrequency\n    On 160 meters, the magnetic field is physical context. The panel calculates fH with the current WMM2025 field at 90 km and compares the 1.836 MHz reference RF using the dimensionless f/fH ratio. This is not an opening forecast or path loss.\n    fH 614.7 kHz · fRF 1836 kHzWMM2025 at 90 km · inclination -39.4° · 2026-09-08 17:50 UTCDimensionless f/fH ratio: 2.99 — context only; not path loss or S/N.\n    Assumptions and limits of this diagnosticThe 1.836 MHz value is a declared analysis reference. fH depends on field intensity, altitude, and date; f/fH is dimensionless. A vertical projection does not solve the magnetoionic equation, electron density, collisions, polarization, or the complete path. P.533 remains at 2–30 MHz and the adopted P.1147 range at approximately 150–1,700 kHz; the 160 m module does not claim a normative ionospheric S/N.\n  \n  160 meters — reception and geometry laboratoryWhat can be observed and calculated on this path? Inspect recent 160 m receptions, solar geometry, and noise. Conditional S/N requires your own measurement; it does not extrapolate P.1147 or forecast a band opening.160 m transmitter grid (optional)Query 160 m WSPRExport data and assumptions (JSON)This path has not been queried yet.Reference RF: 1.836 MHz · λ 163.3 m · GG67KD ← EUA Leste (W3) · 2026-09-08 17:50 UTCApproximate transmitter: the HF destination, not an identified station. Enter the transmitter grid to study a defined circuit.1. Reception evidence0 report(s) toward the QTH · 0 distinct receiver(s) · 0 in the reverse direction (separate).Each observed endpoint must be within 200 km of its selected endpoint. These are reported grid centers, not GPS positions. Maximum age: 2 h. These are operational filters, not physical limits or independent samples.No reports does not mean the band is closed. We do not know whether a transmitter and receiver were operating on the path.Rows excluded by filters: 0. 2. Solar geometry and noisePath: 7538 km · bearing at QTH: 335.2° · solar elevation QTH/TX: 41.0° / 55.1°.Arc fraction with Sun below the geometric horizon: 0.0%. At 90 km altitude, fraction in geometric Earth shadow: 0.0%.Next 24 h — entire 90 km arc in shadow (10-minute time grid): 2026-09-09 00:20 UTC — 2026-09-09 08:40 UTCShadow does not imply disappearance of the D region or a band opening: recombination, absorption, collisions, and atmospheric refraction are not modeled.P.372 reference external noise at the QTH: -69.7 dBm / 2400 Hz · climatology, not a measurement of your receiver.S/N experiment using a reference receptionEnter the actual transmitter grid above and a reception measured at your QTH, at 1.836 MHz, within the last 30 minutes. Scenario power and bandwidth are selected in Scientific Radio Listening. Use average power with the same convention; do not mix AM carrier, PEP, and SSB average power. Physical installation changes require a new reference.Measured S/N (dB)TX power during measurement (W)Reference equivalent noise bandwidth (Hz)Measurement time (UTC ISO 8601)Reference noise (dBm, optional)Scenario noise (same RBW and port)I confirm the same RF frequency, path, antennas, orientation, polarization, and installation; the receiver is linear and noise density is approximately flat across the bandwidth.Record reference and calculateRecord a reference reception.Mathematics, references, and limitsS/N₂ = S/N₁ + 10 log₁₀(P₂/P₁) − 10 log₁₀(B₂/B₁) − ΔN₀.P is average signal power; B is equivalent noise bandwidth. The rule assumes the signal remains inside the filter and noise/interference can be represented by approximately constant density. Do not transfer calibration to another antenna, frequency, or station. The 30-minute limit is a conservative refresh policy, not a demonstrated coherence time.P.1147 remains limited to the adopted 150–1,700 kHz domain, with the Figure 4 discrepancy still open. No gain is invented from Kp, Bz, f/fH, or gray-line geometry.ITU-R P.1147 · ITU-R P.372 · WSJT-X / WSPR · wspr.live — raw data; noncommercial use · Vanhamel et al. (2022) · NOAA solar geometry\n  \n    📻 Scientific Radio ListeningAdjust noise, receiving antenna, remote transmitter power, and bandwidth to compare listening attempts at your QTH. HF results describe a monthly-median model, not today’s reception probability or a guarantee.Receiving-site noiseUrbanResidentialRuralQuiet ruralReceiving antenna½λ dipole at 0.50λ½λ dipole at 0.25λ½λ dipole at 1.00λIdeal ¼λ verticalConstant 2.15 dBi referenceInverted V · pattern not validatedLong wire / end-fed · pattern not validatedBeverage 1λ · pattern not validated4-Square · pattern not validatedHi-Z array · pattern not validatedK9AY · pattern not validatedFlag / Pennant / EWE · pattern not validatedSmall magnetic loop · pattern not validatedRemote transmitter power100 W500 W1 kW3 kW5 kW7 kW10 kWReceiver bandwidthNarrow CW · 500 HzSSB · 2.4 kHzAM · 6 kHzWide AM · 10 kHzOptional measured receiver noise (preferred over climatology)Noise floor (dBm)Measurement RBW (Hz)Frequency (MHz)HF path7538 kmPower relative to 100 W0.0 dBReceiver bandwidth2.4 kHzControlled antenna-pattern comparison: Half-wave dipole at 0.50λ above ground · common peak reference 2.15 dBi · IMAGE-GROUND / NOT A NEC SOLUTION · ground assumption: perfectly conducting · assumed sensitivity scale ±2 dB. All selectable receive patterns are normalized to the same peak. The link budget therefore compares elevation-pattern coupling at each arrival angle, not absolute realized gain. Main-lobe alignment is assumed. RDF, front-to-back ratio, efficiency, feeder loss, receiver noise figure, and directional noise rejection are not converted into gain.HIGHEST MODELED S/N NOW15m · UnfavorableS/N -18.3 dB · planning threshold 6 dB · margin -24.3 dB (assumption-based sensitivity +6.5/−9.5 dB)P.533 interpolated 7,000–9,000 km. This band has the highest modeled S/N after multimode power summation, D-region absorption, elevation-pattern gain, and receiving-site noise.🔬 Calculation detailsReceived power-118.2 dBmReceiver noise-99.9 dBm · Fa 40.3 dB · climatologyMUF / f23.50 / 21.096 MHz · f/MUF 0.90foF2 / foE8.57 / 3.55 MHzDominant-mode path loss162.6 dBD-region absorption12.5 dBArrival elevation / RX gain9.1° / -4.2 dBiAssumption-based sensitivity (not a confidence interval)+6.5 / −9.5 dB · dominant term: noiseSpace-weather contextSFI 107 · Kp 2.0 · observed context, not added to the baseline monthly-median S/NSame-band, equal-peak pattern comparison: Ideal quarter-wave vertical -10.8 dB · Half-wave dipole at 1.00λ above ground -13.1 dB · Half-wave dipole at 0.50λ above ground -18.3 dB · Half-wave dipole at 0.25λ above ground -24.1 dBPatterns are normalized to 2.15 dBi and evaluated at the calculated arrival angle. This is a controlled pattern comparison, not an NEC model of the actual installation or a prediction of directional noise rejection.BandS/NReception assessmentEvidence160m—Not modeled by P.533 — use the 160 m evidence panelOUTSIDE P.533 DOMAIN (<2 MHz)80m-160.7 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37260m-101.8 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37240m-76.3 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37230m-52.3 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37220m-33.8 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37217m-21.7 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37215m-18.3 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37212m-24.5 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37211m (CB)-29.0 dBUnfavorableP.533 §5.4 INTERPOLATED + P.37210m-31.0 dBUnfavorableP.533 §5.4 INTERPOLATED + P.372Signal power uses ITU-R P.533-14: discrete modes below 7,000 km, §5.4 interpolation from 7,000–9,000 km, and the §5.3 long-path formulation above 9,000 km. Receiving noise uses ITU-R P.372-17 climatology or the optional measured floor. “Favorable” means the median S/N exceeds the declared planning threshold by at least 6 dB; “worth trying” means it meets the threshold. These are operator-oriented decisions, not ITU circuit reliability or a guarantee. Broadcast listeners: the planning thresholds here are attempt-a-listen levels, not the ITU-R broadcasting quality criteria (BS.560, BS.703), which demand far higher ratios for undegraded program audio. The remote antenna remains a declared 2.15 dBi reference unless its real pattern is supplied. Timestamp: 2026-09-08 17:50 UTC.LF/MF — sky-wave predictionEXPERIMENTAL IMPLEMENTATION UNDER REVIEW — not validated against independent measurements.P.1147 now provides an electric-field estimate. The result represents an annual median, not a measurement or an exact forecast for today. Ground wave (P.368) is not included.Power and receiver bandwidth follow the selections above. The HF receiving antenna is not reused: LF/MF requires its own receiving reference.LF/MF transmitter grid (optional)LF / longwave (kHz)MF / medium wave (kHz)Ideal transmitting monopole (h/λ)Short compared with λ0.25 λ0.40 λ0.50 λ0.60 λRadiation efficiency (%)TX horizontal factor GH (dB)Regional profile — explicit selectionGeneral (Brazil/U.S./Canada)European path: b = 1Midpoint in Region 3 south of 11°SStudy R12 V1 (blank: dashboard index)Defaults of 100% efficiency and GH = 0 dB are ideal assumptions, not measurements. h/λ is the electrical height at each frequency, not one real multiband installation. For an AM reception study, enter carrier power, not PEP. Without a dedicated grid, the HF destination supplies a study route, not an identified broadcaster.Coastal terminals — optional correctionNo sea gain is the initial scenario, not an automatic geographic classification. To enable it, enter s₁ to the sea and s₂ to the next land along the path. α is the land fraction; 0.5 is the recommendation’s approximation without a terrain database. This does not apply to fresh water.TransmitterScenarioNo sea gainApply using the inputs belows₁ (km)s₂ (km)α (0–1)Receiver / QTHScenarioNo sea gainApply using the inputs belows₁ (km)s₂ (km)α (0–1)Optional S/N — calibrated receiving system requiredA system antenna factor (AF), calibrated at this frequency, direction, and polarization, must be referenced to the receiver’s 50 Ω input and include feeder, matching, and preamplifier effects. Measure noise without the wanted signal at that same input. Do not enter dBi as AF. Changing frequency or route clears AF and noise to prevent invalid reuse.LF / longwaveSystem AF (dB/m)Measured noise (dBm)Measurement equivalent noise bandwidth (Hz)MF / medium waveSystem AF (dB/m)Measured noise (dBm)Measurement equivalent noise bandwidth (Hz)Bandwidth conversion assumes locally flat noise spectral density. Interference, fading, selectivity, and intelligibility are not determined by S/N alone. Neither the HF measurement nor a lossless receiving antenna is assumed.Transmitter → your QTH: HF destination (scenario) · 38.900, -77.000 → -22.854, -47.125.R12: 72.0 · dashboard V1 proxy (0.6 × smoothed V2 index); fixed for the 24 h study.LF / longwave · 198.000 kHzNo prediction for these inputsCheck coordinates, frequency, and parameters.INVALID_INPUTMF / medium wave · 1,000.000 kHzNo prediction for these inputsCheck coordinates, frequency, and parameters.INVALID_INPUTReference, assumptions, and implementation limitsITU-R P.1147-4 · AGHIP-P1147-4-EQUATIONS-WMM2025-r7.Figures 1 and 2 are embedded interpolation tables; Equations 1–13 and Appendix 1 are implemented. The field reference is a loop at ground level in the great-circle vertical plane. Average terminal ground: 3–10 mS/m; highly resistive ground can substantially reduce the field. No arbitrary ground, HF antenna, or space-weather corrections have been added.Research implementation without independent predictive validation. An auxiliary comparison with Figure 4 did not reproduce all curves within plot-reading tolerance; calculation explicitly follows the published equations. This remains an open report item, with no hidden empirical adjustment.Geometry uses the selected QTH coordinates; a dedicated transmitter grid represents its cell center. The geomagnetic profile uses WMM2025, not the historical map. The 30 dB daytime approximation does not replace Annex 2’s separate daytime treatment. There is no ground-wave sum, installation-specific NEC validation, broadcaster directory, or reception guarantee.VHF 6 m / 2 mPath outside available screeningYour QTH → VHF grid PM95 · 18,489 km.This route is outside the available distance screens. This is a model limitation, not proof of physical impossibility. Check the grid of the station you want to hear.EME is a separate Earth–Moon–Earth link; see the EME tab.Understand the calculations and limitsAGHIP distance screens — not probabilitiesMechanismStatusSporadic E (Es)Outside distance-screening rangeMeteor scatter (MS)Outside distance-screening rangeTransequatorial propagation (TEP), 6 m / 2 mOutside distance-screening rangeExisting AGHIP screening limits: Es 500–2,200 km; MS 300–2,200 km; TEP 2,500–9,000 km. These are experimental filters, not universal physical boundaries or ITU-R criteria. Magnetic geometry, frequency, and current conditions still matter. No 0–100 index is converted into a reception probability.P.1546: exceeds the 1,000 km upper limit. P.1812-8: outside the approximate 0.25–3,000 km range.These checks do not execute the terrestrial methods. Validated implementations and inputs such as heights, terrain profiles, land cover, and clutter are still required. Received field strength and S/N are not calculated in this card.ITU-R P.1546-6 / ITU-R P.1812-8\n    Understand the calculations: bands, path, ionosphere, and magnetic field\n      These details help you inspect model assumptions. Distinguish midpoint examples from the complete control-point calculation. Received power uses dBW or dBm; S/N is a ratio expressed in dB.\n      Why each band performs this way — U.S. East (W3) MODELEDHover over a cell to view the supporting quantity.BandIonosphereD-region absorptionNoiseGeomagneticGeometryS/NResult80mFAVORABLEDOMINANTHIGHQUIET3 hop(s)—UNUSABLE60mFAVORABLEDOMINANTHIGHQUIET3 hop(s)—UNUSABLE40mFAVORABLEDOMINANTHIGHQUIET3 hop(s)-76UNUSABLE30mFAVORABLEDOMINANTHIGHQUIET3 hop(s)-52UNUSABLE20mFAVORABLEDOMINANTHIGHQUIET3 hop(s)-34UNUSABLE17mFAVORABLEHIGHHIGHQUIET3 hop(s)-22UNUSABLE15mMARGINALHIGHHIGHQUIET3 hop(s)-18UNUSABLE12mABOVE MUFMODERATEHIGHQUIET3 hop(s)-24UNUSABLE11m (CB)ABOVE MUFMODERATEHIGHQUIET3 hop(s)-29UNUSABLE10mABOVE MUFMODERATEHIGHQUIET3 hop(s)-31UNUSABLEHighest calculated S/N: 15m — UNUSABLE, S/N -18.3 dB.The recommendation is based on separate physical mechanisms, not a single score. Ionosphere, absorption, and geometry come from P.533; noise is P.372 climatology; geomagnetic activity is a NOAA observation and is displayed separately from the monthly-median P.533 calculation.\n      Path profile on 15m MODELED — 7538 km, 5 sample points☀23°☀5°☀12°☀29°☀47°QTHU.S. East (W3)The bar shows solar illumination as context for D-region absorption, not measured path loss: red marks stronger modeled illumination, yellow marks intermediate illumination, and green marks low or no illumination. The number below each point is dip latitude; high values indicate possible auroral absorption. Path F2 MUF: 23.5 MHz · MODELED CCIR + P.1239/P.533.\n      Ionosphere at the midpoint of the path — CCIR MODELEDfoF212.24 MHzM(3000)F22.909foE3.61 MHzGIRO assimilationNo usable GIRO observations are available.x = foF2/foE3.39Reflection height hr336 kmLowest-order mode3F2 · hop length 2513kmdmax4000 kmGyrofrequency at 300 km (1960 epoch)0.889 MHzMidpoint diagnostic MUF33.64 MHzAbsorption term AT on 20m257.8 (dimensionless, eq. 20)Auroral loss Lh0.0 dBLegacy heuristic MUF26.85 MHzLink budget on 20m — ITU-R P.533-14 MODELEDModes included under Section 5.2.1; E-layer-screened modes have already been excluded:ModeElev.MUFLiGt(Δ)Gr(Δ)Pr dBWF239.1°23.532.72.1-4.2-162.0F2415.2°19.929.72.1-0.5-157.6F2520.4°17.427.02.11.1-155.4F2625.1°15.626.22.11.9-156.2Dominant modeF25 · -155.4 dBWSelected-method power minus dominant discrete mode-2.23 dBReceived power: selected distance method-157.7 dBW = -127.7 dBmNoise Fa (P.372)46.3 dB CLIMATOLOGYS/N in 2.4 kHz-33.8 dBS/N sensitivity (assumptions)+6.1 / −9.2 dBDominant factornoise (foF2 3.8 · noise 8.2 · antenna 1.4 dB)S/N at destination (you transmit)-22.2 dBS/N at your QTH (you receive)-33.8 dBLimiting directionyou receive · -33.8 dBWith 100 W and antenna reference gains of 2.1/2.1 dBi. Actual modal gains are listed in the table. P.533 §5.2.2 requires summing the power of all open modes, not selecting only the best one; the selected distance method differs from the dominant discrete mode by -2.23 dB. This difference can be negative after distance-method interpolation. This baseline model assumes reciprocal path loss. Differences between the modeled station directions reflect the declared station and noise assumptions; they do not establish that every real ionospheric path is reciprocal. Received power is expressed in dBW or dBm; S/N is a ratio in dB; the heatmap uses a relative propagation index with space-weather penalties that P.533 does not model. These are two distinct models, not an inconsistency.The scientific card uses the CCIR numerical model through ITU-R P.1239-4 and the P.533-14 median link-budget chain. E modes (up to 4,000 km) and unscreened F2 modes are evaluated separately and summed in linear power; absorption, auroral loss, antenna gain at the mode elevation angle, and P.372 noise are included. The heatmap remains a separate relative operational index and is never presented as absolute P.533 S/N.\n      Geomagnetic Field at Your QTH — WMM2025 MODELEDField intensity B22,792 nTDeclination D-21.84°Inclination I-39.80°Dip latitude-22.61°Gyrofrequency fH614.7 kHz (at 90 km)f / fH at 1.836 MHz2.99f/fH is a physical indicator of the relationship between the operating frequency and the local electron gyrofrequency. By itself, it represents neither absorption nor propagation quality and is not used in any SNR calculation in this dashboard.\n    \n  \n"
+  }
+}

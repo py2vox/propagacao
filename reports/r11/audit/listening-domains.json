@@ -1,0 +1,504 @@
+{
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "generatedAt": "2026-09-09T17:19:44.328Z",
+  "summary": {
+    "checks": 120,
+    "passed": 120,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "p1147 boundary 49.999",
+      "ok": true
+    },
+    {
+      "name": "p1147 boundary 50",
+      "ok": true
+    },
+    {
+      "name": "p1147 boundary 50.001",
+      "ok": true
+    },
+    {
+      "name": "p1147 boundary 11999.999",
+      "ok": true
+    },
+    {
+      "name": "p1147 boundary 12000",
+      "ok": true
+    },
+    {
+      "name": "p1147 boundary 12000.001",
+      "ok": true
+    },
+    {
+      "name": "p1147 rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "p1147 rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "p1147 rejects -1",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 49.999",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 50",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 50.001",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 7499.999",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 7500",
+      "ok": true
+    },
+    {
+      "name": "lfVerified boundary 7500.001",
+      "ok": true
+    },
+    {
+      "name": "lfVerified rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "lfVerified rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "lfVerified rejects -1",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary -0.001",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary 0",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary 0.001",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary 999.999",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary 1000",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper boundary 1000.001",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "p1546Upper rejects -1",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 0.249",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 0.25",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 0.251",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 2999.999",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 3000",
+      "ok": true
+    },
+    {
+      "name": "p1812 boundary 3000.001",
+      "ok": true
+    },
+    {
+      "name": "p1812 rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "p1812 rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "p1812 rejects -1",
+      "ok": true
+    },
+    {
+      "name": "es boundary 499.999",
+      "ok": true
+    },
+    {
+      "name": "es boundary 500",
+      "ok": true
+    },
+    {
+      "name": "es boundary 500.001",
+      "ok": true
+    },
+    {
+      "name": "es boundary 2199.999",
+      "ok": true
+    },
+    {
+      "name": "es boundary 2200",
+      "ok": true
+    },
+    {
+      "name": "es boundary 2200.001",
+      "ok": true
+    },
+    {
+      "name": "es rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "es rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "es rejects -1",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 299.999",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 300",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 300.001",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 2199.999",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 2200",
+      "ok": true
+    },
+    {
+      "name": "ms boundary 2200.001",
+      "ok": true
+    },
+    {
+      "name": "ms rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "ms rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "ms rejects -1",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 2499.999",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 2500",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 2500.001",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 8999.999",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 9000",
+      "ok": true
+    },
+    {
+      "name": "tep boundary 9000.001",
+      "ok": true
+    },
+    {
+      "name": "tep rejects NaN",
+      "ok": true
+    },
+    {
+      "name": "tep rejects Infinity",
+      "ok": true
+    },
+    {
+      "name": "tep rejects -1",
+      "ok": true
+    },
+    {
+      "name": "Limits object immutable",
+      "ok": true
+    },
+    {
+      "name": "Actual MF climatology finite",
+      "ok": true,
+      "detail": {
+        "source": "CLIMATOLOGY",
+        "reason": null,
+        "faDb": 76.91927858967604,
+        "noiseDbm": -63.27860899320791,
+        "bwHz": 2400,
+        "fMHz": 1
+      }
+    },
+    {
+      "name": "Double bandwidth raises noise by 3.0102999566 dB",
+      "ok": true
+    },
+    {
+      "name": "Bandwidth does not change Fa",
+      "ok": true
+    },
+    {
+      "name": "Quiet rural noise differs from city",
+      "ok": true
+    },
+    {
+      "name": "Invalid category never substituted",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects bandwidth 0",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects bandwidth -1",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects bandwidth NaN",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects bandwidth Infinity",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects frequency 0",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects frequency -1",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects frequency NaN",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects frequency Infinity",
+      "ok": true
+    },
+    {
+      "name": "Invalid date explicit",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects coordinates null",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects coordinates {lat:NaN,lon:0}",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects coordinates {lat:91,lon:0}",
+      "ok": true
+    },
+    {
+      "name": "Noise rejects coordinates {lat:0,lon:181}",
+      "ok": true
+    },
+    {
+      "name": "Independent 76.9 dB / 2400 Hz arithmetic fixture",
+      "ok": true
+    },
+    {
+      "name": "Noise inputs UTC September/hour 15",
+      "ok": true
+    },
+    {
+      "name": "Noise inputs longitude and latitude converted to radians",
+      "ok": true
+    },
+    {
+      "name": "LF excludes incomplete total",
+      "ok": true
+    },
+    {
+      "name": "LF does not call out-of-domain coefficients",
+      "ok": true
+    },
+    {
+      "name": "Bad coefficients are missing, not zero: null",
+      "ok": true
+    },
+    {
+      "name": "Bad coefficients are missing, not zero: {FamT:NaN}",
+      "ok": true
+    },
+    {
+      "name": "Bad coefficients are missing, not zero: {FamT:Infinity}",
+      "ok": true
+    },
+    {
+      "name": "Coefficient exception explicit",
+      "ok": true
+    },
+    {
+      "name": "Route geometry finite",
+      "ok": true
+    },
+    {
+      "name": "Route distance reciprocal",
+      "ok": true
+    },
+    {
+      "name": "Endpoint solar geometry follows coordinates",
+      "ok": true
+    },
+    {
+      "name": "Midpoint solar geometry reciprocal",
+      "ok": true
+    },
+    {
+      "name": "Antipodal midpoint not invented",
+      "ok": true
+    },
+    {
+      "name": "Same location handled",
+      "ok": true
+    },
+    {
+      "name": "Dateline short path approximately 222 km",
+      "ok": true
+    },
+    {
+      "name": "Different UTC changes geometric context",
+      "ok": true
+    },
+    {
+      "name": "Route rejects invalid target null",
+      "ok": true
+    },
+    {
+      "name": "Route rejects invalid target {lat:NaN,lon:0}",
+      "ok": true
+    },
+    {
+      "name": "Route rejects invalid target {lat:0,lon:181}",
+      "ok": true
+    },
+    {
+      "name": "Route rejects invalid date",
+      "ok": true
+    },
+    {
+      "name": "PT VHF-only legacy adapter",
+      "ok": true
+    },
+    {
+      "name": "PT VHF no fallback",
+      "ok": true
+    },
+    {
+      "name": "PT VHF distant route remains unranked",
+      "ok": true
+    },
+    {
+      "name": "PT VHF separate from HF destination",
+      "ok": true
+    },
+    {
+      "name": "PT VHF no probability",
+      "ok": true
+    },
+    {
+      "name": "PT table caption and scoped headers",
+      "ok": true
+    },
+    {
+      "name": "EN VHF-only legacy adapter",
+      "ok": true
+    },
+    {
+      "name": "EN VHF no fallback",
+      "ok": true
+    },
+    {
+      "name": "EN VHF distant route remains unranked",
+      "ok": true
+    },
+    {
+      "name": "EN VHF separate from HF destination",
+      "ok": true
+    },
+    {
+      "name": "EN VHF no probability",
+      "ok": true
+    },
+    {
+      "name": "EN table caption and scoped headers",
+      "ok": true
+    },
+    {
+      "name": "Short VHF path invites terrestrial analysis",
+      "ok": true
+    },
+    {
+      "name": "Invalid VHF grid requests valid destination",
+      "ok": true
+    },
+    {
+      "name": "Invalid grid cannot inject markup",
+      "ok": true
+    },
+    {
+      "name": "Foundations issue no API calls",
+      "ok": true
+    },
+    {
+      "name": "No console errors",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "limitations": [
+    "Domains/noise/geometry regression plus VHF DOM adapter. LF/MF UI now tested in verify-p1147.cjs.",
+    "No real-browser, live-provider or predictive-accuracy validation"
+  ]
+}

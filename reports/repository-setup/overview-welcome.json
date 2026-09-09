@@ -1,0 +1,335 @@
+{
+  "htmlSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
+  "generatedAt": "2026-09-09T18:16:29.768Z",
+  "summary": {
+    "checks": 53,
+    "passed": 53,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "Only target title replaced",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding map-container",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding map-list-tbody",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding gi-kp",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding gi-moon",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding gi-eclipse",
+      "ok": true
+    },
+    {
+      "name": "Preserved overview binding quake-status",
+      "ok": true
+    },
+    {
+      "name": "Nine amateur HF bands, excluding unsupported 160m and CB",
+      "ok": true
+    },
+    {
+      "name": "Explicit English destination names cover entire map",
+      "ok": true
+    },
+    {
+      "name": "Distinct bands sorted by maximum valid endpoint S/N",
+      "ok": true,
+      "detail": [
+        [
+          14,
+          1,
+          10
+        ],
+        [
+          7,
+          0,
+          8
+        ],
+        [
+          21,
+          2,
+          7
+        ]
+      ]
+    },
+    {
+      "name": "Unfavorable finite values are not fabricated as favorable",
+      "ok": true
+    },
+    {
+      "name": "Non-finite and blocked results rejected",
+      "ok": true
+    },
+    {
+      "name": "R12 missing: no invented recommendations",
+      "ok": true
+    },
+    {
+      "name": "Invalid grid clears earlier result",
+      "ok": true
+    },
+    {
+      "name": "GG67KD calculation completes",
+      "ok": true
+    },
+    {
+      "name": "GG67KD three distinct bands",
+      "ok": true
+    },
+    {
+      "name": "GG67KD descending current S/N",
+      "ok": true
+    },
+    {
+      "name": "GG67KD all rows use valid methods",
+      "ok": true
+    },
+    {
+      "name": "GG67KD UTC minute is frozen across circuit evaluations",
+      "ok": true
+    },
+    {
+      "name": "GG67KD displayed grid and current time",
+      "ok": true
+    },
+    {
+      "name": "GG67KD localized welcome",
+      "ok": true
+    },
+    {
+      "name": "GG67KD three ranked cards rendered",
+      "ok": true
+    },
+    {
+      "name": "GG67KD headline equals fresh link-budget calculation",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "FN31PR calculation completes",
+      "ok": true
+    },
+    {
+      "name": "FN31PR three distinct bands",
+      "ok": true
+    },
+    {
+      "name": "FN31PR descending current S/N",
+      "ok": true
+    },
+    {
+      "name": "FN31PR all rows use valid methods",
+      "ok": true
+    },
+    {
+      "name": "FN31PR UTC minute is frozen across circuit evaluations",
+      "ok": true
+    },
+    {
+      "name": "FN31PR displayed grid and current time",
+      "ok": true
+    },
+    {
+      "name": "FN31PR localized welcome",
+      "ok": true
+    },
+    {
+      "name": "FN31PR three ranked cards rendered",
+      "ok": true
+    },
+    {
+      "name": "FN31PR headline equals fresh link-budget calculation",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "FN03FR calculation completes",
+      "ok": true
+    },
+    {
+      "name": "FN03FR three distinct bands",
+      "ok": true
+    },
+    {
+      "name": "FN03FR descending current S/N",
+      "ok": true
+    },
+    {
+      "name": "FN03FR all rows use valid methods",
+      "ok": true
+    },
+    {
+      "name": "FN03FR UTC minute is frozen across circuit evaluations",
+      "ok": true
+    },
+    {
+      "name": "FN03FR displayed grid and current time",
+      "ok": true
+    },
+    {
+      "name": "FN03FR localized welcome",
+      "ok": true
+    },
+    {
+      "name": "FN03FR three ranked cards rendered",
+      "ok": true
+    },
+    {
+      "name": "FN03FR headline equals fresh link-budget calculation",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "Language-only render reuses numeric result",
+      "ok": true
+    },
+    {
+      "name": "Language switch relocalizes all welcome text",
+      "ok": true
+    },
+    {
+      "name": "Power change invalidates summary cache",
+      "ok": true
+    },
+    {
+      "name": "10x power gives +10 dB in top results",
+      "ok": true
+    },
+    {
+      "name": "Bandwidth change refreshes S/N",
+      "ok": true
+    },
+    {
+      "name": "Unvalidated antenna fails closed",
+      "ok": true
+    },
+    {
+      "name": "Noise category participates in identity",
+      "ok": true
+    },
+    {
+      "name": "Measured noise participates in identity and core",
+      "ok": true
+    },
+    {
+      "name": "Rapid grid switches reject stale calculation",
+      "ok": true
+    },
+    {
+      "name": "Current minute changes cache identity",
+      "ok": true
+    },
+    {
+      "name": "No API requests from welcome feature",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "No console errors",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "cases": [
+    {
+      "grid": "GG67KD",
+      "elapsedMs": 12633,
+      "top": [
+        {
+          "band": 24,
+          "destination": "Uruguai (CX)",
+          "snr": 17.019824913484797,
+          "distanceKm": 1602.8031070170857
+        },
+        {
+          "band": 21,
+          "destination": "Uruguai (CX)",
+          "snr": 15.324315818008927,
+          "distanceKm": 1602.8031070170857
+        },
+        {
+          "band": 18,
+          "destination": "Uruguai (CX)",
+          "snr": 13.41726655094152,
+          "distanceKm": 1602.8031070170857
+        }
+      ],
+      "valid": 423,
+      "attempts": 423
+    },
+    {
+      "grid": "FN31PR",
+      "elapsedMs": 9578,
+      "top": [
+        {
+          "band": 7,
+          "destination": "EUA Leste (W3)",
+          "snr": 10.663142575793444,
+          "distanceKm": 480.89574283067776
+        },
+        {
+          "band": 5,
+          "destination": "EUA Leste (W3)",
+          "snr": 4.638571293601956,
+          "distanceKm": 480.89574283067776
+        },
+        {
+          "band": 21,
+          "destination": "Porto Rico (KP4)",
+          "snr": 3.2028755006406584,
+          "distanceKm": 2679.8346015585635
+        }
+      ],
+      "valid": 432,
+      "attempts": 432
+    },
+    {
+      "grid": "FN03FR",
+      "elapsedMs": 8766,
+      "top": [
+        {
+          "band": 7,
+          "destination": "EUA Leste (W3)",
+          "snr": 9.949231834616398,
+          "distanceKm": 577.3345885218713
+        },
+        {
+          "band": 18,
+          "destination": "Porto Rico (KP4)",
+          "snr": 3.6708616380284695,
+          "distanceKm": 3086.463553613724
+        },
+        {
+          "band": 5,
+          "destination": "EUA Leste (W3)",
+          "snr": 2.1551008906625952,
+          "distanceKm": 577.3345885218713
+        }
+      ],
+      "valid": 423,
+      "attempts": 423
+    }
+  ],
+  "snapshots": {
+    "GG67KD": "\n      Bem-vindo ao AGHIP!\n      Neste momento, as três melhores bandas HF modeladas para seu grid são:\n      112mFavorável no modeloDestino de referência: Uruguai (CX)S/N 17,0 dB · 1.603 km215mFavorável no modeloDestino de referência: Uruguai (CX)S/N 15,3 dB · 1.603 km317mFavorável no modeloDestino de referência: Uruguai (CX)S/N 13,4 dB · 1.603 km\n      Grid GG67KD · -22,85417, -47,12500 · 2026-09-09 15:30 UTC · 100 W TX remoto · 2.400 Hz · ruído: urbano\n      Como estas bandas foram selecionadas?Neste único horário UTC, cada banda é avaliada para os 48 destinos fixos de referência já usados no mapa. Percursos abaixo de 300 km são excluídos, como no mapa. Para cada banda, conserva-se o maior S/N válido de recepção no seu QTH; depois são exibidas até três bandas distintas. A classificação usa a melhor rota de referência, não uma média mundial nem a melhor banda em todas as direções.O balanço P.533 existente inclui seleção de modos, blindagem pela camada E, absorção, potência multimodo, método aplicável à distância e ganho no ângulo de elevação da antena. O ruído no receptor vem da P.372 ou da entrada medida declarada. R12: 72,0. Dipolo de meia onda a 0,50λ do solo.São valores de mediana mensal avaliados para o mês e horário UTC atuais, não medições de recepção ao vivo. Penalidades heurísticas de tempestade/SID e relatos WSPR não são somados a esta classificação. Consulte seus diagnósticos na aba HF antes de operar. Valem a potência, o diagrama receptor normalizado, o ruído e a largura de banda da radioescuta; o ganho TX remoto é referência de 2,15 dBi. Resultados indisponíveis ou fora de domínio nunca são classificados. 160 m está fora do domínio P.533 adotado, e 11 m/CB pertence a outro serviço. Frequências são amostras de cálculo, não recomendações de canais para operação.Limiar de planejamento: 6 dB; “favorável” significa pelo menos 6 dB acima dele. São limiares declarados de tentativa de escuta, não probabilidade de contato, confiabilidade de circuito ITU ou confirmação de transmissor ativo.Cobertura da comparação: 423/423 resultados banda–destino válidos. Excluídos/indisponíveis: 0.\n      O mapa e a lista por destino abaixo continuam mostrando as próximas 3 horas.\n    ",
+    "FN31PR": "\n      Welcome to AGHIP!\n      Right now, the three highest-ranked modeled HF bands for your grid are:\n      140mWorth trying / marginalReference destination: U.S. East (W3)S/N 10.7 dB · 481 km260mBelow the planning thresholdReference destination: U.S. East (W3)S/N 4.6 dB · 481 km315mBelow the planning thresholdReference destination: Puerto Rico (KP4)S/N 3.2 dB · 2,680 km\n      Grid FN31PR · 41.72917, -72.70833 · 2026-09-09 15:30 UTC · 100 W remote TX · 2,400 Hz · noise: urban\n      How were these bands selected?At this single UTC time, each band is evaluated against the 48 fixed reference destinations already on the map. Routes shorter than 300 km are excluded, as in the map. For each band we retain the highest valid receiving S/N at your QTH, then display up to three distinct bands. This is a best-reference-route ranking, not a worldwide average or the best band in every direction.The existing P.533 link budget includes mode selection, E-layer screening, absorption, multimode power, the applicable distance method, and antenna elevation gain. P.372 noise or the declared measured-noise input is used at the receiver. R12: 72.0. Half-wave dipole at 0.50λ above ground.These are monthly-median model values evaluated for the current month and UTC time, not live reception measurements. Storm/SID heuristic penalties and WSPR reports are not added to this ranking. Consult their diagnostics in HF before operating. The selected Radio Listening power, normalized receive pattern, noise and bandwidth apply; remote TX gain is a 2.15 dBi reference. Missing or out-of-domain results are never ranked. 160 m is outside the adopted P.533 domain, and 11 m/CB is a different service. Frequencies are model samples, not operating-channel recommendations.Planning threshold: 6 dB; “favorable” means at least 6 dB above it. These are declared listening thresholds, not contact probability, ITU circuit reliability, or confirmation of an active transmitter.Audit coverage: 432/432 valid band–destination results. Excluded/unavailable: 0.\n      The map and destination list below still cover the next 3 hours.\n    ",
+    "FN03FR": "\n      Welcome to AGHIP!\n      Right now, the three highest-ranked modeled HF bands for your grid are:\n      140mWorth trying / marginalReference destination: U.S. East (W3)S/N 9.9 dB · 577 km217mBelow the planning thresholdReference destination: Puerto Rico (KP4)S/N 3.7 dB · 3,086 km360mBelow the planning thresholdReference destination: U.S. East (W3)S/N 2.2 dB · 577 km\n      Grid FN03FR · 43.72917, -79.54167 · 2026-09-09 15:30 UTC · 100 W remote TX · 2,400 Hz · noise: urban\n      How were these bands selected?At this single UTC time, each band is evaluated against the 48 fixed reference destinations already on the map. Routes shorter than 300 km are excluded, as in the map. For each band we retain the highest valid receiving S/N at your QTH, then display up to three distinct bands. This is a best-reference-route ranking, not a worldwide average or the best band in every direction.The existing P.533 link budget includes mode selection, E-layer screening, absorption, multimode power, the applicable distance method, and antenna elevation gain. P.372 noise or the declared measured-noise input is used at the receiver. R12: 72.0. Half-wave dipole at 0.50λ above ground.These are monthly-median model values evaluated for the current month and UTC time, not live reception measurements. Storm/SID heuristic penalties and WSPR reports are not added to this ranking. Consult their diagnostics in HF before operating. The selected Radio Listening power, normalized receive pattern, noise and bandwidth apply; remote TX gain is a 2.15 dBi reference. Missing or out-of-domain results are never ranked. 160 m is outside the adopted P.533 domain, and 11 m/CB is a different service. Frequencies are model samples, not operating-channel recommendations.Planning threshold: 6 dB; “favorable” means at least 6 dB above it. These are declared listening thresholds, not contact probability, ITU circuit reliability, or confirmation of an active transmitter.Audit coverage: 423/423 valid band–destination results. Excluded/unavailable: 0.\n      The map and destination list below still cover the next 3 hours.\n    "
+  },
+  "limitations": [
+    "DOM emulation, not real-browser visual or accessibility validation",
+    "No live APIs or predictive-accuracy validation",
+    "Ranking rule is an AGHIP policy over fixed reference destinations, not an ITU reliability method"
+  ]
+}

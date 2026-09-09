@@ -1,0 +1,30 @@
+{
+  "htmlSha256": "61b45da4d50db4f1bc34130b271b52fb4e73f303d13436ce69c4764f5ac6845e",
+  "scope": "Synthetic failure reproduction on sealed r10; no live observations invented",
+  "findings": [
+    {
+      "id": "TOPBAND_NULL_ROW",
+      "reproduced": true
+    },
+    {
+      "id": "ZERO_DURATION_WINDOW",
+      "reproduced": true
+    },
+    {
+      "id": "LATE_HF_RESPONSE",
+      "reproduced": true
+    },
+    {
+      "id": "NULL_POWER_AS_ZERO",
+      "reproduced": true
+    },
+    {
+      "id": "LATE_WEATHER_RESPONSE",
+      "reproduced": true
+    },
+    {
+      "id": "LATE_TROPO_FAILURE",
+      "reproduced": true
+    }
+  ]
+}
