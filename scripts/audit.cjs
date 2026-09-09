@@ -1,0 +1,11 @@
+'use strict';
+const fs=require('fs'),path=require('path'),{spawnSync}=require('child_process');
+const root=path.resolve(__dirname,'..');
+const dependency=path.dirname(require.resolve('linkedom/package.json',{paths:[root]}));
+const checks=spawnSync(process.execPath,[path.join(__dirname,'verify-repository.cjs')],{cwd:root,stdio:'inherit',windowsHide:true});
+if(checks.status!==0)process.exit(checks.status||1);
+const base=path.join(root,'.audit-runs');fs.mkdirSync(base,{recursive:true});
+const out=path.join(base,new Date().toISOString().replace(/[:.]/g,'-')+'-'+process.pid);
+const child=spawnSync(process.execPath,[path.join(root,'tests/run-audit.cjs'),dependency,out],{cwd:root,stdio:'inherit',windowsHide:true});
+console.log('Audit reports: '+out);
+if(child.error)console.error(child.error.message);process.exitCode=child.status===0?0:1;
