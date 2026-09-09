@@ -1,0 +1,24 @@
+{
+  "name": "aghip-scientific-review",
+  "version": "2026.9.9-r11",
+  "private": true,
+  "description": "Development and audit tools for the single-file AGHIP research application",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/py2vox/propagacao.git"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "check": "node scripts/verify-repository.cjs",
+    "test": "node scripts/audit.cjs",
+    "package": "node scripts/package.cjs"
+  },
+  "devDependencies": {
+    "linkedom": "0.18.12",
+    "yaml": "2.9.0"
+  }
+}

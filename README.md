@@ -122,23 +122,24 @@ The reviewed r11 HTML has this SHA-256:
 a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0
 ```
 
-The release package's manifest and reports identify the exact tested artifact. The embedded application-script digest is a separate quantity with a documented calculation convention. Hashes establish identity, not scientific correctness.
+The provenance manifest and preserved reports identify the exact tested artifact. The embedded application-script digest is a separate quantity with a documented calculation convention. Hashes establish identity, not scientific correctness.
 
 ### Reproducing the reviewed tests
 
-Use the **complete r11 review package**, not the HTML alone. The package includes `run-audit.cjs`, the individual suites, fixtures, and reports.
+This repository includes the nine suites in `tests/`, supporting fixtures, and preserved r11 reports in `reports/r11/`. The runtime HTML is unchanged.
 
-Development requirements for that package are Node.js 24 and `linkedom` 0.18.12. These are not runtime requirements for opening AGHIP. Install the test dependency in a separate development environment and supply its absolute path.
+With Node.js 24 installed, run these commands from the repository root:
 
-From the review-package directory, run this as **one PowerShell command**, replacing the example paths:
-
-```powershell
-node .\run-audit.cjs 'C:\PATH\node_modules\linkedom' 'C:\PATH\new-audit-results'
+```sh
+npm install --global pnpm@11.19.0 --ignore-scripts
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm check
+pnpm test
 ```
 
-The results directory must not already exist. The runner preserves previous evidence, checks report-to-artifact hashes, and produces `audit-summary.json`. Running `audit-scientific.cjs` alone does not execute the complete nine-suite release audit.
+Each run creates a new `.audit-runs/` directory. No live API probes run in CI. See [Getting started](docs/GETTING-STARTED.md), [the submission review](docs/SUBMISSION-REVIEW.md), [publication checklist](docs/GITHUB-AND-DOI.md), and [deployment boundaries](docs/DEPLOYMENT.md).
 
-For detailed interpretation, consult the review package's `SUBMISSION-REVIEW.md`, `release-manifest.json`, `package-integrity.json`, and individual test reports. These filenames describe the reviewed package; their presence in any particular repository checkout should be verified before running the commands.
+The workflow is configured for Windows and Linux. A generated workflow is not evidence that GitHub-hosted jobs have already passed.
 
 ### Open scientific and operational work
 

@@ -1,0 +1,15 @@
+node_modules/
+.audit-runs/
+dist/
+.artifacts/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+.DS_Store
+Thumbs.db
+*.log
+!reports/**/*.log
