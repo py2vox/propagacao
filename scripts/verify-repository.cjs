@@ -12,7 +12,7 @@ const canonical=scripts.map(m=>m[2].replace(/const SCIENTIFIC_BUNDLE_SHA256 = '[
 if(!declared||hash(canonical)!==declared)throw Error('Application-script digest mismatch');
 for(const entry of provenance.preservedFiles){const b=fs.readFileSync(path.join(root,entry.path));if(hash(b)!==entry.sha256)throw Error('Preserved evidence changed: '+entry.path);}
 const summary=JSON.parse(fs.readFileSync(path.join(root,'reports/r11/audit/audit-summary.json'),'utf8'));
-if(summary.htmlSha256!==htmlHash||summary.summary.failedSuites!==0||summary.summary.passedChecks!==1717)throw Error('Historical baseline mismatch');
+if(summary.htmlSha256!==provenance.baselineRuntimeSha256||summary.summary.failedSuites!==0||summary.summary.passedChecks!==1717)throw Error('Historical baseline mismatch');
 const workflow=fs.readFileSync(path.join(root,'.github/workflows/ci.yml'),'utf8');
 const YAML=require('yaml');
 const ci=YAML.parse(workflow),citation=YAML.parse(fs.readFileSync(path.join(root,'CITATION.cff'),'utf8'));
@@ -24,3 +24,15 @@ if(citation['cff-version']!=='1.2.0'||!citation.title||!citation.authors?.length
 for(const match of workflow.matchAll(/uses:\s+([^\s#]+)/g))if(!/@[a-f0-9]{40}$/.test(match[1]))throw Error('Unpinned action: '+match[1]);
 if(workflow.includes('pull_request_target:')||!workflow.includes('contents: read'))throw Error('Unexpected CI privilege');
 console.log(JSON.stringify({status:'PASS',htmlSha256:htmlHash,preservedFiles:provenance.preservedFiles.length,scope:'Repository identity and configuration checks, not scientific validation'},null,2));
+
+// The citation edition must differ from the reviewed application only in declared metadata.
+const baseline=fs.readFileSync(path.join(root,'reports/baseline/index.html'),'utf8');
+const parts=s=>[...s.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].map(m=>m[2]);
+const zero=s=>s.replace(/const SCIENTIFIC_BUNDLE_SHA256 = '[a-f0-9]{64}';/,"const SCIENTIFIC_BUNDLE_SHA256 = '"+'0'.repeat(64)+"';");
+const edits=provenance.scriptChanges;
+const restored=zero(parts(html).join('\n')).replaceAll(edits.release,edits.baselineRelease).replace(edits.englishAfter,edits.englishBefore);
+if(restored!==zero(parts(baseline).join('\n')))throw Error('Unexpected numerical or library changes');
+const zen=JSON.parse(fs.readFileSync(path.join(root,'.zenodo.json'),'utf8'));
+if(citation.doi!==provenance.publication.doi||zen.doi!==citation.doi||!html.includes('name="citation_doi" content="'+citation.doi+'"'))throw Error('DOI metadata mismatch');
+if(citation.version!==provenance.runtimeRelease||zen.version!==citation.version)throw Error('Release metadata mismatch');
+console.log('PASS: DOI consistency and metadata-only application changes');
