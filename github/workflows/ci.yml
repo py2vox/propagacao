@@ -1,1 +1,58 @@
+name: Scientific software checks
 
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: audit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Deterministic audit (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.19.0'
+
+      - name: Install pinned package manager
+        run: npm install --global pnpm@11.19.0 --ignore-scripts
+
+      - name: Install audit dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Verify repository and reviewed artifact
+        run: pnpm check
+
+      - name: Run deterministic suites (no live API probes)
+        run: pnpm test
+
+      - name: Save audit evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: aghip-audit-${{ matrix.os }}
+          path: .audit-runs/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
