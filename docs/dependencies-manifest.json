@@ -1,0 +1,32 @@
+[
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css",
+    "bytes": 10879,
+    "sha256": "b570abbda963c60b4de4b4ff4b26f9326f53fb2ccf1461fdf0955ca094fb2539"
+  },
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js",
+    "bytes": 20968,
+    "sha256": "b47a003c6a0d761211dbc60797d0d62f37917ddc228241fb38205732b1d78683"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json",
+    "bytes": 107761,
+    "sha256": "2516c915867c7baf18ddec727aec46c315541a07cfb3d79a6559b05d5e94eee8"
+  },
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js",
+    "bytes": 147171,
+    "sha256": "5c9aecfc30e4564519dbdcddcc53a418227dcc7568e619e9762ddcec7609ed47"
+  },
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js",
+    "bytes": 205125,
+    "sha256": "74401d738dd3e03ee5dfb3b6841210fe2c4ead8a960c4011ca4ba0b78a9fd8f3"
+  },
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js",
+    "bytes": 279633,
+    "sha256": "d6b03aefc9f6c44c7bc78713679c78c295028fa914319119e5cc4b4954855b1c"
+  }
+]
