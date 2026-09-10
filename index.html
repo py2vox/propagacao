@@ -2,7 +2,7 @@
 ===============================================================================
 AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation
 An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis.
-Scientific-review candidate | AGHIP-review-2026.09.09-r11-source-en.2
+Scientific-review candidate | AGHIP-review-2026.09.10-r12
 ===============================================================================
 Author and maintainer: José Ricardo de Paula — PY2VOX
 Affiliation: Independent researcher — Campinas, SP, Brazil
@@ -14,7 +14,7 @@ This release is submitted FOR independent review, not represented as having
 passed it. No zero-failure, predictive-accuracy or certification claim is made.
 The application-script digest is provided in the official repository README and release notes to maintain signature integrity.
 The accompanying
-release manifest gives the full-file SHA-256. The r11 submission report separates
+release manifest gives the full-file SHA-256. Historical r11 reports and the current revision report separate
 deterministic checks, live API sample probes and unresolved
 external-validation issues. Internal agreement is not predictive validation.
 Inside the browser: validarP533Blindagem(), validarWMM(), validarP372().
@@ -22,7 +22,7 @@ Internal assertions and one official noise case do not validate every circuit.
 
 SCIENTIFIC PROFILE
 P.1239-4: embedded CCIR maps and foE. The polar-winter branch follows the
-published text; the reference-code branch remains available for comparison.
+geometric no-sunrise condition and geometric sunset (chi=90 degrees). Legacy branches remain for comparison.
 The fixed V2-to-V1 sunspot scale is an approximation, not a universal identity.
 P.533-14: basic MUF, E/F2 modal field and power, 7000–9000 km interpolation,
 and the long-distance empirical field formulation. Not a complete implementation
@@ -66,15 +66,15 @@ to point-based services when those services are queried. No personal API key
 is intentionally included in this distributable file.
 
 
-SOURCE LANGUAGE AND COMPATIBILITY — English documentation edition, 2026-09-10
+SOURCE LANGUAGE AND COMPATIBILITY — scientific correction r12, 2026-09-10
 All maintained source comments are documented in technical English. pt-BR
 interface resources and original official Portuguese bulletins intentionally
 retain their language. Proper names, published titles, attribution and API
 field names are not translated. Existing identifiers, DOM IDs, selector values
 and storage keys remain stable to protect integration and saved preferences.
-No antenna model, coefficient, equation, endpoint, UI message or event handler
-was changed by this documentation edition. The release label and script digest
-are the only declared executable-literal changes. See the companion source
+The r12 correction changes foE nighttime selection, elapsed sunset time and audit text. No antenna model, coefficient or endpoint
+was changed. The prior documentation-only edition is preserved for comparison. The release label and script digest
+are updated. See the current revision report and the companion source
 comparison report and docs/SOURCE-LANGUAGE.md for reproducible verification.
 
 ENGLISH READER'S MAP (legacy identifiers retained verbatim)
@@ -92,14 +92,14 @@ drive the scientific core; language selection must not change that physics.
 
 PUBLICATION METADATA
 Code and release: https://github.com/py2vox/propagacao
-Archived release: https://doi.org/10.5281/zenodo.22682135
-DOI: 10.5281/zenodo.22682135
+Previous archive (not this r12 revision): https://doi.org/10.5281/zenodo.22682135
+Current revision DOI: unassigned. Previous archive: 10.5281/zenodo.22682135
 ORCID: https://orcid.org/0009-0005-9657-7254
 Identifiers supplied by the author; archive-version content not independently verified.
 Git commit: recorded externally after committing this edition.
 Suggested citation: de Paula, José Ricardo (PY2VOX). AGHIP — Analysis of Geospace
-and High-frequency Ionospheric Propagation. AGHIP-review-2026.09.09-r11-source-en.2, 2026. Software.
-DOI: 10.5281/zenodo.22682135
+and High-frequency Ionospheric Propagation. AGHIP-review-2026.09.10-r12, 2026. Software.
+Current revision DOI: unassigned. Previous archive: 10.5281/zenodo.22682135
 
 ATTRIBUTION
 ITU-R Study Group 3: recommendations, reference source and coefficient data;
@@ -267,16 +267,16 @@ THIS SOFTWARE.
 <meta name="citation_author" content="de Paula, José Ricardo">
 <meta name="citation_title" content="AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation">
 <meta name="citation_publication_date" content="2026-09-09">
-<meta name="citation_doi" content="10.5281/zenodo.22682135">
-<meta name="dcterms.identifier" content="https://doi.org/10.5281/zenodo.22682135">
-<meta name="aghip.publication-status" content="Archive link supplied by the author; exact archived-version correspondence must be checked before publishing this edition">
+<meta name="aghip_previous_archive_doi" content="10.5281/zenodo.22682135">
+<meta name="dcterms.relation" content="https://doi.org/10.5281/zenodo.22682135">
+<meta name="aghip.publication-status" content="Unpublished r12 scientific correction; the related DOI identifies a previous author-supplied archive, not this artifact">
 <meta name="citation_author_email" content="py2vox@gmail.com">
 <meta name="citation_author_institution" content="Independent researcher — Campinas, SP, Brazil">
 <meta name="citation_author_orcid" content="https://orcid.org/0009-0005-9657-7254">
 <meta name="dcterms.creator.identifier" content="https://orcid.org/0009-0005-9657-7254">
 <link rel="author" href="https://orcid.org/0009-0005-9657-7254">
 <link rel="related" href="https://github.com/py2vox/propagacao" title="Code and release">
-<link rel="related" href="https://doi.org/10.5281/zenodo.22682135" title="Archived release">
+<link rel="related" href="https://doi.org/10.5281/zenodo.22682135" title="Previous archive, not this r12 revision">
 <meta name="citation_abstract" lang="en-US" content="An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis. Single-file research software with explicit model assumptions and validation limits. Candidate for independent scientific review; not certified.">
 <meta name="dcterms.creator.email" content="py2vox@gmail.com">
 <link rel="author" href="mailto:py2vox@gmail.com">
@@ -765,6 +765,7 @@ html[data-reduce-motion=true] *,html[data-reduce-motion=true] *::before,html[dat
 <button onclick="rodarAutovalidacao()">Executar verificações WMM / P.372</button>
 <div id="wmm-validacao-saida" class="js-wmm-out" style="display:none;margin-top:10px;"></div>
 <button onclick="p1239RenderDivergencia()">Comparar ramos texto / código P.1239</button>
+<p data-hf-native lang="pt-BR">P.1239 r12: o foE usa noite polar geométrica e horas após o pôr do Sol geométrico (ângulo zenital de 90°), sem limite fixo de crepúsculo civil ou hora adicional. A comparação histórica do erro de sinal é separada; não representa validação com ionossondas.</p>
 <div id="p1239-divergencia" class="js-p1239-out" aria-live="polite"></div>
 <p><code>validarP533Blindagem()</code> · <code>validarWMM()</code> · <code>validarP372()</code></p>
 <h3>Campanha observacional WSPR</h3>
@@ -774,7 +775,7 @@ html[data-reduce-motion=true] *,html[data-reduce-motion=true] *::before,html[dat
 <h3>Operação em arquivo único</h3>
 <p>Bibliotecas principais, equações, coeficientes e contorno mundial da visão geral estão incorporados. Dados atuais das APIs, mapas de ruas, radar e decodificador HDF5 do GLM ainda exigem Internet. Operação offline não fornece avisos meteorológicos atuais. Restrições CORS são do provedor e não podem ser anuladas por este HTML.</p>
 <h3>Autor e colaboração científica</h3>
-<p><b>José Ricardo de Paula, PY2VOX</b><br>Pesquisador independente — Campinas, SP, Brasil<br>ORCID: <a href="https://orcid.org/0009-0005-9657-7254" target="_blank" rel="noopener noreferrer">https://orcid.org/0009-0005-9657-7254</a><br><a href="mailto:py2vox@gmail.com">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Código e versões: <a href="https://github.com/py2vox/propagacao" target="_blank" rel="noopener noreferrer">https://github.com/py2vox/propagacao</a><br>Versão arquivada: <a href="https://doi.org/10.5281/zenodo.22682135" target="_blank" rel="noopener noreferrer">https://doi.org/10.5281/zenodo.22682135</a><br>São bem-vindas colaborações em revisão reproduzível de equações, modelagem de antenas, comparações com ionossondas/WSPR e observações de propagação.</p>
+<p><b>José Ricardo de Paula, PY2VOX</b><br>Pesquisador independente — Campinas, SP, Brasil<br>ORCID: <a href="https://orcid.org/0009-0005-9657-7254" target="_blank" rel="noopener noreferrer">https://orcid.org/0009-0005-9657-7254</a><br><a href="mailto:py2vox@gmail.com">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Código e versões: <a href="https://github.com/py2vox/propagacao" target="_blank" rel="noopener noreferrer">https://github.com/py2vox/propagacao</a><br>Arquivo anterior (não corresponde à r12): <a href="https://doi.org/10.5281/zenodo.22682135" target="_blank" rel="noopener noreferrer">https://doi.org/10.5281/zenodo.22682135</a><br>São bem-vindas colaborações em revisão reproduzível de equações, modelagem de antenas, comparações com ionossondas/WSPR e observações de propagação.</p>
 <details><summary>Licença — MIT</summary><pre style="white-space:pre-wrap;font-size:11px;">MIT License
 Copyright (c) 2026 José Ricardo de Paula (PY2VOX)
 
@@ -1857,7 +1858,7 @@ function restoreBrTree(){
   });
   LOCALIZED_EN_NODES=new WeakMap(); LOCALIZED_EN_ATTRS=new WeakSet();
 }
-const US_INFO_HTML="<div id=\"us-info\"><div class=\"card\" style=\"font-size:13px;line-height:1.7;\">\n<h2>Scientific scope and review status</h2>\n<p class=\"aghip-about\" data-hf-native><b data-aghip-name lang=\"en-US\" translate=\"no\">AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation</b><br><span data-aghip-tagline lang=\"en-US\">An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis.</span></p>\n<p><b>Candidate for independent evaluation — not certified.</b> Passing automated tests does not establish predictive accuracy, full ITU-R conformity or absence of defects.</p>\n<h3>How to interpret the panels</h3>\n<ul>\n<li><b>HF / Radio listening:</b> monthly-median model under declared station assumptions. Path formulas cover short, interpolated and long-distance regimes; the implementation retains documented text/reference-code differences. P.1240 operational MUF, circuit reliability and a full ITURHFProp golden-master comparison are not claimed.</li>\n<li><b>Antennas and noise:</b> ideal elevation patterns with the same peak reference are an illustrative pattern comparison, not realized gain or directional noise rejection. NEC decks, losses, ground and orientation are still needed for actual installations. P.372 describes climatology; S/N sensitivity is assumption-based, not a statistical confidence interval.</li>\n<li><b>VHF / LF / MF / 160 m:</b> VHF indices are uncalibrated screening. LF/MF use an experimental P.1147 annual-median profile between 150 and 1,700 kHz; the Figure 4 comparison remains open and ground wave is not calculated. On 160 m, WSPR evidence and geometry are separate from the conditional measured-reception experiment. P.1147 is not extended to 160 m.</li>\n<li><b>EME:</b> geometric Moon visibility and polarization context use approximate ephemerides. Faraday severity is contextual, not measured path TEC. Global lunar phase and eclipse dates are distinct from local visibility.</li>\n<li><b>Weather:</b> INMET for BR, NWS for US, ECCC for CA, within the selected operational layer. Unavailable or incomplete feeds do not mean no alerts. Radar shows precipitation; GLM shows satellite total-lightning flashes, not verified ground strikes. P.453 uses a local forecast column, not the entire radio path.</li>\n<li><b>Observations:</b> GIRO assimilation remains experimental. WSPR is an opportunistic received-spot sample; missing spots cannot establish non-reception. Global solar/geomagnetic indices are not measurements made at the grid.</li>\n</ul>\n<h3>P.533 profile and documented choices</h3>\n<p>Table 1a MUF points are separate from Table 1b screening points. Screening is limited to 4,000 km following §4 and the inspected official routine; the broader range printed in Table 1b is retained as an unresolved text discrepancy. All required control points must be available. Screening geometry follows §5.1, while discrete field-mode height follows §5.2.1. Polynomial G includes the published +90.47xr term. fL in the long-path expression is a model parameter, not an invented hard cutoff. Lm/Lz and absorption averaging retain the declared reference-code profile.</p>\n<p><a href=\"https://www.itu.int/rec/R-REC-P.533-14-201908-I/en\">ITU-R P.533-14</a> · <a href=\"https://www.itu.int/rec/R-REC-P.1239/en\">P.1239</a> · <a href=\"https://www.itu.int/rec/R-REC-P.372/en\">P.372</a> · <a href=\"https://www.itu.int/rec/R-REC-P.453/en\">P.453</a> · <a href=\"https://github.com/ITU-R-Study-Group-3/ITU-R-HF\">ITU-R reference source</a> · <a href=\"https://www.ncei.noaa.gov/products/world-magnetic-model\">WMM</a></p>\n<h3>Reproducible checks</h3>\n<p>The release report states exactly which tests ran. Embedded WMM and noise checks cover their supplied reference cases only. No external specialist approval is implied.</p>\n<button onclick=\"rodarAutovalidacao()\">Run WMM / P.372 checks</button>\n<div  class=\"js-wmm-out\" style=\"display:none;margin-top:10px;\"></div>\n<button onclick=\"p1239RenderDivergencia()\">Compare P.1239 text / source branches</button>\n<div  class=\"js-p1239-out\" aria-live=\"polite\"></div>\n<p><code>validarP533Blindagem()</code> · <code>validarWMM()</code> · <code>validarP372()</code></p>\n<h3>WSPR observational campaign</h3>\n<p>Records are grouped by the application-script hash. These opportunistic residuals are not an unbiased test of detection probability.</p>\n<div  class=\"js-campanha-out\" aria-live=\"polite\"></div>\n<button onclick=\"campanhaBaixarCSV()\">Export records (CSV)</button>\n<h3>Single-file operation</h3>\n<p>Core libraries, equations, coefficients and the overview world outline are embedded. Internet is still required for current API data, street tiles, radar and the GLM HDF5 decoder. Offline operation is not a source of live weather warnings. CORS restrictions belong to each provider and cannot be overridden by this HTML.</p>\n<h3>Author and scientific collaboration</h3>\n<p><b>José Ricardo de Paula, PY2VOX</b><br>Independent researcher — Campinas, SP, Brazil<br>ORCID: <a href=\"https://orcid.org/0009-0005-9657-7254\" target=\"_blank\" rel=\"noopener noreferrer\">https://orcid.org/0009-0005-9657-7254</a><br><a href=\"mailto:py2vox@gmail.com\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Code and release: <a href=\"https://github.com/py2vox/propagacao\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/py2vox/propagacao</a><br>Archived release: <a href=\"https://doi.org/10.5281/zenodo.22682135\" target=\"_blank\" rel=\"noopener noreferrer\">https://doi.org/10.5281/zenodo.22682135</a><br>Collaboration is invited on reproducible equation review, antenna modeling, ionosonde/WSPR comparisons and radio-propagation observations.</p>\n<details><summary>License — MIT</summary><pre style=\"white-space:pre-wrap;font-size:11px;\">MIT License\nCopyright (c) 2026 José Ricardo de Paula (PY2VOX)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre></details>\n</div></div>";
+const US_INFO_HTML="<div id=\"us-info\"><div class=\"card\" style=\"font-size:13px;line-height:1.7;\">\n<h2>Scientific scope and review status</h2>\n<p class=\"aghip-about\" data-hf-native><b data-aghip-name lang=\"en-US\" translate=\"no\">AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation</b><br><span data-aghip-tagline lang=\"en-US\">An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis.</span></p>\n<p><b>Candidate for independent evaluation — not certified.</b> Passing automated tests does not establish predictive accuracy, full ITU-R conformity or absence of defects.</p>\n<h3>How to interpret the panels</h3>\n<ul>\n<li><b>HF / Radio listening:</b> monthly-median model under declared station assumptions. Path formulas cover short, interpolated and long-distance regimes; the implementation retains documented text/reference-code differences. P.1240 operational MUF, circuit reliability and a full ITURHFProp golden-master comparison are not claimed.</li>\n<li><b>Antennas and noise:</b> ideal elevation patterns with the same peak reference are an illustrative pattern comparison, not realized gain or directional noise rejection. NEC decks, losses, ground and orientation are still needed for actual installations. P.372 describes climatology; S/N sensitivity is assumption-based, not a statistical confidence interval.</li>\n<li><b>VHF / LF / MF / 160 m:</b> VHF indices are uncalibrated screening. LF/MF use an experimental P.1147 annual-median profile between 150 and 1,700 kHz; the Figure 4 comparison remains open and ground wave is not calculated. On 160 m, WSPR evidence and geometry are separate from the conditional measured-reception experiment. P.1147 is not extended to 160 m.</li>\n<li><b>EME:</b> geometric Moon visibility and polarization context use approximate ephemerides. Faraday severity is contextual, not measured path TEC. Global lunar phase and eclipse dates are distinct from local visibility.</li>\n<li><b>Weather:</b> INMET for BR, NWS for US, ECCC for CA, within the selected operational layer. Unavailable or incomplete feeds do not mean no alerts. Radar shows precipitation; GLM shows satellite total-lightning flashes, not verified ground strikes. P.453 uses a local forecast column, not the entire radio path.</li>\n<li><b>Observations:</b> GIRO assimilation remains experimental. WSPR is an opportunistic received-spot sample; missing spots cannot establish non-reception. Global solar/geomagnetic indices are not measurements made at the grid.</li>\n</ul>\n<h3>P.1239 nighttime correction (r12)</h3><p>The default foE profile uses geometric polar night and hours after geometric sunset (solar zenith 90 degrees), without a civil-twilight latitude cutoff or extra hour. The historical sign-only comparison is separate. These are implementation checks, not ionosonde validation. The linked DOI refers to a previous archive, not this revision.</p><h3>P.533 profile and documented choices</h3>\n<p>Table 1a MUF points are separate from Table 1b screening points. Screening is limited to 4,000 km following §4 and the inspected official routine; the broader range printed in Table 1b is retained as an unresolved text discrepancy. All required control points must be available. Screening geometry follows §5.1, while discrete field-mode height follows §5.2.1. Polynomial G includes the published +90.47xr term. fL in the long-path expression is a model parameter, not an invented hard cutoff. Lm/Lz and absorption averaging retain the declared reference-code profile.</p>\n<p><a href=\"https://www.itu.int/rec/R-REC-P.533-14-201908-I/en\">ITU-R P.533-14</a> · <a href=\"https://www.itu.int/rec/R-REC-P.1239/en\">P.1239</a> · <a href=\"https://www.itu.int/rec/R-REC-P.372/en\">P.372</a> · <a href=\"https://www.itu.int/rec/R-REC-P.453/en\">P.453</a> · <a href=\"https://github.com/ITU-R-Study-Group-3/ITU-R-HF\">ITU-R reference source</a> · <a href=\"https://www.ncei.noaa.gov/products/world-magnetic-model\">WMM</a></p>\n<h3>Reproducible checks</h3>\n<p>The release report states exactly which tests ran. Embedded WMM and noise checks cover their supplied reference cases only. No external specialist approval is implied.</p>\n<button onclick=\"rodarAutovalidacao()\">Run WMM / P.372 checks</button>\n<div  class=\"js-wmm-out\" style=\"display:none;margin-top:10px;\"></div>\n<button onclick=\"p1239RenderDivergencia()\">Compare P.1239 text / source branches</button>\n<div  class=\"js-p1239-out\" aria-live=\"polite\"></div>\n<p><code>validarP533Blindagem()</code> · <code>validarWMM()</code> · <code>validarP372()</code></p>\n<h3>WSPR observational campaign</h3>\n<p>Records are grouped by the application-script hash. These opportunistic residuals are not an unbiased test of detection probability.</p>\n<div  class=\"js-campanha-out\" aria-live=\"polite\"></div>\n<button onclick=\"campanhaBaixarCSV()\">Export records (CSV)</button>\n<h3>Single-file operation</h3>\n<p>Core libraries, equations, coefficients and the overview world outline are embedded. Internet is still required for current API data, street tiles, radar and the GLM HDF5 decoder. Offline operation is not a source of live weather warnings. CORS restrictions belong to each provider and cannot be overridden by this HTML.</p>\n<h3>Author and scientific collaboration</h3>\n<p><b>José Ricardo de Paula, PY2VOX</b><br>Independent researcher — Campinas, SP, Brazil<br>ORCID: <a href=\"https://orcid.org/0009-0005-9657-7254\" target=\"_blank\" rel=\"noopener noreferrer\">https://orcid.org/0009-0005-9657-7254</a><br><a href=\"mailto:py2vox@gmail.com\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Code and release: <a href=\"https://github.com/py2vox/propagacao\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/py2vox/propagacao</a><br>Previous archive (not this r12 revision): <a href=\"https://doi.org/10.5281/zenodo.22682135\" target=\"_blank\" rel=\"noopener noreferrer\">https://doi.org/10.5281/zenodo.22682135</a><br>Collaboration is invited on reproducible equation review, antenna modeling, ionosonde/WSPR comparisons and radio-propagation observations.</p>\n<details><summary>License — MIT</summary><pre style=\"white-space:pre-wrap;font-size:11px;\">MIT License\nCopyright (c) 2026 José Ricardo de Paula (PY2VOX)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\nof the Software, and to permit persons to whom the Software is furnished to do\nso, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre></details>\n</div></div>";
 // Canonical project identity is invariant across regional operational modes.
 // These native strings bypass the legacy DOM translator. Branding is not a
 // statement of model completeness, conformity, or predictive validation.
@@ -2218,17 +2219,39 @@ function p1239SolarParams(latRad, lngRad, mes, hora){
 // interpretation, not an independent validation of ionization physics.
 // The inspected reference code tests northern winter at lat>72.5622 in NOV/DEC/JAN, but uses
 // lat<+72.5622 for MAY/JUN/JUL in the southern branch. The missing minus sign broadens that branch
-// beyond the southern polar region. It uses equation (18e) alone where the published-text
-// implementation uses max(18d,18e).
-// Modes retain the original selector values: 'normativo' = published-text profile (default);
-// 'referencia' = inspected reference-code behavior. Historical notes describe 2,502 divergent sampled
-// points with maximum daily solar elevation above -6 degrees. Reproduce the declared grid before
-// citing this count. Keep the discrepancy visible for independent review.
+// beyond the southern polar region. The sign-only historical experiment compares that branch
+// with 'legacy-signed', which changes only the southern sign and is NOT the current default.
+// 'normativo' (default) now uses geometric polar night and geometric hours after sunset.
+// 'referencia' retains inspected reference-code behavior, including its legacy time convention.
+// Old divergence counts are historical only. Current-vs-legacy changes include more than a sign.
+// P.1239-4 section 4, equation (17): geometric solar-center horizon, chi = 90 degrees.
+// Use the same monthly representative declination and hour angle as the foE calculation.
+// No refraction, solar radius, civil-twilight latitude cutoff, or extra UTC-hour offset.
+// A grazing Sun that never rises strictly above the horizon is treated as polar night.
+function p1239NightContext(latRad, decl, hourAngle){
+  if(![latRad,decl,hourAngle].every(Number.isFinite) || Math.abs(latRad)>Math.PI/2 || Math.abs(decl)>Math.PI/2)
+    throw new RangeError('Invalid P.1239 solar geometry');
+  const offset=Math.sin(latRad)*Math.sin(decl);
+  const amplitude=Math.cos(latRad)*Math.cos(decl);
+  const maxSinElevation=offset+amplitude;
+  const minSinElevation=offset-amplitude;
+  const tolerance=1e-14; // Floating-point treatment of exact horizon tangency only.
+  const noonElevation=Math.asin(Math.max(-1,Math.min(1,maxSinElevation)))*180/Math.PI;
+  if(maxSinElevation<=tolerance) return {polarNight:true,polarDay:false,hoursAfterSunset:null,noonElevation};
+  if(minSinElevation>=-tolerance) return {polarNight:false,polarDay:true,hoursAfterSunset:null,noonElevation};
+  const sunsetAngle=Math.acos(Math.max(-1,Math.min(1,-offset/amplitude)));
+  const angle=((hourAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  const night=angle>=sunsetAngle && angle<=2*Math.PI-sunsetAngle;
+  return {polarNight:false,polarDay:false,
+    hoursAfterSunset:night?(angle-sunsetAngle)*12/Math.PI:null,noonElevation};
+}
 function p1239_foE(latDeg, lngDeg, mes, hora, R12, modo){
+  if(![latDeg,lngDeg,mes,hora,R12].every(Number.isFinite) || Math.abs(latDeg)>90 || Math.abs(lngDeg)>180 || !Number.isInteger(mes) || mes<0 || mes>11 || R12<0)
+    throw new RangeError('Invalid P.1239 inputs');
   const D2R_=Math.PI/180, R2D_=180/Math.PI;
   const SSN=Math.min(R12,160);
-  const phi=63.7+0.728*SSN+0.00089*SSN*SSN;      // eq. (13)
-  const A=1+0.0094*(phi-66);                      // Equation (12): solar-activity factor.
+  const phi=63.7+0.728*SSN+0.00089*SSN*SSN;      // Retained reference-code R12-to-flux approximation.
+  const A=1+0.0094*(phi-66);                      // Equation (13): solar-activity factor.
   const latRad=latDeg*D2R_, lngRad=lngDeg*D2R_;
   // Local solar parameters use sp rather than S to avoid shadowing the global application state.
   const sp=p1239SolarParams(latRad,lngRad,mes,hora);
@@ -2237,12 +2260,14 @@ function p1239_foE(latDeg, lngDeg, mes, hora, R12, modo){
                                      : (0.11-0.49*Math.cos(latRad));
   const N=(Math.abs(latRad-sp.decl)<80*D2R_) ? (latRad-sp.decl) : 80*D2R_;
   const B=Math.pow(Math.cos(N),M);
-  // C: principal latitude factor, equation (15).
+  // C: principal latitude factor, equation (16).
   const X=(Math.abs(latRad)<32*D2R_)?23:92;
   const Y=(Math.abs(latRad)<32*D2R_)?116:35;
   const C=X+Y*Math.cos(latRad);
-  // D: time-of-day factor, equations (16)–(18).
+  // D: time-of-day factor, equations (17a)–(17e).
   const p=(Math.abs(latRad)<=12*D2R_)?1.31:1.2;
+  const nightContext=p1239NightContext(latRad,sp.decl,sp.ha);
+  const legacy=modo==='referencia'||modo==='legacy-signed';
   let D;
   if(sp.sza<=73*D2R_) D=Math.pow(Math.cos(sp.sza),p);
   else if(sp.sza<Math.PI/2){
@@ -2255,18 +2280,27 @@ function p1239_foE(latDeg, lngDeg, mes, hora, R12, modo){
     else if(sp.lss<sp.lsr && hr>=sp.lss && hr<sp.lsr) h=hr-sp.lss;
     else if(sp.lss>=sp.lsr && hr<sp.lss && hr<sp.lsr) h=24-sp.lss+hr;
     else h=0;
-    const d1=Math.pow(0.072,p)*Math.exp(-1.4*h);              // eq. (18d)
-    const d2=Math.pow(0.072,p)*Math.exp(25.2-0.28*sp.sza*R2D_); // eq. (18e)
+    // Legacy h is retained solely for historical comparison; not used by the default profile.
+    const d1=Math.pow(0.072,p)*Math.exp(-1.4*h);              // eq. (17d)
+    const d2=Math.pow(0.072,p)*Math.exp(25.2-0.28*sp.sza*R2D_); // eq. (17e)
     const invNorte=(latRad> 72.5622*D2R_)&&(mes===10||mes===11||mes===0);
     const invSul  =(latRad<-72.5622*D2R_)&&(mes=== 4||mes=== 5||mes===6);
     const invRef  =(latRad> 72.5622*D2R_)&&(mes===10||mes===11||mes===0)
                 || (latRad< 72.5622*D2R_)&&(mes=== 4||mes=== 5||mes===6);
     const polar=(modo==='referencia')?invRef:(invNorte||invSul);
-    D=polar?d2:Math.max(d1,d2);
+    if(legacy) D=polar?d2:Math.max(d1,d2);
+    else if(nightContext.polarNight) D=d2;
+    else {
+      // At a numerical horizon boundary, elapsed time is zero. A polar-day grazing
+      // point uses the zenith-angle expression; no artificial sunset is invented.
+      const elapsed=nightContext.hoursAfterSunset;
+      D=elapsed===null?d2:Math.max(Math.pow(0.072,p)*Math.exp(-1.4*elapsed),d2);
+    }
   }
   const foE=Math.max(Math.pow(A*B*C*D,0.25),
-                     Math.pow(0.004*Math.pow(1+0.021*phi,2),0.25));  // eq. (19)
-  return {foE, sza:sp.sza, decl:sp.decl, lsr:sp.lsr, lss:sp.lss, A, B, C, D, phi};
+                     Math.pow(0.004*Math.pow(1+0.021*phi,2),0.25));  // eq. (18)
+  return {foE, sza:sp.sza, decl:sp.decl, lsr:sp.lsr, lss:sp.lss, A, B, C, D, phi,
+    nightContext,profile:legacy?'P1239-HISTORICAL-'+modo:'P1239-4-GEOMETRIC-NIGHT-r12'};
 }
 
 // REPRODUCIBLE POLAR-WINTER COMPARISON. A previously quoted 2.3% discrepancy lacked a published sample
@@ -2287,7 +2321,7 @@ function p1239Percentil(ordenado, p){
 async function p1239MedirDivergencia(progresso){
   const M=P1239_DIV_MALHA;
   let n=0, nDif=0, pesoTot=0, pesoDif=0, nJanela=0, nDifJanela=0;
-  let maxAbs=0, argMax=null, violaSinal=0, foraDaJanela=0;
+  let maxAbs=0, argMax=null, violaSinal=0, foraDaJanela=0, revisedCount=0, revisedMax=0;
   const difs=[];
   const linhas=Math.round((M.lat1-M.lat0)/M.dlat)+1;
   for(let i=0;i<linhas;i++){
@@ -2298,15 +2332,17 @@ async function p1239MedirDivergencia(progresso){
         const maioAJulho=(mes===4||mes===5||mes===6);
         for(let hora=0; hora<24; hora++){
           for(let k=0;k<M.r12.length;k++){
-            const a=p1239_foE(lat,lon,mes,hora,M.r12[k],'normativo').foE;
+            const a=p1239_foE(lat,lon,mes,hora,M.r12[k],'legacy-signed').foE;
             const b=p1239_foE(lat,lon,mes,hora,M.r12[k],'referencia').foE;
+            const revised=p1239_foE(lat,lon,mes,hora,M.r12[k],'normativo').foE;
+            if(Math.abs(revised-a)>M.eps){revisedCount++;revisedMax=Math.max(revisedMax,Math.abs(revised-a));}
             const d=a-b;
             n++; pesoTot+=peso; if(maioAJulho) nJanela++;
             if(Math.abs(d)>M.eps){
               nDif++; pesoDif+=peso; difs.push(Math.abs(d));
               if(maioAJulho) nDifJanela++;
-              // Reference behavior uses equation (18e); the published-text profile uses max(18d,18e). The reference
-// foE therefore cannot exceed the published-text result. A violation rejects the proposed explanation.
+              // Sign-only historical comparison: reference uses 17e where legacy-signed uses
+              // max(17d,17e). This monotonicity does not describe the new geometric-night profile.
               if(d<0) violaSinal++;
               // The diagnosed divergence is restricted to MAY/JUN/JUL and |lat|<72.5622 degrees. A difference
 // elsewhere invalidates the diagnosis and must be investigated.
@@ -2325,7 +2361,7 @@ async function p1239MedirDivergencia(progresso){
           fracaoJanela:nJanela?nDifJanela/nJanela:0,
           mediana:p1239Percentil(difs,0.50), p95:p1239Percentil(difs,0.95),
           maxAbs, maxRel:argMax?maxAbs/argMax.norm:0, argMax,
-          violaSinal, foraDaJanela, malha:M};
+          violaSinal, foraDaJanela, revisedCount, revisedMax, malha:M};
 }
 function p1239RenderDivergencia(){
   const el=saidaAuditoria('.js-p1239-out','p1239-divergencia'); if(!el) return;
@@ -2338,8 +2374,12 @@ function p1239RenderDivergencia(){
       const mhz=x=>x.toFixed(4)+' MHz';
       const okSinal=r.violaSinal===0, okJanela=r.foraDaJanela===0;
       el.innerHTML=
-        '<b>'+(en?'Measured divergence — ITU-R P.1239-4 polar-winter test'
-                 :'Divergência medida — teste de inverno polar da ITU-R P.1239-4')+'</b>'
+        '<b>'+(en?'Historical sign-error comparison — P.1239 implementation'
+                 :'Comparação histórica do erro de sinal — implementação P.1239')+'</b>'
+        +'<p>'+(en?'The two historical profiles below isolate the southern-latitude sign error; neither is the current default. The current geometric-night profile differs from the sign-corrected legacy profile at '
+          :'Os dois perfis históricos abaixo isolam o erro de sinal da latitude sul; nenhum é o padrão atual. O perfil atual de noite geométrica difere do perfil legado com sinal corrigido em ')+r.revisedCount
+        +(en?' sampled points; maximum absolute foE change: ':' pontos amostrados; maior alteração absoluta de foE: ')+mhz(r.revisedMax)
+        +(en?'. This is a code comparison, not observational validation.':'. Esta é uma comparação de código, não validação observacional.')+'</p>'
         +'<div style="font-size:11px;color:var(--text-muted);margin:3px 0 6px;">'
         +(en?'Grid: latitude ':'Malha: latitude ')+M.lat0+'° … '+M.lat1+'° '+(en?'step ':'passo ')+M.dlat+'°'
         +(en?' · longitude −180° … 150° step ':' · longitude −180° … 150° passo ')+M.dlon+'°'
@@ -2350,17 +2390,17 @@ function p1239RenderDivergencia(){
         +(en?' · within May–July, the only window where the fault can fire: ':' · dentro de maio–julho, única janela em que a falha pode disparar: ')+'<b>'+pc(r.fracaoJanela)+'</b>'
         +'<br>'+(en?'Deviation in foE — median ':'Desvio em foE — mediana ')+mhz(r.mediana)
         +(en?' · 95th percentile ':' · percentil 95 ')+mhz(r.p95)
-        +(en?' · maximum ':' · máximo ')+'<b>'+mhz(r.maxAbs)+'</b> ('+(r.maxRel*100).toFixed(1)+(en?'% of the normative value)':'% do valor normativo)')
+        +(en?' · maximum ':' · máximo ')+'<b>'+mhz(r.maxAbs)+'</b> ('+(r.maxRel*100).toFixed(1)+(en?'% of the sign-corrected legacy value)':'% do valor legado com sinal corrigido)')
         +(r.argMax?'<div style="font-size:11px;color:var(--text-muted);">'+(en?'Worst case at ':'Pior caso em ')
             +r.argMax.lat.toFixed(2)+'°, '+r.argMax.lon.toFixed(2)+'°, '+(en?'month ':'mês ')+r.argMax.mes
             +', '+String(r.argMax.hora).padStart(2,'0')+'h UTC, R12 '+r.argMax.r12
-            +' — foE '+r.argMax.norm.toFixed(2)+(en?' MHz normative vs ':' MHz normativo contra ')+r.argMax.ref.toFixed(2)
+            +' — foE '+r.argMax.norm.toFixed(2)+(en?' MHz sign-corrected legacy vs ':' MHz legado com sinal corrigido contra ')+r.argMax.ref.toFixed(2)
             +(en?' MHz reference.':' MHz da referência.')+'</div>':'')
         +'<div style="margin-top:6px;font-size:12px;">'
         +'<b>'+(en?'Structural checks':'Verificações estruturais')+'</b><br>'
         +'<span style="color:'+(okSinal?'var(--good)':'var(--bad)')+';">'+(okSinal?'✓':'✗')+'</span> '
-        +(en?'The reference branch never exceeds the normative one, as the fault predicts (it drops the max operator).'
-            :'O ramo da referência nunca supera o normativo, como a falha prevê — ela elimina o operador de máximo.')
+        +(en?'The historical reference branch never exceeds the sign-corrected legacy branch, as the fault predicts (it drops the max operator).'
+            :'O ramo histórico da referência nunca supera o legado com sinal corrigido, como a falha prevê — ela elimina o operador de máximo.')
         +'<br><span style="color:'+(okJanela?'var(--good)':'var(--bad)')+';">'+(okJanela?'✓':'✗')+'</span> '
         +(en?'No divergence outside May–July and |lat| < 72.5622°, confirming the diagnosis and not merely the count.'
             :'Nenhuma divergência fora de maio–julho e de |lat| &lt; 72,5622°, o que confirma o diagnóstico e não apenas a contagem.')
@@ -3936,8 +3976,8 @@ const CAMPANHA_ESCALA_SIGMA = CAMPANHA_ESCALA_LOGIT*CAMPANHA_LOGIT_PARA_SIGMA;  
 const WSPR_BW_HZ = 2500;
 const WSPR_PARA_MODELO_DB = 10*Math.log10(P533_BW_HZ/WSPR_BW_HZ);   // Bandwidth correction: -0.177 dB in this direction. Group results by model identity. The inline
 // application-script digest is computed with its own digest field zeroed.
-const SCIENTIFIC_BUNDLE_SHA256 = '9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556';
-const MODELO_VERSAO = 'AGHIP-review-2026.09.09-r11-source-en.2+'+SCIENTIFIC_BUNDLE_SHA256;
+const SCIENTIFIC_BUNDLE_SHA256 = 'b2ea371e68b6f42bed34357b3e12c6c0711bf9703634800d961090a8afedb896';
+const MODELO_VERSAO = 'AGHIP-review-2026.09.10-r12+'+SCIENTIFIC_BUNDLE_SHA256;
 // Propagate the per-prediction uncertainty scale where available; otherwise use the declared global
 // scale. This prior sensitivity is not fitted to observed residuals.
 function campanhaRegistro(banda, dkKm, prevDb, obsDb, camada, extra){
