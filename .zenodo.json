@@ -4,10 +4,12 @@
   "description": "Single-HTML research software for HF/VHF/EME propagation and space-weather analysis. Release candidate for independent scientific review, not certified. The accompanying review and tests disclose model limits and unresolved external-validation gates, including the P.1147 Figure 4 discrepancy. Offline numerical operation does not provide live weather observations or official alerts.",
   "creators": [
     {
-      "name": "de Paula, José Ricardo"
+      "name": "de Paula, José Ricardo",
+      "affiliation": "Independent researcher — Campinas, SP, Brazil",
+      "orcid": "0009-0005-9657-7254"
     }
   ],
-  "version": "AGHIP-review-2026.09.09-r11",
+  "version": "AGHIP-review-2026.09.09-r11-source-en.2",
   "publication_date": "2026-09-09",
   "license": "MIT",
   "access_right": "open",
@@ -25,5 +27,6 @@
       "relation": "isSupplementTo",
       "scheme": "url"
     }
-  ]
+  ],
+  "doi": "10.5281/zenodo.22682135"
 }
