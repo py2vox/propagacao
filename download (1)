@@ -1,8 +1,0 @@
-* text=auto eol=lf
-# Preserve the exact UTF-8 bytes of reviewed artifacts and reference fixtures.
-index.html -text
-tests/fixtures/*.html -text
-tests/*.json -text
-reports/** -text
-*.png binary
-*.zip binary
