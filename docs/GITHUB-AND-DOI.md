@@ -21,8 +21,20 @@ The prepared CI file cannot enable repository settings. The owner must review Ac
 5. Prepare the final commit/tag, review manifests and archive the exact intended files. Verify the archive contents against hashes before publishing.
 6. Publish only after approval. Confirm the DOI resolves to the intended version and update documentation without silently replacing the cited artifact.
 
-`CITATION.cff` and `.zenodo.json` now contain the reserved DOI 10.5281/zenodo.22682135 supplied by the maintainer. No ORCID was supplied. Use the existing draft; see DOI-PREPARATION.md. A commit cannot conveniently contain its own final commit hash; record that hash in an external release manifest or deposit metadata after the commit exists.
+`CITATION.cff` and `.zenodo.json` contain the author-supplied archive DOI 10.5281/zenodo.22682135. ORCID: https://orcid.org/0009-0005-9657-7254. If the record is a draft, update that draft; if already published, follow its new-version workflow. See DOI-PREPARATION.md. A commit cannot conveniently contain its own final commit hash; record that hash in an external release manifest or deposit metadata after the commit exists.
 
 Official guidance: [Zenodo DOI reservation](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/) and [GitHub integration](https://help.zenodo.org/docs/github/).
 
 No branch, pull request, GitHub setting, release, DOI reservation or deposit was created by generating this structure.
+
+## Author and publication links
+
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
+
+Current metadata supplied by the author on 2026-09-10. Earlier review statements describe historical artifacts, not the current author record. Archive registration and exact version correspondence were not independently confirmed in this update.

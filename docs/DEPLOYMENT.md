@@ -16,3 +16,15 @@ Before deployment:
 - Preserve rollback artifacts and verify the uploaded HTML hash after deployment.
 
 Cloud costs, AWS resources, DNS records, HTTPS certificates and production configuration remain owner-approved work. No `CNAME`, credentials, fake endpoint or active deployment is included in this package.
+
+## Author and publication links
+
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
+
+Current metadata supplied by the author on 2026-09-10. Earlier review statements describe historical artifacts, not the current author record. Archive registration and exact version correspondence were not independently confirmed in this update.

@@ -19,3 +19,15 @@ Reference HTML under `tests/fixtures/` is a historical oracle for preservation t
 ## Packaging boundary
 
 `scripts/package.cjs` requires successful current-HTML test evidence and stages a minimal local release directory. It does not change Git history, reserve a DOI, configure DNS, create cloud resources or publish a release. Future intentional runtime modifications require a new scientific artifact identity and fresh evidence.
+
+## Author and publication links
+
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
+
+Current metadata supplied by the author on 2026-09-10. Earlier review statements describe historical artifacts, not the current author record. Archive registration and exact version correspondence were not independently confirmed in this update.

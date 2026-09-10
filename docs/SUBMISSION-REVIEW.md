@@ -79,7 +79,7 @@ INMET returned RSS and a CAP bulletin with a polygon and municipal list, but the
 
 The r10 header's `SCIENTIFIC_BUNDLE_SHA256` reference was not itself an unresolved placeholder: the application contained a real digest. The convention zeroes that one declaration, concatenates non-vendor script bodies in document order with newline separators, and hashes UTF-8 with SHA-256. The new digest was recalculated. `release-manifest.json` supplies the separate whole-HTML digest; `package-integrity.json` lists supporting files and excludes itself. None is a digital signature or correctness proof.
 
-Tagline text **and** `lang` are exercised under the actual BR/US mode switch in DOM emulation. The English application name intentionally stays `lang="en-US"` in both modes. `citation_doi` is intentionally absent until a real identifier has been assigned. Repository/DOI/ORCID placeholders are unresolved publication metadata, not permission to invent identifiers. Use a specific version DOI for a frozen release, preserve the cited bytes and distinguish later revisions.
+Tagline text **and** `lang` are exercised under the actual BR/US mode switch in DOM emulation. The English application name intentionally stays `lang="en-US"` in both modes. Historical r11 had unresolved publication identifiers; that original report is preserved under reports/prior-author-metadata/. The current edition contains the author-supplied repository, DOI and ORCID, including citation metatags. Use the appropriate version DOI for a frozen release, preserve the cited bytes and distinguish later revisions. Identifier availability is not scientific certification.
 
 ## Primary references and documentation
 
@@ -91,3 +91,15 @@ Tagline text **and** `lang` are exercised under the actual BR/US mode switch in 
 - [Zenodo GitHub release integration](https://help.zenodo.org/docs/github/) and [version DOI guidance](https://zenodo.org/help/versioning). No deposit or publication was made during this review.
 
 Contact for collaboration and independent results: py2vox@gmail.com · José Ricardo de Paula — PY2VOX.
+
+## Author and publication links
+
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
+
+Current metadata supplied by the author on 2026-09-10. Earlier review statements describe historical artifacts, not the current author record. Archive registration and exact version correspondence were not independently confirmed in this update.
