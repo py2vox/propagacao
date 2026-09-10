@@ -1,6 +1,6 @@
 {
   "name": "aghip-scientific-review",
-  "version": "2026.9.9-r11",
+  "version": "2026.9.10-r12",
   "private": true,
   "description": "Development and audit tools for the single-file AGHIP research application",
   "license": "MIT",

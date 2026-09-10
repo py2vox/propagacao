@@ -1,21 +1,11 @@
 {
-  "doi": "10.5281/zenodo.22682135",
-  "status": "archive-link-supplied-by-author",
-  "release": "AGHIP-review-2026.09.09-r11-source-en.2",
-  "runtimeSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
-  "baselineSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
-  "appHash": "9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556",
-  "numericalScriptsUnchanged": "Executable AST unchanged after declared release/digest normalization; comment bytes differ",
-  "sourceDocumentationEdition": true,
-  "publicationStatusVerified": false,
-  "author": {
-    "name": "José Ricardo de Paula",
-    "callsign": "PY2VOX",
-    "affiliation": "Independent researcher — Campinas, SP, Brazil",
-    "email": "py2vox@gmail.com",
-    "orcid": "https://orcid.org/0009-0005-9657-7254",
-    "repository": "https://github.com/py2vox/propagacao",
-    "archive": "https://doi.org/10.5281/zenodo.22682135",
-    "doi": "10.5281/zenodo.22682135"
-  }
+  "release": "AGHIP-review-2026.09.10-r12",
+  "currentDoi": null,
+  "previousArchive": "https://doi.org/10.5281/zenodo.22682135",
+  "status": "Local unarchived scientific correction; do not assign the previous archive DOI to these bytes",
+  "runtimeSha256": "5271a14989c2ea174451089b7d03a351e920d7a4c69bed52c4c13ab9f02a76f7",
+  "applicationScriptSha256": "b2ea371e68b6f42bed34357b3e12c6c0711bf9703634800d961090a8afedb896",
+  "scientificCalculationsChanged": true,
+  "report": "docs/R12-REVIEW.md",
+  "publicationStatusVerified": false
 }

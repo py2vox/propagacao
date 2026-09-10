@@ -8,13 +8,13 @@ The selected **Maidenhead grid locator** anchors location-dependent calculations
 
 **Scientific status:** research software submitted for independent evaluation. AGHIP is not a certified warning system, a guarantee of reception, or an independently validated predictor for every supported operating scenario.
 
-## DOI metadata edition
+## Scientific correction r12 — local review candidate
 
-Version: **AGHIP-review-2026.09.09-r11-source-en.2**. Author-supplied archive: [10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135). The current edition updates source documentation and author metadata without changing scientific calculations. See [publication preparation](docs/DOI-PREPARATION.md).
+Version: **AGHIP-review-2026.09.10-r12**. Author-supplied archive: [10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135). This revision corrects foE polar-night selection and geometric sunset timing. The DOI above identifies a previous archive; r12 has no assigned DOI. See docs/R12-REVIEW.md. See [publication preparation](docs/DOI-PREPARATION.md).
 
-Application-script SHA-256: `9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556`. See [release notes](RELEASE-NOTES.md).
+Application-script SHA-256: `b2ea371e68b6f42bed34357b3e12c6c0711bf9703634800d961090a8afedb896`. See [release notes](RELEASE-NOTES.md).
 
-Current HTML SHA-256: `87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f`. The r11 hash and reports below describe the preserved historical baseline.
+Current HTML SHA-256: `5271a14989c2ea174451089b7d03a351e920d7a4c69bed52c4c13ab9f02a76f7`. The r11 hash and reports below describe the preserved historical baseline.
 
 ## Getting started
 
@@ -174,7 +174,7 @@ Cite the exact version used in your analysis. Current author and publication ide
 
 Suggested citation for the reviewed baseline:
 
-> de Paula, José Ricardo (PY2VOX). (2026). *AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation* (AGHIP-review-2026.09.09-r11-source-en.2) [Computer software]. Code: https://github.com/py2vox/propagacao. Author-supplied archive: https://doi.org/10.5281/zenodo.22682135. Verify the archived version before citing this updated edition.
+> de Paula, José Ricardo (PY2VOX). (2026). *AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation* (AGHIP-review-2026.09.10-r12) [Computer software]. Code: https://github.com/py2vox/propagacao. Author-supplied archive: https://doi.org/10.5281/zenodo.22682135. Verify the archived version before citing this updated edition.
 
 When a version-specific DOI is assigned, update the citation and publication metadata consistently. Recalculate hashes and rerun the relevant checks whenever the distributed artifact changes.
 
@@ -219,7 +219,7 @@ The current source comments are in technical English. Portuguese localization an
 ## Author and publication links
 
 Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
-Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+Previous archive (not the r12 artifact): [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
 
 José Ricardo de Paula, PY2VOX  
 Independent researcher — Campinas, SP, Brazil  

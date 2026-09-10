@@ -17,7 +17,7 @@ Respectful, evidence-based discussion is expected. Corrections to a scientific c
 ## Author and publication links
 
 Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
-Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+Previous archive (not the r12 artifact): [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
 
 José Ricardo de Paula, PY2VOX  
 Independent researcher — Campinas, SP, Brazil  

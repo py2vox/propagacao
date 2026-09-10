@@ -7,7 +7,9 @@
   "repository": "https://github.com/py2vox/propagacao",
   "archive": "https://doi.org/10.5281/zenodo.22682135",
   "doi": "10.5281/zenodo.22682135",
-  "release": "AGHIP-review-2026.09.09-r11-source-en.2",
+  "release": "AGHIP-review-2026.09.10-r12",
   "source": "Supplied by the author",
-  "externalRecordVerified": false
+  "externalRecordVerified": false,
+  "currentRevisionDoi": null,
+  "archiveScope": "Previous author-supplied archive; not an identity claim for r12"
 }

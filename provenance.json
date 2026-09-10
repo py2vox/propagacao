@@ -1,9 +1,10 @@
 {
-  "runtimeRelease": "AGHIP-review-2026.09.09-r11-source-en.2",
-  "runtimeSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "runtimeRelease": "AGHIP-review-2026.09.10-r12",
+  "runtimeSha256": "5271a14989c2ea174451089b7d03a351e920d7a4c69bed52c4c13ab9f02a76f7",
   "repositoryPreparation": "2026-09-09",
   "source": "Preserved local r11 review package; remote repository was not inspected",
-  "note": "Author/ORCID and publication-link metadata update. The exact declared metadata substitutions are reversible; remaining executable AST and vendor source are preserved.",
+  "note": "Scientific correction r12; historical proof fields describe prior editions, not executable equivalence of r12.",
+  "scientificRevision": {"baseline":"reports/pre-r12/index.html","baselineSha256":"87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f","release":"AGHIP-review-2026.09.10-r12","currentDoi":null,"applicationScriptSha256":"b2ea371e68b6f42bed34357b3e12c6c0711bf9703634800d961090a8afedb896","report":"docs/R12-REVIEW.md"},
   "preservedFiles": [
     {
       "path": "reports/baseline/index.html",
@@ -66,7 +67,7 @@
       "sha256": "e01c08761add973eace05b3f60b34b826b001aa07fbb2b93703dfaebe04acb36"
     },
     {
-      "path": "tests/verify-screening-monotonicity.cjs",
+      "path": "reports/pre-r12/verify-screening-monotonicity.cjs",
       "sourcePath": "verify-screening-monotonicity.cjs",
       "sha256": "d9a7005528e53e75caeceb97ec62afa100d94eb9bc936c4a825e9bae9f9705b9"
     },
