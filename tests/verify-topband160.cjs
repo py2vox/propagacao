@@ -1,6 +1,15 @@
 'use strict';
 // Deterministic numerical and DOM-emulation checks. No claims of field validation.
 const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
+const {assertEquivalentScripts}=require('./verify-source-language.cjs');
+// Comments and line positions may change in a documentation edition. Keep every
+// executable identifier, operator and literal in the comparison. Native functions
+// retain their exact-string comparison because their source is not parseable JS.
+function sameExecutable(a,b){
+  if(String(a)===String(b))return true;
+  if(typeof a!=='function'||typeof b!=='function')return false;
+  try{assertEquivalentScripts('('+String(a)+')','('+String(b)+')');return true;}catch{return false;}
+}
 const {parseHTML}=require(path.resolve(process.argv[4]));
 const root=path.resolve(process.argv[2]),parentPath=path.resolve(process.argv[3]);
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),parent=fs.readFileSync(parentPath,'utf8');
@@ -27,9 +36,9 @@ async function main(){
   run("globalThis.now=new Date('2026-09-09T03:00:00Z');");
   const changed=new Set(['topband160Median','topband160Geometry','topband160Observation','topband160Noise','renderTopband160','renderHF','p1147Predict','loadGroundTruth','estatGroundTruth','renderGroundTruth','topband160Windows','topband160SelectSpots','loadWeather','loadTropo','loadAllData','classificarRefracao','a11yTropoTable']);
   const unchanged=Object.keys(old.ctx).filter(k=>typeof old.ctx[k]==='function'&&!changed.has(k));
-  check('Existing functions outside declared scope unchanged',unchanged.every(k=>String(old.ctx[k])===String(env.ctx[k])),{compared:unchanged.length});
-  check('HF P.533 equations unchanged',String(old.ctx.p533_ModoF2)===String(env.ctx.p533_ModoF2));
-  check('P.1147 budget equations unchanged',String(old.ctx.p1147Budget)===String(env.ctx.p1147Budget));
+  check('Existing executable functions outside declared scope unchanged',unchanged.every(k=>sameExecutable(old.ctx[k],env.ctx[k])),{compared:unchanged.length,comparison:'AST excluding comments and source positions'});
+  check('HF P.533 equations unchanged',sameExecutable(old.ctx.p533_ModoF2,env.ctx.p533_ModoF2));
+  check('P.1147 budget equations unchanged',sameExecutable(old.ctx.p1147Budget,env.ctx.p1147Budget));
   check('WSPR provider hardened with request identity',String(env.ctx.loadGroundTruth).includes('groundTruthRequestEpoch'));
   check('All vendor scripts unchanged',JSON.stringify(scripts(parent).filter(s=>s[1].includes('data-aghip-vendor')).map(s=>s[0]))===JSON.stringify(scripts(html).filter(s=>s[1].includes('data-aghip-vendor')).map(s=>s[0])));
   check('P1147 1836 kHz rejected',run("p1147Predict({tx:{lat:40,lon:-75},rx:{lat:35,lon:-80},now,fKHz:1836,powerW:100,efficiency:1,gh:0,region:'general'}).reason")==='FREQUENCY_DOMAIN');
@@ -114,7 +123,7 @@ async function main(){
   check('No console errors in exercised rendering',env.errors.length===0,env.errors);
   check('No actual network calls during deterministic checks',env.requests.length===0);
   const summary={passed:checks.filter(x=>x.passed).length,failed:checks.filter(x=>!x.passed).length};
-  fs.writeFileSync(path.join(root,'topband160-results.json'),JSON.stringify({release:'AGHIP-review-2026.09.09-r11',htmlSha256:hash(html),summary,
+  fs.writeFileSync(path.join(root,'topband160-results.json'),JSON.stringify({release:"AGHIP-review-2026.09.09-r11-source-en.2",htmlSha256:hash(html),summary,
     limits:{realBrowser:false,liveApi:false,predictiveValidation:false,p1147Figure4:'OPEN'},checks},null,2));
   console.log(JSON.stringify({summary,failures:checks.filter(x=>!x.passed)}));if(summary.failed)process.exitCode=1;
 }
