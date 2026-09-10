@@ -31,8 +31,11 @@ const parts=s=>[...s.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].map(m=
 const zero=s=>s.replace(/const SCIENTIFIC_BUNDLE_SHA256 = '[a-f0-9]{64}';/,"const SCIENTIFIC_BUNDLE_SHA256 = '"+'0'.repeat(64)+"';");
 const edits=provenance.scriptChanges;
 const restored=zero(parts(html).join('\n')).replaceAll(edits.release,edits.baselineRelease).replace(edits.englishAfter,edits.englishBefore);
-if(restored!==zero(parts(baseline).join('\n')))throw Error('Unexpected numerical or library changes');
+const {assertEquivalentDocuments,verify,restorePublication}=require('../tests/verify-source-language.cjs');
+assertEquivalentDocuments(restorePublication(html,provenance).replaceAll(edits.release,edits.baselineRelease).replace(edits.englishAfter,edits.englishBefore),baseline);
+verify(root);
+require('../tests/verify-author-metadata.cjs').verify(root);
 const zen=JSON.parse(fs.readFileSync(path.join(root,'.zenodo.json'),'utf8'));
 if(citation.doi!==provenance.publication.doi||zen.doi!==citation.doi||!html.includes('name="citation_doi" content="'+citation.doi+'"'))throw Error('DOI metadata mismatch');
 if(citation.version!==provenance.runtimeRelease||zen.version!==citation.version)throw Error('Release metadata mismatch');
-console.log('PASS: DOI consistency and metadata-only application changes');
+console.log('PASS: DOI consistency and declared metadata and source-comment changes');
