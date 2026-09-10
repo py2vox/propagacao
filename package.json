@@ -18,7 +18,7 @@
     "package": "node scripts/package.cjs"
   },
   "devDependencies": {
-    "linkedom": "0.18.12",
+    "linkedom": "0.18.13",
     "yaml": "2.9.0"
   },
   "author": {
