@@ -1,13 +1,15 @@
 cff-version: 1.2.0
-message: "Cite the exact release used. The supplied DOI is reserved; it becomes registered upon Zenodo publication."
+message: "Cite the exact release used. The archive link and ORCID were supplied by the author; verify the cited version."
 title: "AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation"
 type: software
-version: "AGHIP-review-2026.09.09-r11-doi.1"
+version: "AGHIP-review-2026.09.09-r11-source-en.2"
 date-released: 2026-09-09
 authors:
   - family-names: "de Paula"
     given-names: "José Ricardo"
     email: "py2vox@gmail.com"
+    orcid: "https://orcid.org/0009-0005-9657-7254"
+    affiliation: "Independent researcher — Campinas, SP, Brazil"
 license: MIT
 abstract: "An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis. Single-file research software with declared model limits. Candidate for independent scientific review; not certified."
 

@@ -1,17 +1,29 @@
-# AGHIP-review-2026.09.09-r11-doi.1
+# AGHIP-review-2026.09.09-r11-source-en.2
 
-DOI: 10.5281/zenodo.22682135
+Author identity and publication-link update, prepared 2026-09-10.
 
-Publication metadata edition of the reviewed r11 numerical implementation. The DOI was supplied by the maintainer. At preparation it is recorded as reserved; no archive publication or GitHub release was performed by the preparation scripts.
+## Author and publication links
 
-- Full HTML SHA-256: 769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c
-- Application-script SHA-256: 5d1b840e40f3d6ba3148dc6b4f68871109bf6b8e3fe26d13cf3079285e19a813
-- Original r11 SHA-256: a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
 
-Updated publication comment, citation DOI metatag, citation text, bilingual Science publication information, CFF and Zenodo metadata. ORCID was not supplied. The final Git commit is recorded externally after the repository commit exists. No numerical equations, coefficients or API logic changed. All application and vendor scripts are compared against the preserved baseline after reversing only the declared metadata substitutions.
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
 
-This is research software for independent review. Internal regression results and open scientific limitations are documented in reports and docs.
+## Scope
 
-## Final metadata-edition verification
+Updated HTML header, ORCID/citation metatags, Portuguese and English Science author cards, CITATION.cff, .zenodo.json, package author, provenance and every active Markdown document. Original legal notices, prior releases, historical reports and fixtures remain intact. Replaced ambiguous current ORCID placeholders with the supplied identifier. Metadata correspondence does not establish archive registration, ORCID ownership, scientific endorsement or predictive accuracy.
 
-Nine suites passed: 1,717 checks, zero failures, against HTML SHA-256 769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c. These are internal deterministic and DOM-emulated checks; no new live API or independent predictive validation was performed. Full reports: reports/doi-edition/.
+## Verification
+
+9 suites: 1,717 checks passed, zero failures. Additional author-metadata checker: 81 checks passed, including the ORCID check digit, structured metadata, both source-language author cards and all active Markdown documents. The verifier reverses the six exact HTML metadata edits and release/digest substitutions to recover the preceding artifact. Complete executable AST and vendor/non-comment markup comparison then verifies the historical calculation baseline. Reports: reports/author-metadata-edition/, reports/author-metadata-checks.json and reports/author-metadata-parity.json. These are internal and DOM-emulated tests; no new external predictive validation or live API survey was performed.
+
+## Identity
+
+HTML SHA-256: 87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f
+Application-script SHA-256: 9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556
+Previous English-source HTML: 1ae2baad76f31374b3968fc57720d368a4519ef58776157c49c2253bc753e4e7
+
+No GitHub commit/release or Zenodo publication was performed. The author-supplied archive is not asserted to contain these updated bytes. Verify version correspondence before publication/citation.

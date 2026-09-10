@@ -20,5 +20,10 @@
   "devDependencies": {
     "linkedom": "0.18.12",
     "yaml": "2.9.0"
+  },
+  "author": {
+    "name": "José Ricardo de Paula (PY2VOX)",
+    "email": "py2vox@gmail.com",
+    "url": "https://orcid.org/0009-0005-9657-7254"
   }
 }

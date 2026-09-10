@@ -10,11 +10,11 @@ The selected **Maidenhead grid locator** anchors location-dependent calculations
 
 ## DOI metadata edition
 
-Version: **AGHIP-review-2026.09.09-r11-doi.1**. Reserved DOI: [10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135). The maintainer supplied this identifier for the existing Zenodo draft; registration occurs upon publication. This edition updates publication text and metadata; the numerical implementation is unchanged. See [DOI preparation](docs/DOI-PREPARATION.md).
+Version: **AGHIP-review-2026.09.09-r11-source-en.2**. Author-supplied archive: [10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135). The current edition updates source documentation and author metadata without changing scientific calculations. See [publication preparation](docs/DOI-PREPARATION.md).
 
-Application-script SHA-256: `5d1b840e40f3d6ba3148dc6b4f68871109bf6b8e3fe26d13cf3079285e19a813`. See [release notes](RELEASE-NOTES.md).
+Application-script SHA-256: `9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556`. See [release notes](RELEASE-NOTES.md).
 
-Current HTML SHA-256: `769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c`. The r11 hash and reports below describe the preserved historical baseline.
+Current HTML SHA-256: `87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f`. The r11 hash and reports below describe the preserved historical baseline.
 
 ## Getting started
 
@@ -134,7 +134,7 @@ The provenance manifest and preserved reports identify the exact tested artifact
 
 ### Reproducing the reviewed tests
 
-This repository includes the nine suites in `tests/`, supporting fixtures, and preserved r11 reports in `reports/r11/`. This DOI edition changes publication metadata and retains the baseline numerical implementation.
+This repository includes the nine suites in `tests/`, supporting fixtures, and preserved r11 reports in `reports/r11/`. This edition changes publication metadata and source documentation while retaining the baseline numerical implementation.
 
 With Node.js 24 installed, run these commands from the repository root:
 
@@ -170,11 +170,11 @@ When reporting an issue, include the software version or HTML hash, UTC timestam
 
 Repository: [github.com/py2vox/propagacao](https://github.com/py2vox/propagacao).
 
-Cite the exact version used in your analysis. The reviewed r11 package includes `CITATION.cff`; no DOI or ORCID was assigned in that package. Do not substitute an invented identifier or present repository availability as peer-review approval.
+Cite the exact version used in your analysis. Current author and publication identifiers are listed below and in CITATION.cff. Historical reports retain their original metadata; repository availability and a DOI do not imply peer-review approval.
 
 Suggested citation for the reviewed baseline:
 
-> de Paula, José Ricardo (PY2VOX). (2026). *AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation* (AGHIP-review-2026.09.09-r11) [Computer software]. https://github.com/py2vox/propagacao
+> de Paula, José Ricardo (PY2VOX). (2026). *AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation* (AGHIP-review-2026.09.09-r11-source-en.2) [Computer software]. Code: https://github.com/py2vox/propagacao. Author-supplied archive: https://doi.org/10.5281/zenodo.22682135. Verify the archived version before citing this updated edition.
 
 When a version-specific DOI is assigned, update the citation and publication metadata consistently. Recalculate hashes and rerun the relevant checks whenever the distributed artifact changes.
 
@@ -203,10 +203,27 @@ Acknowledgments include the ITU-R Study Group 3, NOAA/NCEI/BGS, NASA, USGS, GIRO
 
 ## Author and contact
 
-**José Ricardo de Paula — PY2VOX**  
-Campinas, São Paulo, Brazil
+**José Ricardo de Paula, PY2VOX**  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)
 
 - Email: [py2vox@gmail.com](mailto:py2vox@gmail.com)
 - WhatsApp: +55 19 98323-5341
 
 AGHIP is intended to support transparent analysis, experimentation, and collaboration—not to replace measurements, professional judgment, or official safety guidance.
+
+## English source-documentation edition
+
+The current source comments are in technical English. Portuguese localization and stable legacy identifiers are intentional. See [source-language scope and verification](docs/SOURCE-LANGUAGE.md). Historical reports retain their original artifact hashes.
+
+## Author and publication links
+
+Code and release: [https://github.com/py2vox/propagacao](https://github.com/py2vox/propagacao)  
+Archived release: [https://doi.org/10.5281/zenodo.22682135](https://doi.org/10.5281/zenodo.22682135)
+
+José Ricardo de Paula, PY2VOX  
+Independent researcher — Campinas, SP, Brazil  
+ORCID: [https://orcid.org/0009-0005-9657-7254](https://orcid.org/0009-0005-9657-7254)  
+[py2vox@gmail.com](mailto:py2vox@gmail.com)
+
+Current metadata supplied by the author on 2026-09-10. Earlier review statements describe historical artifacts, not the current author record. Archive registration and exact version correspondence were not independently confirmed in this update.

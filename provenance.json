@@ -1,9 +1,9 @@
 {
-  "runtimeRelease": "AGHIP-review-2026.09.09-r11-doi.1",
-  "runtimeSha256": "769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c",
+  "runtimeRelease": "AGHIP-review-2026.09.09-r11-source-en.2",
+  "runtimeSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
   "repositoryPreparation": "2026-09-09",
   "source": "Preserved local r11 review package; remote repository was not inspected",
-  "note": "DOI metadata edition. Baseline reports retain their original hashes. Numerical application scripts are unchanged after reversing only the documented publication text, release label and digest substitutions.",
+  "note": "Author/ORCID and publication-link metadata update. The exact declared metadata substitutions are reversible; remaining executable AST and vendor source are preserved.",
   "preservedFiles": [
     {
       "path": "reports/baseline/index.html",
@@ -16,7 +16,7 @@
       "sha256": "8091ec40644e4ec09c51d6a10e72e1cc4ad992aa1688253763931c1911403d10"
     },
     {
-      "path": "docs/SUBMISSION-REVIEW.md",
+      "path": "reports/prior-author-metadata/docs/SUBMISSION-REVIEW.md",
       "sourcePath": "SUBMISSION-REVIEW.md",
       "sha256": "ac60e5e7484cbe360e7116e6b4a2df083b61ebba547d5d950e1eb011bb363696"
     },
@@ -229,20 +229,80 @@
       "path": "reports/r11/release-manifest.json",
       "sourcePath": "release-manifest.json",
       "sha256": "7fd877c94c601b471e983f68064827deb373f277c573777677251fc7d706b6b0"
+    },
+    {
+      "path": "reports/source-language-baseline/index.html",
+      "sha256": "769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c"
+    },
+    {
+      "path": "reports/author-metadata-baseline/index.html",
+      "sha256": "1ae2baad76f31374b3968fc57720d368a4519ef58776157c49c2253bc753e4e7"
     }
   ],
   "baselineRuntimeSha256": "a8362ce0819fee6b8192116c6f2a1218cc5d84e75f6d106a27e9f3698bc832c0",
   "publication": {
     "doi": "10.5281/zenodo.22682135",
-    "status": "reserved",
-    "source": "DOI supplied by the maintainer in this task",
-    "registration": "Zenodo registers the DOI when the deposit is published"
+    "status": "archive-link-supplied-by-author",
+    "archive": "https://doi.org/10.5281/zenodo.22682135",
+    "repository": "https://github.com/py2vox/propagacao",
+    "externalRecordVerified": false,
+    "note": "Do not assume this updated edition is identical to the archived version; verify version correspondence before publication."
   },
-  "scriptDigest": "5d1b840e40f3d6ba3148dc6b4f68871109bf6b8e3fe26d13cf3079285e19a813",
+  "scriptDigest": "9085dc8aed2b94e7dbf87a4e102a0c8125d493ac1d1b25d6cc974f4c3509d556",
   "scriptChanges": {
     "englishBefore": "Collaboration is invited on reproducible equation review, NEC antenna models, ionosonde/WSPR validation and radio-propagation observations. Repository, DOI and ORCID remain pending until supplied and verified.",
     "englishAfter": "Repository: https://github.com/py2vox/propagacao. Reserved DOI: 10.5281/zenodo.22682135; registration occurs when the Zenodo deposit is published. ORCID not supplied.",
     "baselineRelease": "AGHIP-review-2026.09.09-r11",
-    "release": "AGHIP-review-2026.09.09-r11-doi.1"
+    "release": "AGHIP-review-2026.09.09-r11-source-en.2"
+  },
+  "sourceLanguage": {
+    "edition": "source-en.1",
+    "date": "2026-09-10",
+    "baseline": "reports/source-language-baseline/index.html",
+    "baselineSha256": "769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c",
+    "baselineRelease": "AGHIP-review-2026.09.09-r11-doi.1",
+    "translatedGroups": 457
+  },
+  "authorMetadata": {
+    "name": "José Ricardo de Paula",
+    "callsign": "PY2VOX",
+    "affiliation": "Independent researcher — Campinas, SP, Brazil",
+    "email": "py2vox@gmail.com",
+    "orcid": "https://orcid.org/0009-0005-9657-7254",
+    "repository": "https://github.com/py2vox/propagacao",
+    "archive": "https://doi.org/10.5281/zenodo.22682135",
+    "doi": "10.5281/zenodo.22682135",
+    "edition": "source-en.2",
+    "suppliedBy": "Author in this task",
+    "externalRecordVerified": false,
+    "baseline": "reports/author-metadata-baseline/index.html",
+    "baselineSha256": "1ae2baad76f31374b3968fc57720d368a4519ef58776157c49c2253bc753e4e7",
+    "baselineRelease": "AGHIP-review-2026.09.09-r11-source-en.1",
+    "htmlEdits": [
+      {
+        "before": "Location: Campinas, São Paulo, Brazil",
+        "after": "Affiliation: Independent researcher — Campinas, SP, Brazil"
+      },
+      {
+        "before": "Repository URL: https://github.com/py2vox/propagacao\nDOI: 10.5281/zenodo.22682135\nDOI status at preparation: reserved by the maintainer; registration occurs on Zenodo publication.\nORCID: not supplied. Git commit: recorded externally after committing this edition.",
+        "after": "Code and release: https://github.com/py2vox/propagacao\nArchived release: https://doi.org/10.5281/zenodo.22682135\nDOI: 10.5281/zenodo.22682135\nORCID: https://orcid.org/0009-0005-9657-7254\nIdentifiers supplied by the author; archive-version content not independently verified.\nGit commit: recorded externally after committing this edition."
+      },
+      {
+        "before": "<meta name=\"aghip.publication-status\" content=\"DOI reserved; registration occurs upon Zenodo publication\">",
+        "after": "<meta name=\"aghip.publication-status\" content=\"Archive link supplied by the author; exact archived-version correspondence must be checked before publishing this edition\">"
+      },
+      {
+        "before": "<meta name=\"citation_author_institution\" content=\"Independent researcher — Campinas, São Paulo, Brazil\">",
+        "after": "<meta name=\"citation_author_institution\" content=\"Independent researcher — Campinas, SP, Brazil\">\n<meta name=\"citation_author_orcid\" content=\"https://orcid.org/0009-0005-9657-7254\">\n<meta name=\"dcterms.creator.identifier\" content=\"https://orcid.org/0009-0005-9657-7254\">\n<link rel=\"author\" href=\"https://orcid.org/0009-0005-9657-7254\">\n<link rel=\"related\" href=\"https://github.com/py2vox/propagacao\" title=\"Code and release\">\n<link rel=\"related\" href=\"https://doi.org/10.5281/zenodo.22682135\" title=\"Archived release\">"
+      },
+      {
+        "before": "<p><b>José Ricardo de Paula — PY2VOX</b> · Campinas, São Paulo, Brasil.<br><a href=\"mailto:py2vox@gmail.com\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>São bem-vindas colaborações em revisão reproduzível de equações, modelos NEC de antenas, validação com ionossondas/WSPR e observações de propagação. Repositório: https://github.com/py2vox/propagacao. DOI reservado: 10.5281/zenodo.22682135; registro efetivado na publicação do depósito Zenodo. ORCID não informado.</p>",
+        "after": "<p><b>José Ricardo de Paula, PY2VOX</b><br>Pesquisador independente — Campinas, SP, Brasil<br>ORCID: <a href=\"https://orcid.org/0009-0005-9657-7254\" target=\"_blank\" rel=\"noopener noreferrer\">https://orcid.org/0009-0005-9657-7254</a><br><a href=\"mailto:py2vox@gmail.com\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Código e versões: <a href=\"https://github.com/py2vox/propagacao\" target=\"_blank\" rel=\"noopener noreferrer\">https://github.com/py2vox/propagacao</a><br>Versão arquivada: <a href=\"https://doi.org/10.5281/zenodo.22682135\" target=\"_blank\" rel=\"noopener noreferrer\">https://doi.org/10.5281/zenodo.22682135</a><br>São bem-vindas colaborações em revisão reproduzível de equações, modelagem de antenas, comparações com ionossondas/WSPR e observações de propagação.</p>"
+      },
+      {
+        "before": "const US_INFO_HTML=\"<div id=\\\"us-info\\\"><div class=\\\"card\\\" style=\\\"font-size:13px;line-height:1.7;\\\">\\n<h2>Scientific scope and review status</h2>\\n<p class=\\\"aghip-about\\\" data-hf-native><b data-aghip-name lang=\\\"en-US\\\" translate=\\\"no\\\">AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation</b><br><span data-aghip-tagline lang=\\\"en-US\\\">An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis.</span></p>\\n<p><b>Candidate for independent evaluation — not certified.</b> Passing automated tests does not establish predictive accuracy, full ITU-R conformity or absence of defects.</p>\\n<h3>How to interpret the panels</h3>\\n<ul>\\n<li><b>HF / Radio listening:</b> monthly-median model under declared station assumptions. Path formulas cover short, interpolated and long-distance regimes; the implementation retains documented text/reference-code differences. P.1240 operational MUF, circuit reliability and a full ITURHFProp golden-master comparison are not claimed.</li>\\n<li><b>Antennas and noise:</b> ideal elevation patterns with the same peak reference are an illustrative pattern comparison, not realized gain or directional noise rejection. NEC decks, losses, ground and orientation are still needed for actual installations. P.372 describes climatology; S/N sensitivity is assumption-based, not a statistical confidence interval.</li>\\n<li><b>VHF / LF / MF / 160 m:</b> VHF indices are uncalibrated screening. LF/MF use an experimental P.1147 annual-median profile between 150 and 1,700 kHz; the Figure 4 comparison remains open and ground wave is not calculated. On 160 m, WSPR evidence and geometry are separate from the conditional measured-reception experiment. P.1147 is not extended to 160 m.</li>\\n<li><b>EME:</b> geometric Moon visibility and polarization context use approximate ephemerides. Faraday severity is contextual, not measured path TEC. Global lunar phase and eclipse dates are distinct from local visibility.</li>\\n<li><b>Weather:</b> INMET for BR, NWS for US, ECCC for CA, within the selected operational layer. Unavailable or incomplete feeds do not mean no alerts. Radar shows precipitation; GLM shows satellite total-lightning flashes, not verified ground strikes. P.453 uses a local forecast column, not the entire radio path.</li>\\n<li><b>Observations:</b> GIRO assimilation remains experimental. WSPR is an opportunistic received-spot sample; missing spots cannot establish non-reception. Global solar/geomagnetic indices are not measurements made at the grid.</li>\\n</ul>\\n<h3>P.533 profile and documented choices</h3>\\n<p>Table 1a MUF points are separate from Table 1b screening points. Screening is limited to 4,000 km following §4 and the inspected official routine; the broader range printed in Table 1b is retained as an unresolved text discrepancy. All required control points must be available. Screening geometry follows §5.1, while discrete field-mode height follows §5.2.1. Polynomial G includes the published +90.47xr term. fL in the long-path expression is a model parameter, not an invented hard cutoff. Lm/Lz and absorption averaging retain the declared reference-code profile.</p>\\n<p><a href=\\\"https://www.itu.int/rec/R-REC-P.533-14-201908-I/en\\\">ITU-R P.533-14</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.1239/en\\\">P.1239</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.372/en\\\">P.372</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.453/en\\\">P.453</a> · <a href=\\\"https://github.com/ITU-R-Study-Group-3/ITU-R-HF\\\">ITU-R reference source</a> · <a href=\\\"https://www.ncei.noaa.gov/products/world-magnetic-model\\\">WMM</a></p>\\n<h3>Reproducible checks</h3>\\n<p>The release report states exactly which tests ran. Embedded WMM and noise checks cover their supplied reference cases only. No external specialist approval is implied.</p>\\n<button onclick=\\\"rodarAutovalidacao()\\\">Run WMM / P.372 checks</button>\\n<div  class=\\\"js-wmm-out\\\" style=\\\"display:none;margin-top:10px;\\\"></div>\\n<button onclick=\\\"p1239RenderDivergencia()\\\">Compare P.1239 text / source branches</button>\\n<div  class=\\\"js-p1239-out\\\" aria-live=\\\"polite\\\"></div>\\n<p><code>validarP533Blindagem()</code> · <code>validarWMM()</code> · <code>validarP372()</code></p>\\n<h3>WSPR observational campaign</h3>\\n<p>Records are grouped by the application-script hash. These opportunistic residuals are not an unbiased test of detection probability.</p>\\n<div  class=\\\"js-campanha-out\\\" aria-live=\\\"polite\\\"></div>\\n<button onclick=\\\"campanhaBaixarCSV()\\\">Export records (CSV)</button>\\n<h3>Single-file operation</h3>\\n<p>Core libraries, equations, coefficients and the overview world outline are embedded. Internet is still required for current API data, street tiles, radar and the GLM HDF5 decoder. Offline operation is not a source of live weather warnings. CORS restrictions belong to each provider and cannot be overridden by this HTML.</p>\\n<h3>Author and scientific collaboration</h3>\\n<p><b>José Ricardo de Paula — PY2VOX</b> · Campinas, São Paulo, Brasil.<br><a href=\\\"mailto:py2vox@gmail.com\\\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Repository: https://github.com/py2vox/propagacao. Reserved DOI: 10.5281/zenodo.22682135; registration occurs when the Zenodo deposit is published. ORCID not supplied.</p>\\n<details><summary>License — MIT</summary><pre style=\\\"white-space:pre-wrap;font-size:11px;\\\">MIT License\\nCopyright (c) 2026 José Ricardo de Paula (PY2VOX)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \\\"Software\\\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\\nof the Software, and to permit persons to whom the Software is furnished to do\\nso, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \\\"AS IS\\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.</pre></details>\\n</div></div>\";",
+        "after": "const US_INFO_HTML=\"<div id=\\\"us-info\\\"><div class=\\\"card\\\" style=\\\"font-size:13px;line-height:1.7;\\\">\\n<h2>Scientific scope and review status</h2>\\n<p class=\\\"aghip-about\\\" data-hf-native><b data-aghip-name lang=\\\"en-US\\\" translate=\\\"no\\\">AGHIP — Analysis of Geospace and High-frequency Ionospheric Propagation</b><br><span data-aghip-tagline lang=\\\"en-US\\\">An integrated computational framework for HF/VHF/EME radio propagation and space-weather analysis.</span></p>\\n<p><b>Candidate for independent evaluation — not certified.</b> Passing automated tests does not establish predictive accuracy, full ITU-R conformity or absence of defects.</p>\\n<h3>How to interpret the panels</h3>\\n<ul>\\n<li><b>HF / Radio listening:</b> monthly-median model under declared station assumptions. Path formulas cover short, interpolated and long-distance regimes; the implementation retains documented text/reference-code differences. P.1240 operational MUF, circuit reliability and a full ITURHFProp golden-master comparison are not claimed.</li>\\n<li><b>Antennas and noise:</b> ideal elevation patterns with the same peak reference are an illustrative pattern comparison, not realized gain or directional noise rejection. NEC decks, losses, ground and orientation are still needed for actual installations. P.372 describes climatology; S/N sensitivity is assumption-based, not a statistical confidence interval.</li>\\n<li><b>VHF / LF / MF / 160 m:</b> VHF indices are uncalibrated screening. LF/MF use an experimental P.1147 annual-median profile between 150 and 1,700 kHz; the Figure 4 comparison remains open and ground wave is not calculated. On 160 m, WSPR evidence and geometry are separate from the conditional measured-reception experiment. P.1147 is not extended to 160 m.</li>\\n<li><b>EME:</b> geometric Moon visibility and polarization context use approximate ephemerides. Faraday severity is contextual, not measured path TEC. Global lunar phase and eclipse dates are distinct from local visibility.</li>\\n<li><b>Weather:</b> INMET for BR, NWS for US, ECCC for CA, within the selected operational layer. Unavailable or incomplete feeds do not mean no alerts. Radar shows precipitation; GLM shows satellite total-lightning flashes, not verified ground strikes. P.453 uses a local forecast column, not the entire radio path.</li>\\n<li><b>Observations:</b> GIRO assimilation remains experimental. WSPR is an opportunistic received-spot sample; missing spots cannot establish non-reception. Global solar/geomagnetic indices are not measurements made at the grid.</li>\\n</ul>\\n<h3>P.533 profile and documented choices</h3>\\n<p>Table 1a MUF points are separate from Table 1b screening points. Screening is limited to 4,000 km following §4 and the inspected official routine; the broader range printed in Table 1b is retained as an unresolved text discrepancy. All required control points must be available. Screening geometry follows §5.1, while discrete field-mode height follows §5.2.1. Polynomial G includes the published +90.47xr term. fL in the long-path expression is a model parameter, not an invented hard cutoff. Lm/Lz and absorption averaging retain the declared reference-code profile.</p>\\n<p><a href=\\\"https://www.itu.int/rec/R-REC-P.533-14-201908-I/en\\\">ITU-R P.533-14</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.1239/en\\\">P.1239</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.372/en\\\">P.372</a> · <a href=\\\"https://www.itu.int/rec/R-REC-P.453/en\\\">P.453</a> · <a href=\\\"https://github.com/ITU-R-Study-Group-3/ITU-R-HF\\\">ITU-R reference source</a> · <a href=\\\"https://www.ncei.noaa.gov/products/world-magnetic-model\\\">WMM</a></p>\\n<h3>Reproducible checks</h3>\\n<p>The release report states exactly which tests ran. Embedded WMM and noise checks cover their supplied reference cases only. No external specialist approval is implied.</p>\\n<button onclick=\\\"rodarAutovalidacao()\\\">Run WMM / P.372 checks</button>\\n<div  class=\\\"js-wmm-out\\\" style=\\\"display:none;margin-top:10px;\\\"></div>\\n<button onclick=\\\"p1239RenderDivergencia()\\\">Compare P.1239 text / source branches</button>\\n<div  class=\\\"js-p1239-out\\\" aria-live=\\\"polite\\\"></div>\\n<p><code>validarP533Blindagem()</code> · <code>validarWMM()</code> · <code>validarP372()</code></p>\\n<h3>WSPR observational campaign</h3>\\n<p>Records are grouped by the application-script hash. These opportunistic residuals are not an unbiased test of detection probability.</p>\\n<div  class=\\\"js-campanha-out\\\" aria-live=\\\"polite\\\"></div>\\n<button onclick=\\\"campanhaBaixarCSV()\\\">Export records (CSV)</button>\\n<h3>Single-file operation</h3>\\n<p>Core libraries, equations, coefficients and the overview world outline are embedded. Internet is still required for current API data, street tiles, radar and the GLM HDF5 decoder. Offline operation is not a source of live weather warnings. CORS restrictions belong to each provider and cannot be overridden by this HTML.</p>\\n<h3>Author and scientific collaboration</h3>\\n<p><b>José Ricardo de Paula, PY2VOX</b><br>Independent researcher — Campinas, SP, Brazil<br>ORCID: <a href=\\\"https://orcid.org/0009-0005-9657-7254\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">https://orcid.org/0009-0005-9657-7254</a><br><a href=\\\"mailto:py2vox@gmail.com\\\">py2vox@gmail.com</a> · WhatsApp +55 19 98323-5341.<br>Code and release: <a href=\\\"https://github.com/py2vox/propagacao\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">https://github.com/py2vox/propagacao</a><br>Archived release: <a href=\\\"https://doi.org/10.5281/zenodo.22682135\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">https://doi.org/10.5281/zenodo.22682135</a><br>Collaboration is invited on reproducible equation review, antenna modeling, ionosonde/WSPR comparisons and radio-propagation observations.</p>\\n<details><summary>License — MIT</summary><pre style=\\\"white-space:pre-wrap;font-size:11px;\\\">MIT License\\nCopyright (c) 2026 José Ricardo de Paula (PY2VOX)\\n\\nPermission is hereby granted, free of charge, to any person obtaining a copy\\nof this software and associated documentation files (the \\\"Software\\\"), to deal\\nin the Software without restriction, including without limitation the rights\\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies\\nof the Software, and to permit persons to whom the Software is furnished to do\\nso, subject to the following conditions:\\n\\nThe above copyright notice and this permission notice shall be included in all\\ncopies or substantial portions of the Software.\\n\\nTHE SOFTWARE IS PROVIDED \\\"AS IS\\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\\nSOFTWARE.</pre></details>\\n</div></div>\";"
+      }
+    ]
   }
 }
