@@ -1,0 +1,1823 @@
+{
+  "artifact": "index.html",
+  "htmlSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "generatedAt": "2026-09-10T11:37:51.075Z",
+  "summary": {
+    "checks": 157,
+    "passed": 157,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "Application parses with accessibility code",
+      "ok": true
+    },
+    {
+      "name": "No external script tags added",
+      "ok": true
+    },
+    {
+      "name": "One h1 and main landmark",
+      "ok": true
+    },
+    {
+      "name": "Skip link targets main",
+      "ok": true
+    },
+    {
+      "name": "Inactive shared fields initially hidden",
+      "ok": true
+    },
+    {
+      "name": "Grid Enter handler does not blur focus",
+      "ok": true
+    },
+    {
+      "name": "Radar avoids application role",
+      "ok": true
+    },
+    {
+      "name": "Both locales have identical accessibility keys",
+      "ok": true
+    },
+    {
+      "name": "No invented confidence percentage in accessible copy",
+      "ok": true
+    },
+    {
+      "name": "pt native a11y-tools",
+      "ok": true
+    },
+    {
+      "name": "pt native a11y-coordinates",
+      "ok": true
+    },
+    {
+      "name": "pt localized navigation",
+      "ok": true
+    },
+    {
+      "name": "pt all static data-copy nodes rendered",
+      "ok": true
+    },
+    {
+      "name": "pt no empty form labels",
+      "ok": true
+    },
+    {
+      "name": "en native a11y-tools",
+      "ok": true
+    },
+    {
+      "name": "en native a11y-coordinates",
+      "ok": true
+    },
+    {
+      "name": "en localized navigation",
+      "ok": true
+    },
+    {
+      "name": "en all static data-copy nodes rendered",
+      "ok": true
+    },
+    {
+      "name": "en no empty form labels",
+      "ok": true
+    },
+    {
+      "name": "Native accessibility copy survives legacy translator",
+      "ok": true
+    },
+    {
+      "name": "pt native a11y-tools",
+      "ok": true
+    },
+    {
+      "name": "pt native a11y-coordinates",
+      "ok": true
+    },
+    {
+      "name": "pt localized navigation",
+      "ok": true
+    },
+    {
+      "name": "pt all static data-copy nodes rendered",
+      "ok": true
+    },
+    {
+      "name": "pt no empty form labels",
+      "ok": true
+    },
+    {
+      "name": "End selects last tab",
+      "ok": true
+    },
+    {
+      "name": "Home selects first tab",
+      "ok": true
+    },
+    {
+      "name": "HF reveals only its shared field",
+      "ok": true
+    },
+    {
+      "name": "EME hides HF field from keyboard",
+      "ok": true
+    },
+    {
+      "name": "Open shared section has no fixed-height clipping",
+      "ok": true
+    },
+    {
+      "name": "One selected tab and one visible panel",
+      "ok": true
+    },
+    {
+      "name": "Heatmap table preserves mean and exact date",
+      "ok": true
+    },
+    {
+      "name": "Missing heatmap value is not a favorable condition",
+      "ok": true
+    },
+    {
+      "name": "Operational index not relabeled as absolute S/N",
+      "ok": true
+    },
+    {
+      "name": "Heatmap capture uses existing avg only",
+      "ok": true
+    },
+    {
+      "name": "Kp table includes all plotted values",
+      "ok": true
+    },
+    {
+      "name": "Zone-less provider time explicitly UTC",
+      "ok": true
+    },
+    {
+      "name": "Kp threshold patterns distinct",
+      "ok": true
+    },
+    {
+      "name": "Tropospheric table retains missing hour and midnight date",
+      "ok": true
+    },
+    {
+      "name": "Tropospheric categories include text",
+      "ok": true
+    },
+    {
+      "name": "New tropo request clears previous table",
+      "ok": true
+    },
+    {
+      "name": "Source names escaped in table",
+      "ok": true
+    },
+    {
+      "name": "Incomplete earthquake record remains explicit without throwing",
+      "ok": true
+    },
+    {
+      "name": "a11y-heat-data has caption, scoped headers and scroll entry point",
+      "ok": true
+    },
+    {
+      "name": "a11y-kp-data has caption, scoped headers and scroll entry point",
+      "ok": true
+    },
+    {
+      "name": "a11y-quake-data has caption, scoped headers and scroll entry point",
+      "ok": true
+    },
+    {
+      "name": "qth-input localized associated error",
+      "ok": true
+    },
+    {
+      "name": "qth-input clears error after correction",
+      "ok": true
+    },
+    {
+      "name": "vhf-dest-grid localized associated error",
+      "ok": true
+    },
+    {
+      "name": "vhf-dest-grid clears error after correction",
+      "ok": true
+    },
+    {
+      "name": "eme-other-grid localized associated error",
+      "ok": true
+    },
+    {
+      "name": "eme-other-grid clears error after correction",
+      "ok": true
+    },
+    {
+      "name": "Invalid coordinates do not change QTH",
+      "ok": true
+    },
+    {
+      "name": "Blank coordinate is not coerced to zero",
+      "ok": true
+    },
+    {
+      "name": "Coordinate action retains exact point and generates 8-character grid",
+      "ok": true
+    },
+    {
+      "name": "Coordinate action uses one existing refresh",
+      "ok": true
+    },
+    {
+      "name": "Explicit mute silences status and alert regions",
+      "ok": true
+    },
+    {
+      "name": "Unmute restores original urgency",
+      "ok": true
+    },
+    {
+      "name": "Reduced motion disables canvas animation",
+      "ok": true
+    },
+    {
+      "name": "Pause blocks periodic callback with visible outdated-data warning",
+      "ok": true
+    },
+    {
+      "name": "Resume permits periodic callback",
+      "ok": true
+    },
+    {
+      "name": "Bootstrap uses controlled periodic scheduling",
+      "ok": true
+    },
+    {
+      "name": "Visibility-triggered refresh honors pause",
+      "ok": true
+    },
+    {
+      "name": "OS reduced-motion covers pseudo-elements and animation",
+      "ok": true
+    },
+    {
+      "name": "Forced-colors fallback present",
+      "ok": true
+    },
+    {
+      "name": "No provider requested by presentation tests",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "No console errors",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pt mapa has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt hf has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt vhf has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt eme has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt meteo has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt info has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "pt EME Faraday row headers",
+      "ok": true
+    },
+    {
+      "name": "en mapa has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en hf has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en vhf has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en eme has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en meteo has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en info has scientific heading navigation",
+      "ok": true
+    },
+    {
+      "name": "en EME Faraday row headers",
+      "ok": true
+    },
+    {
+      "name": "No errors in VHF/EME presentation renders",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Invalid remote grid still invokes original renderer",
+      "ok": true
+    },
+    {
+      "name": "WCAG arithmetic black/white reference",
+      "ok": true
+    },
+    {
+      "name": "light text #1a1a1a / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 17.40432753274219
+      }
+    },
+    {
+      "name": "light text #1a1a1a / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 15.813922590713819
+      }
+    },
+    {
+      "name": "light text #1a1a1a / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 16.530659795004713
+      }
+    },
+    {
+      "name": "light text #50504b / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 8.1076104950897
+      }
+    },
+    {
+      "name": "light text #50504b / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 7.366738216331789
+      }
+    },
+    {
+      "name": "light text #50504b / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.700622192532421
+      }
+    },
+    {
+      "name": "light text #62625b / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 6.144890800639176
+      }
+    },
+    {
+      "name": "light text #62625b / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 5.583371564737883
+      }
+    },
+    {
+      "name": "light text #62625b / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 5.836427699474335
+      }
+    },
+    {
+      "name": "light text #166534 / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.130310076434003
+      }
+    },
+    {
+      "name": "light text #166534 / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.478743369106667
+      }
+    },
+    {
+      "name": "light text #166534 / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.772380598140432
+      }
+    },
+    {
+      "name": "light text #0f6660 / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 6.796631812833138
+      }
+    },
+    {
+      "name": "light text #0f6660 / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.1755565771515695
+      }
+    },
+    {
+      "name": "light text #0f6660 / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.455452417709624
+      }
+    },
+    {
+      "name": "light text #92400e / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.090048300172369
+      }
+    },
+    {
+      "name": "light text #92400e / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.442160708158214
+      }
+    },
+    {
+      "name": "light text #92400e / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.734139894794004
+      }
+    },
+    {
+      "name": "light text #a41530 / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.696680871242817
+      }
+    },
+    {
+      "name": "light text #a41530 / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.993359282298256
+      }
+    },
+    {
+      "name": "light text #a41530 / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.31032053918082
+      }
+    },
+    {
+      "name": "light text #1855a0 / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.379163747837125
+      }
+    },
+    {
+      "name": "light text #1855a0 / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.70485682787607
+      }
+    },
+    {
+      "name": "light text #1855a0 / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.0087422371042996
+      }
+    },
+    {
+      "name": "light border #74746b / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#ffffff",
+        "minimum": 3,
+        "ratio": 4.715853442439896
+      }
+    },
+    {
+      "name": "light focus #1855a0 / #ffffff",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#ffffff",
+        "minimum": 3,
+        "ratio": 7.379163747837125
+      }
+    },
+    {
+      "name": "light border #74746b / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#f5f4f0",
+        "minimum": 3,
+        "ratio": 4.284919434410675
+      }
+    },
+    {
+      "name": "light focus #1855a0 / #f5f4f0",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#f5f4f0",
+        "minimum": 3,
+        "ratio": 6.70485682787607
+      }
+    },
+    {
+      "name": "light border #74746b / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#faf9f6",
+        "minimum": 3,
+        "ratio": 4.479125594104074
+      }
+    },
+    {
+      "name": "light focus #1855a0 / #faf9f6",
+      "ok": true,
+      "detail": {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#faf9f6",
+        "minimum": 3,
+        "ratio": 7.0087422371042996
+      }
+    },
+    {
+      "name": "dark text #f2f1ed / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 13.414190858168567
+      }
+    },
+    {
+      "name": "dark text #f2f1ed / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 14.77357883916672
+      }
+    },
+    {
+      "name": "dark text #f2f1ed / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 15.56703987909104
+      }
+    },
+    {
+      "name": "dark text #d2d1c9 / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 9.893571173970967
+      }
+    },
+    {
+      "name": "dark text #d2d1c9 / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 10.896181162545568
+      }
+    },
+    {
+      "name": "dark text #d2d1c9 / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 11.481394490376216
+      }
+    },
+    {
+      "name": "dark text #b8b7ae / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 7.524659644221719
+      }
+    },
+    {
+      "name": "dark text #b8b7ae / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 8.28720521924818
+      }
+    },
+    {
+      "name": "dark text #b8b7ae / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 8.732295372616989
+      }
+    },
+    {
+      "name": "dark text #86efac / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 10.797495418789142
+      }
+    },
+    {
+      "name": "dark text #86efac / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 11.891708677894997
+      }
+    },
+    {
+      "name": "dark text #86efac / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 12.530389909894419
+      }
+    },
+    {
+      "name": "dark text #7cddd3 / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 9.486610545082533
+      }
+    },
+    {
+      "name": "dark text #7cddd3 / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 10.447979329211806
+      }
+    },
+    {
+      "name": "dark text #7cddd3 / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 11.009120582385082
+      }
+    },
+    {
+      "name": "dark text #ffd166 / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 10.514539952671928
+      }
+    },
+    {
+      "name": "dark text #ffd166 / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 11.580078633947153
+      }
+    },
+    {
+      "name": "dark text #ffd166 / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 12.202022804369662
+      }
+    },
+    {
+      "name": "dark text #ffa4b2 / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 8.089508828991482
+      }
+    },
+    {
+      "name": "dark text #ffa4b2 / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 8.909295962675582
+      }
+    },
+    {
+      "name": "dark text #ffa4b2 / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 9.38779743591352
+      }
+    },
+    {
+      "name": "dark text #8ecaff / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 8.694009301776271
+      }
+    },
+    {
+      "name": "dark text #8ecaff / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 9.575056237553536
+      }
+    },
+    {
+      "name": "dark text #8ecaff / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 10.089314438785133
+      }
+    },
+    {
+      "name": "dark border #a5a59a / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#262624",
+        "minimum": 3,
+        "ratio": 6.099437532982659
+      }
+    },
+    {
+      "name": "dark focus #ffd166 / #262624",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#262624",
+        "minimum": 3,
+        "ratio": 10.514539952671928
+      }
+    },
+    {
+      "name": "dark border #a5a59a / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#1e1e1c",
+        "minimum": 3,
+        "ratio": 6.7175517495502985
+      }
+    },
+    {
+      "name": "dark focus #ffd166 / #1e1e1c",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#1e1e1c",
+        "minimum": 3,
+        "ratio": 11.580078633947153
+      }
+    },
+    {
+      "name": "dark border #a5a59a / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#191918",
+        "minimum": 3,
+        "ratio": 7.078338777187283
+      }
+    },
+    {
+      "name": "dark focus #ffd166 / #191918",
+      "ok": true,
+      "detail": {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#191918",
+        "minimum": 3,
+        "ratio": 12.202022804369662
+      }
+    },
+    {
+      "name": "both heatmap text #ffffff / #62625b",
+      "ok": true,
+      "detail": {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#62625b",
+        "minimum": 4.5,
+        "ratio": 6.144890800639176
+      }
+    },
+    {
+      "name": "both heatmap text #ffffff / #166534",
+      "ok": true,
+      "detail": {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#166534",
+        "minimum": 4.5,
+        "ratio": 7.130310076434003
+      }
+    },
+    {
+      "name": "both heatmap text #ffffff / #0f6660",
+      "ok": true,
+      "detail": {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#0f6660",
+        "minimum": 4.5,
+        "ratio": 6.796631812833138
+      }
+    },
+    {
+      "name": "both heatmap text #ffffff / #92400e",
+      "ok": true,
+      "detail": {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#92400e",
+        "minimum": 4.5,
+        "ratio": 7.090048300172369
+      }
+    },
+    {
+      "name": "both heatmap text #ffffff / #a41530",
+      "ok": true,
+      "detail": {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#a41530",
+        "minimum": 4.5,
+        "ratio": 7.696680871242817
+      }
+    },
+    {
+      "name": "status text #166534 / #dcfce7",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#dcfce7",
+        "minimum": 4.5,
+        "ratio": 6.4923831516894746
+      }
+    },
+    {
+      "name": "status text #92400e / #fef3c7",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#fef3c7",
+        "minimum": 4.5,
+        "ratio": 6.367237188363559
+      }
+    },
+    {
+      "name": "status text #9a3412 / #ffedd5",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#9a3412",
+        "bg": "#ffedd5",
+        "minimum": 4.5,
+        "ratio": 6.376792569037283
+      }
+    },
+    {
+      "name": "status text #991b1b / #fee2e2",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#991b1b",
+        "bg": "#fee2e2",
+        "minimum": 4.5,
+        "ratio": 6.802728419777387
+      }
+    },
+    {
+      "name": "status text #86efac / #14532d",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#14532d",
+        "minimum": 4.5,
+        "ratio": 6.488664598034754
+      }
+    },
+    {
+      "name": "status text #fde68a / #78350f",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#fde68a",
+        "bg": "#78350f",
+        "minimum": 4.5,
+        "ratio": 7.2846866682628075
+      }
+    },
+    {
+      "name": "status text #ffedd5 / #7c2d12",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#ffedd5",
+        "bg": "#7c2d12",
+        "minimum": 4.5,
+        "ratio": 8.177432385913093
+      }
+    },
+    {
+      "name": "status text #fca5a5 / #7f1d1d",
+      "ok": true,
+      "detail": {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#fca5a5",
+        "bg": "#7f1d1d",
+        "minimum": 4.5,
+        "ratio": 5.279117945355004
+      }
+    }
+  ],
+  "contrast": {
+    "method": "WCAG 2.2 relative luminance, opaque sRGB",
+    "pairs": [
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 17.40432753274219
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 15.813922590713819
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1a1a1a",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 16.530659795004713
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 8.1076104950897
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 7.366738216331789
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#50504b",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.700622192532421
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 6.144890800639176
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 5.583371564737883
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#62625b",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 5.836427699474335
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.130310076434003
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.478743369106667
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.772380598140432
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 6.796631812833138
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.1755565771515695
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#0f6660",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.455452417709624
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.090048300172369
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.442160708158214
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 6.734139894794004
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.696680871242817
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.993359282298256
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#a41530",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.31032053918082
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#ffffff",
+        "minimum": 4.5,
+        "ratio": 7.379163747837125
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#f5f4f0",
+        "minimum": 4.5,
+        "ratio": 6.70485682787607
+      },
+      {
+        "theme": "light",
+        "kind": "text",
+        "fg": "#1855a0",
+        "bg": "#faf9f6",
+        "minimum": 4.5,
+        "ratio": 7.0087422371042996
+      },
+      {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#ffffff",
+        "minimum": 3,
+        "ratio": 4.715853442439896
+      },
+      {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#ffffff",
+        "minimum": 3,
+        "ratio": 7.379163747837125
+      },
+      {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#f5f4f0",
+        "minimum": 3,
+        "ratio": 4.284919434410675
+      },
+      {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#f5f4f0",
+        "minimum": 3,
+        "ratio": 6.70485682787607
+      },
+      {
+        "theme": "light",
+        "kind": "border",
+        "fg": "#74746b",
+        "bg": "#faf9f6",
+        "minimum": 3,
+        "ratio": 4.479125594104074
+      },
+      {
+        "theme": "light",
+        "kind": "focus",
+        "fg": "#1855a0",
+        "bg": "#faf9f6",
+        "minimum": 3,
+        "ratio": 7.0087422371042996
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 13.414190858168567
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 14.77357883916672
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#f2f1ed",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 15.56703987909104
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 9.893571173970967
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 10.896181162545568
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#d2d1c9",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 11.481394490376216
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 7.524659644221719
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 8.28720521924818
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#b8b7ae",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 8.732295372616989
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 10.797495418789142
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 11.891708677894997
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 12.530389909894419
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 9.486610545082533
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 10.447979329211806
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#7cddd3",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 11.009120582385082
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 10.514539952671928
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 11.580078633947153
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffd166",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 12.202022804369662
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 8.089508828991482
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 8.909295962675582
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#ffa4b2",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 9.38779743591352
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#262624",
+        "minimum": 4.5,
+        "ratio": 8.694009301776271
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#1e1e1c",
+        "minimum": 4.5,
+        "ratio": 9.575056237553536
+      },
+      {
+        "theme": "dark",
+        "kind": "text",
+        "fg": "#8ecaff",
+        "bg": "#191918",
+        "minimum": 4.5,
+        "ratio": 10.089314438785133
+      },
+      {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#262624",
+        "minimum": 3,
+        "ratio": 6.099437532982659
+      },
+      {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#262624",
+        "minimum": 3,
+        "ratio": 10.514539952671928
+      },
+      {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#1e1e1c",
+        "minimum": 3,
+        "ratio": 6.7175517495502985
+      },
+      {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#1e1e1c",
+        "minimum": 3,
+        "ratio": 11.580078633947153
+      },
+      {
+        "theme": "dark",
+        "kind": "border",
+        "fg": "#a5a59a",
+        "bg": "#191918",
+        "minimum": 3,
+        "ratio": 7.078338777187283
+      },
+      {
+        "theme": "dark",
+        "kind": "focus",
+        "fg": "#ffd166",
+        "bg": "#191918",
+        "minimum": 3,
+        "ratio": 12.202022804369662
+      },
+      {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#62625b",
+        "minimum": 4.5,
+        "ratio": 6.144890800639176
+      },
+      {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#166534",
+        "minimum": 4.5,
+        "ratio": 7.130310076434003
+      },
+      {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#0f6660",
+        "minimum": 4.5,
+        "ratio": 6.796631812833138
+      },
+      {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#92400e",
+        "minimum": 4.5,
+        "ratio": 7.090048300172369
+      },
+      {
+        "theme": "both",
+        "kind": "heatmap text",
+        "fg": "#ffffff",
+        "bg": "#a41530",
+        "minimum": 4.5,
+        "ratio": 7.696680871242817
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#166534",
+        "bg": "#dcfce7",
+        "minimum": 4.5,
+        "ratio": 6.4923831516894746
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#92400e",
+        "bg": "#fef3c7",
+        "minimum": 4.5,
+        "ratio": 6.367237188363559
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#9a3412",
+        "bg": "#ffedd5",
+        "minimum": 4.5,
+        "ratio": 6.376792569037283
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#991b1b",
+        "bg": "#fee2e2",
+        "minimum": 4.5,
+        "ratio": 6.802728419777387
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#86efac",
+        "bg": "#14532d",
+        "minimum": 4.5,
+        "ratio": 6.488664598034754
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#fde68a",
+        "bg": "#78350f",
+        "minimum": 4.5,
+        "ratio": 7.2846866682628075
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#ffedd5",
+        "bg": "#7c2d12",
+        "minimum": 4.5,
+        "ratio": 8.177432385913093
+      },
+      {
+        "theme": "status",
+        "kind": "text",
+        "fg": "#fca5a5",
+        "bg": "#7f1d1d",
+        "minimum": 4.5,
+        "ratio": 5.279117945355004
+      }
+    ]
+  },
+  "limitations": [
+    "DOM emulation, not a real browser or assistive-technology test",
+    "Token-pair contrasts, not computed-style coverage of every inline state or third-party tile",
+    "Radar raster cells lack equivalent quantitative text from the provider",
+    "Pause stops future periodic callbacks, not already-started requests or manual actions",
+    "No certification of WCAG AA, predictive accuracy, or live API availability"
+  ]
+}

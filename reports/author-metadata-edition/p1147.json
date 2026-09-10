@@ -1,0 +1,2167 @@
+{
+  "htmlSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "generatedAt": "2026-09-10T11:37:20.703Z",
+  "summary": {
+    "checks": 505,
+    "passed": 505,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "Python budget fixture 0",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 1",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 2",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 3",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 4",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 5",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 6",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 7",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 8",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 9",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 10",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 11",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 12",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 13",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 14",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 15",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 16",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 17",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 18",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 19",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 20",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 21",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 22",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 23",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 24",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 25",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 26",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 27",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 28",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 29",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 30",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 31",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 32",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 33",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 34",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 35",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 36",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 37",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 38",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 39",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 40",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 41",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 42",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 43",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 44",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 45",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 46",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 47",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 48",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 49",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 50",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 51",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 52",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 53",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 54",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 55",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 56",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 57",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 58",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 59",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 60",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 61",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 62",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 63",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 64",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 65",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 66",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 67",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 68",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 69",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 70",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 71",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 72",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 73",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 74",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 75",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 76",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 77",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 78",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 79",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 80",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 81",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 82",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 83",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 84",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 85",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 86",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 87",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 88",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 89",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 90",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 91",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 92",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 93",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 94",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 95",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 96",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 97",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 98",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 99",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 100",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 101",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 102",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 103",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 104",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 105",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 106",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 107",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 108",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 109",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 110",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 111",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 112",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 113",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 114",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 115",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 116",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 117",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 118",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 119",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 120",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 121",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 122",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 123",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 124",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 125",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 126",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 127",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 128",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 129",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 130",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 131",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 132",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 133",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 134",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 135",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 136",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 137",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 138",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 139",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 140",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 141",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 142",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 143",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 144",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 145",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 146",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 147",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 148",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 149",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 150",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 151",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 152",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 153",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 154",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 155",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 156",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 157",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 158",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 159",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 160",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 161",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 162",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 163",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 164",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 165",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 166",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 167",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 168",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 169",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 170",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 171",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 172",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 173",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 174",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 175",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 176",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 177",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 178",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 179",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 180",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 181",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 182",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 183",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 184",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 185",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 186",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 187",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 188",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 189",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 190",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 191",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 192",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 193",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 194",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 195",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 196",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 197",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 198",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 199",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 200",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 201",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 202",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 203",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 204",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 205",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 206",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 207",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 208",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 209",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 210",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 211",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 212",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 213",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 214",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 215",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 216",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 217",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 218",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 219",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 220",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 221",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 222",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 223",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 224",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 225",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 226",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 227",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 228",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 229",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 230",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 231",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 232",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 233",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 234",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 235",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 236",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 237",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 238",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 239",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 240",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 241",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 242",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 243",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 244",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 245",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 246",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 247",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 248",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 249",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 250",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 251",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 252",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 253",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 254",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 255",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 256",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 257",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 258",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 259",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 260",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 261",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 262",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 263",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 264",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 265",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 266",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 267",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 268",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 269",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 270",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 271",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 272",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 273",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 274",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 275",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 276",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 277",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 278",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 279",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 280",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 281",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 282",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 283",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 284",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 285",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 286",
+      "ok": true
+    },
+    {
+      "name": "Python budget fixture 287",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 0",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 1",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 2",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 3",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 4",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 5",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 6",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 7",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 8",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 9",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 10",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 11",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 12",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 13",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 14",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 15",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 16",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 17",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 18",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 19",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 20",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 21",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 22",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 23",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 24",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 25",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 26",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 27",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 28",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 29",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 30",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 31",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 32",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 33",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 34",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 35",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 36",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 37",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 38",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 39",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 40",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 41",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 42",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 43",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 44",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 45",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 46",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 47",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 48",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 49",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 50",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 51",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 52",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 53",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 54",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 55",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 56",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 57",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 58",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 59",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 60",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 61",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 62",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 63",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 64",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 65",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 66",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 67",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 68",
+      "ok": true
+    },
+    {
+      "name": "Python sunrise/sunset fixture 69",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"powerW\":1000}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"efficiency\":0.5}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"gv\":3}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"gh\":3}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"gs\":3}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"lp\":3}",
+      "ok": true
+    },
+    {
+      "name": "Budget sensitivity {\"lt\":3}",
+      "ok": true
+    },
+    {
+      "name": "Solar activity increases loss",
+      "ok": true
+    },
+    {
+      "name": "Missing required R12 rejected",
+      "ok": true
+    },
+    {
+      "name": "Missing R12 not required at equatorial MF",
+      "ok": true
+    },
+    {
+      "name": "LF independent of R12",
+      "ok": true
+    },
+    {
+      "name": "Invalid radiated-power input NaN",
+      "ok": true
+    },
+    {
+      "name": "Invalid radiated-power input null",
+      "ok": true
+    },
+    {
+      "name": "Invalid radiated-power input Infinity",
+      "ok": true
+    },
+    {
+      "name": "Invalid radiated-power input 0",
+      "ok": true
+    },
+    {
+      "name": "Invalid radiated-power input -1",
+      "ok": true
+    },
+    {
+      "name": "Invalid section geometry []",
+      "ok": true
+    },
+    {
+      "name": "Invalid section geometry [0,20]",
+      "ok": true
+    },
+    {
+      "name": "Invalid section geometry [91]",
+      "ok": true
+    },
+    {
+      "name": "Invalid section geometry [-91]",
+      "ok": true
+    },
+    {
+      "name": "Figure1 ascending short",
+      "ok": true
+    },
+    {
+      "name": "Figure1 exact vertex short",
+      "ok": true
+    },
+    {
+      "name": "Figure1 no clipped extrapolation short",
+      "ok": true
+    },
+    {
+      "name": "Figure1 long-distance note short",
+      "ok": true
+    },
+    {
+      "name": "Figure1 ascending 0.25",
+      "ok": true
+    },
+    {
+      "name": "Figure1 exact vertex 0.25",
+      "ok": true
+    },
+    {
+      "name": "Figure1 no clipped extrapolation 0.25",
+      "ok": true
+    },
+    {
+      "name": "Figure1 long-distance note 0.25",
+      "ok": true
+    },
+    {
+      "name": "Figure1 ascending 0.40",
+      "ok": true
+    },
+    {
+      "name": "Figure1 exact vertex 0.40",
+      "ok": true
+    },
+    {
+      "name": "Figure1 no clipped extrapolation 0.40",
+      "ok": true
+    },
+    {
+      "name": "Figure1 long-distance note 0.40",
+      "ok": true
+    },
+    {
+      "name": "Figure1 ascending 0.50",
+      "ok": true
+    },
+    {
+      "name": "Figure1 exact vertex 0.50",
+      "ok": true
+    },
+    {
+      "name": "Figure1 no clipped extrapolation 0.50",
+      "ok": true
+    },
+    {
+      "name": "Figure1 long-distance note 0.50",
+      "ok": true
+    },
+    {
+      "name": "Figure1 ascending 0.60",
+      "ok": true
+    },
+    {
+      "name": "Figure1 exact vertex 0.60",
+      "ok": true
+    },
+    {
+      "name": "Figure1 no clipped extrapolation 0.60",
+      "ok": true
+    },
+    {
+      "name": "Figure1 long-distance note 0.60",
+      "ok": true
+    },
+    {
+      "name": "Sea eq5 r1=1000 G0 squared/(Qf)",
+      "ok": true
+    },
+    {
+      "name": "Sea c1 is linear, not squared",
+      "ok": true
+    },
+    {
+      "name": "Sea eq6 second radius",
+      "ok": true
+    },
+    {
+      "name": "Sea eq6 correction",
+      "ok": true
+    },
+    {
+      "name": "Sea net example 5.1 dB",
+      "ok": true
+    },
+    {
+      "name": "Coast with no intervening land reaches MF cap",
+      "ok": true
+    },
+    {
+      "name": "LF cap 4.1 dB",
+      "ok": true
+    },
+    {
+      "name": "Sea loss floors gain to zero",
+      "ok": true
+    },
+    {
+      "name": "Incomplete coastal data rejected",
+      "ok": true
+    },
+    {
+      "name": "Sea next land cannot precede coast",
+      "ok": true
+    },
+    {
+      "name": "Eq8 magnetic equator E-W 28 dB",
+      "ok": true
+    },
+    {
+      "name": "Eq8 high dip zero",
+      "ok": true
+    },
+    {
+      "name": "Eq8 hemispheric symmetry",
+      "ok": true
+    },
+    {
+      "name": "Eq8 axial symmetry",
+      "ok": true
+    },
+    {
+      "name": "Eq8 literal negative edge retained",
+      "ok": true
+    },
+    {
+      "name": "Appendix latitude guard -65",
+      "ok": true
+    },
+    {
+      "name": "Appendix latitude guard 65",
+      "ok": true
+    },
+    {
+      "name": "Appendix latitude guard 89",
+      "ok": true
+    },
+    {
+      "name": "Full LF/MF component chain finite",
+      "ok": true
+    },
+    {
+      "name": "Local night circuit recognized",
+      "ok": true
+    },
+    {
+      "name": "Two terminal polarization corrections",
+      "ok": true
+    },
+    {
+      "name": "Distance/geomagnetic reciprocity",
+      "ok": true
+    },
+    {
+      "name": "LF omits excess polarization",
+      "ok": true
+    },
+    {
+      "name": "Published frequency guard 149.99",
+      "ok": true
+    },
+    {
+      "name": "Published frequency guard 1700.01",
+      "ok": true
+    },
+    {
+      "name": "Published boundary included 150",
+      "ok": true
+    },
+    {
+      "name": "Published boundary included 299.99",
+      "ok": true
+    },
+    {
+      "name": "Published boundary included 300",
+      "ok": true
+    },
+    {
+      "name": "Published boundary included 1700",
+      "ok": true
+    },
+    {
+      "name": "Distance exclusion 49.99",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 50",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 50",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 50",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 1999.99",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 1999.99",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 1999.99",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 2000",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 2000",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 2000",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 2000.01",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 2000.01",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 2000.01",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 3000",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 3000",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 3000",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 3000.01",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 3000.01",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 3000.01",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 7500",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 7500",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 7500",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 7500.01",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 7500.01",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 7500.01",
+      "ok": true
+    },
+    {
+      "name": "Distance inclusion 12000",
+      "ok": true
+    },
+    {
+      "name": "Hourly CP count 12000",
+      "ok": true
+    },
+    {
+      "name": "Geomagnetic section count 12000",
+      "ok": true
+    },
+    {
+      "name": "Distance exclusion 12000.01",
+      "ok": true
+    },
+    {
+      "name": "Identical QTH rejected",
+      "ok": true
+    },
+    {
+      "name": "Antipodal QTH rejected",
+      "ok": true
+    },
+    {
+      "name": "WMM date guard",
+      "ok": true
+    },
+    {
+      "name": "50 ohm voltage-to-power fixture",
+      "ok": true
+    },
+    {
+      "name": "Conditional SNR fixture",
+      "ok": true
+    },
+    {
+      "name": "AF worsened by 3 dB lowers SNR by 3",
+      "ok": true
+    },
+    {
+      "name": "Double BW reduces SNR by 3.0103 dB",
+      "ok": true
+    },
+    {
+      "name": "Missing AF does not imply zero",
+      "ok": true
+    },
+    {
+      "name": "Missing noise does not imply zero",
+      "ok": true
+    },
+    {
+      "name": "Separate LF/MF controls created",
+      "ok": true
+    },
+    {
+      "name": "Default radiation efficiency 100%",
+      "ok": true
+    },
+    {
+      "name": "LF/MF followed by VHF card",
+      "ok": true
+    },
+    {
+      "name": "No automatic fabricated SNR",
+      "ok": true
+    },
+    {
+      "name": "Calibrated SNR available",
+      "ok": true
+    },
+    {
+      "name": "EN native section",
+      "ok": true
+    },
+    {
+      "name": "EN no fallback",
+      "ok": true
+    },
+    {
+      "name": "EN retains calibration",
+      "ok": true
+    },
+    {
+      "name": "EN no unlabeled controls",
+      "ok": true
+    },
+    {
+      "name": "EN scoped table headers",
+      "ok": true
+    },
+    {
+      "name": "EN current plus next 24 hours",
+      "ok": true
+    },
+    {
+      "name": "EN Figure4 caveat visible in disclosure",
+      "ok": true
+    },
+    {
+      "name": "EN duplicate IDs absent",
+      "ok": true
+    },
+    {
+      "name": "PT native section",
+      "ok": true
+    },
+    {
+      "name": "PT no fallback",
+      "ok": true
+    },
+    {
+      "name": "PT retains calibration",
+      "ok": true
+    },
+    {
+      "name": "PT no unlabeled controls",
+      "ok": true
+    },
+    {
+      "name": "PT scoped table headers",
+      "ok": true
+    },
+    {
+      "name": "PT current plus next 24 hours",
+      "ok": true
+    },
+    {
+      "name": "PT Figure4 caveat visible in disclosure",
+      "ok": true
+    },
+    {
+      "name": "PT duplicate IDs absent",
+      "ok": true
+    },
+    {
+      "name": "EN native section",
+      "ok": true
+    },
+    {
+      "name": "EN no fallback",
+      "ok": true
+    },
+    {
+      "name": "EN retains calibration",
+      "ok": true
+    },
+    {
+      "name": "EN no unlabeled controls",
+      "ok": true
+    },
+    {
+      "name": "EN scoped table headers",
+      "ok": true
+    },
+    {
+      "name": "EN current plus next 24 hours",
+      "ok": true
+    },
+    {
+      "name": "EN Figure4 caveat visible in disclosure",
+      "ok": true
+    },
+    {
+      "name": "EN duplicate IDs absent",
+      "ok": true
+    },
+    {
+      "name": "EN no Portuguese leftovers",
+      "ok": true
+    },
+    {
+      "name": "PT no characteristic EN leftovers",
+      "ok": true
+    },
+    {
+      "name": "Frequency change invalidates AF/noise",
+      "ok": true
+    },
+    {
+      "name": "Route change invalidates calibration",
+      "ok": true
+    },
+    {
+      "name": "Invalid transmitter grid no fallback",
+      "ok": true
+    },
+    {
+      "name": "Grid injection escaped",
+      "ok": true
+    },
+    {
+      "name": "Invalid HF antenna does not hide LF/MF predictions",
+      "ok": true
+    },
+    {
+      "name": "No additional API calls",
+      "ok": true
+    },
+    {
+      "name": "No console errors",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "Single HTML has no external script sources",
+      "ok": true
+    },
+    {
+      "name": "Open reference discrepancy retained",
+      "ok": true
+    }
+  ],
+  "snapshots": {
+    "circuit": {
+      "ok": true,
+      "profile": "AGHIP-P1147-4-EQUATIONS-WMM2025-r7",
+      "field": 34.09777106336311,
+      "V": -10.541734311375318,
+      "A": 107,
+      "p": 495.2967776911288,
+      "spreading": 53.89731005104771,
+      "la": 4.611437143387744,
+      "lt": 0,
+      "lr": 0,
+      "gs": 0,
+      "lp": 3.8517474308261144,
+      "gv": -0.5417343113753188,
+      "gh": 0,
+      "keff": 6.552447380824979,
+      "k": [
+        6.552447380824979
+      ],
+      "b": [
+        0
+      ],
+      "phis": [
+        -13.128424275580953
+      ],
+      "radiatedPowerW": 100,
+      "lfBeyondVerified": false,
+      "highGeomagneticLatitude": false,
+      "band": "mf",
+      "fKHz": 1000,
+      "distanceKm": 453.12128397506933,
+      "hourly": {
+        "ok": true,
+        "loss": 0,
+        "phase": "NIGHT",
+        "overlap": false,
+        "site": {
+          "lat": -21.4343297755768,
+          "lon": -45.547220163219436
+        },
+        "points": [
+          {
+            "site": {
+              "lat": -21.4343297755768,
+              "lon": -45.547220163219436
+            },
+            "solarCos": -0.9608060141911012,
+            "hourly": {
+              "ok": true,
+              "loss": 0,
+              "phase": "NIGHT",
+              "overlap": false
+            }
+          }
+        ]
+      },
+      "polarization": [
+        {
+          "theta": -21.95867925686383,
+          "I": 39.762186313125284,
+          "loss": 1.9286563259015121
+        },
+        {
+          "theta": -22.031282788119654,
+          "I": 39.79695553388585,
+          "loss": 1.9230911049246022
+        }
+      ],
+      "sea": [
+        {
+          "gain": 0,
+          "assumption": "NO_SEA_GAIN_ASSUMED"
+        },
+        {
+          "gain": 0,
+          "assumption": "NO_SEA_GAIN_ASSUMED"
+        }
+      ],
+      "groundAssumption": "AVERAGE_TERMINAL_GROUND_3_TO_10_MSM",
+      "predictiveValidation": false
+    },
+    "en": "LF/MF — sky-wave predictionEXPERIMENTAL IMPLEMENTATION UNDER REVIEW — not validated against independent measurements.P.1147 now provides an electric-field estimate. The result represents an annual median, not a measurement or an exact forecast for today. Ground wave (P.368) is not included.Power and receiver bandwidth follow the selections above. The HF receiving antenna is not reused: LF/MF requires its own receiving reference.LF/MF transmitter grid (optional)LF / longwave (kHz)MF / medium wave (kHz)Ideal transmitting monopole (h/λ)Short compared with λ0.25 λ0.40 λ0.50 λ0.60 λRadiation efficiency (%)TX horizontal factor GH (dB)Regional profile — explicit selectionGeneral (Brazil/U.S./Canada)European path: b = 1Midpoint in Region 3 south of 11°SStudy R12 V1 (blank: dashboard index)Defaults of 100% efficiency and GH = 0 dB are ideal assumptions, not measurements. h/λ is the electrical height at each frequency, not one real multiband installation. For an AM reception study, enter carrier power, not PEP. Without a dedicated grid, the HF destination supplies a study route, not an identified broadcaster.Coastal terminals — optional correctionNo sea gain is the initial scenario, not an automatic geographic classification. To enable it, enter s₁ to the sea and s₂ to the next land along the path. α is the land fraction; 0.5 is the recommendation’s approximation without a terrain database. This does not apply to fresh water.TransmitterScenarioNo sea gainApply using the inputs belows₁ (km)s₂ (km)α (0–1)Receiver / QTHScenarioNo sea gainApply using the inputs belows₁ (km)s₂ (km)α (0–1)Optional S/N — calibrated receiving system requiredA system antenna factor (AF), calibrated at this frequency, direction, and polarization, must be referenced to the receiver’s 50 Ω input and include feeder, matching, and preamplifier effects. Measure noise without the wanted signal at that same input. Do not enter dBi as AF. Changing frequency or route clears AF and noise to prevent invalid reuse.LF / longwaveSystem AF (dB/m)Measured noise (dBm)Measurement equivalent noise bandwidth (Hz)MF / medium waveSystem AF (dB/m)Measured noise (dBm)Measurement equivalent noise bandwidth (Hz)Bandwidth conversion assumes locally flat noise spectral density. Interference, fading, selectivity, and intelligibility are not determined by S/N alone. Neither the HF measurement nor a lossless receiving antenna is assumed.Transmitter → your QTH: GG70AA · -29.979, -45.958 → -22.854, -47.125.R12: 72.0 · dashboard V1 proxy (0.6 × smoothed V2 index); fixed for the 24 h study.LF / longwave · 198.000 kHzSky-wave electric field: 35.5 dBµV/mNighttime · 2026-09-09 03:00 UTC.Modeled annual median; the real ionosphere can produce higher or lower values. This is neither a ground-wave sum nor confirmation of a band opening.Candidate listening time: 2026-09-09 03:00 UTC · 35.5 dBµV/m. Highest nighttime/transition field in 30-minute samples over the next 24 h; not a reception probability.S/N not determined. To calculate it, enter LF/MF AF and measured noise in the calibration options. A stronger field does not guarantee reception with the real antenna.Audit the calculation and upcoming timesPath: 801 km · assumed radiated power: 100.0 W · GV -0.2 dB · GH 0.0 dB.Reference P.372 external noise, separate from the field-to-power conversion: total unavailable; below 300 kHz the man-made noise expression is not extrapolated.E = V + GS − Lp + A − 20 log₁₀(p) − La − Lt − Lr.Components of the current field calculationTermValueV (dB/300 V)-10.182GS (dB)0.000Lp (dB)0.000A (dB)110.20020 log₁₀(p/km)58.332La (dB)6.183Lt (dB)0.000Lr (dB)0.000Φ: -18.01° · k: 6.8062 · hourly control point: -26.418, -46.560.Next 24 h — hourly samples of a climatologyUTCdBµV/mRegime2026-09-09 03:00 UTC35.5Nighttime2026-09-09 04:00 UTC35.5Nighttime2026-09-09 05:00 UTC35.5Nighttime2026-09-09 06:00 UTC35.5Nighttime2026-09-09 07:00 UTC34.7Sunrise/sunset transition2026-09-09 08:00 UTC33.9Sunrise/sunset transition2026-09-09 09:00 UTC27.9Sunrise/sunset transition2026-09-09 10:00 UTC11.6Sunrise/sunset transition2026-09-09 11:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 12:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 13:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 14:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 15:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 16:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 17:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 18:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 19:00 UTC5.5Daytime — approximate 30 dB limit2026-09-09 20:00 UTC11.4Sunrise/sunset transition2026-09-09 21:00 UTC23.6Sunrise/sunset transition2026-09-09 22:00 UTC30.0Sunrise/sunset transition2026-09-09 23:00 UTC32.8Sunrise/sunset transition2026-09-10 00:00 UTC33.9Sunrise/sunset transition2026-09-10 01:00 UTC35.5Nighttime2026-09-10 02:00 UTC35.5NighttimeMF / medium wave · 1,000.000 kHzSky-wave electric field: 32.2 dBµV/mNighttime · 2026-09-09 03:00 UTC.Modeled annual median; the real ionosphere can produce higher or lower values. This is neither a ground-wave sum nor confirmation of a band opening.Candidate listening time: 2026-09-09 03:00 UTC · 32.2 dBµV/m. Highest nighttime/transition field in 30-minute samples over the next 24 h; not a reception probability.S/N 15.2 dB · receiver power -84.8 dBm · adjusted noise -100.0 dBm / 2,400 Hz.S/N is conditional on the supplied calibration; it does not rate intelligibility or circuit reliability.Audit the calculation and upcoming timesPath: 801 km · assumed radiated power: 100.0 W · GV -0.2 dB · GH 0.0 dB.Reference P.372 external noise, separate from the field-to-power conversion: -56.5 dBm / 2,400 Hz · Fₐ 83.7 dB.E = V + GS − Lp + A − 20 log₁₀(p) − La − Lt − Lr.Components of the current field calculationTermValueV (dB/300 V)-10.182GS (dB)0.000Lp (dB)0.088A (dB)107.00020 log₁₀(p/km)58.332La (dB)6.183Lt (dB)0.000Lr (dB)0.000Φ: -18.01° · k: 6.8062 · hourly control point: -26.418, -46.560.Next 24 h — hourly samples of a climatologyUTCdBµV/mRegime2026-09-09 03:00 UTC32.2Nighttime2026-09-09 04:00 UTC32.2Nighttime2026-09-09 05:00 UTC32.2Nighttime2026-09-09 06:00 UTC32.2Nighttime2026-09-09 07:00 UTC31.4Sunrise/sunset transition2026-09-09 08:00 UTC30.6Sunrise/sunset transition2026-09-09 09:00 UTC24.6Sunrise/sunset transition2026-09-09 10:00 UTC8.3Sunrise/sunset transition2026-09-09 11:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 12:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 13:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 14:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 15:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 16:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 17:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 18:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 19:00 UTC2.2Daytime — approximate 30 dB limit2026-09-09 20:00 UTC8.2Sunrise/sunset transition2026-09-09 21:00 UTC20.3Sunrise/sunset transition2026-09-09 22:00 UTC26.7Sunrise/sunset transition2026-09-09 23:00 UTC29.5Sunrise/sunset transition2026-09-10 00:00 UTC30.6Sunrise/sunset transition2026-09-10 01:00 UTC32.2Nighttime2026-09-10 02:00 UTC32.2NighttimeReference, assumptions, and implementation limitsITU-R P.1147-4 · AGHIP-P1147-4-EQUATIONS-WMM2025-r7.Figures 1 and 2 are embedded interpolation tables; Equations 1–13 and Appendix 1 are implemented. The field reference is a loop at ground level in the great-circle vertical plane. Average terminal ground: 3–10 mS/m; highly resistive ground can substantially reduce the field. No arbitrary ground, HF antenna, or space-weather corrections have been added.Research implementation without independent predictive validation. An auxiliary comparison with Figure 4 did not reproduce all curves within plot-reading tolerance; calculation explicitly follows the published equations. This remains an open report item, with no hidden empirical adjustment.Geometry uses the selected QTH coordinates; a dedicated transmitter grid represents its cell center. The geomagnetic profile uses WMM2025, not the historical map. The 30 dB daytime approximation does not replace Annex 2’s separate daytime treatment. There is no ground-wave sum, installation-specific NEC validation, broadcaster directory, or reception guarantee.VHF 6 m / 2 mPath outside available screeningYour QTH → VHF grid PM95 · 18,489 km.This route is outside the available distance screens. This is a model limitation, not proof of physical impossibility. Check the grid of the station you want to hear.EME is a separate Earth–Moon–Earth link; see the EME tab.Understand the calculations and limitsAGHIP distance screens — not probabilitiesMechanismStatusSporadic E (Es)Outside distance-screening rangeMeteor scatter (MS)Outside distance-screening rangeTransequatorial propagation (TEP), 6 m / 2 mOutside distance-screening rangeExisting AGHIP screening limits: Es 500–2,200 km; MS 300–2,200 km; TEP 2,500–9,000 km. These are experimental filters, not universal physical boundaries or ITU-R criteria. Magnetic geometry, frequency, and current conditions still matter. No 0–100 index is converted into a reception probability.P.1546: exceeds the 1,000 km upper limit. P.1812-8: outside the approximate 0.25–3,000 km range.These checks do not execute the terrestrial methods. Validated implementations and inputs such as heights, terrain profiles, land cover, and clutter are still required. Received field strength and S/N are not calculated in this card.ITU-R P.1546-6 / ITU-R P.1812-8",
+    "pt": "LF/MF — previsão de onda ionosféricaIMPLEMENTAÇÃO EXPERIMENTAL EM REVISÃO — não validada por medições independentes.Agora é possível estimar o campo elétrico pela P.1147. O resultado representa uma mediana anual, não uma medição nem a previsão exata de hoje. Onda de superfície (P.368) não está incluída.A potência e a largura de banda são as selecionadas acima. A antena receptora do quadro HF não é reutilizada: LF/MF exige sua própria referência de recepção.Grid do transmissor LF/MF (opcional)LF / ondas longas (kHz)MF / ondas médias (kHz)Monopolo transmissor ideal (h/λ)Curto em relação a λ0.25 λ0.40 λ0.50 λ0.60 λEficiência de radiação (%)Fator horizontal TX GH (dB)Perfil regional — seleção explícitaGeral (BR/EUA/Canadá)Percurso europeu: b = 1Ponto médio na Região 3 ao sul de 11°SR12 V1 de estudo (vazio: índice do painel)Padrão: 100% de eficiência e GH = 0 dB são hipóteses ideais, não medições. h/λ é a altura elétrica em cada frequência, não uma instalação multibanda real. Informe a potência da portadora para estudar recepção AM; não a PEP. Sem grid próprio, a rota é apenas um cenário com o destino HF, não uma emissora identificada.Terminais costeiros — correção opcionalSem ganho marítimo é o cenário inicial, não uma classificação geográfica automática. Para ativar: informe s₁ até o mar e s₂ até a próxima terra ao longo do percurso. α é a fração de terra; 0,5 é a aproximação da recomendação quando não há base de terreno. Não se aplica a água doce.TransmissorCenárioSem ganho marítimoAplicar com os dados abaixos₁ (km)s₂ (km)α (0–1)Receptor / QTHCenárioSem ganho marítimoAplicar com os dados abaixos₁ (km)s₂ (km)α (0–1)S/N opcional — somente com calibração de recepçãoÉ necessário um fator de antena do sistema (AF) calibrado nesta frequência, direção e polarização, referido à entrada de 50 Ω do receptor, incluindo cabos, adaptação e pré-amplificador. Meça o ruído sem o sinal desejado nessa mesma entrada. Não informe dBi no campo AF. A mudança de frequência ou rota limpa AF e ruído para evitar reutilização indevida.LF / ondas longasAF do sistema (dB/m)Ruído medido (dBm)Largura equivalente da medição (Hz)MF / ondas médiasAF do sistema (dB/m)Ruído medido (dBm)Largura equivalente da medição (Hz)A conversão entre larguras de banda assume densidade espectral de ruído localmente constante. Interferência, fading, seletividade e inteligibilidade não são determinados apenas pelo S/N. Não reutilizamos a medição HF nem presumimos uma antena sem perdas.Transmissor → seu QTH: GG70AA · -29.979, -45.958 → -22.854, -47.125.R12: 72.0 · proxy V1 do painel (0,6 × índice V2 suavizado); fixo no estudo de 24 h.LF / ondas longas · 198,000 kHzCampo elétrico de onda ionosférica: 35,5 dBµV/mNoturno · 2026-09-09 03:00 UTC.Mediana anual modelada; a ionosfera real pode produzir valores maiores ou menores. Não é a soma com a onda de superfície nem uma confirmação de banda aberta.Horário candidato para tentar a escuta: 2026-09-09 03:00 UTC · 35,5 dBµV/m. Maior campo noturno/transição na amostragem de 30 min das próximas 24 h; não é probabilidade de recepção.S/N não determinado. Para calculá-lo, informe AF e ruído medidos em LF/MF nas opções de calibração. Um campo mais forte não garante escuta com a antena real.Auditar o cálculo e os próximos horáriosPercurso: 801 km · potência radiada assumida: 100,0 W · GV -0,2 dB · GH 0,0 dB.Ruído externo P.372 de referência, separado da conversão do campo em potência: total indisponível; abaixo de 300 kHz não extrapolamos a expressão de ruído artificial.E = V + GS − Lp + A − 20 log₁₀(p) − La − Lt − Lr.Parcelas do campo calculado agoraTermoValorV (dB/300 V)-10,182GS (dB)0,000Lp (dB)0,000A (dB)110,20020 log₁₀(p/km)58,332La (dB)6,183Lt (dB)0,000Lr (dB)0,000Φ: -18,01° · k: 6,8062 · controle horário: -26,418, -46,560.Próximas 24 h — amostras horárias de uma climatologiaUTCdBµV/mRegime2026-09-09 03:00 UTC35,5Noturno2026-09-09 04:00 UTC35,5Noturno2026-09-09 05:00 UTC35,5Noturno2026-09-09 06:00 UTC35,5Noturno2026-09-09 07:00 UTC34,7Transição nascer/pôr do Sol2026-09-09 08:00 UTC33,9Transição nascer/pôr do Sol2026-09-09 09:00 UTC27,9Transição nascer/pôr do Sol2026-09-09 10:00 UTC11,6Transição nascer/pôr do Sol2026-09-09 11:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 12:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 13:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 14:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 15:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 16:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 17:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 18:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 19:00 UTC5,5Diurno — limite aproximado de 30 dB2026-09-09 20:00 UTC11,4Transição nascer/pôr do Sol2026-09-09 21:00 UTC23,6Transição nascer/pôr do Sol2026-09-09 22:00 UTC30,0Transição nascer/pôr do Sol2026-09-09 23:00 UTC32,8Transição nascer/pôr do Sol2026-09-10 00:00 UTC33,9Transição nascer/pôr do Sol2026-09-10 01:00 UTC35,5Noturno2026-09-10 02:00 UTC35,5NoturnoMF / ondas médias · 1.000,000 kHzCampo elétrico de onda ionosférica: 32,2 dBµV/mNoturno · 2026-09-09 03:00 UTC.Mediana anual modelada; a ionosfera real pode produzir valores maiores ou menores. Não é a soma com a onda de superfície nem uma confirmação de banda aberta.Horário candidato para tentar a escuta: 2026-09-09 03:00 UTC · 32,2 dBµV/m. Maior campo noturno/transição na amostragem de 30 min das próximas 24 h; não é probabilidade de recepção.S/N 15,2 dB · potência no receptor -84,8 dBm · ruído ajustado -100,0 dBm / 2.400 Hz.S/N condicionado à calibração informada; não classifica inteligibilidade ou confiabilidade de circuito.Auditar o cálculo e os próximos horáriosPercurso: 801 km · potência radiada assumida: 100,0 W · GV -0,2 dB · GH 0,0 dB.Ruído externo P.372 de referência, separado da conversão do campo em potência: -56,5 dBm / 2.400 Hz · Fₐ 83,7 dB.E = V + GS − Lp + A − 20 log₁₀(p) − La − Lt − Lr.Parcelas do campo calculado agoraTermoValorV (dB/300 V)-10,182GS (dB)0,000Lp (dB)0,088A (dB)107,00020 log₁₀(p/km)58,332La (dB)6,183Lt (dB)0,000Lr (dB)0,000Φ: -18,01° · k: 6,8062 · controle horário: -26,418, -46,560.Próximas 24 h — amostras horárias de uma climatologiaUTCdBµV/mRegime2026-09-09 03:00 UTC32,2Noturno2026-09-09 04:00 UTC32,2Noturno2026-09-09 05:00 UTC32,2Noturno2026-09-09 06:00 UTC32,2Noturno2026-09-09 07:00 UTC31,4Transição nascer/pôr do Sol2026-09-09 08:00 UTC30,6Transição nascer/pôr do Sol2026-09-09 09:00 UTC24,6Transição nascer/pôr do Sol2026-09-09 10:00 UTC8,3Transição nascer/pôr do Sol2026-09-09 11:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 12:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 13:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 14:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 15:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 16:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 17:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 18:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 19:00 UTC2,2Diurno — limite aproximado de 30 dB2026-09-09 20:00 UTC8,2Transição nascer/pôr do Sol2026-09-09 21:00 UTC20,3Transição nascer/pôr do Sol2026-09-09 22:00 UTC26,7Transição nascer/pôr do Sol2026-09-09 23:00 UTC29,5Transição nascer/pôr do Sol2026-09-10 00:00 UTC30,6Transição nascer/pôr do Sol2026-09-10 01:00 UTC32,2Noturno2026-09-10 02:00 UTC32,2NoturnoReferência, hipóteses e limites da implementaçãoITU-R P.1147-4 · AGHIP-P1147-4-EQUATIONS-WMM2025-r7.Figuras 1 e 2 incorporadas como tabelas de interpolação; equações 1–13 e Apêndice 1 implementados. Campo de referência para loop no solo, no plano vertical do grande círculo. Solo terminal médio: 3–10 mS/m; solo muito resistivo pode reduzir substancialmente o campo. Não foram adicionadas correções arbitrárias de solo, antena HF ou meteorologia espacial.Implementação de pesquisa, ainda sem validação preditiva independente. A comparação auxiliar com a Figura 4 não reproduziu todas as curvas dentro da tolerância de leitura; o cálculo segue explicitamente as equações publicadas. Esse ponto permanece aberto no relatório, sem ajuste empírico oculto.A geometria usa as coordenadas do QTH selecionado; o grid próprio do transmissor representa o centro da célula. O perfil geomagnético usa WMM2025, não o mapa histórico. A aproximação diurna de 30 dB não substitui o modelo diurno específico do Anexo 2. Não há soma de onda de superfície, validação NEC da instalação, cadastro de emissoras ou garantia de recepção.VHF 6 m / 2 mPercurso fora da triagem disponívelSeu QTH → grid VHF PM95 · 18.489 km.Esta rota está fora das triagens de distância aqui disponíveis. Isso é uma limitação dos modelos, não prova de impossibilidade física. Confira o grid da estação que deseja ouvir.EME é um enlace separado, via Terra–Lua–Terra; consulte a aba EME.Entenda os cálculos e os limitesFiltros de distância do AGHIP — não são probabilidadesMecanismoSituaçãoEsporádica E (Es)Fora da triagem de distânciaDispersão meteórica (MS)Fora da triagem de distânciaPropagação transequatorial (TEP), 6 m / 2 mFora da triagem de distânciaLimites de triagem existentes no AGHIP: Es 500–2.200 km; MS 300–2.200 km; TEP 2.500–9.000 km. São filtros experimentais, não fronteiras físicas universais nem critérios da ITU-R. Geometria magnética, frequência e condições atuais ainda importam. Nenhum índice 0–100 é convertido em probabilidade de escuta.P.1546: excede o limite superior de 1.000 km. P.1812-8: fora da faixa aproximada de 0,25–3.000 km.Essas verificações não executam os métodos terrestres. Faltam implementações validadas e entradas como alturas, perfil do terreno, cobertura e obstáculos (clutter). Não há campo recebido ou S/N calculado neste quadro.ITU-R P.1546-6 / ITU-R P.1812-8"
+  },
+  "externalReference": {
+    "status": "OPEN_DISCREPANCY_NOT_TUNED_AWAY",
+    "sourceSha256": "5a4dc07b5542e22c12ee9244893804d7e167fc2532ed4581634f4b66a1306860",
+    "description": "Figure 4a constant geomagnetic latitude 0 degrees, Gs=Lp=R=0; E0 compared to equations. Axis/curve reading checked visually. Not a confirmed normative erratum.",
+    "plotReadingToleranceDb": 0.2,
+    "points": [
+      {
+        "distanceKm": 500,
+        "figureDbUvM": 55.277020473585445,
+        "equationsDbUvM": 50.965187285762454,
+        "differenceDb": 4.311833187822991
+      },
+      {
+        "distanceKm": 1000,
+        "figureDbUvM": 46.20865167758248,
+        "equationsDbUvM": 43.68457052057846,
+        "differenceDb": 2.5240811570040194
+      },
+      {
+        "distanceKm": 2000,
+        "figureDbUvM": 36.88316273804367,
+        "equationsDbUvM": 35.228288879317184,
+        "differenceDb": 1.6548738587264893
+      },
+      {
+        "distanceKm": 3000,
+        "figureDbUvM": 30.766628850955684,
+        "equationsDbUvM": 29.743447615315517,
+        "differenceDb": 1.0231812356401662
+      },
+      {
+        "distanceKm": 5000,
+        "figureDbUvM": 22.65252435548282,
+        "equationsDbUvM": 22.158410809517207,
+        "differenceDb": 0.4941135459656145
+      },
+      {
+        "distanceKm": 6500,
+        "figureDbUvM": 18.704826454623884,
+        "equationsDbUvM": 17.914790760176228,
+        "differenceDb": 0.7900356944476563
+      }
+    ]
+  },
+  "limitations": [
+    "Internal invariants and separately transcribed Python equations, not independent predictive validation",
+    "Figure 4 discrepancy OPEN; not a confirmed ITU erratum",
+    "DOM emulation only; no browser or real receiver tests",
+    "No live provider availability tests"
+  ]
+}

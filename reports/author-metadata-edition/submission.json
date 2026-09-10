@@ -1,0 +1,416 @@
+{
+  "htmlSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "summary": {
+    "checks": 101,
+    "passed": 101,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "160 m rejects invalid collection null",
+      "ok": true
+    },
+    {
+      "name": "160 m rejects invalid collection {}",
+      "ok": true
+    },
+    {
+      "name": "160 m rejects invalid collection false",
+      "ok": true
+    },
+    {
+      "name": "160 m rejects invalid collection \"\"",
+      "ok": true
+    },
+    {
+      "name": "160 m malformed rows do not crash",
+      "ok": true
+    },
+    {
+      "name": "No zero-duration shadow window at horizon boundary",
+      "ok": true
+    },
+    {
+      "name": "Declared zero dBm preserved",
+      "ok": true
+    },
+    {
+      "name": "HF rejects absent power null",
+      "ok": true
+    },
+    {
+      "name": "HF rejects absent power undefined",
+      "ok": true
+    },
+    {
+      "name": "HF rejects absent power \"\"",
+      "ok": true
+    },
+    {
+      "name": "HF rejects absent power false",
+      "ok": true
+    },
+    {
+      "name": "HF rejects absent power NaN",
+      "ok": true
+    },
+    {
+      "name": "HF rejects invalid time null",
+      "ok": true
+    },
+    {
+      "name": "HF rejects invalid time 2026-09-09T04:00:00Z",
+      "ok": true
+    },
+    {
+      "name": "HF rejects invalid time 2026-09-08 18:00:00",
+      "ok": true
+    },
+    {
+      "name": "HF rejects invalid time 2026-02-30 02:00:00",
+      "ok": true
+    },
+    {
+      "name": "HF rejects invalid time ",
+      "ok": true
+    },
+    {
+      "name": "UTC Z timestamp accepted once",
+      "ok": true
+    },
+    {
+      "name": "Non-WSPR mode excluded",
+      "ok": true
+    },
+    {
+      "name": "Malformed HF rows skipped",
+      "ok": true
+    },
+    {
+      "name": "Exact duplicate excluded",
+      "ok": true
+    },
+    {
+      "name": "Regional box wraps date line",
+      "ok": true
+    },
+    {
+      "name": "Regional box clamps latitude",
+      "ok": true
+    },
+    {
+      "name": "Document locale US23",
+      "ok": true
+    },
+    {
+      "name": "Tagline language updated US24",
+      "ok": true
+    },
+    {
+      "name": "Tagline text updated US25",
+      "ok": true
+    },
+    {
+      "name": "US active tab mapa",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab mapa",
+      "ok": true
+    },
+    {
+      "name": "US active tab meteo",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab meteo",
+      "ok": true
+    },
+    {
+      "name": "US active tab hf",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab hf",
+      "ok": true
+    },
+    {
+      "name": "US active tab vhf",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab vhf",
+      "ok": true
+    },
+    {
+      "name": "US active tab eme",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab eme",
+      "ok": true
+    },
+    {
+      "name": "US active tab info",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab info",
+      "ok": true
+    },
+    {
+      "name": "Document locale BR38",
+      "ok": true
+    },
+    {
+      "name": "Tagline language updated BR39",
+      "ok": true
+    },
+    {
+      "name": "Tagline text updated BR40",
+      "ok": true
+    },
+    {
+      "name": "BR active tab mapa",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab mapa",
+      "ok": true
+    },
+    {
+      "name": "BR active tab meteo",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab meteo",
+      "ok": true
+    },
+    {
+      "name": "BR active tab hf",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab hf",
+      "ok": true
+    },
+    {
+      "name": "BR active tab vhf",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab vhf",
+      "ok": true
+    },
+    {
+      "name": "BR active tab eme",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab eme",
+      "ok": true
+    },
+    {
+      "name": "BR active tab info",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab info",
+      "ok": true
+    },
+    {
+      "name": "Document locale US53",
+      "ok": true
+    },
+    {
+      "name": "Tagline language updated US54",
+      "ok": true
+    },
+    {
+      "name": "Tagline text updated US55",
+      "ok": true
+    },
+    {
+      "name": "US active tab mapa",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab mapa",
+      "ok": true
+    },
+    {
+      "name": "US active tab meteo",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab meteo",
+      "ok": true
+    },
+    {
+      "name": "US active tab hf",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab hf",
+      "ok": true
+    },
+    {
+      "name": "US active tab vhf",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab vhf",
+      "ok": true
+    },
+    {
+      "name": "US active tab eme",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab eme",
+      "ok": true
+    },
+    {
+      "name": "US active tab info",
+      "ok": true
+    },
+    {
+      "name": "US exactly one selected tab info",
+      "ok": true
+    },
+    {
+      "name": "Document locale BR68",
+      "ok": true
+    },
+    {
+      "name": "Tagline language updated BR69",
+      "ok": true
+    },
+    {
+      "name": "Tagline text updated BR70",
+      "ok": true
+    },
+    {
+      "name": "BR active tab mapa",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab mapa",
+      "ok": true
+    },
+    {
+      "name": "BR active tab meteo",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab meteo",
+      "ok": true
+    },
+    {
+      "name": "BR active tab hf",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab hf",
+      "ok": true
+    },
+    {
+      "name": "BR active tab vhf",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab vhf",
+      "ok": true
+    },
+    {
+      "name": "BR active tab eme",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab eme",
+      "ok": true
+    },
+    {
+      "name": "BR active tab info",
+      "ok": true
+    },
+    {
+      "name": "BR exactly one selected tab info",
+      "ok": true
+    },
+    {
+      "name": "DOI matches the identifier supplied by the maintainer",
+      "ok": true
+    },
+    {
+      "name": "HF late result cannot replace new route",
+      "ok": true
+    },
+    {
+      "name": "HF failure is unavailable rather than zero",
+      "ok": true
+    },
+    {
+      "name": "Unavailable HF table does not say no spots",
+      "ok": true
+    },
+    {
+      "name": "Weather late response ignored",
+      "ok": true
+    },
+    {
+      "name": "Missing gust clears old values",
+      "ok": true
+    },
+    {
+      "name": "Old model time not displayed as current",
+      "ok": true
+    },
+    {
+      "name": "Old tropo failure cannot clear new route",
+      "ok": true
+    },
+    {
+      "name": "Null vertical profile not converted to measurements",
+      "ok": true
+    },
+    {
+      "name": "Tropo missing intervals split anomaly windows",
+      "ok": true
+    },
+    {
+      "name": "Tropo time strip retains unavailable hours",
+      "ok": true
+    },
+    {
+      "name": "English subrefraction label is mapped from same classifier",
+      "ok": true
+    },
+    {
+      "name": "Accessible classification agrees with reference threshold",
+      "ok": true
+    },
+    {
+      "name": "Kp strict finite gate",
+      "ok": true
+    },
+    {
+      "name": "Dst strict finite gate",
+      "ok": true
+    },
+    {
+      "name": "R12 strict null gate",
+      "ok": true
+    },
+    {
+      "name": "X-ray strictly positive numeric flux",
+      "ok": true
+    },
+    {
+      "name": "No console errors in exercised states",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "scope": "Deterministic fault injection and DOM state emulation; not live, visual, predictive or expert validation"
+}

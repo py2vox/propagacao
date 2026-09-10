@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "baselineSha256": "769de742024775580abcbd96ff1acd4a7f94bd755888afc6da1eb16ac26e3a8c",
+  "htmlSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "applicationScripts": 2,
+  "vendorScripts": 4,
+  "negativeControls": 4,
+  "commentOnlyControl": "PASS",
+  "declaredPublicationEdits": 6,
+  "checks": [
+    "Full JavaScript AST equality after reversing exact declared author/publication edits and normalizing release/digest",
+    "Embedded vendor source byte equality",
+    "Non-comment HTML and CSS equality after reversing exact declared author/publication edits",
+    "Preserved source baseline SHA-256"
+  ],
+  "scope": "Source-documentation and metadata regression; not live-provider, full-browser or independent scientific validation"
+}

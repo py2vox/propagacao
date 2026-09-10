@@ -1,0 +1,2761 @@
+{
+  "artifact": "index.html",
+  "sha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "generatedAt": "2026-09-10T11:37:22.117Z",
+  "scope": "Offline equation/reference-vector checks, synthetic contract tests and circuit invariants; not browser or live-service validation",
+  "summary": {
+    "checks": 335,
+    "passed": 335,
+    "failed": 0,
+    "wmmAssertions": 700,
+    "p533EmbeddedAssertions": 12
+  },
+  "wmm": {
+    "modelo": "WMM2025 (epoca 2025.0, grau/ordem 12, 90 coeficientes)",
+    "fonte": "NOAA NCEI / British Geological Survey -- dominio publico",
+    "pontos": 100,
+    "assercoes": 700,
+    "falhas": 0,
+    "erroMaximo": {
+      "D": 0.004973006265437618,
+      "I": 0.004992299344440454,
+      "H": 0.0007026296152616851,
+      "X": 0.0007182206136349123,
+      "Y": 4.999975544706103e-7,
+      "Z": 0.0000021734558686148375,
+      "F": 0.00042653271520975977
+    },
+    "toleranciaNT": 0.01,
+    "toleranciaGraus": 0.005,
+    "resultado": "APROVADO",
+    "detalheFalhas": []
+  },
+  "noise": {
+    "resultado": "APROVADO",
+    "componentesTestados": "atmosférico, man-made, galáctico e combinação — cadeia completa",
+    "naoTestado": "demais frequências, épocas e geografias não cobertas por este caso",
+    "conformidade": "REFERENCE_CASE_CHECKED — caso incorporado, não validação global",
+    "testes": [
+      {
+        "nome": "Atmosférico Fa",
+        "calc": 60.73265032938231,
+        "esp": 60.733,
+        "erro": 0.0003496706176875364,
+        "rel": 0.000005757506095327687,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Atmosférico decil sup.",
+        "calc": 10.600910186767578,
+        "esp": 10.601,
+        "erro": 0.00008981323242274186,
+        "rel": 0.000008472147195806231,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Atmosférico decil inf.",
+        "calc": 8.277667045593262,
+        "esp": 8.278,
+        "erro": 0.0003329544067387502,
+        "rel": 0.000040221600234205147,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Man-made Fa",
+        "calc": 76.8,
+        "esp": 76.8,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Man-made decil sup.",
+        "calc": 11,
+        "esp": 11,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Man-made decil inf.",
+        "calc": 6.7,
+        "esp": 6.7,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Galáctico Fa",
+        "calc": 52,
+        "esp": 52,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Galáctico decil sup.",
+        "calc": 2,
+        "esp": 2,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Galáctico decil inf.",
+        "calc": 2,
+        "esp": 2,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Total FamT",
+        "calc": 76.98652611518486,
+        "esp": 76.987,
+        "erro": 0.0004738848151362163,
+        "rel": 0.000006155387469783422,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Total decil sup.",
+        "calc": 10.940193315811273,
+        "esp": 10.94,
+        "erro": 0.00019331581127346453,
+        "rel": 0.00001767054947655069,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Total decil inf.",
+        "calc": 6.57393027273399,
+        "esp": 6.574,
+        "erro": 0.00006972726600995571,
+        "rel": 0.00001060652053695706,
+        "tol": 0.001,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Combinação: 1 componente devolve ele mesmo",
+        "calc": 60,
+        "esp": 60,
+        "erro": 0,
+        "rel": 0,
+        "tol": 0.02,
+        "un": "dB",
+        "pass": true
+      },
+      {
+        "nome": "Combinação: 2×60dB dá ~+3dB",
+        "calc": 63.14588402598417,
+        "esp": 63.01,
+        "erro": 0.1358840259841685,
+        "rel": 0.0021565469922896125,
+        "tol": 0.2,
+        "un": "dB",
+        "pass": true
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "JavaScript syntax 1",
+      "ok": true
+    },
+    {
+      "name": "JavaScript syntax 2",
+      "ok": true
+    },
+    {
+      "name": "JavaScript syntax 3",
+      "ok": true
+    },
+    {
+      "name": "JavaScript syntax 4",
+      "ok": true
+    },
+    {
+      "name": "JavaScript syntax 5",
+      "ok": true
+    },
+    {
+      "name": "JavaScript syntax 6",
+      "ok": true
+    },
+    {
+      "name": "Unique static DOM IDs",
+      "ok": true
+    },
+    {
+      "name": "One document declaration",
+      "ok": true
+    },
+    {
+      "name": "No external classic script tags",
+      "ok": true
+    },
+    {
+      "name": "No relative manifest or service worker dependency",
+      "ok": true
+    },
+    {
+      "name": "No translation-unavailable placeholder",
+      "ok": true
+    },
+    {
+      "name": "Embedded application-script SHA-256 matches actual code",
+      "ok": true
+    },
+    {
+      "name": "Actual numerical core loads without network",
+      "ok": true
+    },
+    {
+      "name": "WMM official embedded vectors",
+      "ok": true,
+      "detail": {
+        "assertions": 700,
+        "points": 100,
+        "maxError": {
+          "D": 0.004973006265437618,
+          "I": 0.004992299344440454,
+          "H": 0.0007026296152616851,
+          "X": 0.0007182206136349123,
+          "Y": 4.999975544706103e-7,
+          "Z": 0.0000021734558686148375,
+          "F": 0.00042653271520975977
+        }
+      }
+    },
+    {
+      "name": "P.372 / Atmosférico Fa",
+      "ok": true,
+      "detail": {
+        "expected": 60.733,
+        "actual": 60.73265032938231,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Atmosférico decil sup.",
+      "ok": true,
+      "detail": {
+        "expected": 10.601,
+        "actual": 10.600910186767578,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Atmosférico decil inf.",
+      "ok": true,
+      "detail": {
+        "expected": 8.278,
+        "actual": 8.277667045593262,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Man-made Fa",
+      "ok": true,
+      "detail": {
+        "expected": 76.8,
+        "actual": 76.8,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Man-made decil sup.",
+      "ok": true,
+      "detail": {
+        "expected": 11,
+        "actual": 11,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Man-made decil inf.",
+      "ok": true,
+      "detail": {
+        "expected": 6.7,
+        "actual": 6.7,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Galáctico Fa",
+      "ok": true,
+      "detail": {
+        "expected": 52,
+        "actual": 52,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Galáctico decil sup.",
+      "ok": true,
+      "detail": {
+        "expected": 2,
+        "actual": 2,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Galáctico decil inf.",
+      "ok": true,
+      "detail": {
+        "expected": 2,
+        "actual": 2,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Total FamT",
+      "ok": true,
+      "detail": {
+        "expected": 76.987,
+        "actual": 76.98652611518486,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Total decil sup.",
+      "ok": true,
+      "detail": {
+        "expected": 10.94,
+        "actual": 10.940193315811273,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Total decil inf.",
+      "ok": true,
+      "detail": {
+        "expected": 6.574,
+        "actual": 6.57393027273399,
+        "tolerance": 0.001
+      }
+    },
+    {
+      "name": "P.372 / Combinação: 1 componente devolve ele mesmo",
+      "ok": true,
+      "detail": {
+        "expected": 60,
+        "actual": 60,
+        "tolerance": 0.02
+      }
+    },
+    {
+      "name": "P.372 / Combinação: 2×60dB dá ~+3dB",
+      "ok": true,
+      "detail": {
+        "expected": 63.01,
+        "actual": 63.14588402598417,
+        "tolerance": 0.2
+      }
+    },
+    {
+      "name": "Embedded P.533 boundary suite",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "passed": 12,
+        "total": 12,
+        "failures": [],
+        "profile": "ITU-R-P.533-14-S4-OFFICIAL-4000KM"
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 0",
+      "ok": true,
+      "detail": {
+        "expectedKm": 174.6856831175423,
+        "actualKm": 174.6856831175423
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 1",
+      "ok": true,
+      "detail": {
+        "expectedKm": 174.6856831175423,
+        "actualKm": 174.6856831175423
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 2",
+      "ok": true,
+      "detail": {
+        "expectedKm": 174.6856831175423,
+        "actualKm": 174.6856831175423
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 3",
+      "ok": true,
+      "detail": {
+        "expectedKm": 236.49094819539718,
+        "actualKm": 236.49094819539715
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 4",
+      "ok": true,
+      "detail": {
+        "expectedKm": 180.64121985314816,
+        "actualKm": 180.64121985314816
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 5",
+      "ok": true,
+      "detail": {
+        "expectedKm": 180.64121985314816,
+        "actualKm": 180.64121985314816
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 6",
+      "ok": true,
+      "detail": {
+        "expectedKm": 375.037569632616,
+        "actualKm": 375.03756963261657
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 7",
+      "ok": true,
+      "detail": {
+        "expectedKm": 203.63349183906791,
+        "actualKm": 203.63349183906791
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 8",
+      "ok": true,
+      "detail": {
+        "expectedKm": 193.06595288435625,
+        "actualKm": 193.06595288435622
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 9",
+      "ok": true,
+      "detail": {
+        "expectedKm": 383.37235082449695,
+        "actualKm": 383.3723508244959
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 10",
+      "ok": true,
+      "detail": {
+        "expectedKm": 376.18832181172706,
+        "actualKm": 376.1883218117279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 11",
+      "ok": true,
+      "detail": {
+        "expectedKm": 241.62238833067187,
+        "actualKm": 241.62238833067184
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 12",
+      "ok": true,
+      "detail": {
+        "expectedKm": 392.713406664762,
+        "actualKm": 392.71340666476186
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 13",
+      "ok": true,
+      "detail": {
+        "expectedKm": 392.713406664762,
+        "actualKm": 392.71340666476186
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 14",
+      "ok": true,
+      "detail": {
+        "expectedKm": 269.56786115499364,
+        "actualKm": 269.56786115499364
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 15",
+      "ok": true,
+      "detail": {
+        "expectedKm": 443.9696540349601,
+        "actualKm": 443.96965403496006
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 16",
+      "ok": true,
+      "detail": {
+        "expectedKm": 443.9696540349601,
+        "actualKm": 443.96965403496006
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 17",
+      "ok": true,
+      "detail": {
+        "expectedKm": 443.9696540349601,
+        "actualKm": 443.96965403496006
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 18",
+      "ok": true,
+      "detail": {
+        "expectedKm": 453.01487415911276,
+        "actualKm": 453.01487415911265
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 19",
+      "ok": true,
+      "detail": {
+        "expectedKm": 453.01487415911276,
+        "actualKm": 453.01487415911265
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 20",
+      "ok": true,
+      "detail": {
+        "expectedKm": 453.01487415911276,
+        "actualKm": 453.01487415911265
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 21",
+      "ok": true,
+      "detail": {
+        "expectedKm": 181.42704228870588,
+        "actualKm": 181.42704228870588
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 22",
+      "ok": true,
+      "detail": {
+        "expectedKm": 181.42704228870588,
+        "actualKm": 181.42704228870588
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 23",
+      "ok": true,
+      "detail": {
+        "expectedKm": 181.42704228870588,
+        "actualKm": 181.42704228870588
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 24",
+      "ok": true,
+      "detail": {
+        "expectedKm": 261.7750796182475,
+        "actualKm": 261.77507961824756
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 25",
+      "ok": true,
+      "detail": {
+        "expectedKm": 189.0695476220844,
+        "actualKm": 189.0695476220844
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 26",
+      "ok": true,
+      "detail": {
+        "expectedKm": 189.0695476220844,
+        "actualKm": 189.0695476220844
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 27",
+      "ok": true,
+      "detail": {
+        "expectedKm": 429.3641714880371,
+        "actualKm": 429.364171488038
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 28",
+      "ok": true,
+      "detail": {
+        "expectedKm": 225.26192276904942,
+        "actualKm": 225.26192276904953
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 29",
+      "ok": true,
+      "detail": {
+        "expectedKm": 208.19160337448167,
+        "actualKm": 208.1916033744817
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 30",
+      "ok": true,
+      "detail": {
+        "expectedKm": 436.55570065098084,
+        "actualKm": 436.5557006509797
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 31",
+      "ok": true,
+      "detail": {
+        "expectedKm": 436.55570065098084,
+        "actualKm": 436.5557006509797
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 32",
+      "ok": true,
+      "detail": {
+        "expectedKm": 270.9606478884591,
+        "actualKm": 270.96064788845916
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 33",
+      "ok": true,
+      "detail": {
+        "expectedKm": 448.0254947018625,
+        "actualKm": 448.0254947018625
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 34",
+      "ok": true,
+      "detail": {
+        "expectedKm": 448.0254947018625,
+        "actualKm": 448.0254947018625
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 35",
+      "ok": true,
+      "detail": {
+        "expectedKm": 307.1755634443477,
+        "actualKm": 307.17556344434774
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 36",
+      "ok": true,
+      "detail": {
+        "expectedKm": 510.9625556948024,
+        "actualKm": 510.96255569480246
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 37",
+      "ok": true,
+      "detail": {
+        "expectedKm": 510.9625556948024,
+        "actualKm": 510.96255569480246
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 38",
+      "ok": true,
+      "detail": {
+        "expectedKm": 510.9625556948024,
+        "actualKm": 510.96255569480246
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 39",
+      "ok": true,
+      "detail": {
+        "expectedKm": 522.0690958700271,
+        "actualKm": 522.0690958700271
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 40",
+      "ok": true,
+      "detail": {
+        "expectedKm": 522.0690958700271,
+        "actualKm": 522.0690958700271
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 41",
+      "ok": true,
+      "detail": {
+        "expectedKm": 522.0690958700271,
+        "actualKm": 522.0690958700271
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 42",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 43",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 44",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 45",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 46",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 47",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 48",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 49",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 50",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 51",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 52",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 53",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 54",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 55",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 56",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 57",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 58",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 59",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 60",
+      "ok": true,
+      "detail": {
+        "expectedKm": 284.1389919993586,
+        "actualKm": 284.13899199935895
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 61",
+      "ok": true,
+      "detail": {
+        "expectedKm": 301.72076920142763,
+        "actualKm": 301.7207692014279
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 62",
+      "ok": true,
+      "detail": {
+        "expectedKm": 342.1588567661862,
+        "actualKm": 342.15885676618655
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 63",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 64",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 65",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 66",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 67",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 68",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 69",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 70",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 71",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 72",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 73",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 74",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 75",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 76",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 77",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 78",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 79",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 80",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 81",
+      "ok": true,
+      "detail": {
+        "expectedKm": 472.20961462942915,
+        "actualKm": 472.2096146294299
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 82",
+      "ok": true,
+      "detail": {
+        "expectedKm": 532.245750329097,
+        "actualKm": 532.2457503290976
+      }
+    },
+    {
+      "name": "P.533 mirror height / fixture 83",
+      "ok": true,
+      "detail": {
+        "expectedKm": 670.3288624383327,
+        "actualKm": 670.3288624383335
+      }
+    },
+    {
+      "name": "Missing height input is rejected",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 6999",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 7000",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 7001",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 8999",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 9000",
+      "ok": true
+    },
+    {
+      "name": "P.533 regime 9001",
+      "ok": true
+    },
+    {
+      "name": "7000 km needs no long-path contribution",
+      "ok": true
+    },
+    {
+      "name": "7001 km missing long-path result is not accepted",
+      "ok": true
+    },
+    {
+      "name": "S/N power equation",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip GG67",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip GG67KD",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip GG67KD55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN31",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN31PR",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN31PR55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN03",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN03FR",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip FN03FR55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip AA00",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip AA00AA",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip AA00AA55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip RR99",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip RR99XX",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip RR99XX55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip QF56",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip QF56OD",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip QF56OD55",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip PM95",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip PM95AA",
+      "ok": true
+    },
+    {
+      "name": "Grid center round-trip PM95AA55",
+      "ok": true
+    },
+    {
+      "name": "Invalid grid rejected",
+      "ok": true
+    },
+    {
+      "name": "Antipodal distance finite",
+      "ok": true
+    },
+    {
+      "name": "Coincident distance zero",
+      "ok": true
+    },
+    {
+      "name": "Special antenna excluded from scientific ranking",
+      "ok": true
+    },
+    {
+      "name": "Meeus example: ecliptic longitude",
+      "ok": true,
+      "detail": 133.16265468515905
+    },
+    {
+      "name": "Meeus example: ecliptic latitude",
+      "ok": true,
+      "detail": -3.2291264192229074
+    },
+    {
+      "name": "Meeus example: distance",
+      "ok": true,
+      "detail": 368409.6848161269
+    },
+    {
+      "name": "P.453 modified refractivity units",
+      "ok": true
+    },
+    {
+      "name": "P.453 zero water vapor",
+      "ok": true
+    },
+    {
+      "name": "Finite/explicit state Brazil/0/3",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/0/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/0/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/0/7",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/0/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/0/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/0/14",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/0/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/0/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/0/21",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/0/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/0/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/0/28",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/0/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/0/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/12/3",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/12/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/12/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/12/7",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/12/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/12/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/12/14",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/12/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/12/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/12/21",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/12/21",
+      "ok": true,
+      "detail": 10.000000000000028
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/12/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Brazil/12/28",
+      "ok": true,
+      "detail": "curto"
+    },
+    {
+      "name": "10x power gives 10 dB Brazil/12/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Brazil/12/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/0/3",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/0/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/0/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/0/7",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/0/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/0/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/0/14",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/0/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/0/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/0/21",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/0/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/0/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/0/28",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/0/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/0/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/12/3",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/12/3",
+      "ok": true,
+      "detail": 9.999999999999943
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/12/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/12/7",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/12/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/12/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/12/14",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/12/14",
+      "ok": true,
+      "detail": 9.999999999999972
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/12/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/12/21",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/12/21",
+      "ok": true,
+      "detail": 9.999999999999972
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/12/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state US/12/28",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB US/12/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB US/12/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/0/3",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/0/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/0/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/0/7",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/0/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/0/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/0/14",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/0/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/0/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/0/21",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/0/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/0/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/0/28",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/0/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/0/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/12/3",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/12/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/12/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/12/7",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/12/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/12/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/12/14",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/12/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/12/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/12/21",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/12/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/12/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Canada/12/28",
+      "ok": true,
+      "detail": "interp"
+    },
+    {
+      "name": "10x power gives 10 dB Canada/12/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Canada/12/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/0/3",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/0/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/0/3",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/0/7",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/0/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/0/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/0/14",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/0/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/0/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/0/21",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/0/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/0/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/0/28",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/0/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/0/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/12/3",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/12/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/12/3",
+      "ok": true,
+      "detail": -3.0102999566397557
+    },
+    {
+      "name": "Finite/explicit state Europe/12/7",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/12/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/12/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/12/14",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/12/14",
+      "ok": true,
+      "detail": 9.999999999999972
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/12/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/12/21",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/12/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/12/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Europe/12/28",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Europe/12/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Europe/12/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/0/3",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/0/3",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/0/3",
+      "ok": true,
+      "detail": -3.0102999566398694
+    },
+    {
+      "name": "Finite/explicit state Japan/0/7",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/0/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/0/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/0/14",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/0/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/0/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/0/21",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/0/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/0/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/0/28",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/0/28",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/0/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/12/3",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/12/3",
+      "ok": true,
+      "detail": 10.000000000000114
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/12/3",
+      "ok": true,
+      "detail": -3.0102999566397557
+    },
+    {
+      "name": "Finite/explicit state Japan/12/7",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/12/7",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/12/7",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/12/14",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/12/14",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/12/14",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/12/21",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/12/21",
+      "ok": true,
+      "detail": 10
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/12/21",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Finite/explicit state Japan/12/28",
+      "ok": true,
+      "detail": "longo"
+    },
+    {
+      "name": "10x power gives 10 dB Japan/12/28",
+      "ok": true,
+      "detail": 9.999999999999972
+    },
+    {
+      "name": "2x bandwidth gives -3.0103 dB Japan/12/28",
+      "ok": true,
+      "detail": -3.0102999566398125
+    },
+    {
+      "name": "Circuit fixtures exercised finite S/N",
+      "ok": true,
+      "detail": 50
+    },
+    {
+      "name": "P.533 equation 42 reconstructs the interpolated field",
+      "ok": true
+    },
+    {
+      "name": "160 m is not extrapolated through P.533",
+      "ok": true
+    },
+    {
+      "name": "Screening fails when required foE is missing",
+      "ok": true
+    },
+    {
+      "name": "Table 1a missing control cannot be silently replaced",
+      "ok": true
+    },
+    {
+      "name": "Symmetric short circuit has reciprocal received power for equal stations",
+      "ok": true
+    },
+    {
+      "name": "Below-fL long-distance fit is evaluated (not cut off)",
+      "ok": true
+    },
+    {
+      "name": "R12 restored after exception",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation INMET/INMET",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation INMET/NWS",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation INMET/ECCC",
+      "ok": true
+    },
+    {
+      "name": "Stale epoch INMET",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation NWS/INMET",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation NWS/NWS",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation NWS/ECCC",
+      "ok": true
+    },
+    {
+      "name": "Stale epoch NWS",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation ECCC/INMET",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation ECCC/NWS",
+      "ok": true
+    },
+    {
+      "name": "Provider isolation ECCC/ECCC",
+      "ok": true
+    },
+    {
+      "name": "Stale epoch ECCC",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / valid zero",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / error payload",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / pagination",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / missing NWS expiry",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / missing CA geometry",
+      "ok": true
+    },
+    {
+      "name": "Alert payload / invalid CA polygon",
+      "ok": true
+    },
+    {
+      "name": "Polygon boundary is covered",
+      "ok": true
+    },
+    {
+      "name": "Dateline polygon excludes Greenwich",
+      "ok": true
+    },
+    {
+      "name": "Dateline polygon includes both sides",
+      "ok": true
+    },
+    {
+      "name": "Polygon holes remain excluded",
+      "ok": true
+    },
+    {
+      "name": "Actual NWS loader does not fetch in BR mode",
+      "ok": true
+    },
+    {
+      "name": "Actual NWS loader ignores a late response after country change",
+      "ok": true
+    }
+  ],
+  "circuits": [
+    {
+      "name": "Brazil",
+      "hour": 0,
+      "band": 3,
+      "distance": 788.5843280345681,
+      "snr": 13.178192374624075,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 0,
+      "band": 7,
+      "distance": 788.5843280345681,
+      "snr": 18.953358721953776,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 0,
+      "band": 14,
+      "distance": 788.5843280345681,
+      "snr": 23.40537862977206,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 0,
+      "band": 21,
+      "distance": 788.5843280345681,
+      "snr": -2.2507867464299807,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 0,
+      "band": 28,
+      "distance": 788.5843280345681,
+      "snr": -11.928836834961288,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 12,
+      "band": 3,
+      "distance": 788.5843280345681,
+      "snr": -20.64001129237829,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 12,
+      "band": 7,
+      "distance": 788.5843280345681,
+      "snr": 10.295497860794114,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 12,
+      "band": 14,
+      "distance": 788.5843280345681,
+      "snr": 21.106394098391405,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 12,
+      "band": 21,
+      "distance": 788.5843280345681,
+      "snr": -0.9479541521067745,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10.000000000000028,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "Brazil",
+      "hour": 12,
+      "band": 28,
+      "distance": 788.5843280345681,
+      "snr": -10.40318431362769,
+      "regime": "curto",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 9,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 0,
+      "band": 3,
+      "distance": 7644.556997884292,
+      "snr": -21.977503542254738,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 0,
+      "band": 7,
+      "distance": 7644.556997884292,
+      "snr": -7.541128616028715,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 0,
+      "band": 14,
+      "distance": 7644.556997884292,
+      "snr": -3.8360012369678316,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 0,
+      "band": 21,
+      "distance": 7644.556997884292,
+      "snr": -18.96700686446252,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 0,
+      "band": 28,
+      "distance": 7644.556997884292,
+      "snr": -43.3177465342805,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 12,
+      "band": 3,
+      "distance": 7644.556997884292,
+      "snr": -112.59912996657056,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 9.999999999999943,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 12,
+      "band": 7,
+      "distance": 7644.556997884292,
+      "snr": -57.00816659101832,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 12,
+      "band": 14,
+      "distance": 7644.556997884292,
+      "snr": -25.033850791525452,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 9.999999999999972,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 12,
+      "band": 21,
+      "distance": 7644.556997884292,
+      "snr": -15.92181103311026,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 9.999999999999972,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "US",
+      "hour": 12,
+      "band": 28,
+      "distance": 7644.556997884292,
+      "snr": -36.19586557649856,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 0,
+      "band": 3,
+      "distance": 8100.053487993282,
+      "snr": -25.000600335991805,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 0,
+      "band": 7,
+      "distance": 8100.053487993282,
+      "snr": -7.236699750507029,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 0,
+      "band": 14,
+      "distance": 8100.053487993282,
+      "snr": -4.492882361916344,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 0,
+      "band": 21,
+      "distance": 8100.053487993282,
+      "snr": -19.336596954374613,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 0,
+      "band": 28,
+      "distance": 8100.053487993282,
+      "snr": -43.27420587719027,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 12,
+      "band": 3,
+      "distance": 8100.053487993282,
+      "snr": -131.29583402631977,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 12,
+      "band": 7,
+      "distance": 8100.053487993282,
+      "snr": -70.98956913492987,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 12,
+      "band": 14,
+      "distance": 8100.053487993282,
+      "snr": -29.65957617744843,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 12,
+      "band": 21,
+      "distance": 8100.053487993282,
+      "snr": -25.158632313673195,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Canada",
+      "hour": 12,
+      "band": 28,
+      "distance": 8100.053487993282,
+      "snr": -40.19575199809353,
+      "regime": "interp",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 0,
+      "band": 3,
+      "distance": 9415.83055641949,
+      "snr": -19.524105881854325,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 0,
+      "band": 7,
+      "distance": 9415.83055641949,
+      "snr": -5.797639999562449,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 0,
+      "band": 14,
+      "distance": 9415.83055641949,
+      "snr": -16.702535675380034,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 0,
+      "band": 21,
+      "distance": 9415.83055641949,
+      "snr": -46.355705021237554,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 0,
+      "band": 28,
+      "distance": 9415.83055641949,
+      "snr": -89.85201575484245,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 12,
+      "band": 3,
+      "distance": 9415.83055641949,
+      "snr": -583.212495165385,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566397557,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 12,
+      "band": 7,
+      "distance": 9415.83055641949,
+      "snr": -176.97866844267787,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 12,
+      "band": 14,
+      "distance": 9415.83055641949,
+      "snr": -46.86592954629043,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 9.999999999999972,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 12,
+      "band": 21,
+      "distance": 9415.83055641949,
+      "snr": -27.012755579206527,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Europe",
+      "hour": 12,
+      "band": 28,
+      "distance": 9415.83055641949,
+      "snr": -28.963953639017035,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 4,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 0,
+      "band": 3,
+      "distance": 18441.93652445947,
+      "snr": -335.27923168496864,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398694,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 0,
+      "band": 7,
+      "distance": 18441.93652445947,
+      "snr": -100.29189282702413,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 0,
+      "band": 14,
+      "distance": 18441.93652445947,
+      "snr": -25.234928239063322,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 0,
+      "band": 21,
+      "distance": 18441.93652445947,
+      "snr": -19.57392214475135,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 0,
+      "band": 28,
+      "distance": 18441.93652445947,
+      "snr": -29.754596973506978,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 12,
+      "band": 3,
+      "distance": 18441.93652445947,
+      "snr": -410.85063300702336,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10.000000000000114,
+      "bandwidthStep": -3.0102999566397557,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 12,
+      "band": 7,
+      "distance": 18441.93652445947,
+      "snr": -124.86878374022331,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 12,
+      "band": 14,
+      "distance": 18441.93652445947,
+      "snr": -37.94159047077025,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 12,
+      "band": 21,
+      "distance": 18441.93652445947,
+      "snr": -34.93841370653411,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 10,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    },
+    {
+      "name": "Japan",
+      "hour": 12,
+      "band": 28,
+      "distance": 18441.93652445947,
+      "snr": -52.52891573445373,
+      "regime": "longo",
+      "finite": true,
+      "powerStep": 9.999999999999972,
+      "bandwidthStep": -3.0102999566398125,
+      "modeCount": 1,
+      "notNaN": true
+    }
+  ],
+  "limitations": [
+    "No independent peer review",
+    "No complete ITURHFProp golden master",
+    "No live browser/end-to-end API verification",
+    "No calibrated reception-probability claim"
+  ]
+}

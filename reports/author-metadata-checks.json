@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "checks": 81,
+  "htmlSha256": "87e96d3cb4547d3f964768d98c3b9c947503c407cfd0236f18590ce7e0b6340f",
+  "orcid": "https://orcid.org/0009-0005-9657-7254",
+  "scope": "Metadata consistency and checksum only; not external registration or ownership verification"
+}
