@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "linkedom": "0.18.12",
-    "yaml": "2.9.0"
+    "yaml": "2.9.1"
   },
   "author": {
     "name": "José Ricardo de Paula (PY2VOX)",
